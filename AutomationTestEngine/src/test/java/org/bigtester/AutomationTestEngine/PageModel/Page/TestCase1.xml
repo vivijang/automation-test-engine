@@ -2,6 +2,8 @@
 <!-- //this class is useless for demoing the BDD and Spring -->
 <TestCase>
 	<PreTestCases>
+	<TestCase>
+	</TestCase>
 	</PreTestCases>
 	<Steps>
 		<Step>
