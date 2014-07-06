@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- //this class is useless for demoing the BDD and Spring -->
+<Suite name="login">
+	<TestCase name="login_happy">
+		<Steps>
+			<Step name="login">
+				<WebElementAction WebElement="login_username"
+					action="sendKeys">
+					<Data></Data>
+				</WebElementAction>
+			</Step>
+		</Steps>
+	</TestCase>
+</Suite>

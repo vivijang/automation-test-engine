@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- //this class is useless for demoing the BDD and Spring -->
+<TestCase>
+	<PreTestCases>
+	</PreTestCases>
+	<Steps>
+		<Step>
+			<PreStep></PreStep>
+			<page name="homepage">
+				<WebElement name="login_username" type="input" findby="name"
+					findbyvalue="loginusername">
+					<Action>
+						sendKeys
+					</Action>
+				</WebElement>
+				<WebElement name="login_options" type="select_options"
+					findby="name" findbyvalue="loginOptions">
+					<Action>
+						select_all
+					</Action>
+					<Action>
+						deselect_all
+					</Action>
+				</WebElement>
+			</page>
+			<PostStep>
+
+			</PostStep>
+		</Step>
+	</Steps>
+	<PostTestCases>
+	</PostTestCases>
+</TestCase>
