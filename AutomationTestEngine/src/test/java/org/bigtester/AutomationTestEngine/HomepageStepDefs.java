@@ -15,10 +15,16 @@ public class HomepageStepDefs {
 	@Autowired
 	private MyStepService myservice;
 	
+	@Autowired
+	private TestCase myTc;
+	
+	
 	@Given("^a homepage I just navigate to$")
 	public void a_homepage_I_just_navigate_to() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		String msg = myservice.getMsg();
+		
+		myTc.goSteps();
 		System.out.println(msg);
 	}
 

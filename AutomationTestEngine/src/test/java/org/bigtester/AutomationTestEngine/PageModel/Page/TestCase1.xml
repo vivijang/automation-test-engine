@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- //this class is useless for demoing the BDD and Spring -->
 <TestCase>
-	<PreTestCases>
+	<PreConditions>
 	<TestCase id="testcase2">
 	</TestCase>
-	</PreTestCases>
+	</PreConditions>
 	<Steps>
-		<Step>
-			<PreStep></PreStep>
-			<page name="homepage">
-				<WebElement name="login_username" type="input" findby="name"
-					findbyvalue="loginusername">
-					<Action>
-						sendKeys
+		<Step group="login" name="fillusername" testobject="no" page="homepage">
+				<WebElement name="login_username" type="input" findby="id" findbyvalue="modlgn_username">
+					<Action name="sendKeys">
+						<Data type="input">peidong</Data>
 					</Action>
 				</WebElement>
-				<WebElement name="login_options" type="select_options"
-					findby="name" findbyvalue="loginOptions">
-					<Action>
-						select_all
-					</Action>
-					<Action>
-						deselect_all
+<!-- 				<WebElement name="login_options" type="select_options" -->
+<!-- 					findby="name" findbyvalue="loginOptions"> -->
+<!-- 					<Action> -->
+<!-- 						select_all -->
+<!-- 					</Action> -->
+<!-- 					<Action> -->
+<!-- 						deselect_all -->
+<!-- 					</Action> -->
+<!-- 				</WebElement> -->
+			</page>
+		</Step>
+		<Step group="login" name="fillpassword" testobject="no" page="homepage">
+			<page name="homepage">
+				<WebElement name="login_password" type="password" findby="id"	findbyvalue="modlgn_passwd">
+					<Action name="sendKeys">
+						<Data type="input">peidong</Data>
 					</Action>
 				</WebElement>
 			</page>
-			<PostStep>
-
-			</PostStep>
+		</Step>
+		<Step group="login" name="submitlogin" testobject="yes" page="homepage">
+			<page name="homepage">
+				<WebElement name="login_submit" type="submit" findby="name" findbyvalue="Submit">
+					<Action name="click">
+						<Data type="expected result">
+						<WebElement name="login_failed_text" type="text" findby="text" findbyvalue="Username and password do not match or you do not have an account yet.">
+						</WebElement>
+						</Data>
+					</Action>
+				</WebElement>
+			</page>
 		</Step>
 	</Steps>
-	<PostTestCases>
-	</PostTestCases>
+	<Teardown>
+	</Teardown>
 </TestCase>
