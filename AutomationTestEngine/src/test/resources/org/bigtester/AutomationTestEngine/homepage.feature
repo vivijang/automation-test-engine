@@ -1,9 +1,9 @@
-Feature: Homepage Browsing
+Feature: The entrance of a test case
 
-  Background: A homepage of bigtester.com
-    Given a homepage I just navigate to
+  Background: run a test case with bigtester Automation Test Engine
+    Given a predefined test case Spring context xml file
 
-  Scenario: About sub-menu exists
+  Scenario: start and run the test
     # Try to validate if the login form exists on homepage
-    When I open About menu
-    Then About sub-menu appears
+    When run the test
+    Then generate a test case report

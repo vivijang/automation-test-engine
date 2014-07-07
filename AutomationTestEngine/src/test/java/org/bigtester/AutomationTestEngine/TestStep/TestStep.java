@@ -1,11 +1,10 @@
-package org.bigtester.AutomationTestEngine;
+package org.bigtester.AutomationTestEngine.TestStep;
 
 import org.bigtester.AutomationTestEngine.PageModel.Page.MyWebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-@Component
-@Scope("prototype")
+
 public class TestStep implements ITestStep{
 	//TOTO add pageObject as another member.
 	

@@ -2,6 +2,7 @@ package org.bigtester.AutomationTestEngine;
 
 import java.util.List;
 
+import org.bigtester.AutomationTestEngine.TestStep.ITestStep;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestCase {

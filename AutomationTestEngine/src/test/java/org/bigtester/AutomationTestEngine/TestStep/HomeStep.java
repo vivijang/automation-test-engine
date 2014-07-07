@@ -1,4 +1,4 @@
-package org.bigtester.AutomationTestEngine;
+package org.bigtester.AutomationTestEngine.TestStep;
 
 import org.bigtester.AutomationTestEngine.PageModel.Page.Homepage;
 import org.springframework.beans.factory.annotation.Autowired;
