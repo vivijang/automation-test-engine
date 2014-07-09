@@ -16,7 +16,7 @@ public class ElementFindByName extends _ElementFind implements IElementFind {
 	}
 	@Override
 	public WebElement doFind(String findByValue) {
-		return mywd.getWd().findElement(By.name(findByValue));
+		return iMyWd.getWd().findElement(By.name(findByValue));
 	}
 	
 }

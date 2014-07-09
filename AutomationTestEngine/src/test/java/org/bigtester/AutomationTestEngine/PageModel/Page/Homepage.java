@@ -20,6 +20,6 @@ public class Homepage extends _PageModelBase{
 	}
 	
 	public void startHomepage(){
-		super.mywd.getWd().get(homeUrl);
+		super.iMyWd.getWd().get(homeUrl);
 	}
 }

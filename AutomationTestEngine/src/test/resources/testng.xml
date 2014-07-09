@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="launchSuite" verbose="1">
+	<listeners>
+		<listener class-name="org.bigtester.AutomationTestEngine.ModifyTestInvocation" />
+	</listeners>
+	<test name="launchTest">
+		<classes>
+			<class name="org.bigtester.AutomationTestEngine.StartSuitesTest">
+				<method name="f">
+				</method>
+			</class>
+		</classes>
+	</test>
+</suite>

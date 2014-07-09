@@ -2,8 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
-	
+
 	<bean id="MyFirefoxWebDriver"
 		class="org.bigtester.AutomationTestEngine.PageModel.MyWebDriver.MyFirefoxDriver" />
 
@@ -59,7 +58,7 @@
 
 	<bean id="ea1" name="ea1" parent="eaAbstract"
 		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
-		<property name="dataValue" value="peidong" />
+		<property name="dataValue" value="peidong2" />
 	</bean>
 
 	<!-- step2 definition -->
@@ -79,7 +78,7 @@
 
 	<bean id="ea2" name="ea2" parent="eaAbstract"
 		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
-		<property name="dataValue" value="peidong" />
+		<property name="dataValue" value="peidong2" />
 	</bean>
 
 </beans>
