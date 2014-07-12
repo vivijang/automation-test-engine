@@ -13,6 +13,7 @@
 				<ref bean="homestep" />
 				<ref bean="step1" />
 				<ref bean="step2" />
+				<ref bean="laststep" />
 			</list>
 		</property>
 	</bean>
@@ -38,6 +39,17 @@
 	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
 		class="org.bigtester.AutomationTestEngine.PageModel.Page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
+	</bean>
+	
+	<!-- laststep definition -->
+	<bean id="laststep" name="closeBrowser"
+		class="org.bigtester.AutomationTestEngine.CaseModel.LastStep">
+		<property name="lP">
+			<ref bean="myLastpage" />
+		</property>
+	</bean>
+	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.Page.Lastpage">
 	</bean>
 
 	<!-- step1 definition -->

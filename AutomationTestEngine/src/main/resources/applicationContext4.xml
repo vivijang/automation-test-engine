@@ -13,14 +13,17 @@
 				<ref bean="homestep" />
 				<ref bean="step1" />
 				<ref bean="step2" />
+				<ref bean="laststep" />
 			</list>
 		</property>
 	</bean>
 
 	<!-- abstract beans, won't be initialized by Spring -->
-	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel" class="org.bigtester.AutomationTestEngine.PageModel.ElementFind._ElementFind">
+	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.ElementFind._ElementFind">
 	</bean>
-	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel" class="org.bigtester.AutomationTestEngine.PageModel.ElementAction._ElementAction">
+	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction._ElementAction">
 	</bean>
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
 		class="org.bigtester.AutomationTestEngine.PageModel._PageObjectModel">
@@ -38,6 +41,17 @@
 	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
 		class="org.bigtester.AutomationTestEngine.PageModel.Page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
+	</bean>
+
+	<!-- laststep definition -->
+	<bean id="laststep" name="closeBrowser"
+		class="org.bigtester.AutomationTestEngine.CaseModel.LastStep">
+		<property name="lP">
+			<ref bean="myLastpage" />
+		</property>
+	</bean>
+	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.Page.Lastpage">
 	</bean>
 
 	<!-- step1 definition -->
@@ -58,7 +72,7 @@
 
 	<bean id="ea1" name="ea1" parent="eaAbstract"
 		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
-		<property name="dataValue" value="peidong2" />
+		<property name="dataValue" value="peidong4" />
 	</bean>
 
 	<!-- step2 definition -->
@@ -78,7 +92,7 @@
 
 	<bean id="ea2" name="ea2" parent="eaAbstract"
 		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
-		<property name="dataValue" value="peidong2" />
+		<property name="dataValue" value="peidong4" />
 	</bean>
 
 </beans>

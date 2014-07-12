@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
-	
+
+
 	<bean id="MyFirefoxWebDriver"
 		class="org.bigtester.AutomationTestEngine.PageModel.MyWebDriver.MyFirefoxDriver" />
 
@@ -14,14 +14,17 @@
 				<ref bean="homestep" />
 				<ref bean="step1" />
 				<ref bean="step2" />
+				<ref bean="laststep" />
 			</list>
 		</property>
 	</bean>
 
 	<!-- abstract beans, won't be initialized by Spring -->
-	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel" class="org.bigtester.AutomationTestEngine.PageModel.ElementFind._ElementFind">
+	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.ElementFind._ElementFind">
 	</bean>
-	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel" class="org.bigtester.AutomationTestEngine.PageModel.ElementAction._ElementAction">
+	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction._ElementAction">
 	</bean>
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
 		class="org.bigtester.AutomationTestEngine.PageModel._PageObjectModel">
@@ -40,7 +43,17 @@
 		class="org.bigtester.AutomationTestEngine.PageModel.Page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
 	</bean>
-
+	<!-- laststep definition -->
+	<bean id="laststep" name="closeBrowser"
+		class="org.bigtester.AutomationTestEngine.CaseModel.LastStep">
+		<property name="lP">
+			<ref bean="myLastpage" />
+		</property>
+	</bean>
+	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
+		class="org.bigtester.AutomationTestEngine.PageModel.Page.Lastpage">
+	</bean>
+	
 	<!-- step1 definition -->
 	<bean id="step1" name="step1"
 		class="org.bigtester.AutomationTestEngine.CaseModel.TestStep">

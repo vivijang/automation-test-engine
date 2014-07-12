@@ -4,8 +4,6 @@ import org.bigtester.AutomationTestEngine.ProjectModel.TestProject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 
 public class TestProjectRunner {
   
