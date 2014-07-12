@@ -1,8 +1,6 @@
-package org.bigtester.AutomationTestEngine;
+package org.bigtester.AutomationTestEngine.CaseModel;
 
 import java.util.List;
-
-import org.bigtester.AutomationTestEngine.TestStep.ITestStep;
 
 public class TestCase {
 	

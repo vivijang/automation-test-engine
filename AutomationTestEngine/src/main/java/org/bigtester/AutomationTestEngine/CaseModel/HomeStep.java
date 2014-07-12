@@ -1,4 +1,4 @@
-package org.bigtester.AutomationTestEngine.TestStep;
+package org.bigtester.AutomationTestEngine.CaseModel;
 
 import org.bigtester.AutomationTestEngine.PageModel.Page.Homepage;
 
