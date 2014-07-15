@@ -1,4 +1,4 @@
-// Testcase for open 4 times 
+// Test case for open 4 times 
 package org.bigtester.AutomationTestEngine;
 
 import org.bigtester.AutomationTestEngine.ProjectModel.TestProject;
