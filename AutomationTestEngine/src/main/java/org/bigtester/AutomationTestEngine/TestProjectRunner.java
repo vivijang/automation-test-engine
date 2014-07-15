@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestProjectRunner {
   
 	public static void main(String[] args) {
-		//test
+		//test k
 	  	ApplicationContext context = new ClassPathXmlApplicationContext(
 				"testproject.xml");
 		
