@@ -5,10 +5,10 @@
 
 
 	<bean id="MyFirefoxWebDriver"
-		class="org.bigtester.AutomationTestEngine.PageModel.MyWebDriver.MyFirefoxDriver" />
+		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
 
 	<bean id="testcase2" name="testcase2"
-		class="org.bigtester.AutomationTestEngine.CaseModel.TestCase">
+		class="org.bigtester.ate.model.casestep.TestCase">
 		<property name="lTs">
 			<list>
 				<ref bean="homestep" />
@@ -21,77 +21,77 @@
 
 	<!-- abstract beans, won't be initialized by Spring -->
 	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementFind._ElementFind">
+		class="org.bigtester.ate.model.page.elementfind._ElementFind">
 	</bean>
 	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction._ElementAction">
+		class="org.bigtester.ate.model.page.elementaction._ElementAction">
 	</bean>
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
-		class="org.bigtester.AutomationTestEngine.PageModel._PageObjectModel">
+		class="org.bigtester.ate.model.page._PageObjectModel">
 		<property name="iMyWd">
 			<ref bean="MyFirefoxWebDriver"></ref>
 		</property>
 	</bean>
 	<!-- homestep definition -->
 	<bean id="homestep" name="openHomepage"
-		class="org.bigtester.AutomationTestEngine.CaseModel.HomeStep">
+		class="org.bigtester.ate.model.casestep.HomeStep">
 		<property name="hP">
 			<ref bean="myHomepage" />
 		</property>
 	</bean>
 	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
-		class="org.bigtester.AutomationTestEngine.PageModel.Page.Homepage">
+		class="org.bigtester.ate.model.page.page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
 	</bean>
 	<!-- laststep definition -->
 	<bean id="laststep" name="closeBrowser"
-		class="org.bigtester.AutomationTestEngine.CaseModel.LastStep">
+		class="org.bigtester.ate.model.casestep.LastStep">
 		<property name="lP">
 			<ref bean="myLastpage" />
 		</property>
 	</bean>
 	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
-		class="org.bigtester.AutomationTestEngine.PageModel.Page.Lastpage">
+		class="org.bigtester.ate.model.page.page.Lastpage">
 	</bean>
 	
 	<!-- step1 definition -->
 	<bean id="step1" name="step1"
-		class="org.bigtester.AutomationTestEngine.CaseModel.TestStep">
+		class="org.bigtester.ate.model.casestep.TestStep">
 		<constructor-arg ref="myWe1"></constructor-arg>
 
 	</bean>
 	<bean id="myWe1" name="myWe1"
-		class="org.bigtester.AutomationTestEngine.PageModel.Page.MyWebElement">
+		class="org.bigtester.ate.model.page.page.MyWebElement">
 		<constructor-arg ref="ef1"></constructor-arg>
 		<constructor-arg ref="ea1"></constructor-arg>
 	</bean>
 	<bean id="ef1" name="ef1" parent="efAbstract"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementFind.ElementFindById">
+		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
 		<property name="findByValue" value="modlgn_username" />
 	</bean>
 
 	<bean id="ea1" name="ea1" parent="eaAbstract"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
+		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
 		<property name="dataValue" value="peidong" />
 	</bean>
 
 	<!-- step2 definition -->
 	<bean id="step2" name="step2"
-		class="org.bigtester.AutomationTestEngine.CaseModel.TestStep">
+		class="org.bigtester.ate.model.casestep.TestStep">
 		<constructor-arg ref="myWe2"></constructor-arg>
 	</bean>
 	<bean id="myWe2" name="myWe2"
-		class="org.bigtester.AutomationTestEngine.PageModel.Page.MyWebElement">
+		class="org.bigtester.ate.model.page.page.MyWebElement">
 		<constructor-arg ref="ef2"></constructor-arg>
 		<constructor-arg ref="ea2"></constructor-arg>
 	</bean>
 	<bean id="ef2" name="ef2" parent="efAbstract"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementFind.ElementFindById">
+		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
 		<property name="findByValue" value="modlgn_passwd" />
 	</bean>
 
 	<bean id="ea2" name="ea2" parent="eaAbstract"
-		class="org.bigtester.AutomationTestEngine.PageModel.ElementAction.SendKeysAction">
+		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
 		<property name="dataValue" value="peidong" />
 	</bean>
 
