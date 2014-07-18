@@ -1,0 +1,52 @@
+This document is built for developers to setup your code style and JAutoDoc tool.
+
+1) Code Style setup
+	a) Click on menus Window->Preferences->Java->Code Style->Code Templates
+	b) Click 'Import' button and select bigtester_codetemplates.xml to import the code style. the template file could be found at the root of the project folder.
+	c) Click on Comments item in the right panel
+	d) Click on 'Types' in the expanded Comments treeview
+	e) Click on 'Edit' button to change the Type comment's author name to your own name
+	
+	f) To test if your setting is working, exit the dialog of Windows-Preferences
+	g) New a Class in your project and see if the newly created class has correct header and your full name in the comments.
+	
+2) Install plugin JAutoDoc from Eclipse marketplace
+	a) Click on menus Window->Preferences->Java->JAutoDoc, 
+	b) Check the option 'Add file header',
+	c) click button 'Edit' beside above option and replace the content with the following header at the bottom of this file, including the stared lines. 
+	(don't forget to copy the first stared line and last started line) 
+	d) Click on menus Window->Preferences->Java->JAutoDoc, click the expanding icon beside 'JAutoDoc' menu,
+	e) Click Templates, click 'Properties' button on the right of the dialog
+	f) Add variable 'author', value is your own full name
+	g) Click 'Types' item in the right panel
+	h) Click 'Default' item, and click edit,
+	i) Change the line of @Author comment to '@author ${author}'
+	
+	j) To test if the JAutodoc works correctly, exit the dialog of Windows-Preferences
+	k) Create a new Class
+	l) Delete all the comments
+	m) move the cursor to the first line of the file,
+	n) press 'Ctrl-Alt-j', All comments should be added automatically including the header and class comments. 
+	
+ 	
+ /*******************************************************************************
+ * ATE, Automation Test Engine
+ *
+ * Copyright ${year}, Montreal PROT, or individual contributors as
+ * indicated by the @author tags or express copyright attribution
+ * statements applied by the authors.  All third-party contributions are
+ * distributed under license by Montreal PROT.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+	
