@@ -29,37 +29,38 @@ import java.util.List;
  * @author Peidong Hu
  */
 public class TestCase {
-	
-	/** The l ts. */
-	private List<ITestStep> lTs;
-	
+
+	/** The test step list. */
+	private List<ITestStep> testStepList;
+
 	/**
-	 * Go steps.
+	 * Gets the test step list.
+	 * 
+	 * @return the testStepList
+	 */
+	public List<ITestStep> getTestStepList() {
+		return testStepList;
+	}
+
+	/**
+	 * Sets the test step list.
+	 * 
+	 * @param testStepList
+	 *            the testStepList to set
+	 */
+	public final void setTestStepList(final List<ITestStep> testStepList) {
+		this.testStepList = testStepList;
+	}
+
+	/**
+	 * run steps.
 	 */
 	public void goSteps() {
-		for (ITestStep tempStep : lTs) {
-			tempStep.doStep();
+		
+		for (int i=0; i<testStepList.size(); i++) {
+			
+			testStepList.get(i).doStep();
 		}
 	}
-	
-	/**
-	 * Gets the l ts.
-	 * 
-	 * @return the l ts
-	 */
-	public List<ITestStep> getlTs() {
-		return lTs;
-	}
-	
-	/**
-	 * Sets the l ts.
-	 * 
-	 * @param lTs
-	 *            the new l ts
-	 */
-	public void setlTs(List<ITestStep> lTs) {
-		this.lTs = lTs;
-	}
-	
 
 }

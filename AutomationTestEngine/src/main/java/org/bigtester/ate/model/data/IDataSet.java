@@ -33,5 +33,5 @@ public interface IDataSet {
 	 * 
 	 * @return the ds
 	 */
-	public DataSet getDS();
+	AbstractDataSet getDS();
 }

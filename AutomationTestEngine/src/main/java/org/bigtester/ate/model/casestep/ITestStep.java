@@ -31,5 +31,5 @@ public interface ITestStep {
 	/**
 	 * Do step.
 	 */
-	public void doStep();
+	void doStep();
 }

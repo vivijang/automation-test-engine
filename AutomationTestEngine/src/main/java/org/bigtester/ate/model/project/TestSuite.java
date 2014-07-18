@@ -29,32 +29,32 @@ import java.util.List;
  * @author Peidong Hu
  */
 public class TestSuite {
-	
-	/**
-	 * Gets the l testcase.
-	 * 
-	 * @return the l testcase
-	 */
-	public List<TestCase> getlTestcase() {
-		return lTestcase;
-	}
-	
-	/**
-	 * Sets the l testcase.
-	 * 
-	 * @param lTestcase
-	 *            the new l testcase
-	 */
-	public void setlTestcase(List<TestCase> lTestcase) {
-		this.lTestcase = lTestcase;
-	}
-	
-	/** The l testcase. */
-	private List<TestCase> lTestcase;
-	
+
+	/** The test case list. */
+	private List<TestCase> testCaseList;
+
 	/** The suite name. */
 	private String suiteName;
-	
+
+	/**
+	 * Gets the test case list.
+	 * 
+	 * @return the testCaseList
+	 */
+	public List<TestCase> getTestCaseList() {
+		return testCaseList;
+	}
+
+	/**
+	 * Sets the test case list.
+	 * 
+	 * @param testCaseList
+	 *            the testCaseList to set
+	 */
+	public void setTestCaseList(final List<TestCase> testCaseList) {
+		this.testCaseList = testCaseList;
+	}
+
 	/**
 	 * Gets the suite name.
 	 * 
@@ -63,21 +63,16 @@ public class TestSuite {
 	public String getSuiteName() {
 		return suiteName;
 	}
-	
+
 	/**
 	 * Sets the suite name.
 	 * 
 	 * @param suiteName
 	 *            the new suite name
 	 */
-	public void setSuiteName(String suiteName) {
+	public void setSuiteName(final String suiteName) {
 		this.suiteName = suiteName;
 	}
+
 	
-	/**
-	 * Instantiates a new test suite.
-	 */
-	public TestSuite () {
-		
-	}
 }

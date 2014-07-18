@@ -31,18 +31,18 @@ import org.openqa.selenium.WebElement;
 public interface IElementFind {
 	
 	/**
-	 * Do find.
+	 * Do find of the element.
 	 * 
 	 * @param findByValue
 	 *            the find by value
 	 * @return the web element
 	 */
-	public WebElement doFind(String findByValue);
+	WebElement doFind(String findByValue);
 	
 	/**
 	 * Gets the find by value.
 	 * 
 	 * @return the find by value
 	 */
-	public String getFindByValue();
+	String getFindByValue();
 }

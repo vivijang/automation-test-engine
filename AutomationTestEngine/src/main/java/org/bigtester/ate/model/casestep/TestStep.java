@@ -28,48 +28,46 @@ import org.bigtester.ate.model.page.page.MyWebElement;
  * 
  * @author Peidong Hu
  */
-public class TestStep implements ITestStep{
-	//TOTO add pageObject as another member.
-	
+public class TestStep implements ITestStep {
+	// TOTO add pageObject as another member.
+
 	/** The my we. */
-	private MyWebElement myWe;
-	
+	private MyWebElement myWebElement;
+
+	/**
+	 * Gets the my web element.
+	 *
+	 * @return the myWebElement
+	 */
+	public final MyWebElement getMyWebElement() {
+		return myWebElement;
+	}
+
+	/**
+	 * Sets the my web element.
+	 *
+	 * @param myWebElement            the myWebElement to set
+	 */
+	public final void setMyWebElement(final MyWebElement myWebElement) {
+		this.myWebElement = myWebElement;
+	}
+
 	/**
 	 * Instantiates a new test step.
 	 * 
 	 * @param myWe
 	 *            the my we
 	 */
-	public TestStep(MyWebElement myWe){
-		this.myWe = myWe;
+	public TestStep(final MyWebElement myWe) {
+		this.myWebElement = myWe;
 	}
+
 	
 	/**
-	 * Gets the my we.
-	 * 
-	 * @return the my we
-	 */
-	public MyWebElement getMyWe() {
-		return myWe;
-	}
-
-
-	/**
-	 * Sets the my we.
-	 * 
-	 * @param myWe
-	 *            the new my we
-	 */
-	public void setMyWe(MyWebElement myWe) {
-		this.myWe = myWe;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.casestep.ITestStep#doStep()
+	 * {@inheritDoc}
 	 */
 	public void doStep() {
-		
-		myWe.doAction();
+
+		myWebElement.doAction();
 	}
 }

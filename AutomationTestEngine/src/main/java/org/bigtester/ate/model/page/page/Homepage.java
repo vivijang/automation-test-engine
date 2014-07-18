@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page._PageModelBase;
+import org.bigtester.ate.model.page.AbstractPageModelBase;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,18 +28,18 @@ import org.bigtester.ate.model.page._PageModelBase;
  * 
  * @author Peidong Hu
  */
-public class Homepage extends _PageModelBase{
-	
+public class Homepage extends AbstractPageModelBase {
+
 	/** The home url. */
 	private static String homeUrl;
-	
+
 	/**
 	 * Sets the home url.
 	 * 
 	 * @param homeUrl
 	 *            the new home url
 	 */
-	public static void setHomeUrl(String homeUrl) {
+	public static void setHomeUrl(final String homeUrl) {
 		Homepage.homeUrl = homeUrl;
 	}
 
@@ -51,19 +51,21 @@ public class Homepage extends _PageModelBase{
 	public String getHomeUrl() {
 		return homeUrl;
 	}
-	
-	/**
-	 * Instantiates a new homepage.
-	 */
-	public Homepage()
-	{
-		
-	}
-	
+
 	/**
 	 * Start homepage.
 	 */
-	public void startHomepage(){
-		super.iMyWd.getWd().get(homeUrl);
+	public void startHomepage() {
+		super.getMyWd().getWebDriver().get(homeUrl);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

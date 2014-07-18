@@ -36,67 +36,67 @@ import org.testng.xml.XmlTest;
  * @author Peidong Hu
  */
 public class TestProject {
-	
+
+	/** The suite list. */
+	private List<TestSuite> suiteList;
+
 	/**
-	 * Gets the l suite.
+	 * Gets the suite list.
 	 * 
-	 * @return the l suite
+	 * @return the suiteList
 	 */
-	public List<TestSuite> getlSuite() {
-		return lSuite;
+	public List<TestSuite> getSuiteList() {
+		return suiteList;
 	}
 
 	/**
-	 * Sets the l suite.
+	 * Sets the suite list.
 	 * 
-	 * @param lSuite
-	 *            the new l suite
+	 * @param suiteList
+	 *            the suiteList to set
 	 */
-	public void setlSuite(List<TestSuite> lSuite) {
-		this.lSuite = lSuite;
+	public void setSuiteList(final List<TestSuite> suiteList) {
+		this.suiteList = suiteList;
 	}
-
-	/** The l suite. */
-	private List<TestSuite> lSuite;
 
 	/**
 	 * Run suites.
 	 */
 	public void runSuites() {
-		
-		
-		TestListenerAdapter tla = new TestListenerAdapter();
-		TestNG testng = new TestNG();
+
+		final TestListenerAdapter tla = new TestListenerAdapter();
+		final TestNG testng = new TestNG();
 		testng.addListener(tla);
-	
-		List<XmlSuite> suites = new ArrayList<XmlSuite>();
-		
-		
-		for (TestSuite tempSuite: lSuite) {
+
+		final List<XmlSuite> suites = new ArrayList<XmlSuite>();
+
+		for (TestSuite tempSuite: suiteList) {
 			
 			XmlSuite suite = new XmlSuite();
 			suite.setName(tempSuite.getSuiteName());
-			
-			for (TestCase tempTC: tempSuite.getlTestcase()) {
-				
-				XmlClass xmlClass = new XmlClass("org.bigtester.ate.model.project.CaseRunner");
-			
+
+			for (TestCase tempTC : tempSuite.getTestCaseList()) {
+
+				XmlClass xmlClass = new XmlClass(
+						"org.bigtester.ate.model.project.CaseRunner");
+
 				List<XmlClass> classes = new ArrayList<XmlClass>();
 				classes.add(xmlClass);
-				
+
 				XmlTest test = new XmlTest(suite);
-				test.setName(tempTC.getTcname());
-				test.setXmlClasses(classes) ;
+				test.setName(tempTC.getTestCaseName());
+				test.setXmlClasses(classes);
 			}
 			suites.add(suite);
 			System.out.println(suite.toXml());
 		}
-		if (!suites.isEmpty()) {
+		if (suites.isEmpty()) {
+			//TODO
+		} else {
 			testng.setXmlSuites(suites);
 
 			testng.run();
-		} else {
-			//TODO add exception handling
+
 		}
 
 	}

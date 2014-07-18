@@ -32,21 +32,34 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 
  * @author Peidong Hu
  */
-public class TestProjectRunner {
+public final class TestProjectRunner {
 	
+	/**
+	 * Instantiates a new test project runner.
+	 */
+	private TestProjectRunner() {
+		
+	}
 	/**
 	 * The main method.
 	 * 
 	 * @param args
 	 *            the arguments
 	 */
-	public static void main(String[] args) {
-		//test k
-	  	ApplicationContext context = new ClassPathXmlApplicationContext(
+	public static void main(final String... args) {
+	
+	  	runTest();
+	}
+	
+	/**
+	 * Run test.
+	 */
+	private static void runTest() {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"testproject.xml");
 		
-		TestProject tp = (TestProject) context.getBean("testproject");
-		tp.runSuites();
+		TestProject testProj = (TestProject) context.getBean("testproject");
+		testProj.runSuites();
 		((ConfigurableApplicationContext)context).close();
 	}
 

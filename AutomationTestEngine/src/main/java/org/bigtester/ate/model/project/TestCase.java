@@ -28,26 +28,28 @@ package org.bigtester.ate.model.project;
  */
 public class TestCase {
 	
-	/** The tcname. */
-	private String tcname;
+	
+	/** The test case name. */
+	private String testCaseName;
 
 	/**
-	 * Gets the tcname.
-	 * 
-	 * @return the tcname
+	 * Gets the test case name.
+	 *
+	 * @return the testCaseName
 	 */
-	public String getTcname() {
-		return tcname;
+	public String getTestCaseName() {
+		return testCaseName;
 	}
 
 	/**
-	 * Sets the tcname.
-	 * 
-	 * @param tcname
-	 *            the new tcname
+	 * Sets the test case name.
+	 *
+	 * @param testCaseName the testCaseName to set
 	 */
-	public void setTcname(String tcname) {
-		this.tcname = tcname;
+	public void setTestCaseName(final String testCaseName) {
+		this.testCaseName = testCaseName;
 	}
+
+	
 
 }

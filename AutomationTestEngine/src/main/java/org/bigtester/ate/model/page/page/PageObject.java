@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page._PageModelBase;
+import org.bigtester.ate.model.page.AbstractPageModelBase;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -31,35 +31,37 @@ import java.util.List;
  * 
  * @author Peidong Hu
  */
-public class PageObject extends _PageModelBase {
+public class PageObject extends AbstractPageModelBase {
 
 	/** The l we. */
-	List<WebElement> lWe;
+	private List<WebElement> webElementList;
 
 	/**
-	 * Gets the l we.
+	 * Gets the web element list.
 	 * 
-	 * @return the l we
+	 * @return the web element list
 	 */
-	public List<WebElement> getlWe() {
-		return lWe;
+	public List<WebElement> getWebElementList() {
+		return webElementList;
 	}
 
 	/**
-	 * Sets the l we.
+	 * Sets the web element list.
 	 * 
-	 * @param lWe
-	 *            the new l we
+	 * @param webElementList
+	 *            the new web element list
 	 */
-	public void setlWe(List<WebElement> lWe) {
-		this.lWe = lWe;
+	public void setWebElementList(final List<WebElement> webElementList) {
+		this.webElementList = webElementList;
 	}
 
 	/**
-	 * Instantiates a new page object.
+	 * {@inheritDoc}
 	 */
-	public PageObject() {
-
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

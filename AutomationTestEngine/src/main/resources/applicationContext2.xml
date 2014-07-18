@@ -9,7 +9,7 @@
 
 	<bean id="testcase2" name="testcase2"
 		class="org.bigtester.ate.model.casestep.TestCase">
-		<property name="lTs">
+		<property name="testStepList">
 			<list>
 				<ref bean="homestep" />
 				<ref bean="step1" />
@@ -21,21 +21,21 @@
 
 	<!-- abstract beans, won't be initialized by Spring -->
 	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel"
-		class="org.bigtester.ate.model.page.elementfind._ElementFind">
+		class="org.bigtester.ate.model.page.elementfind.AbstractElementFind">
 	</bean>
 	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel"
-		class="org.bigtester.ate.model.page.elementaction._ElementAction">
+		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
 	</bean>
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
-		class="org.bigtester.ate.model.page._PageObjectModel">
-		<property name="iMyWd">
+		class="org.bigtester.ate.model.page.AbstractPageObjectModel">
+		<property name="myWd">
 			<ref bean="MyFirefoxWebDriver"></ref>
 		</property>
 	</bean>
 	<!-- homestep definition -->
 	<bean id="homestep" name="openHomepage"
 		class="org.bigtester.ate.model.casestep.HomeStep">
-		<property name="hP">
+		<property name="homepg">
 			<ref bean="myHomepage" />
 		</property>
 	</bean>
@@ -46,7 +46,7 @@
 	<!-- laststep definition -->
 	<bean id="laststep" name="closeBrowser"
 		class="org.bigtester.ate.model.casestep.LastStep">
-		<property name="lP">
+		<property name="lastPage">
 			<ref bean="myLastpage" />
 		</property>
 	</bean>

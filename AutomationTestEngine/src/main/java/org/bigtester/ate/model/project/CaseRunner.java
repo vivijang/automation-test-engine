@@ -25,6 +25,7 @@ import org.bigtester.ate.model.casestep.TestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
@@ -38,8 +39,22 @@ import org.testng.annotations.Test;
 public class CaseRunner {
 	
 	/** The my tc. */
-	private TestCase myTc;
+	private TestCase myTestCase;
 	
+	/**
+	 * @return the myTestCase
+	 */
+	public TestCase getMyTestCase() {
+		return myTestCase;
+	}
+
+	/**
+	 * @param myTestCase the myTestCase to set
+	 */
+	public void setMyTestCase(final TestCase myTestCase) {
+		this.myTestCase = myTestCase;
+	}
+
 	/**
 	 * Test runner1.
 	 * 
@@ -47,14 +62,14 @@ public class CaseRunner {
 	 *            the ctx
 	 */
 	@Test
-	public void testRunner1(ITestContext ctx) {
-		String testname = ctx.getCurrentXmlTest().getName();
+	public void testRunner1(final ITestContext ctx) {
+		final String testname = ctx.getCurrentXmlTest().getName();
 		//String testname = "applicationContext1.xml";
-		ApplicationContext context = new ClassPathXmlApplicationContext(testname);
+		final ApplicationContext context = new ClassPathXmlApplicationContext(testname);
 		System.out.println("processing fileabc: " + testname);
-		
-		myTc = (TestCase) context.getBean("testcase2");
-		myTc.goSteps();
+		Assert.assertTrue(true);
+		myTestCase = (TestCase) context.getBean("testcase2");
+		myTestCase.goSteps();
 		((ConfigurableApplicationContext)context).close();
 		
 	}

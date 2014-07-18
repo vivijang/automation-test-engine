@@ -26,13 +26,22 @@ package org.bigtester.ate.model.data;
  * 
  * @author Peidong Hu
  */
-public class ValuePair extends DataSet implements IDataSet{
-	
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.data.IDataSet#getDS()
+public class ValuePair extends AbstractDataSet implements IDataSet {
+
+	/**
+	 * {@inheritDoc}
 	 */
-	public DataSet getDS() {
-		//TODO
+	public AbstractDataSet getDS() {
+		// TODO
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IDataSet initDataSet() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -5,10 +5,15 @@ This document is built for developers to setup your code style and JAutoDoc tool
 	b) Click 'Import' button and select bigtester_codetemplates.xml to import the code style. the template file could be found at the root of the project folder.
 	c) Click on Comments item in the right panel
 	d) Click on 'Types' in the expanded Comments treeview
-	e) Click on 'Edit' button to change the Type comment's author name to your own name
+	e) Click on 'Edit' button to change the 'Types' comment's author name to your own name
+	f) click on 'Overriding methods' item under 'Comments' treeview, click on edit button
+	g) change the pattern of 'Overriding methods' to 
+	/**
+	 * {@inheritDoc}
+	 */
 	
-	f) To test if your setting is working, exit the dialog of Windows-Preferences
-	g) New a Class in your project and see if the newly created class has correct header and your full name in the comments.
+	h) To test if your setting is working, exit the dialog of Windows-Preferences
+	i) New a Class in your project and see if the newly created class has correct header and your full name in the comments.
 	
 2) Install plugin JAutoDoc from Eclipse marketplace
 	a) Click on menus Window->Preferences->Java->JAutoDoc, 
@@ -28,7 +33,19 @@ This document is built for developers to setup your code style and JAutoDoc tool
 	m) move the cursor to the first line of the file,
 	n) press 'Ctrl-Alt-j', All comments should be added automatically including the header and class comments. 
 	
- 	
+ 3) Install PMD through Eclipse marketplace
+ 	a) click on menus window->preferences-java->PMD->rule configuration
+ 	b) click 'Use global rule management'	
+ 	c) find rule 'CommentSize' and click on it
+ 	d) click on properties tab of this rule
+ 	e) change the maximum line length to 200
+ 	f) change the maximum lines to 50
+ 	f')click Rule Configuration,
+ 	f'') uncheck rules 'LawofDemeter', 'LocalVariableCouldBeFinal', 'AvoidInstantiatingObjectsInLoops'
+ 	g) exit window->preferences dialog
+ 	h) enable PMD on your project by right click on 'AutomationTestEngine' project->properties->PMD 
+ 	i) click 'enable PMD for this project'
+ 	j) project will be scanned and suggestion of code style will be displayed as a triangle icon on file.
  /*******************************************************************************
  * ATE, Automation Test Engine
  *

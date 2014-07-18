@@ -30,33 +30,38 @@ import org.bigtester.ate.model.page.page.Homepage;
  */
 public class HomeStep implements ITestStep{
 	
-	/** The h p. */
-	private Homepage hP;
+	
+	/** The homepg. */
+	private Homepage homepg;
 
 	/**
-	 * Gets the h p.
+	 * Gets the homepg.
 	 * 
-	 * @return the h p
+	 * @return the homepg
 	 */
-	public Homepage gethP() {
-		return hP;
+	public Homepage getHomepg() {
+		return homepg;
 	}
 
 	/**
-	 * Sets the h p.
+	 * Sets the homepg.
 	 * 
-	 * @param hP
-	 *            the new h p
+	 * @param homepg
+	 *            the new homepg
 	 */
-	public void sethP(Homepage hP) {
-		this.hP = hP;
+	public void setHomepg(final Homepage homepg) {
+		this.homepg = homepg;
 	}
+
 	
 	/* (non-Javadoc)
 	 * @see org.bigtester.ate.model.casestep.ITestStep#doStep()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	public void doStep(){
-		hP.startHomepage();
+		homepg.startHomepage();
 	}
 
 }

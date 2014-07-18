@@ -18,39 +18,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-
+package org.bigtester.ate.model.data;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class _PageModelBase defines ....
+ * The Class DataSet defines ....
  * 
  * @author Peidong Hu
  */
-public abstract class _PageModelBase {
+public abstract class AbstractDataSet {
 	
-	/** The i my wd. */
-	protected IMyWebDriver iMyWd;
-
 	/**
-	 * Gets the i my wd.
-	 * 
-	 * @return the i my wd
+	 * Inits the data set.
 	 */
-	public IMyWebDriver getiMyWd() {
-		return iMyWd;
-	}
+	public abstract IDataSet initDataSet();
 
-	/**
-	 * Sets the i my wd.
-	 * 
-	 * @param iMyWd
-	 *            the new i my wd
-	 */
-	public void setiMyWd(IMyWebDriver iMyWd) {
-		this.iMyWd = iMyWd;
-	}
-	
 }

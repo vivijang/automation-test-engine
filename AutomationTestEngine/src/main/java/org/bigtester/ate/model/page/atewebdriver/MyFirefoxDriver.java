@@ -28,14 +28,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * 
  * @author Peidong Hu
  */
-public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
+public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriver{
 	
 	/**
 	 * Instantiates a new my firefox driver.
 	 */
 	public MyFirefoxDriver() {
 		//TODO create multi browsers and remote web driver handler
-		wd = new FirefoxDriver();
+		super();
+		setWebDriver(new FirefoxDriver());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void driverCapacity() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

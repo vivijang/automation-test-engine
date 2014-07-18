@@ -36,6 +36,6 @@ public interface IElementAction {
 	 * @param we
 	 *            the we
 	 */
-	public void doAction(WebElement we);
+	void doAction(WebElement webElm);
 
 }

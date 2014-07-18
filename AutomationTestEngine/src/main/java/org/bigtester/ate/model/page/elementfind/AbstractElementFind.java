@@ -18,13 +18,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.page.elementfind;
 
+import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.openqa.selenium.WebElement;
+
+// TODO: Auto-generated Javadoc
 /**
- * The Class DataSet defines ....
+ * The Class AbstractElementFind defines ....
  * 
  * @author Peidong Hu
  */
-public abstract class DataSet {
-
+public abstract class AbstractElementFind extends AbstractPageModelBase{
+	
+	/** The find by value. */
+	private String findByValue;
+	
+	/**
+	 * Do find.
+	 * 
+	 * @param findByValue
+	 *            the find by value
+	 * @return the web element
+	 */
+	public abstract WebElement doFind(String findByValue);
+	
+	/**
+	 * Gets the find by value.
+	 * 
+	 * @return the find by value
+	 */
+	public String getFindByValue() {
+		return findByValue;
+	}
+	
+	/**
+	 * Sets the find by value.
+	 * 
+	 * @param findByValue
+	 *            the new find by value
+	 */
+	public void setFindByValue(final String findByValue) {
+		this.findByValue = findByValue;
+	}
+	
 }

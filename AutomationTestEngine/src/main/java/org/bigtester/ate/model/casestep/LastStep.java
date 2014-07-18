@@ -31,39 +31,48 @@ import org.bigtester.ate.model.page.page.Lastpage;
  */
 public class LastStep implements ITestStep{
 	
-	/** The l p. */
-	private Lastpage lP;
+	
+	/** The last page. */
+	private Lastpage lastPage;
 
 	
 	
+
+
 	/**
-	 * Gets the l p.
-	 * 
-	 * @return the l p
+	 * Gets the last page.
+	 *
+	 * @return the lastPage
 	 */
-	public Lastpage getlP() {
-		return lP;
+	public Lastpage getLastPage() {
+		return lastPage;
 	}
 
 
 
+
+
 	/**
-	 * Sets the l p.
-	 * 
-	 * @param lP
-	 *            the new l p
+	 * Sets the last page.
+	 *
+	 * @param lastPage the lastPage to set
 	 */
-	public void setlP(Lastpage lP) {
-		this.lP = lP;
+	public void setLastPage(final Lastpage lastPage) {
+		this.lastPage = lastPage;
 	}
+
+
 
 
 
 	/* (non-Javadoc)
 	 * @see org.bigtester.ate.model.casestep.ITestStep#doStep()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	public void doStep(){
-		lP.closeLastpage();
+		lastPage.closeLastpage();
 	}
 
 }

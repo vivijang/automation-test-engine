@@ -18,27 +18,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.atewebdriver;
+package org.bigtester.ate.model.page.elementaction;
 
-import org.openqa.selenium.WebDriver;
+
+import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.openqa.selenium.WebElement;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class WebDriverBase defines ....
+ * The Class _ElementAction defines ....
  * 
  * @author Peidong Hu
  */
-public abstract class WebDriverBase {
+public abstract class AbstractElementAction extends AbstractPageModelBase{
 	
-	/** The wd. */
-	protected WebDriver wd;
+	/** The data value. */
+	private String dataValue;
 	
 	/**
-	 * Gets the wd.
+	 * Gets the data value.
 	 * 
-	 * @return the wd
+	 * @return the data value
 	 */
-	public WebDriver getWd() {
-		return wd;
+	public String getDataValue() {
+		return dataValue;
 	}
+
+	/**
+	 * Sets the data value.
+	 * 
+	 * @param dataValue
+	 *            the new data value
+	 */
+	public void setDataValue(final String dataValue) {
+		this.dataValue = dataValue;
+	}
+
+	
+	/**
+	 * Do action.
+	 *
+	 * @param webElm the web elm
+	 */
+	public abstract void doAction(WebElement webElm);
+
+	
+	
 }

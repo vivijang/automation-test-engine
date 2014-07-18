@@ -31,68 +31,64 @@ import org.bigtester.ate.model.page.elementfind.IElementFind;
  */
 public class MyWebElement {
 
-	/** The ea. */
-	private IElementAction ea;
+	/** The i elm action. */
+	private IElementAction elementAction;
 
-	/** The ef. */
-	private IElementFind ef;
+	/** The i elm find. */
+	private IElementFind elementFind;
 
 	/**
 	 * Instantiates a new my web element.
 	 * 
-	 * @param ef
+	 * @param iElmFind
 	 *            the ef
-	 * @param ea
+	 * @param iElmAction
 	 *            the ea
 	 */
-	public MyWebElement(IElementFind ef, IElementAction ea) {
-		this.ea = ea;
-		this.ef = ef;
+	public MyWebElement(final IElementFind iElmFind,
+			final IElementAction iElmAction) {
+		this.elementAction = iElmAction;
+		this.elementFind = iElmFind;
 	}
+
+	
+	/**
+	 * @return the elementAction
+	 */
+	public IElementAction getElementAction() {
+		return elementAction;
+	}
+
+
+	/**
+	 * @param elementAction the elementAction to set
+	 */
+	public void setElementAction(final IElementAction elementAction) {
+		this.elementAction = elementAction;
+	}
+
+
+	/**
+	 * @return the elementFind
+	 */
+	public IElementFind getElementFind() {
+		return elementFind;
+	}
+
+
+	/**
+	 * @param elementFind the elementFind to set
+	 */
+	public void setElementFind(final IElementFind elementFind) {
+		this.elementFind = elementFind;
+	}
+
 
 	/**
 	 * Do action.
 	 */
 	public void doAction() {
-		ea.doAction(ef.doFind(ef.getFindByValue()));
-	}
-
-	/**
-	 * Gets the ea.
-	 * 
-	 * @return the ea
-	 */
-	public IElementAction getEa() {
-		return ea;
-	}
-
-	/**
-	 * Sets the ea.
-	 * 
-	 * @param ea
-	 *            the new ea
-	 */
-	public void setEa(IElementAction ea) {
-		this.ea = ea;
-	}
-
-	/**
-	 * Gets the ef.
-	 * 
-	 * @return the ef
-	 */
-	public IElementFind getEf() {
-		return ef;
-	}
-
-	/**
-	 * Sets the ef.
-	 * 
-	 * @param ef
-	 *            the new ef
-	 */
-	public void setEf(IElementFind ef) {
-		this.ef = ef;
+		elementAction.doAction(elementFind.doFind(elementFind.getFindByValue()));
 	}
 
 }

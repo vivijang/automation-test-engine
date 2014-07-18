@@ -22,22 +22,30 @@ package org.bigtester.ate.model.page.elementaction;
 
 import org.openqa.selenium.WebElement;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class ClickAction defines ....
  * 
  * @author Peidong Hu
  */
-public class ClickAction extends _ElementAction implements IElementAction {
+public class ClickAction extends AbstractElementAction implements
+		IElementAction {
 
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementaction._ElementAction#doAction(org.openqa.selenium.WebElement)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void doAction(WebElement we) {
-		we.click();
+	public void doAction(final WebElement webElm) {
+		webElm.click();
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

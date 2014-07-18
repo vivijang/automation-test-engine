@@ -28,24 +28,25 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public class SendKeysAction extends _ElementAction implements IElementAction{
-	
-		
+public class SendKeysAction extends AbstractElementAction implements
+		IElementAction {
+
 	/**
-	 * Instantiates a new send keys action.
-	 */
-	public SendKeysAction()
-	{
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementaction._ElementAction#doAction(org.openqa.selenium.WebElement)
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void doAction(WebElement we) {
+	public void doAction(final WebElement webElm) {
 		// TODO Auto-generated method stub
-		we.sendKeys(getDataValue());
+		webElm.sendKeys(getDataValue());
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -25,18 +25,28 @@ import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ElementFindById defines ....
+ * The Class ElementFindById defines the way to find element by id
  * 
  * @author Peidong Hu
  */
-public class ElementFindById extends _ElementFind implements IElementFind {
+public class ElementFindById extends AbstractElementFind implements IElementFind {
 
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementfind._ElementFind#doFind(java.lang.String)
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(String findByValue) {
-		return iMyWd.getWd().findElement(By.id(findByValue));
+	public WebElement doFind(final String findByValue) {
+		return super.getMyWd().getWebDriver().findElement(By.id(findByValue));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

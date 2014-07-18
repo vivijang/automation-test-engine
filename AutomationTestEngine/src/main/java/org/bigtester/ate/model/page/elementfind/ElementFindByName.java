@@ -25,35 +25,48 @@ import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ElementFindByName defines ....
+ * The Class ElementFindByName defines the way to find element by name
  * 
  * @author Peidong Hu
  */
-public class ElementFindByName extends _ElementFind implements IElementFind {
+public class ElementFindByName extends AbstractElementFind implements IElementFind {
 	
 	/** The find by value. */
 	private String findByValue;
 	
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementfind._ElementFind#getFindByValue()
+	
+	/**
+	 * {@inheritDoc}
 	 */
 	public String getFindByValue() {
 		return findByValue;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementfind._ElementFind#setFindByValue(java.lang.String)
+	
+	/**
+	 * {@inheritDoc}
 	 */
-	public void setFindByValue(String findByValue) {
+	public void setFindByValue(final String findByValue) {
 		this.findByValue = findByValue;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.page.elementfind._ElementFind#doFind(java.lang.String)
+	
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(String findByValue) {
-		return iMyWd.getWd().findElement(By.name(findByValue));
+	public WebElement doFind(final String findByValue) {
+		return super.getMyWd().getWebDriver().findElement(By.name(findByValue));
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

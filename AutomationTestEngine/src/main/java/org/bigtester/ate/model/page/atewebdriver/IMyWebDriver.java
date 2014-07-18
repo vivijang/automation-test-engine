@@ -31,9 +31,9 @@ import org.openqa.selenium.WebDriver;
 public interface IMyWebDriver {
 	
 	/**
-	 * Gets the wd.
+	 * Gets the webdriver.
 	 * 
-	 * @return the wd
+	 * @return the webdriver
 	 */
-	public WebDriver getWd();
+	WebDriver getWebDriver();
 }

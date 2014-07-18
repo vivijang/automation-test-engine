@@ -20,8 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.misc;
 
-import org.bigtester.ate.model.data.DataSet;
-import org.bigtester.ate.model.page.elementaction._ElementAction;
+import org.bigtester.ate.model.data.AbstractDataSet;
+import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
 import org.bigtester.ate.model.page.page.PageObject;
 
 
@@ -36,11 +36,11 @@ public interface IPageObjectAction {
 	/**
 	 * Do action.
 	 * 
-	 * @param at
+	 * @param elementaction
 	 *            the at
-	 * @param ds
+	 * @param dataset
 	 *            the ds
 	 * @return the page object
 	 */
-	public PageObject doAction(_ElementAction at, DataSet ds);
+	PageObject doAction(AbstractElementAction elementaction, AbstractDataSet dataset);
 }

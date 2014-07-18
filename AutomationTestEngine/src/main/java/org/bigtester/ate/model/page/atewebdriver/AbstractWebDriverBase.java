@@ -18,48 +18,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementfind;
+package org.bigtester.ate.model.page.atewebdriver;
 
-import org.bigtester.ate.model.page._PageModelBase;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class _ElementFind defines ....
+ * The Class WebDriverBase defines ....
  * 
  * @author Peidong Hu
  */
-public abstract class _ElementFind extends _PageModelBase{
+public abstract class AbstractWebDriverBase {
 	
-	/** The find by value. */
-	private String findByValue;
 	
-	/**
-	 * Do find.
-	 * 
-	 * @param findByValue
-	 *            the find by value
-	 * @return the web element
-	 */
-	public abstract WebElement doFind(String findByValue);
+	/** The web driver. */
+	protected WebDriver webDriver;
 	
 	/**
-	 * Gets the find by value.
-	 * 
-	 * @return the find by value
+	 * Gets the web driver.
+	 *
+	 * @return the webDriver
 	 */
-	public String getFindByValue() {
-		return findByValue;
+	public final WebDriver getWebDriver() {
+		return webDriver;
+	}
+
+	/**
+	 * Sets the web driver.
+	 *
+	 * @param webDriver the webDriver to set
+	 */
+	public final void setWebDriver(final WebDriver webDriver) {
+		this.webDriver = webDriver;
 	}
 	
 	/**
-	 * Sets the find by value.
-	 * 
-	 * @param findByValue
-	 *            the new find by value
+	 * Driver capacity.
+	 * @return 
 	 */
-	public void setFindByValue(String findByValue) {
-		this.findByValue = findByValue;
-	}
-	
+	public abstract void driverCapacity();
 }

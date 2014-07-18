@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page._PageModelBase;
+import org.bigtester.ate.model.page.AbstractPageModelBase;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,22 +28,21 @@ import org.bigtester.ate.model.page._PageModelBase;
  * 
  * @author Peidong Hu
  */
-public class Lastpage extends _PageModelBase{
-	
-	
-		
-	/**
-	 * Instantiates a new lastpage.
-	 */
-	public Lastpage()
-	{
-		
-	}
-	
+public class Lastpage extends AbstractPageModelBase {
+
 	/**
 	 * Close lastpage.
 	 */
-	public void closeLastpage(){
-		super.iMyWd.getWd().close();
+	public void closeLastpage() {
+		super.getMyWd().getWebDriver().close();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void navigate() {
+		// TODO Auto-generated method stub
+		
 	}
 }
