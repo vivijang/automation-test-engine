@@ -41,7 +41,7 @@ This document is built for developers to setup your code style and JAutoDoc tool
  	e) change the maximum line length to 200
  	f) change the maximum lines to 50
  	f')click Rule Configuration,
- 	f'') uncheck rules 'LawofDemeter', 'LocalVariableCouldBeFinal', 'AvoidInstantiatingObjectsInLoops'
+ 	f'') uncheck rules 'LawofDemeter', 'LocalVariableCouldBeFinal', 'AvoidInstantiatingObjectsInLoops', all JUnit related rules
  	g) exit window->preferences dialog
  	h) enable PMD on your project by right click on 'AutomationTestEngine' project->properties->PMD 
  	i) click 'enable PMD for this project'

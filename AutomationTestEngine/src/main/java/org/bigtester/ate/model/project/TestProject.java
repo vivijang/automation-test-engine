@@ -23,6 +23,7 @@ package org.bigtester.ate.model.project;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
@@ -55,7 +56,7 @@ public class TestProject {
 	 * @param suiteList
 	 *            the suiteList to set
 	 */
-	public void setSuiteList(final List<TestSuite> suiteList) {
+	public void setSuiteList(List<TestSuite> suiteList) {
 		this.suiteList = suiteList;
 	}
 
@@ -67,11 +68,14 @@ public class TestProject {
 		final TestListenerAdapter tla = new TestListenerAdapter();
 		final TestNG testng = new TestNG();
 		testng.addListener(tla);
-
+		
+		ATEXMLReporter rng = new ATEXMLReporter();
+		testng.addListener(rng);
+		
 		final List<XmlSuite> suites = new ArrayList<XmlSuite>();
 
-		for (TestSuite tempSuite: suiteList) {
-			
+		for (TestSuite tempSuite : suiteList) {
+
 			XmlSuite suite = new XmlSuite();
 			suite.setName(tempSuite.getSuiteName());
 
@@ -91,7 +95,7 @@ public class TestProject {
 			System.out.println(suite.toXml());
 		}
 		if (suites.isEmpty()) {
-			//TODO
+			// TODO
 		} else {
 			testng.setXmlSuites(suites);
 
