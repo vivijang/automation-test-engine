@@ -18,49 +18,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.testresult;
 
 import java.util.List;
 
+import org.testng.ITestResult;
+
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestCase defines ....
- * 
+ * This class IATETestResult defines ....
  * @author Peidong Hu
+ *
  */
-public class TestCase {
-
-	/** The test step list. */
-	private List<ITestStep> testStepList;
-
-	/**
-	 * Gets the test step list.
-	 * 
-	 * @return the testStepList
-	 */
-	public List<ITestStep> getTestStepList() {
-		return testStepList;
-	}
-
-	/**
-	 * Sets the test step list.
-	 * 
-	 * @param testStepList
-	 *            the testStepList to set
-	 */
-	public final void setTestStepList(final List<ITestStep> testStepList) {
-		this.testStepList = testStepList;
-	}
-
-	/**
-	 * run steps.
-	 */
-	public void goSteps() {
-		
-		for (int i=0; i<testStepList.size(); i++) {
-			
-			testStepList.get(i).doStep();//NOPMD
-		}
-	}
+public interface IATETestResult extends ITestResult{
+	List<ITestStepResult> getTestStepResultList();
 
 }

@@ -59,6 +59,7 @@ public class TestStep implements ITestStep {
 	 *            the my we
 	 */
 	public TestStep(final MyWebElement myWe) {
+		super();
 		this.myWebElement = myWe;
 	}
 
