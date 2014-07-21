@@ -44,7 +44,8 @@ This document is built for developers to setup your code style and JAutoDoc tool
  	f'') uncheck rules 'LawofDemeter', 'LocalVariableCouldBeFinal', 'AvoidInstantiatingObjectsInLoops', all JUnit related rules
  	g) exit window->preferences dialog
  	h) enable PMD on your project by right click on 'AutomationTestEngine' project->properties->PMD 
- 	i) click 'enable PMD for this project'
+ 	i) click 'enable PMD'
+	i') click Use the ruleset configured in a project file
  	j) project will be scanned and suggestion of code style will be displayed as a triangle icon on file.
  /*******************************************************************************
  * ATE, Automation Test Engine
