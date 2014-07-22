@@ -1,5 +1,6 @@
 package org.bigtester.ate.reporter;
 
+import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.IResultMap;
 import org.testng.ISuiteResult;
 import org.testng.ITestContext;
@@ -163,6 +164,7 @@ public class ATEXMLSuiteResultWriter {
     attribs.setProperty(XMLReporterConfig.ATTR_TEST_INSTANCE_NAME, testInstanceName);
     xmlBuffer.push(XMLReporterConfig.TAG_TEST_METHOD, attribs);
     addTestMethodParams(xmlBuffer, testResult);
+    TestStepsXMLReporterUtils.addTestSteps(xmlBuffer, testResult);
     addTestResultException(xmlBuffer, testResult);
     addTestResultOutput(xmlBuffer, testResult);
     if (config.isGenerateTestResultAttributes()) {

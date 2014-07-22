@@ -18,19 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.testresult;
+package org.bigtester.ate.reporter;
 
-import java.util.List;
-
-import org.testng.ITestResult;
+import org.testng.reporters.XMLReporterConfig;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class IATETestResult defines ....
+ * This class ATEXMLReporterConfig defines ....
+ * 
  * @author Peidong Hu
- *
+ * 
  */
-public interface IATETestResult extends ITestResult{
-	List<ITestStepResult> getTestStepResultList();
+public class ATEXMLReporterConfig extends XMLReporterConfig { //NOPMD
+
+	
+	/** The Constant TAG_STEPS. */
+	public final static String TAG_STEPS = "Steps";
+
+	/** The Constant TAG_STEP. */
+	public final static String TAG_STEP = "Step";
+	
+	public final static String TAG_STEP_DESC = "StepDescription";
+	
 
 }

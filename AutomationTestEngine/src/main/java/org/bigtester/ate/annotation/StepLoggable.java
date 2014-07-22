@@ -18,16 +18,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.testresult;
+package org.bigtester.ate.annotation;
 
-import org.testng.internal.TestResult;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.ElementType;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ATETestResult defines ....
+ * This class StepLoggable defines ....
  * @author Peidong Hu
  *
  */
-public class ATETestResult extends TestResult implements IATETestResult{
+@Retention(RetentionPolicy.RUNTIME)
+@Target(
+{
+    ElementType.METHOD, ElementType.TYPE
+})
+public @interface StepLoggable {
 
 }

@@ -48,35 +48,37 @@ import com.jamonapi.MonitorFactory;
  *
  * @author Peidong Hu
  */
-
-public class TestStepResult
+@Aspect
+public class TestStepMonitor
 {
+	//private static final Logger logger_c = Logger.getLogger(TestStepResult.class);
 	/** The monitor. */
 	private final String MONITOR = "PERFORMANCE_MONITOR";
 	public static final String STEPRESULTLIST = "StepResultList";
 	/** The monitor_i. */
 	private Monitor monitor_i;
 	
-	private String stepName;
-	
-	/** The this step. */
-	private BaseTestStep thisStep;
-
-	
+	/*
+	 * @Before tells the Spring framework that this method should be invoked before the specified Pointcut.
+	 * The Pointcut expression here is identical to the one we used in the XML configuration example
+	 */
 	/**
 	 * Start monitor.
 	 */
-	
+	@Before("@annotation(org.bigtester.ate.annotation.StepLoggable)")
 	public void startMonitor()
 	{
 		monitor_i = MonitorFactory.start(MONITOR);
 	}
 
-	
+	/*
+	 * @After tells the Spring framework that this method should be invoked after the specified Pointcut.
+	 * The Pointcut expression here is identical to the one we used in the XML configuration example
+	 */
 	/**
 	 * Stop monitor.
 	 */
-	
+	@After("@annotation(org.bigtester.ate.annotation.StepLoggable)")
 	public void stopMonitor()
 	{
 		monitor_i.stop();
@@ -153,36 +155,27 @@ public class TestStepResult
 	}
 
 	
+	/**
+	 * Log.
+	 *
+	 * @param joinPoint_p the join point_p
+	 */
+	@After("@annotation(org.bigtester.ate.annotation.StepLoggable)")
+	public void log(final JoinPoint joinPoint_p)
+	{
+		TestStepResult tsr = new TestStepResult();
+		tsr.setThisStep((BaseTestStep) joinPoint_p.getTarget());
+		tsr.setStepName(((BaseTestStep) joinPoint_p.getTarget()).getStepName());
+		
+		ITestResult testResult = Reporter.getCurrentTestResult();
+		//TODO checked cast or create a new class
+		List<TestStepResult> stepResultList = (List<TestStepResult>) testResult.getAttribute(TestStepResult.STEPRESULTLIST);
+		if (stepResultList == null) {
+			stepResultList = new ArrayList<TestStepResult>();
+			
+		}
+		stepResultList.add(tsr);
+		testResult.setAttribute(TestStepResult.STEPRESULTLIST, stepResultList);
+	}
 	
-	/**
-	 * Gets the this step.
-	 *
-	 * @return the thisStep
-	 */
-	public BaseTestStep getThisStep() {
-		return thisStep;
-	}
-
-	/**
-	 * Sets the this step.
-	 *
-	 * @param thisStep the thisStep to set
-	 */
-	public void setThisStep(BaseTestStep thisStep) {
-		this.thisStep = thisStep;
-	}
-
-	/**
-	 * @return the stepName
-	 */
-	public String getStepName() {
-		return stepName;
-	}
-
-	/**
-	 * @param stepName the stepName to set
-	 */
-	public void setStepName(String stepName) {
-		this.stepName = stepName;
-	}
 }
