@@ -3,6 +3,7 @@ This document is built for developers to setup your code style and JAutoDoc tool
 1) Code Style setup
 	a) Click on menus Window->Preferences->Java->Code Style->Code Templates
 	b) Click 'Import' button and select bigtester_codetemplates.xml to import the code style. the template file could be found at the root of the project folder.
+	b') Check the option 'Automatically add comments for new methods and types' at the bottom of the dialog.
 	c) Click on Comments item in the right panel
 	d) Click on 'Types' in the expanded Comments treeview
 	e) Click on 'Edit' button to change the 'Types' comment's author name to your own name
@@ -25,7 +26,7 @@ This document is built for developers to setup your code style and JAutoDoc tool
 	f) Add variable 'author', value is your own full name
 	g) Click 'Types' item in the right panel
 	h) Click 'Default' item, and click edit,
-	i) Change the line of @Author comment to '@author ${author}'
+	i) Add the line '@author ${author}'
 	
 	j) To test if the JAutodoc works correctly, exit the dialog of Windows-Preferences
 	k) Create a new Class

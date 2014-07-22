@@ -29,16 +29,18 @@ import org.testng.reporters.XMLReporterConfig;
  * @author Peidong Hu
  * 
  */
-public class ATEXMLReporterConfig extends XMLReporterConfig { //NOPMD
-
-	
+public final class ATEXMLReporterConfig extends XMLReporterConfig {
 	/** The Constant TAG_STEPS. */
 	public final static String TAG_STEPS = "Steps";
 
 	/** The Constant TAG_STEP. */
 	public final static String TAG_STEP = "Step";
-	
+
+	/** The Constant TAG_STEP_DESC. */
 	public final static String TAG_STEP_DESC = "StepDescription";
-	
+
+	private ATEXMLReporterConfig() {
+		super();
+	}
 
 }

@@ -1,6 +1,5 @@
 package org.bigtester.ate.reporter;
 
-import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.IResultMap;
 import org.testng.ISuiteResult;
 import org.testng.ITestContext;

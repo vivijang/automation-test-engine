@@ -28,10 +28,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.apache.log4j.Logger;
 import org.bigtester.ate.model.casestep.BaseTestStep;
-import org.bigtester.ate.model.casestep.ITestStep;
-import org.bigtester.ate.model.casestep.TestStep;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
@@ -45,137 +42,160 @@ import com.jamonapi.MonitorFactory;
  */
 /**
  * The Class TestStepResult defines ....
- *
+ * 
  * @author Peidong Hu
  */
 @Aspect
-public class TestStepMonitor
-{
-	//private static final Logger logger_c = Logger.getLogger(TestStepResult.class);
+public class TestStepMonitor {
+	// private static final Logger logger_c =
+	// Logger.getLogger(TestStepResult.class);
 	/** The monitor. */
-	private final String MONITOR = "PERFORMANCE_MONITOR";
+	private final static String MONITOR = "PERFORMANCE_MONITOR";
+
+	/** The Step result list constant. */
 	public static final String STEPRESULTLIST = "StepResultList";
 	/** The monitor_i. */
-	private Monitor monitor_i;
-	
+	private Monitor monitor;
+
+	/**
+	 * Gets the monitor.
+	 * 
+	 * @return the monitor
+	 */
+	public Monitor getMonitor() {
+		return monitor;
+	}
+
+	/**
+	 * Sets the monitor_i.
+	 * 
+	 * @param monitor_i
+	 *            the new monitor_i
+	 */
+	public void setMonitor(Monitor monitor) {
+		this.monitor = monitor;
+	}
+
 	/*
-	 * @Before tells the Spring framework that this method should be invoked before the specified Pointcut.
-	 * The Pointcut expression here is identical to the one we used in the XML configuration example
+	 * @Before tells the Spring framework that this method should be invoked
+	 * before the specified Pointcut. The Pointcut expression here is identical
+	 * to the one we used in the XML configuration example
 	 */
 	/**
 	 * Start monitor.
 	 */
 	@Before("@annotation(org.bigtester.ate.annotation.StepLoggable)")
-	public void startMonitor()
-	{
-		monitor_i = MonitorFactory.start(MONITOR);
+	public void startMonitor() {
+		monitor = MonitorFactory.start(MONITOR);
 	}
 
 	/*
-	 * @After tells the Spring framework that this method should be invoked after the specified Pointcut.
-	 * The Pointcut expression here is identical to the one we used in the XML configuration example
+	 * @After tells the Spring framework that this method should be invoked
+	 * after the specified Pointcut. The Pointcut expression here is identical
+	 * to the one we used in the XML configuration example
 	 */
 	/**
 	 * Stop monitor.
 	 */
 	@After("@annotation(org.bigtester.ate.annotation.StepLoggable)")
-	public void stopMonitor()
-	{
-		monitor_i.stop();
+	public void stopMonitor() {
+		monitor.stop();
 	}
 
 	/**
 	 * get last access.
-	 *
+	 * 
 	 * @return Date
 	 */
-	public Date getLastAccess()
-	{
-		return monitor_i.getLastAccess();
+	public Date getLastAccess() {
+		return monitor.getLastAccess();
 	}
 
 	/**
 	 * get call count.
-	 *
+	 * 
 	 * @return int
 	 */
-	public int getCallCount()
-	{
-		return (int) monitor_i.getHits();
+	public int getCallCount() {
+		return (int) monitor.getHits();
 	}
 
 	/**
 	 * get average call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getAverageCallTime()
-	{
-		return monitor_i.getAvg() / 1000;
+	public double getAverageCallTime() {
+		return monitor.getAvg() / 1000;
 	}
 
 	/**
 	 * get last call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getLastCallTime()
-	{
-		return monitor_i.getLastValue() / 1000;
+	public double getLastCallTime() {
+		return monitor.getLastValue() / 1000;
 	}
 
 	/**
 	 * get maximum call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getMaximumCallTime()
-	{
-		return monitor_i.getMax() / 1000;
+	public double getMaximumCallTime() {
+		return monitor.getMax() / 1000;
 	}
 
 	/**
 	 * get minimum call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getMinimumCallTime()
-	{
-		return monitor_i.getMin() / 1000;
+	public double getMinimumCallTime() {
+		return monitor.getMin() / 1000;
 	}
 
 	/**
 	 * get total call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getTotalCallTime()
-	{
-		return monitor_i.getTotal() / 1000;
+	public double getTotalCallTime() {
+		return monitor.getTotal() / 1000;
 	}
 
-	
 	/**
 	 * Log.
-	 *
-	 * @param joinPoint_p the join point_p
+	 * 
+	 * @param joinPoint_p
+	 *            the join point_p
 	 */
+
+	@SuppressWarnings("unchecked")
 	@After("@annotation(org.bigtester.ate.annotation.StepLoggable)")
-	public void log(final JoinPoint joinPoint_p)
-	{
+	public void log(final JoinPoint joinPoint_p) {
 		TestStepResult tsr = new TestStepResult();
 		tsr.setThisStep((BaseTestStep) joinPoint_p.getTarget());
 		tsr.setStepName(((BaseTestStep) joinPoint_p.getTarget()).getStepName());
-		
+
 		ITestResult testResult = Reporter.getCurrentTestResult();
-		//TODO checked cast or create a new class
-		List<TestStepResult> stepResultList = (List<TestStepResult>) testResult.getAttribute(TestStepResult.STEPRESULTLIST);
-		if (stepResultList == null) {
+		List<TestStepResult> stepResultList;
+		try {
+			if (testResult.getAttribute(TestStepResult.STEPRESULTLIST) instanceof List<?>) {
+				stepResultList = (List<TestStepResult>) testResult //NOPMD
+						.getAttribute(TestStepResult.STEPRESULTLIST);
+			} else {
+				stepResultList = new ArrayList<TestStepResult>();//NOPMD
+			}
+		} catch (final ClassCastException e) {
+			//TODO add warning message to result
+			System.out.println("class cast exception");
 			stepResultList = new ArrayList<TestStepResult>();
-			
 		}
+
 		stepResultList.add(tsr);
 		testResult.setAttribute(TestStepResult.STEPRESULTLIST, stepResultList);
 	}
-	
+
 }

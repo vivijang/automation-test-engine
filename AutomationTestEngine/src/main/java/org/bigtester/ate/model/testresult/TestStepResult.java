@@ -20,20 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.testresult;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.apache.log4j.Logger;
 import org.bigtester.ate.model.casestep.BaseTestStep;
-import org.bigtester.ate.model.casestep.ITestStep;
-import org.bigtester.ate.model.casestep.TestStep;
-import org.testng.ITestResult;
-import org.testng.Reporter;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
@@ -45,118 +34,123 @@ import com.jamonapi.MonitorFactory;
  */
 /**
  * The Class TestStepResult defines ....
- *
+ * 
  * @author Peidong Hu
  */
 
-public class TestStepResult
-{
+public class TestStepResult {
 	/** The monitor. */
-	private final String MONITOR = "PERFORMANCE_MONITOR";
+	private transient final static String MONITOR = "PERFORMANCE_MONITOR";
+
+	/** The Constant STEPRESULTLIST. */
 	public static final String STEPRESULTLIST = "StepResultList";
 	/** The monitor_i. */
-	private Monitor monitor_i;
-	
+	private Monitor monitor;
+	/** The step name. */
 	private String stepName;
-	
+
 	/** The this step. */
 	private BaseTestStep thisStep;
 
-	
+	/**
+	 * Gets the monitor.
+	 * 
+	 * @return the monitor
+	 */
+	public Monitor getMonitor() {
+		return monitor;
+	}
+
+	/**
+	 * @param monitor
+	 *            the monitor to set
+	 */
+	public void setMonitor(Monitor monitor) {
+		this.monitor = monitor;
+	}
+
 	/**
 	 * Start monitor.
 	 */
-	
-	public void startMonitor()
-	{
-		monitor_i = MonitorFactory.start(MONITOR);
+
+	public void startMonitor() {
+		monitor = MonitorFactory.start(MONITOR);
 	}
 
-	
 	/**
 	 * Stop monitor.
 	 */
-	
-	public void stopMonitor()
-	{
-		monitor_i.stop();
+
+	public void stopMonitor() {
+		monitor.stop();
 	}
 
 	/**
 	 * get last access.
-	 *
+	 * 
 	 * @return Date
 	 */
-	public Date getLastAccess()
-	{
-		return monitor_i.getLastAccess();
+	public Date getLastAccess() {
+		return monitor.getLastAccess();
 	}
 
 	/**
 	 * get call count.
-	 *
+	 * 
 	 * @return int
 	 */
-	public int getCallCount()
-	{
-		return (int) monitor_i.getHits();
+	public int getCallCount() {
+		return (int) monitor.getHits();
 	}
 
 	/**
 	 * get average call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getAverageCallTime()
-	{
-		return monitor_i.getAvg() / 1000;
+	public double getAverageCallTime() {
+		return monitor.getAvg() / 1000;
 	}
 
 	/**
 	 * get last call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getLastCallTime()
-	{
-		return monitor_i.getLastValue() / 1000;
+	public double getLastCallTime() {
+		return monitor.getLastValue() / 1000;
 	}
 
 	/**
 	 * get maximum call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getMaximumCallTime()
-	{
-		return monitor_i.getMax() / 1000;
+	public double getMaximumCallTime() {
+		return monitor.getMax() / 1000;
 	}
 
 	/**
 	 * get minimum call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getMinimumCallTime()
-	{
-		return monitor_i.getMin() / 1000;
+	public double getMinimumCallTime() {
+		return monitor.getMin() / 1000;
 	}
 
 	/**
 	 * get total call time.
-	 *
+	 * 
 	 * @return double
 	 */
-	public double getTotalCallTime()
-	{
-		return monitor_i.getTotal() / 1000;
+	public double getTotalCallTime() {
+		return monitor.getTotal() / 1000;
 	}
 
-	
-	
 	/**
 	 * Gets the this step.
-	 *
+	 * 
 	 * @return the thisStep
 	 */
 	public BaseTestStep getThisStep() {
@@ -165,14 +159,17 @@ public class TestStepResult
 
 	/**
 	 * Sets the this step.
-	 *
-	 * @param thisStep the thisStep to set
+	 * 
+	 * @param thisStep
+	 *            the thisStep to set
 	 */
 	public void setThisStep(BaseTestStep thisStep) {
 		this.thisStep = thisStep;
 	}
 
 	/**
+	 * Gets the step name.
+	 * 
 	 * @return the stepName
 	 */
 	public String getStepName() {
@@ -180,7 +177,10 @@ public class TestStepResult
 	}
 
 	/**
-	 * @param stepName the stepName to set
+	 * Sets the step name.
+	 * 
+	 * @param stepName
+	 *            the stepName to set
 	 */
 	public void setStepName(String stepName) {
 		this.stepName = stepName;

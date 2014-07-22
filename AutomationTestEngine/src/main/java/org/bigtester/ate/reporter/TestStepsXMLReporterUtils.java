@@ -25,7 +25,6 @@ import java.util.Properties;
 
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
-import org.testng.reporters.XMLReporterConfig;
 import org.testng.reporters.XMLStringBuffer;
 
 import com.sun.istack.internal.NotNull;
@@ -33,50 +32,64 @@ import com.sun.istack.internal.NotNull;
 // TODO: Auto-generated Javadoc
 /**
  * This class TestStepsXMLReporter defines ....
+ * 
  * @author Peidong Hu
- *
+ * 
  */
 public final class TestStepsXMLReporterUtils {
-	
+
 	private TestStepsXMLReporterUtils() {
-		
+
 	}
+
 	/**
 	 * Adds the test steps.
-	 *
-	 * @param xmlBuffer the xml buffer
-	 * @param testResult the test result
+	 * 
+	 * @param xmlBuffer
+	 *            the xml buffer
+	 * @param testResult
+	 *            the test result
 	 */
-	public static void addTestSteps(XMLStringBuffer xmlBuffer, ITestResult testResult) {
-		//TODO Cast check
-		List<TestStepResult> stepResults = (List<TestStepResult>) testResult.getAttribute(TestStepResult.STEPRESULTLIST);
-		if (stepResults == null) {
-			
-		} else if (!stepResults.isEmpty()) {
-	      xmlBuffer.push(ATEXMLReporterConfig.TAG_STEPS);
-	      for (int i = 0; i < stepResults.size(); i++) {
-	        addStep(xmlBuffer, stepResults.get(i), i);
-	      }
-	      xmlBuffer.pop();
-	    }
-	  }
-	
+	public static void addTestSteps(XMLStringBuffer xmlBuffer,
+			ITestResult testResult) {
+
+		if (testResult.getAttribute(TestStepResult.STEPRESULTLIST) instanceof List<?>) {
+			@SuppressWarnings("unchecked")
+			List<TestStepResult> stepResults = (List<TestStepResult>) testResult
+					.getAttribute(TestStepResult.STEPRESULTLIST);
+			if (stepResults == null) {
+
+			} else if (!stepResults.isEmpty()) {
+				xmlBuffer.push(ATEXMLReporterConfig.TAG_STEPS);
+				for (int i = 0; i < stepResults.size(); i++) {
+					addStep(xmlBuffer, stepResults.get(i), i);
+				}
+				xmlBuffer.pop();
+			}
+		}
+	}
+
 	/**
 	 * Adds the step.
-	 *
-	 * @param xmlBuffer the xml buffer
-	 * @param tsr the parameter
-	 * @param iCount the i
+	 * 
+	 * @param xmlBuffer
+	 *            the xml buffer
+	 * @param tsr
+	 *            the parameter
+	 * @param iCount
+	 *            the i
 	 */
-	private static void addStep(XMLStringBuffer xmlBuffer, @NotNull TestStepResult tsr, int iCount) {
-	    Properties attrs = new Properties();
-	    attrs.setProperty(ATEXMLReporterConfig.ATTR_INDEX, String.valueOf(iCount));
-	    attrs.setProperty(ATEXMLReporterConfig.ATTR_NAME, tsr.getStepName());
-	    xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP, attrs);
-	    xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_DESC);
-	    xmlBuffer.addCDATA(tsr.getThisStep().getStepDescription());
-	    xmlBuffer.pop();
-	    xmlBuffer.pop();
-	  }
-	
+	private static void addStep(XMLStringBuffer xmlBuffer,
+			@NotNull TestStepResult tsr, int iCount) {
+		Properties attrs = new Properties();
+		attrs.setProperty(ATEXMLReporterConfig.ATTR_INDEX,
+				String.valueOf(iCount));
+		attrs.setProperty(ATEXMLReporterConfig.ATTR_NAME, tsr.getStepName());
+		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP, attrs);
+		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_DESC);
+		xmlBuffer.addCDATA(tsr.getThisStep().getStepDescription());
+		xmlBuffer.pop();
+		xmlBuffer.pop();
+	}
+
 }

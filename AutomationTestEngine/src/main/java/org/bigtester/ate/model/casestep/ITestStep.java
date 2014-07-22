@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep; //NOPMD
 
-import org.bigtester.ate.annotation.StepLoggable;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ITestStep defines ....
@@ -47,6 +45,6 @@ public interface ITestStep {
 	/**
 	 * Do step.
 	 */
-	
+
 	void doStep();
 }
