@@ -27,7 +27,7 @@ import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
 import org.testng.reporters.XMLStringBuffer;
 
-import com.sun.istack.internal.NotNull;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -80,7 +80,7 @@ public final class TestStepsXMLReporterUtils {
 	 *            the i
 	 */
 	private static void addStep(XMLStringBuffer xmlBuffer,
-			@NotNull TestStepResult tsr, int iCount) {
+			TestStepResult tsr, int iCount) {
 		Properties attrs = new Properties();
 		attrs.setProperty(ATEXMLReporterConfig.ATTR_INDEX,
 				String.valueOf(iCount));
