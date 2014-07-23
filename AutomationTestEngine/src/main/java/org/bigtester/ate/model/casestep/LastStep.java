@@ -21,6 +21,7 @@
 
 package org.bigtester.ate.model.casestep;
 
+import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.page.Lastpage;
 
 // TODO: Auto-generated Javadoc
@@ -29,7 +30,7 @@ import org.bigtester.ate.model.page.page.Lastpage;
  * 
  * @author Peidong Hu
  */
-public class LastStep implements ITestStep{
+public class LastStep extends BaseTestStep implements ITestStep{
 	
 	
 	/** The last page. */
@@ -71,6 +72,7 @@ public class LastStep implements ITestStep{
 	/**
 	 * {@inheritDoc}
 	 */
+	@StepLoggable
 	public void doStep(){
 		lastPage.closeLastpage();
 	}

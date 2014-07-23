@@ -18,33 +18,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep; //NOPMD
+package org.bigtester.ate.reporter;
+
+import org.testng.reporters.XMLReporterConfig;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ITestStep defines ....
+ * This class ATEXMLReporterConfig defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface ITestStep {
+public final class ATEXMLReporterConfig extends XMLReporterConfig {
+	/** The Constant TAG_STEPS. */
+	public final static String TAG_STEPS = "Steps";
 
-	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
-	 */
-	String getStepName();
+	/** The Constant TAG_STEP. */
+	public final static String TAG_STEP = "Step";
 
-	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
-	 */
-	String getStepDescription();
+	/** The Constant TAG_STEP_DESC. */
+	public final static String TAG_STEP_DESC = "StepDescription";
 
-	/**
-	 * Do step.
-	 */
+	private ATEXMLReporterConfig() {
+		super();
+	}
 
-	void doStep();
 }
