@@ -88,13 +88,12 @@
 		<constructor-arg ref="ea2"></constructor-arg>
 	</bean>
 	<bean id="ef2" name="ef2" parent="efAbstract"
-		class="org.bigtester.ate.model.page.elementfind.ElementFindByLinkText">
-		<property name="findByValue" value="Video" />
+		class="org.bigtester.ate.model.page.elementfind.ElementFindByPartialLinkText">
+		<property name="findByValue" value="Group Chat" />
 	</bean>
 
 	<bean id="ea2" name="ea2" parent="eaAbstract"
-		class="org.bigtester.ate.model.page.elementaction.ClickAction">
-		
+		class="org.bigtester.ate.model.page.elementaction.ClickAction">		
 	</bean>
 	
 </beans>
