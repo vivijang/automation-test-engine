@@ -59,7 +59,7 @@ public class TestCase {
 		
 		for (int i=0; i<testStepList.size(); i++) {
 			
-			testStepList.get(i).doStep();
+			testStepList.get(i).doStep();//NOPMD
 		}
 	}
 

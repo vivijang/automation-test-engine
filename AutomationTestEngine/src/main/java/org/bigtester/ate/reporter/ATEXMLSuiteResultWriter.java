@@ -163,6 +163,7 @@ public class ATEXMLSuiteResultWriter {
     attribs.setProperty(XMLReporterConfig.ATTR_TEST_INSTANCE_NAME, testInstanceName);
     xmlBuffer.push(XMLReporterConfig.TAG_TEST_METHOD, attribs);
     addTestMethodParams(xmlBuffer, testResult);
+    TestStepsXMLReporterUtils.addTestSteps(xmlBuffer, testResult);
     addTestResultException(xmlBuffer, testResult);
     addTestResultOutput(xmlBuffer, testResult);
     if (config.isGenerateTestResultAttributes()) {

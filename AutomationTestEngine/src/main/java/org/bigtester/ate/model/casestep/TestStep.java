@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
@@ -28,29 +29,8 @@ import org.bigtester.ate.model.page.page.MyWebElement;
  * 
  * @author Peidong Hu
  */
-public class TestStep implements ITestStep {
+public class TestStep extends BaseTestStep implements ITestStep {
 	// TOTO add pageObject as another member.
-
-	/** The my we. */
-	private MyWebElement myWebElement;
-
-	/**
-	 * Gets the my web element.
-	 *
-	 * @return the myWebElement
-	 */
-	public final MyWebElement getMyWebElement() {
-		return myWebElement;
-	}
-
-	/**
-	 * Sets the my web element.
-	 *
-	 * @param myWebElement            the myWebElement to set
-	 */
-	public final void setMyWebElement(final MyWebElement myWebElement) {
-		this.myWebElement = myWebElement;
-	}
 
 	/**
 	 * Instantiates a new test step.
@@ -59,15 +39,16 @@ public class TestStep implements ITestStep {
 	 *            the my we
 	 */
 	public TestStep(final MyWebElement myWe) {
-		this.myWebElement = myWe;
+		super();
+		setMyWebElement(myWe);
 	}
 
-	
 	/**
 	 * {@inheritDoc}
 	 */
+	@StepLoggable
 	public void doStep() {
 
-		myWebElement.doAction();
+		getMyWebElement().doAction();
 	}
 }

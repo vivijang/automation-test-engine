@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.page.Homepage;
 
 // TODO: Auto-generated Javadoc
@@ -28,7 +29,7 @@ import org.bigtester.ate.model.page.page.Homepage;
  * 
  * @author Peidong Hu
  */
-public class HomeStep implements ITestStep{
+public class HomeStep extends BaseTestStep implements ITestStep{
 	
 	
 	/** The homepg. */
@@ -60,6 +61,7 @@ public class HomeStep implements ITestStep{
 	/**
 	 * {@inheritDoc}
 	 */
+	@StepLoggable
 	public void doStep(){
 		homepg.startHomepage();
 	}

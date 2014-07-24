@@ -18,33 +18,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep; //NOPMD
+package org.bigtester.ate.annotation;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.ElementType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ITestStep defines ....
- * 
+ * This class StepLoggable defines ....
  * @author Peidong Hu
+ *
  */
-public interface ITestStep {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(
+{
+    ElementType.METHOD, ElementType.TYPE
+})
+public @interface StepLoggable {
 
-	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
-	 */
-	String getStepName();
-
-	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
-	 */
-	String getStepDescription();
-
-	/**
-	 * Do step.
-	 */
-
-	void doStep();
 }
