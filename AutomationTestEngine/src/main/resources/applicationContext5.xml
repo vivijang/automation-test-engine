@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="MyFirefoxWebDriver"
+		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
+
+	<bean id="testcase2" name="testcase2"
+		class="org.bigtester.ate.model.casestep.TestCase">
+		<property name="testStepList">
+			<list>
+				<ref bean="homestep" />
+				<ref bean="step1" />	
+				<ref bean="step2" />			
+				<ref bean="laststep" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- abstract beans, won't be initialized by Spring -->
+	<bean id="efAbstract" name="efAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.ate.model.page.elementfind.AbstractElementFind">
+	</bean>
+	<bean id="eaAbstract" name="eaAbstract" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
+	</bean>
+	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
+		class="org.bigtester.ate.model.page.AbstractPageObjectModel">
+		<property name="myWd">
+			<ref bean="MyFirefoxWebDriver"></ref>
+		</property>
+	</bean>
+	<!-- homestep definition -->
+	<bean id="homestep" name="openHomepage"
+		class="org.bigtester.ate.model.casestep.HomeStep">
+		<property name="homepg">
+			<ref bean="myHomepage" />
+		</property>
+	</bean>
+	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
+		class="org.bigtester.ate.model.page.page.Homepage">
+		<property name="homeUrl" value="http://www.bigtester.com" />
+	</bean>
+	<!-- laststep definition -->
+	<bean id="laststep" name="closeBrowser"
+		class="org.bigtester.ate.model.casestep.LastStep">
+		<property name="lastPage">
+			<ref bean="myLastpage" />
+		</property>
+	</bean>
+	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
+		class="org.bigtester.ate.model.page.page.Lastpage">
+	</bean>
+	
+	<!-- step1 definition -->
+	<bean id="step1" name="step1"
+		class="org.bigtester.ate.model.casestep.TestStep">
+		<constructor-arg ref="myWe1"></constructor-arg>
+
+	</bean>
+	<bean id="myWe1" name="myWe1"
+		class="org.bigtester.ate.model.page.page.MyWebElement">
+<!-- 		ef1: element constructor parameter-->
+		<constructor-arg ref="ef1"></constructor-arg> 
+<!-- 		ea1:action constructor parameter-->
+		<constructor-arg ref="ea1"></constructor-arg>
+	</bean>
+	<bean id="ef1" name="ef1" parent="efAbstract"
+		class="org.bigtester.ate.model.page.elementfind.ElementFindByLinkText">
+		<property name="findByValue" value="HR &amp; Jobs" />
+	</bean>
+
+	<bean id="ea1" name="ea1" parent="eaAbstract"
+		class="org.bigtester.ate.model.page.elementaction.ClickAction">
+		
+	</bean>
+	
+	<!-- step2 definition -->
+	<bean id="step2" name="step2"
+		class="org.bigtester.ate.model.casestep.TestStep">
+		<constructor-arg ref="myWe2"></constructor-arg>
+	</bean>
+	<bean id="myWe2" name="myWe2"
+		class="org.bigtester.ate.model.page.page.MyWebElement">
+		<constructor-arg ref="ef2"></constructor-arg>
+		<constructor-arg ref="ea2"></constructor-arg>
+	</bean>
+	<bean id="ef2" name="ef2" parent="efAbstract"
+		class="org.bigtester.ate.model.page.elementfind.ElementFindByPartialLinkText">
+		<property name="findByValue" value="Group Chat" />
+	</bean>
+
+	<bean id="ea2" name="ea2" parent="eaAbstract"
+		class="org.bigtester.ate.model.page.elementaction.ClickAction">		
+	</bean>
+	
+</beans>
