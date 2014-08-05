@@ -26,6 +26,7 @@ import java.util.List;
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
+import org.testng.reporters.XMLReporterConfig;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -70,6 +71,7 @@ public class TestProject {
 		testng.addListener(tla);
 		
 		ATEXMLReporter rng = new ATEXMLReporter();
+		rng.setStackTraceOutputMethod(XMLReporterConfig.STACKTRACE_NONE);
 		testng.addListener(rng);
 		
 		final List<XmlSuite> suites = new ArrayList<XmlSuite>();

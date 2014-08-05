@@ -7,14 +7,17 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->  
     <aop:aspectj-autoproxy />  
-    
-    <bean id="TestStepResult" class="org.bigtester.ate.model.testresult.TestStepMonitor" /> 
+    <bean id="TestCaseLogger" class="org.bigtester.ate.systemlogger.GenericTestCaseLogger">
+    	<property name="currentTestCase" ref="testcase"/>
+    </bean> 
+    <bean id="TestStepResult" class="org.bigtester.ate.resultmaker.StepResultMaker" />
 
 	<bean id="MyFirefoxWebDriver"
 		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
 
-	<bean id="testcase2" name="testcase2"
+	<bean id="testcase" name="testcase2name"
 		class="org.bigtester.ate.model.casestep.TestCase">
+		<property name="testCaseName" value="testcase2name"/>
 		<property name="testStepList">
 			<list>
 				<ref bean="homestep" />

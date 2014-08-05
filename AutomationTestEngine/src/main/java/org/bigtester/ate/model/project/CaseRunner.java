@@ -22,8 +22,10 @@ package org.bigtester.ate.model.project;
 
 import java.lang.reflect.Method;
 
+import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
+import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,7 +37,7 @@ import org.testng.annotations.Test;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class CaseRunner defines ....
+ * The Class CaseRunner runs a single test case
  * 
  * @author Peidong Hu
  */
@@ -131,16 +133,17 @@ public class CaseRunner implements IRunTestCase {
 	 * 
 	 * @param ctx
 	 *            the ctx
+	 * @throws StepExecutionException 
 	 */
 	@Test(dataProvider = "dp")
-	public void runTest(TestParameters testParams) {
+	public void runTest(TestParameters testParams) throws StepExecutionException {
 		String testname = testParams.getTestFilename();
 		// String testname = "applicationContext1.xml";
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				testname);
 		System.out.println("processing fileabc: " + testname); 
 		Assert.assertTrue(true);
-		myTestCase = (TestCase) context.getBean("testcase2");
+		myTestCase = (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE);
 		myTestCase.goSteps();
 		((ConfigurableApplicationContext) context).close();
 

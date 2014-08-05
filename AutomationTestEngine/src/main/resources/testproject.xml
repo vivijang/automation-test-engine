@@ -8,6 +8,8 @@
 	<!-- this registers beans annotated with @Aspect -->  
     <aop:aspectj-autoproxy />  
     
+    <bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
+    
     <bean id="TestStepResult" class="org.bigtester.ate.model.testresult.TestStepResult" /> 
     
 	<bean id="testproject" name="testproject"
@@ -15,7 +17,7 @@
 		<property name="suiteList">
 			<list>
 				<ref bean="suite1" />
-				<ref bean="suite2" />
+<!-- 				<ref bean="suite2" /> -->
 				
 			</list>
 		</property>
@@ -28,7 +30,7 @@
 		<property name="testCaseList">
 			<list>
 				<ref bean="mytc1" />
-				<ref bean="mytc2" />
+<!-- 				<ref bean="mytc2" /> -->
 				
 			</list>
 		</property>

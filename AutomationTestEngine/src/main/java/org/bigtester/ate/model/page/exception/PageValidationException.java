@@ -18,29 +18,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.misc;
+package org.bigtester.ate.model.page.exception;
 
-import org.bigtester.ate.model.data.AbstractDataSet;
-import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
-import org.bigtester.ate.model.page.page.PageObject;
 
+import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class PageValidationException defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObjectAction {
+public class PageValidationException extends AbstractATEException {
 	
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -7144577815429959403L;
+	
+	
+	
+	/** The element find. */
+	private final IElementFind elementFind;
+     
+    /**
+     * Instantiates a new page validation exception.
+     *
+     * @param message the message
+     * @param errorCode the error code
+     * @param eFind the e find
+     */
+    public PageValidationException(String message, String errorCode, IElementFind eFind){
+        super(message, errorCode);
+        elementFind = eFind;
+    }
+     
+    
+
 	/**
-	 * Do action.
-	 * 
-	 * @param elementaction
-	 *            the at
-	 * @param dataset
-	 *            the ds
-	 * @return the page object
+	 * Gets the element find.
+	 *
+	 * @return the elementFind
 	 */
-	PageObject doAction(AbstractElementAction elementaction, AbstractDataSet dataset);
+	public IElementFind getElementFind() {
+		return elementFind;
+	}
 }

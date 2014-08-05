@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.testresult;
+package org.bigtester.ate.resultmaker;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +29,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.bigtester.ate.model.casestep.BaseTestStep;
+import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
@@ -46,7 +47,7 @@ import com.jamonapi.MonitorFactory;
  * @author Peidong Hu
  */
 @Aspect
-public class TestStepMonitor {
+public class StepResultMaker {
 	// private static final Logger logger_c =
 	// Logger.getLogger(TestStepResult.class);
 	/** The monitor. */

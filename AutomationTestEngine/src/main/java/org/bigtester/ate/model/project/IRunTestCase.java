@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.project;
 
 import org.bigtester.ate.model.data.TestParameters;
+import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.testng.ITest;
 
 // TODO: Auto-generated Javadoc
@@ -29,10 +30,10 @@ import org.testng.ITest;
  *
  * @author Peidong Hu
  */
-public interface IRunTestCase extends ITest{
+public interface IRunTestCase extends ITest {
 	
 	/**
 	 * Run suites.
 	 */
-	void runTest(TestParameters testParams);
+	void runTest(TestParameters testParams) throws StepExecutionException;
 }

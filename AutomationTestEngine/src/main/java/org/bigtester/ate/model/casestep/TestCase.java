@@ -22,6 +22,9 @@ package org.bigtester.ate.model.casestep;
 
 import java.util.List;
 
+import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.openqa.selenium.WebDriver;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestCase defines ....
@@ -29,7 +32,14 @@ import java.util.List;
  * @author Peidong Hu
  */
 public class TestCase {
-
+	
+	/** The current web driver. */
+	private WebDriver currentWebDriver;
+	/** The test case name. */
+	private String testCaseName;
+	
+	/** The current test step. */
+	private ITestStep currentTestStep;
 	/** The test step list. */
 	private List<ITestStep> testStepList;
 
@@ -54,13 +64,68 @@ public class TestCase {
 
 	/**
 	 * run steps.
+	 * @throws StepExecutionException 
 	 */
-	public void goSteps() {
+	public void goSteps() throws StepExecutionException {
 		
 		for (int i=0; i<testStepList.size(); i++) {
-			
-			testStepList.get(i).doStep();//NOPMD
+			currentTestStep = testStepList.get(i);
+			currentTestStep.doStep();//NOPMD
 		}
+	}
+
+	/**
+	 * Gets the test case name.
+	 *
+	 * @return the testCaseName
+	 */
+	public String getTestCaseName() {
+		return testCaseName;
+	}
+
+	/**
+	 * Sets the test case name.
+	 *
+	 * @param testCaseName the testCaseName to set
+	 */
+	public void setTestCaseName(String testCaseName) {
+		this.testCaseName = testCaseName;
+	}
+
+	/**
+	 * Gets the current test step.
+	 *
+	 * @return the currentTestStep
+	 */
+	public ITestStep getCurrentTestStep() {
+		return currentTestStep;
+	}
+
+	/**
+	 * Sets the current test step.
+	 *
+	 * @param currentTestStep the currentTestStep to set
+	 */
+	public void setCurrentTestStep(ITestStep currentTestStep) {
+		this.currentTestStep = currentTestStep;
+	}
+
+	/**
+	 * Gets the current web driver.
+	 *
+	 * @return the currentWebDriver
+	 */
+	public WebDriver getCurrentWebDriver() {
+		return currentWebDriver;
+	}
+
+	/**
+	 * Sets the current web driver.
+	 *
+	 * @param currentWebDriver the currentWebDriver to set
+	 */
+	public void setCurrentWebDriver(WebDriver currentWebDriver) {
+		this.currentWebDriver = currentWebDriver;
 	}
 
 }

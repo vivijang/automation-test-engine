@@ -18,48 +18,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep; //NOPMD
+package org.bigtester.ate.systemlogger;
 
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.IPageObject;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.problomatic2.Problomatic;
+import org.springframework.beans.factory.BeanFactory;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ITestStep defines ....
+ * This class GenericSystemLogger defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface ITestStep {
-	
-	/**
-	 * Checks if is page validation.
-	 *
-	 * @return true, if is page validation
-	 */
-	boolean isPageValidation();
-	/**
-	 * Gets the page object.
-	 *
-	 * @return the page object
-	 */
-	IPageObject getPageObject();
-	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
-	 */
-	String getStepName();
+@Aspect
+public class GenericSystemLogger {
+	@Pointcut("within(org.bigtester.ate..*)")
+	private void selectAll() {}
 
-	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
-	 */
-	String getStepDescription();
+	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
+	public void AfterThrowingAdvice(JoinPoint joinPoint, Throwable error) throws InstantiationException, ClassNotFoundException, IllegalAccessException {
+		
+		//Problomatic.addProblemHandlerForProblem("org.bigtester.problomatic2.problems.RawProblem",
+        //        "org.bigtester.problomatic2.handlers.SystemPrintlnHandler");
+	   
+		//Problomatic.handleThrowable(joinPoint.getTarget(), error);
+		
+		System.out.println("There has been an exception: " +joinPoint.getTarget().toString() + "->" );
+	}
 
-	/**
-	 * Do step.
-	 */
-
-	void doStep () throws StepExecutionException;
 }

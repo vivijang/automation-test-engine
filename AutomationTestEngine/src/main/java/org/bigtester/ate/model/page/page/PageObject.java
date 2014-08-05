@@ -20,10 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page.AbstractPageModelBase;
-import org.openqa.selenium.WebElement;
+import org.bigtester.ate.model.data.AbstractDataSet;
+import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
 
-import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,29 +30,7 @@ import java.util.List;
  * 
  * @author Peidong Hu
  */
-public class PageObject extends AbstractPageModelBase {
-
-	/** The l we. */
-	private List<WebElement> webElementList;
-
-	/**
-	 * Gets the web element list.
-	 * 
-	 * @return the web element list
-	 */
-	public List<WebElement> getWebElementList() {
-		return webElementList;
-	}
-
-	/**
-	 * Sets the web element list.
-	 * 
-	 * @param webElementList
-	 *            the new web element list
-	 */
-	public void setWebElementList(final List<WebElement> webElementList) {
-		this.webElementList = webElementList;
-	}
+public class PageObject extends AbstractPageObject implements IPageObject{
 
 	/**
 	 * {@inheritDoc}
@@ -63,5 +40,16 @@ public class PageObject extends AbstractPageModelBase {
 		// TODO Auto-generated method stub
 		
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PageObject doAction(AbstractElementAction elementaction,
+			AbstractDataSet dataset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

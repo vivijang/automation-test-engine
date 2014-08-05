@@ -20,23 +20,35 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class AbstractTestStep defines ....
+ * 
  * @author Peidong Hu
- *
+ * 
  */
 public class BaseTestStep {//NOPMD
+	/** The page object. */
+	private IPageObject pageObject;
+
+	/** The forced page validation. */
+	private boolean forcedPageValidation;
+
+	/** The target step. */
+	private boolean targetStep;
+
 	/** The step name. */
 	private String stepName = "";
 
 	/** The step description. */
 	private String stepDescription = "";
-	
+
 	/** The my web element. */
 	private MyWebElement myWebElement;
+
 	/**
 	 * Gets the step name.
 	 * 
@@ -74,8 +86,7 @@ public class BaseTestStep {//NOPMD
 	public void setStepDescription(String stepDescription) {
 		this.stepDescription = stepDescription;
 	}
-	
-		
+
 	/**
 	 * Gets the my web element.
 	 * 
@@ -94,5 +105,73 @@ public class BaseTestStep {//NOPMD
 	public final void setMyWebElement(final MyWebElement myWebElement) {
 		this.myWebElement = myWebElement;
 	}
+
+	/**
+	 * Checks if is target step.
+	 * 
+	 * @return the targetStep
+	 */
+	public boolean isTargetStep() {
+		return targetStep;
+	}
+
+	/**
+	 * Sets the target step.
+	 * 
+	 * @param targetStep
+	 *            the targetStep to set
+	 */
+	public void setTargetStep(boolean targetStep) {
+		this.targetStep = targetStep;
+	}
+
+	/**
+	 * Gets the page object.
+	 * 
+	 * @return the pageObject
+	 */
+	public IPageObject getPageObject() {
+		return pageObject;
+	}
+
+	/**
+	 * Sets the page object.
+	 * 
+	 * @param pageObject
+	 *            the pageObject to set
+	 */
+	public void setPageObject(IPageObject pageObject) {
+		this.pageObject = pageObject;
+	}
+
 	
+	/**
+	 * Checks if is forced page validation.
+	 *
+	 * @return the forcedPageValidation
+	 */
+	public boolean isForcedPageValidation() {
+		return forcedPageValidation;
+	}
+
+	/**
+	 * Sets the forced page validation.
+	 *
+	 * @param forcedPageValidation the forcedPageValidation to set
+	 */
+	public void setForcedPageValidation(boolean forcedPageValidation) {
+		this.forcedPageValidation = forcedPageValidation;
+	}
+	
+	/**
+	 * Checks if is page validation.
+	 *
+	 * @return true, if is page validation
+	 */
+	public boolean isPageValidation() {
+		
+		return forcedPageValidation ? true : targetStep;
+	
+	}
+
 }

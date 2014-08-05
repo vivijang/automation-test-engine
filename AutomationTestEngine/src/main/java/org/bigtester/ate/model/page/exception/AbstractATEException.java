@@ -18,49 +18,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
-
-import org.bigtester.ate.annotation.StepLoggable;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.MyWebElement;
-import org.openqa.selenium.NoSuchElementException;
+package org.bigtester.ate.model.page.exception;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestStep defines ....
+ * This class Abstract defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public class TestStep extends BaseTestStep implements ITestStep {
-	// TOTO add pageObject as another member.
+public abstract class AbstractATEException extends Exception {
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -5513011387447019438L;
+	/** The error code. */
+	private final String errorCode;
 
 	/**
-	 * Instantiates a new test step.
+	 * Gets the error code.
 	 * 
-	 * @param myWe
-	 *            the my we
+	 * @return the error code
 	 */
-	public TestStep(final MyWebElement myWe) {
-		super();
-		setMyWebElement(myWe);
+	public String getErrorCode() {
+		return this.errorCode;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Instantiates a new abstract ate exception.
+	 *
+	 * @param message the message
+	 * @param errorCode the error code
 	 */
-	@StepLoggable
-	public void doStep() throws StepExecutionException{
-		try {
-			getMyWebElement().doAction();
-		} catch (NoSuchElementException e) {
-			StepExecutionException pve = new StepExecutionException(
-					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-					this.getMyWebElement());
-			pve.initCause(e);
-			throw pve;
-		}
+	public AbstractATEException(String message, String errorCode) {
+		super(message);
+		this.errorCode = errorCode;
 	}
 }

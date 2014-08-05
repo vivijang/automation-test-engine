@@ -18,49 +18,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.annotation.StepLoggable;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.MyWebElement;
-import org.openqa.selenium.NoSuchElementException;
+import java.util.List;
+
+import org.bigtester.ate.model.data.AbstractDataSet;
+import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
+import org.bigtester.ate.model.page.exception.PageValidationException;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestStep defines ....
+ * The Interface IPageObjectAction defines ....
  * 
  * @author Peidong Hu
  */
-public class TestStep extends BaseTestStep implements ITestStep {
-	// TOTO add pageObject as another member.
-
+public interface IPageObject {
+	
 	/**
-	 * Instantiates a new test step.
+	 * Gets the page name.
+	 *
+	 * @return the page name
+	 */
+	String getPageName();
+	/**
+	 * Gets the web element list.
+	 *
+	 * @return the web element list
+	 */
+	List<MyWebElement> getMyWebElementList();
+	
+	/**
+	 * Validate page.
+	 *
+	 * @return true, if successful
+	 */
+	void validatePage() throws PageValidationException;
+	/**
+	 * Do action.
 	 * 
-	 * @param myWe
-	 *            the my we
+	 * @param elementaction
+	 *            the at
+	 * @param dataset
+	 *            the ds
+	 * @return the page object
 	 */
-	public TestStep(final MyWebElement myWe) {
-		super();
-		setMyWebElement(myWe);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@StepLoggable
-	public void doStep() throws StepExecutionException{
-		try {
-			getMyWebElement().doAction();
-		} catch (NoSuchElementException e) {
-			StepExecutionException pve = new StepExecutionException(
-					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-					this.getMyWebElement());
-			pve.initCause(e);
-			throw pve;
-		}
-	}
+	PageObject doAction(AbstractElementAction elementaction, AbstractDataSet dataset);
 }

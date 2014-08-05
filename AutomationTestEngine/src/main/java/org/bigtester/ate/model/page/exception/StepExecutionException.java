@@ -18,49 +18,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.page.exception;
 
-import org.bigtester.ate.annotation.StepLoggable;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.MyWebElement;
-import org.openqa.selenium.NoSuchElementException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestStep defines ....
+ * This class StepExecutionException defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public class TestStep extends BaseTestStep implements ITestStep {
-	// TOTO add pageObject as another member.
+public class StepExecutionException extends AbstractATEException {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 6019919237360483659L;
+
+	/** The my web element. */
+	private final MyWebElement myWebElement;
 
 	/**
-	 * Instantiates a new test step.
+	 * Instantiates a new step execution exception.
 	 * 
-	 * @param myWe
-	 *            the my we
+	 * @param message
+	 *            the message
+	 * @param errorCode
+	 *            the error code
+	 * @param myWebElement
+	 *            the my web element
 	 */
-	public TestStep(final MyWebElement myWe) {
-		super();
-		setMyWebElement(myWe);
+	public StepExecutionException(String message, String errorCode,
+			MyWebElement myWebElement) {
+		super(message, errorCode);
+		this.myWebElement = myWebElement;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Gets the my web element.
+	 * 
+	 * @return the myWebElement
 	 */
-	@StepLoggable
-	public void doStep() throws StepExecutionException{
-		try {
-			getMyWebElement().doAction();
-		} catch (NoSuchElementException e) {
-			StepExecutionException pve = new StepExecutionException(
-					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-					this.getMyWebElement());
-			pve.initCause(e);
-			throw pve;
-		}
+	public MyWebElement getMyWebElement() {
+		return myWebElement;
 	}
 }

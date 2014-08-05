@@ -18,48 +18,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep; //NOPMD
-
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.IPageObject;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ITestStep defines ....
- * 
+ * This class ExceptionMessage defines ....
  * @author Peidong Hu
+ *
  */
-public interface ITestStep {
+public final class ExceptionMessage {
+	
+	
+	
+	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
+	public static final String MSG_WEBELEMENT_NOTFOUND = "Web Element not Found.";
 	
 	/**
-	 * Checks if is page validation.
-	 *
-	 * @return true, if is page validation
+	 * Instantiates a new exception error code.
 	 */
-	boolean isPageValidation();
-	/**
-	 * Gets the page object.
-	 *
-	 * @return the page object
-	 */
-	IPageObject getPageObject();
-	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
-	 */
-	String getStepName();
-
-	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
-	 */
-	String getStepDescription();
-
-	/**
-	 * Do step.
-	 */
-
-	void doStep () throws StepExecutionException;
+	private ExceptionMessage(){
+	    throw new AssertionError();
+	  }
 }
