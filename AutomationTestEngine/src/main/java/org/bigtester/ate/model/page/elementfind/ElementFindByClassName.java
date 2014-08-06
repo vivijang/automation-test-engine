@@ -39,13 +39,6 @@ public class ElementFindByClassName extends AbstractElementFind implements IElem
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }

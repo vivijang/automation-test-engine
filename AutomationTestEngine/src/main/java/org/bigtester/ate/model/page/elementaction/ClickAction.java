@@ -39,13 +39,6 @@ public class ClickAction extends AbstractElementAction implements
 		webElm.click();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

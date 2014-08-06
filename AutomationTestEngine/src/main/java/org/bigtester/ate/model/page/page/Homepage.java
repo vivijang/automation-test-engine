@@ -59,13 +59,5 @@ public class Homepage extends AbstractPageModelBase {
 		super.getMyWd().getWebDriver().get(homeUrl);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
 		
-	}
-	
 }

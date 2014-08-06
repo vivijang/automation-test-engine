@@ -51,11 +51,5 @@ public abstract class AbstractPageModelBase {
 	public  void setMyWd(final IMyWebDriver myWd) {
 		this.myWd = myWd;
 	}
-	
-	/**
-	 * Place holder for avoid
-	 */
-	//TODO
-	public abstract void navigate();
-		
+				
 }

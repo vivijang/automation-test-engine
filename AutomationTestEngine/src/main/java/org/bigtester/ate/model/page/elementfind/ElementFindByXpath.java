@@ -39,12 +39,5 @@ public class ElementFindByXpath extends AbstractElementFind implements IElementF
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

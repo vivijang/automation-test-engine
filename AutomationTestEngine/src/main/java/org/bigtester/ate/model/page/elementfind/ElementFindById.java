@@ -40,13 +40,6 @@ public class ElementFindById extends AbstractElementFind implements IElementFind
 		return super.getMyWd().getWebDriver().findElement(By.id(findByValue));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

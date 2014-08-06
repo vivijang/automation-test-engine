@@ -91,15 +91,6 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		return;
-	}
-
-	/**
 	 * @return the pageName
 	 */
 	public String getPageName() {

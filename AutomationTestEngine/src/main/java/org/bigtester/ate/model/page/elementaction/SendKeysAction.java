@@ -41,13 +41,6 @@ public class SendKeysAction extends AbstractElementAction implements
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -38,12 +38,5 @@ public class ElementFindByCss extends AbstractElementFind implements IElementFin
 		return super.getMyWd().getWebDriver().findElement(By.cssSelector(findByValue));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

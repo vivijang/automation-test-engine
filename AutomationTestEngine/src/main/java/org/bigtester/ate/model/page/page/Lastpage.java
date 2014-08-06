@@ -37,12 +37,5 @@ public class Lastpage extends AbstractPageModelBase {
 		super.getMyWd().getWebDriver().close();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

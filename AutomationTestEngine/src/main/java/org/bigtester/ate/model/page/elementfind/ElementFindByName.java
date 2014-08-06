@@ -60,13 +60,6 @@ public class ElementFindByName extends AbstractElementFind implements IElementFi
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }

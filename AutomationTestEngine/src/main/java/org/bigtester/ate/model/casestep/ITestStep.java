@@ -30,6 +30,12 @@ import org.bigtester.ate.model.page.page.IPageObject;
  * @author Peidong Hu
  */
 public interface ITestStep {
+	
+	/**
+	 * Checks if is target step.
+	 *
+	 * @return true, if is target step
+	 */
 	boolean isTargetStep();
 	/**
 	 * Checks if is page validation.

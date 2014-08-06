@@ -38,12 +38,5 @@ public class ElementFindByPartialLinkText extends AbstractElementFind implements
 		return super.getMyWd().getWebDriver().findElement(By.partialLinkText(findByValue));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

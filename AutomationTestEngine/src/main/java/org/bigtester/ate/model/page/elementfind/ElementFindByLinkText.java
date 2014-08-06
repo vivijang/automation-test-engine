@@ -39,12 +39,5 @@ public class ElementFindByLinkText extends AbstractElementFind implements IEleme
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

@@ -39,12 +39,5 @@ public class ElementFindByTagName extends AbstractElementFind implements IElemen
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

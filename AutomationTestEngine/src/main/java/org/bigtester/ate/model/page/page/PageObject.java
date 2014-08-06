@@ -32,15 +32,7 @@ import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
  */
 public class PageObject extends AbstractPageObject implements IPageObject{
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void navigate() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
