@@ -31,7 +31,7 @@ import org.bigtester.ate.model.page.AbstractPageModelBase;
 public class Homepage extends AbstractPageModelBase {
 
 	/** The home url. */
-	private static String homeUrl;
+	private String homeUrl;
 
 	/**
 	 * Sets the home url.
@@ -39,8 +39,8 @@ public class Homepage extends AbstractPageModelBase {
 	 * @param homeUrl
 	 *            the new home url
 	 */
-	public static void setHomeUrl(final String homeUrl) {
-		Homepage.homeUrl = homeUrl;
+	public void setHomeUrl(final String homeUrl) {
+		this.homeUrl = homeUrl;
 	}
 
 	/**

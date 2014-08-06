@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
-		class="org.bigtester.ate.model.page.AbstractPageObjectModel">
+		class="org.bigtester.ate.model.page.AbstractPageModelBase">
 		<property name="myWd">
 			<ref bean="MyFirefoxWebDriver"></ref>
 		</property>
