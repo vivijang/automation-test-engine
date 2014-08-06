@@ -21,6 +21,7 @@
 package org.bigtester.ate.systemlogger.problems;
 
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.problomatic2.problems.RawProblem;
 import org.testng.internal.Utils;
 
@@ -39,6 +40,7 @@ public class StepExecutionProblem extends RawProblem {
 	/** The short stack trace. */
 	private final String shortStackTrace;
 	
+	private final TestCase problemTestCase;	
 	/** The step exec exception. */
 	private final StepExecutionException stepExecException;
 	
@@ -48,12 +50,13 @@ public class StepExecutionProblem extends RawProblem {
 	 * @param source the source
 	 * @param see the see
 	 */
-	public StepExecutionProblem(Object source, StepExecutionException see) {
+	public StepExecutionProblem(Object source, StepExecutionException see, TestCase pTc) {
 		super(source, see);
 		String[] stackTraces = Utils.stackTrace(see, false);
 		fullStackTrace = stackTraces[1];
 		shortStackTrace = stackTraces[0];
 		stepExecException = see;
+		problemTestCase = pTc;
 	}
 	
 	/**
@@ -81,6 +84,13 @@ public class StepExecutionProblem extends RawProblem {
 	 */
 	public StepExecutionException getStepExecException() {
 		return stepExecException;
+	}
+
+	/**
+	 * @return the problemTestCase
+	 */
+	public TestCase getProblemTestCase() {
+		return problemTestCase;
 	}
 	
 

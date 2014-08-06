@@ -18,48 +18,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep; //NOPMD
-
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.IPageObject;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ITestStep defines ....
+ * This class LogbackTag defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface ITestStep {
-	boolean isTargetStep();
-	/**
-	 * Checks if is page validation.
-	 *
-	 * @return true, if is page validation
-	 */
-	boolean isPageValidation();
-	/**
-	 * Gets the page object.
-	 *
-	 * @return the page object
-	 */
-	IPageObject getPageObject();
-	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
-	 */
-	String getStepName();
+public final class LogbackTag {
+
+	/** The Constant TAG_APP_LOG. */
+	public static final String TAG_APP_LOG = "APP_LOG: ";
+	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
+	public static final String TAG_TEST_ERROR = "Test-Error: ";
+	
+	/** The Constant TAG_TEST_WARNING. */
+	public static final String TAG_TEST_WARNING= "Test-Warning: ";
+	
+	/** The Constant TAG_SEPERATOR. */
+	public static final String TAG_SEPERATOR = "->";
 
 	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
+	 * Instantiates a new exception error code.
 	 */
-	String getStepDescription();
-
-	/**
-	 * Do step.
-	 */
-
-	void doStep () throws StepExecutionException;
+	private LogbackTag() {
+		throw new AssertionError();
+	}
 }

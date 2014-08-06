@@ -26,9 +26,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.systemlogger.problemhandler.ProblemLogbackHandler;
 import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
 import org.bigtester.problomatic2.Problomatic;
-import org.bigtester.problomatic2.handlers.SystemPrintlnHandler;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -75,20 +75,14 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error)
-			throws InstantiationException {
+			throws InstantiationException, ClassNotFoundException, IllegalAccessException {
 		if (error instanceof StepExecutionException
 				&& joinPoint.getTarget() instanceof TestCase) {
 			StepExecutionProblem sep = new StepExecutionProblem(
-					joinPoint.getTarget(), (StepExecutionException) error);
-			SystemPrintlnHandler sph = new SystemPrintlnHandler();
-			Problomatic.addProblemHandlerForProblem(sep, sph);
-			Problomatic.handleThrowable(joinPoint.getTarget(), error);
-
-			System.out.println("There has been an exception: "
-					+ error.getMessage() + "->"
-					+ joinPoint.getTarget().toString() + "->"
-					+ currentTestCase.getTestCaseName() + "->"
-					+ currentTestCase.getCurrentTestStep().getStepName());
+					joinPoint.getTarget(), (StepExecutionException) error, currentTestCase);
+			ProblemLogbackHandler sph = new ProblemLogbackHandler();
+			Problomatic.addProblemHandlerForProblem(StepExecutionProblem.class, ProblemLogbackHandler.class);
+			Problomatic.handleProblem(sep);
 
 		}
 	}
