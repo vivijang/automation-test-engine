@@ -190,8 +190,7 @@ public class StepResultMaker {
 				stepResultList = new ArrayList<TestStepResult>();//NOPMD
 			}
 		} catch (final ClassCastException e) {
-			//TODO add warning message to result
-			System.out.println("class cast exception");
+			
 			stepResultList = new ArrayList<TestStepResult>();
 		}
 

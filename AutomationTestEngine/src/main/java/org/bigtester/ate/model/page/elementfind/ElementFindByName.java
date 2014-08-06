@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementfind;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -55,8 +56,8 @@ public class ElementFindByName extends AbstractElementFind implements IElementFi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(final String findByValue) {
-		return super.getMyWd().getWebDriver().findElement(By.name(findByValue));
+	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
+		return myWebDriver.getWebDriver().findElement(By.name(findByValue));
 	}
 
 

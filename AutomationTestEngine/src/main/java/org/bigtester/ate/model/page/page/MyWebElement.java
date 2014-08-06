@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.model.page.AbstractPageModelBase;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
@@ -29,7 +30,7 @@ import org.bigtester.ate.model.page.elementfind.IElementFind;
  * 
  * @author Peidong Hu
  */
-public class MyWebElement {
+public class MyWebElement extends AbstractPageModelBase{
 
 	/** The i elm action. */
 	private IElementAction elementAction;
@@ -47,6 +48,7 @@ public class MyWebElement {
 	 */
 	public MyWebElement(final IElementFind iElmFind,
 			final IElementAction iElmAction) {
+		super();
 		this.elementAction = iElmAction;
 		this.elementFind = iElmFind;
 	}
@@ -88,7 +90,7 @@ public class MyWebElement {
 	 * Do action.
 	 */
 	public void doAction() {
-		elementAction.doAction(elementFind.doFind(elementFind.getFindByValue()));
+		elementAction.doAction(elementFind.doFind(getMyWd(), elementFind.getFindByValue()));
 	}
 
 }

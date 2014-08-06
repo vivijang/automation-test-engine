@@ -29,7 +29,7 @@ import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
  * 
  * @author Peidong Hu
  */
-public abstract class AbstractPageModelBase {
+public abstract class AbstractPageModelBase {//NOPMD
 	
 	/** The i my wd. */
 	protected IMyWebDriver myWd;

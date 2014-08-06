@@ -75,7 +75,7 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 			for (int index = 0; index < myWebElementList.size(); index++) {
 				webelement = myWebElementList.get(index);
 				try {
-					webelement.getElementFind().doFind(
+					webelement.getElementFind().doFind(getMyWd(),
 							webelement.getElementFind().getFindByValue());
 				} catch (NoSuchElementException e) {
 					PageValidationException pve = new PageValidationException(

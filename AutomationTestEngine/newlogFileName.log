@@ -1,4 +1,4 @@
-2014-08-06 08:10:58,809 [main]           WARN  [M: ]
-				o.b.a.s.problemhandler.ProblemLogbackHandler    :: Test-Error: []->testcase2name->step1->input user name
-2014-08-06 08:25:01,321 [main]           ERROR [M: ]
+2014-08-06 16:00:15,512 [main]           ERROR [M: ]
+				o.b.a.s.problemhandler.ProblemLogbackHandler    :: APP_LOG: Test-Error: []->testcase2name->step1->input user name
+2014-08-06 16:15:32,688 [main]           ERROR [M: ]
 				o.b.a.s.problemhandler.ProblemLogbackHandler    :: APP_LOG: Test-Error: []->testcase2name->step1->input user name

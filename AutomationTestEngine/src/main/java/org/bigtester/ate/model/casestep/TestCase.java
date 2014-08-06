@@ -22,8 +22,9 @@ package org.bigtester.ate.model.casestep;
 
 import java.util.List;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.openqa.selenium.WebDriver;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +35,7 @@ import org.openqa.selenium.WebDriver;
 public class TestCase {
 	
 	/** The current web driver. */
-	private WebDriver currentWebDriver;
+	private IMyWebDriver currentWebDriver;
 	/** The test case name. */
 	private String testCaseName;
 	
@@ -69,7 +70,9 @@ public class TestCase {
 	public void goSteps() throws StepExecutionException {
 		
 		for (int i=0; i<testStepList.size(); i++) {
+			
 			currentTestStep = testStepList.get(i);
+			currentWebDriver = currentTestStep.getMyWebDriver();
 			currentTestStep.doStep();//NOPMD
 		}
 	}
@@ -115,7 +118,7 @@ public class TestCase {
 	 *
 	 * @return the currentWebDriver
 	 */
-	public WebDriver getCurrentWebDriver() {
+	public IMyWebDriver getCurrentWebDriver() {
 		return currentWebDriver;
 	}
 
@@ -124,7 +127,7 @@ public class TestCase {
 	 *
 	 * @param currentWebDriver the currentWebDriver to set
 	 */
-	public void setCurrentWebDriver(WebDriver currentWebDriver) {
+	public void setCurrentWebDriver(IMyWebDriver currentWebDriver) {
 		this.currentWebDriver = currentWebDriver;
 	}
 

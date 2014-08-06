@@ -22,6 +22,7 @@
 package org.bigtester.ate.model.casestep;
 
 import org.bigtester.ate.annotation.StepLoggable;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.page.Lastpage;
 
 // TODO: Auto-generated Javadoc
@@ -75,6 +76,19 @@ public class LastStep extends BaseTestStep implements ITestStep{
 	@StepLoggable
 	public void doStep(){
 		lastPage.closeLastpage();
+	}
+
+
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IMyWebDriver getMyWebDriver() {
+		// TODO Auto-generated method stub
+		return lastPage.getMyWd();
 	}
 
 }

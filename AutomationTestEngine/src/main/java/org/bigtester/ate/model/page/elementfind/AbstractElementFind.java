@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementfind;
 
-import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -29,7 +29,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public abstract class AbstractElementFind extends AbstractPageModelBase{
+public abstract class AbstractElementFind {
 	
 	/** The find by value. */
 	private String findByValue;
@@ -41,7 +41,7 @@ public abstract class AbstractElementFind extends AbstractPageModelBase{
 	 *            the find by value
 	 * @return the web element
 	 */
-	public abstract WebElement doFind(String findByValue);
+	public abstract WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
 	
 	/**
 	 * Gets the find by value.

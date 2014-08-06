@@ -51,17 +51,10 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		ProblemHandler, ApplicationContextAware {
 	private ApplicationContext applicationContext = null;
 	/** The Constant slf4jLogger. */
-	private static final Logger slf4jLogger = LoggerFactory
+	private static final Logger MYLOGGER = LoggerFactory
 			.getLogger(ProblemLogbackHandler.class);
 
-	/**
-	 * Instantiates a new problem logback handler.
-	 */
-	public ProblemLogbackHandler() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -92,19 +85,19 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 					+ pTS.getStepDescription();
 			switch (see.getErrorCode()) {
 			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				if (pTS.isTargetStep() && slf4jLogger.isErrorEnabled()) {
-					slf4jLogger.error(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_ERROR + logMsg);
-				} else if(slf4jLogger.isWarnEnabled()) {
-					slf4jLogger.warn(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_WARNING + logMsg);
+				if (pTS.isTargetStep() && MYLOGGER.isErrorEnabled()) {
+					MYLOGGER.error(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_ERROR + logMsg);
+				} else if(MYLOGGER.isWarnEnabled()) {
+					MYLOGGER.warn(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_WARNING + logMsg);
 				}
 				break;
 			default:
-				if (slf4jLogger.isInfoEnabled()) {
-					slf4jLogger.info("this message is in TODO list.");
+				if (MYLOGGER.isInfoEnabled()) {
+					MYLOGGER.info("this message is in TODO list.");
 				}
 				break;
 			}
-			pTC.getCurrentWebDriver().quit();
+			pTC.getCurrentWebDriver().getWebDriver().quit();
 		}
 	}
 

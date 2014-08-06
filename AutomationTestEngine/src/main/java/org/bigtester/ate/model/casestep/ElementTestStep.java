@@ -23,6 +23,7 @@ package org.bigtester.ate.model.casestep;
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -33,7 +34,7 @@ import org.openqa.selenium.NoSuchElementException;
  * 
  * @author Peidong Hu
  */
-public class TestStep extends BaseTestStep implements ITestStep {
+public class ElementTestStep extends BaseTestStep implements ITestStep {
 	// TOTO add pageObject as another member.
 
 	/**
@@ -42,7 +43,7 @@ public class TestStep extends BaseTestStep implements ITestStep {
 	 * @param myWe
 	 *            the my we
 	 */
-	public TestStep(final MyWebElement myWe) {
+	public ElementTestStep(final MyWebElement myWe) {
 		super();
 		setMyWebElement(myWe);
 	}
@@ -62,5 +63,14 @@ public class TestStep extends BaseTestStep implements ITestStep {
 			pve.initCause(e);
 			throw pve;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IMyWebDriver getMyWebDriver() {
+		// TODO Auto-generated method stub
+		return super.getMyWebElement().getMyWd();
 	}
 }

@@ -40,6 +40,7 @@ public class StepExecutionProblem extends RawProblem {
 	/** The short stack trace. */
 	private final String shortStackTrace;
 	
+	/** The problem test case. */
 	private final TestCase problemTestCase;	
 	/** The step exec exception. */
 	private final StepExecutionException stepExecException;
@@ -49,6 +50,7 @@ public class StepExecutionProblem extends RawProblem {
 	 *
 	 * @param source the source
 	 * @param see the see
+	 * @param pTc the tc
 	 */
 	public StepExecutionProblem(Object source, StepExecutionException see, TestCase pTc) {
 		super(source, see);
@@ -87,6 +89,8 @@ public class StepExecutionProblem extends RawProblem {
 	}
 
 	/**
+	 * Gets the problem test case.
+	 *
 	 * @return the problemTestCase
 	 */
 	public TestCase getProblemTestCase() {

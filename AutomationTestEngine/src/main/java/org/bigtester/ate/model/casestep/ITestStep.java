@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep; //NOPMD
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.IPageObject;
 
@@ -49,6 +50,13 @@ public interface ITestStep {
 	 * @return the page object
 	 */
 	IPageObject getPageObject();
+	
+	/**
+	 * Gets the my web driver.
+	 *
+	 * @return the my web driver
+	 */
+	IMyWebDriver getMyWebDriver();
 	/**
 	 * Gets the step name.
 	 * 
@@ -65,6 +73,8 @@ public interface ITestStep {
 
 	/**
 	 * Do step.
+	 *
+	 * @throws StepExecutionException the step execution exception
 	 */
 
 	void doStep () throws StepExecutionException;
