@@ -24,8 +24,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.bigtester.problomatic2.Problomatic;
-import org.springframework.beans.factory.BeanFactory;
+import org.testng.internal.Utils;
 
 
 // TODO: Auto-generated Javadoc
@@ -38,17 +37,19 @@ import org.springframework.beans.factory.BeanFactory;
 @Aspect
 public class GenericSystemLogger {
 	@Pointcut("within(org.bigtester.ate..*)")
-	private void selectAll() {}
+	private void selectAll() {} //NOPMD
 
+	/**
+	 * After throwing advice.
+	 *
+	 * @param joinPoint the join point
+	 * @param error the error
+	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
-	public void AfterThrowingAdvice(JoinPoint joinPoint, Throwable error) throws InstantiationException, ClassNotFoundException, IllegalAccessException {
+	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
 		
-		//Problomatic.addProblemHandlerForProblem("org.bigtester.problomatic2.problems.RawProblem",
-        //        "org.bigtester.problomatic2.handlers.SystemPrintlnHandler");
-	   
-		//Problomatic.handleThrowable(joinPoint.getTarget(), error);
-		
-		System.out.println("There has been an exception: " +joinPoint.getTarget().toString() + "->" );
+		String[] fullST = Utils.stackTrace(error, false);
+		LogbackWriter.writeSysError("There has been an exception: " +joinPoint.getTarget().toString() + fullST[1] );
 	}
 
 }

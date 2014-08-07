@@ -52,6 +52,19 @@ public final class LogbackWriter {
 	}
 	
 	/**
+	 * Write app error.
+	 *
+	 * @param msg the msg
+	 */
+	public static void writeSysError(String msg) {
+		if (MYLOGGER.isErrorEnabled()) {
+			MYLOGGER.error(LogbackTag.TAG_SYS_LOG + LogbackTag.TAG_TEST_ERROR + msg);
+		} else {
+			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isErrorEnabled()");
+		}
+	}
+	
+	/**
 	 * Write app warning.
 	 *
 	 * @param msg the msg

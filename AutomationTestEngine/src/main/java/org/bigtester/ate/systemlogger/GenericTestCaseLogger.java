@@ -78,8 +78,7 @@ public class GenericTestCaseLogger {
 	 * @throws IllegalAccessException the illegal access exception
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
-	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error)
-			throws InstantiationException, ClassNotFoundException, IllegalAccessException {
+	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
 		if (error instanceof StepExecutionException
 				&& joinPoint.getTarget() instanceof TestCase) {
 			StepExecutionProblem sep = new StepExecutionProblem(

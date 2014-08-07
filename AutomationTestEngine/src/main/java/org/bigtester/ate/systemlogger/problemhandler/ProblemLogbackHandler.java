@@ -33,9 +33,6 @@ import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
 import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 
 // TODO: Auto-generated Javadoc
@@ -46,8 +43,8 @@ import org.springframework.context.ApplicationContextAware;
  * 
  */
 public class ProblemLogbackHandler extends AbstractProblemHandler implements
-		ProblemHandler, ApplicationContextAware {
-	private ApplicationContext applicationContext = null;
+		ProblemHandler {
+	
 	/** The Constant slf4jLogger. */
 	
 	
@@ -91,6 +88,9 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 				}
 				pTC.getCurrentWebDriver().getWebDriver().quit();
 				break;
+			case ExceptionErrorCode.UNKNOWN_ERROR:
+				LogbackWriter.writeAppError("Uncaught Application Error.");
+				break;
 			default:
 				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
 				break;
@@ -108,14 +108,5 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		// TODO Auto-generated method stub
-		this.applicationContext = applicationContext;
-	}
-
+	
 }

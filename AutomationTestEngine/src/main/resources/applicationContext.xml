@@ -6,6 +6,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
+	<bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
 	<bean id="TestCaseLogger" class="org.bigtester.ate.systemlogger.GenericTestCaseLogger">
 		<property name="currentTestCase" ref="testcase" />
 		<!-- <property name="currentWebDriver" ref="MyFirefoxWebDriver"/> -->
@@ -17,7 +18,7 @@
 
 	<bean id="testcase" name="testcase2name"
 		class="org.bigtester.ate.model.casestep.TestCase">
-		<property name="testCaseName" value="testcase2name" />
+		<property name="testCaseName" value="testcase name" />
 		<property name="testStepList">
 			<list>
 				<ref bean="homestep" />
@@ -82,7 +83,7 @@
 	</bean>
 	<bean id="ef1" name="ef1" parent="efAbstract"
 		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
-		<property name="findByValue" value="modlgn_username" />
+		<property name="findByValue" value="modlgn_username1" />
 	</bean>
 
 	<bean id="ea1" name="ea1" parent="eaAbstract"
