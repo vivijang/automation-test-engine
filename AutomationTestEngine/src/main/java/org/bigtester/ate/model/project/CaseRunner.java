@@ -26,10 +26,10 @@ import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -141,8 +141,8 @@ public class CaseRunner implements IRunTestCase {
 		// String testname = "applicationContext1.xml";
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				testname);
-		System.out.println("processing fileabc: " + testname); 
-		Assert.assertTrue(true);
+		LogbackWriter.writeAppInfo("processing test file: " + testname); 
+		
 		myTestCase = (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE);
 		myTestCase.goSteps();
 		((ConfigurableApplicationContext) context).close();

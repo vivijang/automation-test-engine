@@ -27,18 +27,16 @@ import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.model.casestep.ITestStep;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
 import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
 import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import ch.qos.logback.classic.Level;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -51,9 +49,7 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		ProblemHandler, ApplicationContextAware {
 	private ApplicationContext applicationContext = null;
 	/** The Constant slf4jLogger. */
-	private static final Logger MYLOGGER = LoggerFactory
-			.getLogger(ProblemLogbackHandler.class);
-
+	
 	
 	/**
 	 * {@inheritDoc}
@@ -76,28 +72,30 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		//4) page validation exception: test pass with bug; (passed test with bug)
 		if (aProblem instanceof StepExecutionProblem) {
 			StepExecutionProblem sep = (StepExecutionProblem) aProblem;
-			TestCase pTC = sep.getProblemTestCase();
-			ITestStep pTS = pTC.getCurrentTestStep();
 			StepExecutionException see = sep.getStepExecException();
-			String logMsg = aProblem.getMessages() + LogbackTag.TAG_SEPERATOR
-					+ pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
-					+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
-					+ pTS.getStepDescription();
+			TestCase pTC;
+			ITestStep pTS;
+			String logMsg; 
 			switch (see.getErrorCode()) {
 			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				if (pTS.isTargetStep() && MYLOGGER.isErrorEnabled()) {
-					MYLOGGER.error(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_ERROR + logMsg);
-				} else if(MYLOGGER.isWarnEnabled()) {
-					MYLOGGER.warn(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_WARNING + logMsg);
+				pTC = sep.getProblemTestCase();
+				pTS = pTC.getCurrentTestStep();
+				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
+				+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
+				+ pTS.getStepDescription() + LogbackTag.TAG_SEPERATOR
+				+ ((StepExecutionProblem) aProblem).getStepExecException().getMessage();
+				if (pTS.isTargetStep() ) {
+					LogbackWriter.writeAppError(logMsg);
+				} else {
+					LogbackWriter.writeAppWarning(logMsg);
 				}
+				pTC.getCurrentWebDriver().getWebDriver().quit();
 				break;
 			default:
-				if (MYLOGGER.isInfoEnabled()) {
-					MYLOGGER.info("this message is in TODO list.");
-				}
+				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
 				break;
 			}
-			pTC.getCurrentWebDriver().getWebDriver().quit();
+			
 		}
 	}
 

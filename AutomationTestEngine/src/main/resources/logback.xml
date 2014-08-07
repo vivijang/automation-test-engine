@@ -8,7 +8,7 @@
 		</encoder>
 	</appender>
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>MyLog.log</file>
+		<file>logs/SystemLog.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</Pattern>
@@ -17,7 +17,7 @@
 	<appender name="newAppenderName"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-		<File>newlogFileName.log</File>
+		<File>logs/ApplicationLog.log</File>
 
 		<ImmediateFlush>true</ImmediateFlush>
 
@@ -30,7 +30,7 @@
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 
-			<FileNamePattern>newlogFileName.log.%d{yyyy-MM-dd-HH}
+			<FileNamePattern>logs/ApplicationLog.log.%d{yyyy-MM-dd-HH}
 
 			</FileNamePattern>
 

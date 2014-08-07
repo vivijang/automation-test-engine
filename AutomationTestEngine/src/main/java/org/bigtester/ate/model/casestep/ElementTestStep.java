@@ -52,12 +52,13 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	 * {@inheritDoc}
 	 */
 	@StepLoggable
-	public void doStep() throws StepExecutionException{
+	public void doStep() throws StepExecutionException {
 		try {
 			getMyWebElement().doAction();
 		} catch (NoSuchElementException e) {
 			StepExecutionException pve = new StepExecutionException(
-					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
+					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
+							+ ExceptionMessage.MSG_SEPERATOR + e.getMessage(),
 					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
 					this.getMyWebElement());
 			pve.initCause(e);

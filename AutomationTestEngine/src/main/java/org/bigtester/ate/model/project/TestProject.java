@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.reporter.ATEXMLReporter;
+import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.reporters.XMLReporterConfig;
@@ -94,7 +95,7 @@ public class TestProject {
 				test.setXmlClasses(classes);
 			}
 			suites.add(suite);
-			System.out.println(suite.toXml());
+			LogbackWriter.writeAppInfo(suite.toXml());
 		}
 		if (suites.isEmpty()) {
 			// TODO

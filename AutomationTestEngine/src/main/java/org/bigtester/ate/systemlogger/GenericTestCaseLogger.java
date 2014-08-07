@@ -29,9 +29,6 @@ import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.problemhandler.ProblemLogbackHandler;
 import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
 import org.bigtester.problomatic2.Problomatic;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,11 +38,14 @@ import org.springframework.context.ApplicationContextAware;
  * 
  */
 @Aspect
-public class GenericTestCaseLogger implements ApplicationContextAware {
-	private ApplicationContext applicationContext = null;
+public class GenericTestCaseLogger {
+	
+	/** The current test case. */
 	private TestCase currentTestCase;
 
 	/**
+	 * Gets the current test case.
+	 *
 	 * @return the currentTestCase
 	 */
 	public TestCase getCurrentTestCase() {
@@ -53,15 +53,19 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 	}
 
 	/**
-	 * @param currentTestCase
-	 *            the currentTestCase to set
+	 * Sets the current test case.
+	 *
+	 * @param currentTestCase            the currentTestCase to set
 	 */
 	public void setCurrentTestCase(TestCase currentTestCase) {
 		this.currentTestCase = currentTestCase;
 	}
 
+	/**
+	 * Select all method as pointcuts.
+	 */
 	@Pointcut("within(org.bigtester.ate..*)")
-	private void selectAll() {
+	private void selectAll() { //NOPMD
 	}
 
 	/**
@@ -81,17 +85,10 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 			StepExecutionProblem sep = new StepExecutionProblem(
 					joinPoint.getTarget(), (StepExecutionException) error, currentTestCase);
 			ProblemLogbackHandler sph = new ProblemLogbackHandler();
-			Problomatic.addProblemHandlerForProblem(StepExecutionProblem.class, ProblemLogbackHandler.class);
+			Problomatic.addProblemHandlerForProblem(sep, sph);
 			Problomatic.handleProblem(sep);
 
 		}
-	}
-
-	@Override
-	public void setApplicationContext(
-			final ApplicationContext applicationContext) throws BeansException {
-		System.out.println("setting context");
-		this.applicationContext = applicationContext;
 	}
 
 }

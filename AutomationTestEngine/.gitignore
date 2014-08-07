@@ -5,3 +5,5 @@
 /.pmd
 /doc/
 /.classpath
+/newlogFileName.log
+/logs/

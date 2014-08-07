@@ -29,9 +29,13 @@ package org.bigtester.ate.constant;
 public final class ExceptionMessage {
 	
 	
-	
+	/** The Constant MSG_SEPERATOR. */
+	public static final String MSG_SEPERATOR =" ==> "; 
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
 	public static final String MSG_WEBELEMENT_NOTFOUND = "Web Element not Found.";
+	
+	/** The Constant MSG_UNSUPPORTED_LOGBACK_LEVEL. */
+	public static final String MSG_UNSUPPORTED_LOGBACK_LEVEL = "Unsupported logback error level.";
 	
 	/**
 	 * Instantiates a new exception error code.
