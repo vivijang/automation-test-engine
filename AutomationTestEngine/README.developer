@@ -1,0 +1,11 @@
+NOTE1) Please work on your own branch when you exploring a new technology. To create a new branch, follow these steps,
+		a) right click on project in 'Package explorer', click Team->Switch to...->New Branch
+		b) Give a name for the new branch, for example, ExplorNewTech
+		c) Click OK (a new branch is created in local machine)
+		d) right click on project in 'Package explorer', click Team->Push Branch...
+		e) click next->Finish (this new branch is pushed to the remote server.).
+		f) open your browser, goto https://github.com/bigtester/automation-test-engine
+		g) click dropdown button 'branch: master' to see if your new branch's name appears in the dropdown menu.
+		h) if g) is 'yes', you can start to safely work on your own branch without break the master branch code.
+		
+ 
