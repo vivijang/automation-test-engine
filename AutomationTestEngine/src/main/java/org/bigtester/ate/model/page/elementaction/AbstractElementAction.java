@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.page.elementaction;
 
 
+import org.bigtester.ate.model.data.StepDataValue;
 import org.bigtester.ate.model.page.AbstractPageModelBase;
 import org.openqa.selenium.WebElement;
 
@@ -34,14 +35,16 @@ import org.openqa.selenium.WebElement;
 public abstract class AbstractElementAction extends AbstractPageModelBase{
 	
 	/** The data value. */
-	private String dataValue;
+	//private String dataValue;
+	
+	private StepDataValue dataValue;
 	
 	/**
 	 * Gets the data value.
 	 * 
 	 * @return the data value
 	 */
-	public String getDataValue() {
+	public StepDataValue getDataValue() {
 		return dataValue;
 	}
 
@@ -51,7 +54,7 @@ public abstract class AbstractElementAction extends AbstractPageModelBase{
 	 * @param dataValue
 	 *            the new data value
 	 */
-	public void setDataValue(final String dataValue) {
+	public void setDataValue(final StepDataValue dataValue) {
 		this.dataValue = dataValue;
 	}
 

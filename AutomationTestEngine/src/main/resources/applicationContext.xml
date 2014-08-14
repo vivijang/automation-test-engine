@@ -6,6 +6,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
+	<import resource="db-services.xml"/>
 	<bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
 	<bean id="TestCaseLogger" class="org.bigtester.ate.systemlogger.GenericTestCaseLogger">
 		<property name="currentTestCase" ref="testcase" />
@@ -15,7 +16,6 @@
 
 	<bean id="MyFirefoxWebDriver"
 		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
-	<import resource="db-services.xml"/>
 	<bean id="testcase" name="testcase2name"
 		class="org.bigtester.ate.model.casestep.TestCase">
 		<property name="testCaseName" value="testcase name" />
@@ -28,11 +28,16 @@
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
 		class="org.bigtester.ate.model.page.AbstractPageModelBase">
 		<property name="myWd">
 			<ref bean="MyFirefoxWebDriver"></ref>
 		</property>
+	</bean>
+	<bean id="dataValueAbstract" name="dataValueAbstract" abstract="true"
+		class="org.bigtester.ate.model.data.AbstractDataValue">
+		<property name="elementDataDao" ref="elementInputDataDao"/>
 	</bean>
 	<!-- abstract beans, won't be initialized by Spring -->
 	<bean id="efAbstract" name="efAbstract" abstract="true" 
@@ -83,14 +88,21 @@
 	</bean>
 	<bean id="ef1" name="ef1" parent="efAbstract"
 		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
-		<property name="findByValue" value="modlgn_username1" />
+		<property name="findByValue" value="modlgn_username" />
 	</bean>
 
 	<bean id="ea1" name="ea1" parent="eaAbstract"
 		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
-		<property name="dataValue" value="peidong" />
+		<property name="dataValue">
+		<ref bean="usernameValue"/>
+		</property>
 	</bean>
-
+	<bean id="usernameValue" name="usernameValue" parent="dataValueAbstract"
+		class="org.bigtester.ate.model.data.StepDataValue">
+		<property name="dataValueID" >
+		<value type="java.lang.Long">65</value>
+		</property>
+	</bean>
 	<!-- step2 definition -->
 	<bean id="step2" class="org.bigtester.ate.model.casestep.ElementTestStep">
 		<constructor-arg ref="myWe2"></constructor-arg>
@@ -109,7 +121,16 @@
 
 	<bean id="ea2" name="ea2" parent="eaAbstract"
 		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
-		<property name="dataValue" value="peidong" />
+		<property name="dataValue">
+		<ref bean="usernameValue2"/>
+		</property>
+	</bean>
+	
+	<bean id="usernameValue2" name="usernameValue2" parent="dataValueAbstract"
+		class="org.bigtester.ate.model.data.StepDataValue">
+		<property name="dataValueID" >
+		<value type="java.lang.Long">66</value>
+		</property>
 	</bean>
 
 </beans>

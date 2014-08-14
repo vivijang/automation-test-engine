@@ -22,15 +22,31 @@ package org.bigtester.ate.model.data;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataSet defines ....
- * 
+ * This class AbstractDataValue defines ....
  * @author Peidong Hu
+ *
  */
-public abstract class AbstractDataSet {
+public abstract class AbstractDataValue {//NOPMD
 	
 	/**
-	 * Inits the data set.
+	 * Gets the element data dao.
+	 *
+	 * @return the elementDataDao
 	 */
-	public abstract IDataSet initDataSet();
+	public ElementInputDataDaoImpl getElementDataDao() {
+		return elementDataDao;
+	}
 
-}
+	/**
+	 * Sets the element data dao.
+	 *
+	 * @param elementDataDao the elementDataDao to set
+	 */
+	public void setElementDataDao(ElementInputDataDaoImpl elementDataDao) {
+		this.elementDataDao = elementDataDao;
+	}
+	
+	/** The element data dao. */
+	private ElementInputDataDaoImpl elementDataDao;//NOPMD
+	
+}	

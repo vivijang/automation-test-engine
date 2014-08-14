@@ -22,27 +22,78 @@ package org.bigtester.ate;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.ElementInputData;
 import org.bigtester.ate.model.data.ElementInputDataDaoImpl;
+import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataManager defines ....
+ *
+ * @author Peidong Hu
+ */
 public class DataManager {
+	
+	
+	
+	/**
+	 * Sets the locked.
+	 *
+	 * @param locked the new locked
+	 */
+	@Setter
+	
+	
+	/**
+	 * Gets the locked.
+	 *
+	 * @return the locked
+	 */
+	@Getter
+	private String locked = ""; //NOPMD
 	
 	/**
 	 * Test first data class.
+	 *
+	 * @throws InterruptedException the interrupted exception
+	 * @throws StepExecutionException the step execution exception
 	 */
 	@Test
-	public void testFirstDataClass() {
+	public void testDataClassTestCase() throws InterruptedException, StepExecutionException {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
+				"Test-applicationContext.xml");
+		/** The my tc. */
+		TestCase myTestCase;
+		myTestCase = (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE);
+		myTestCase.goSteps();
+		context.close();
+	}
+	
+	/**
+	 * Test first data class.
+	 *
+	 * @throws InterruptedException the interrupted exception
+	 */
+	@Test
+	public void testDataClassWithoutTestCase() throws InterruptedException {
+		//Thread.sleep(10000);
+		LogbackWriter.writeAppInfo("testng-msg: " + "lock on and 2nd thread running through" + locked);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+				"Test-dbContext.xml");
 		ElementInputDataDaoImpl dao = (ElementInputDataDaoImpl) context
 				.getBean("elementInputDataDao");
 
-		ElementInputData eid = new ElementInputData("Regular User",
+		ElementInputData eid = new ElementInputData(
 				"login Name", "peidonghu");
-		ElementInputData eid2 = new ElementInputData("Manager User",
+		ElementInputData eid2 = new ElementInputData(
 				"login Name", "peidonghu2");
 
 		dao.save(eid);
@@ -53,5 +104,6 @@ public class DataManager {
 			LogbackWriter.writeAppInfo("testng-msg: " + person.toString());
 		}
 		context.close();
+		LogbackWriter.writeAppInfo("testng-msg: " + "lock on and 2nd thread running through"+ locked);
 	}
 }

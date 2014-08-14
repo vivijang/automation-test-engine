@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.data.AbstractDataSet;
-import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
 
 
 // TODO: Auto-generated Javadoc
@@ -33,15 +31,6 @@ import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
 public class PageObject extends AbstractPageObject implements IPageObject{
 
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PageObject doAction(AbstractElementAction elementaction,
-			AbstractDataSet dataset) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 
 }

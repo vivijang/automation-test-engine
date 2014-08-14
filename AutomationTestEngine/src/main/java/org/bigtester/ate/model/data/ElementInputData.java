@@ -41,20 +41,16 @@ public class ElementInputData {
     @GeneratedValue
     private Long id;
 	
-	/** The user role. */
-	private String dataRole;
 	/** The data name. */
 	private String dataName;
 	/** The key in data. */
 	private String dataValue;
 	
-	public ElementInputData(String dataRole, String dataName, String dataValue) {
-		this.dataRole = dataRole;
+	public ElementInputData(String dataName, String dataValue) {
 		this.dataName = dataName;
 		this.dataValue = dataValue;
 	}
 	public ElementInputData() {
-		this.dataRole = "";
 		this.dataName = "";
 		this.dataValue = "";
 	}

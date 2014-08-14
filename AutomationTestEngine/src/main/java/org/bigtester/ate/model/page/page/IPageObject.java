@@ -22,8 +22,6 @@ package org.bigtester.ate.model.page.page;
 
 import java.util.List;
 
-import org.bigtester.ate.model.data.AbstractDataSet;
-import org.bigtester.ate.model.page.elementaction.AbstractElementAction;
 import org.bigtester.ate.model.page.exception.PageValidationException;
 
 
@@ -54,14 +52,5 @@ public interface IPageObject {
 	 * @return true, if successful
 	 */
 	void validatePage() throws PageValidationException;
-	/**
-	 * Do action.
-	 * 
-	 * @param elementaction
-	 *            the at
-	 * @param dataset
-	 *            the ds
-	 * @return the page object
-	 */
-	PageObject doAction(AbstractElementAction elementaction, AbstractDataSet dataset);
+	
 }

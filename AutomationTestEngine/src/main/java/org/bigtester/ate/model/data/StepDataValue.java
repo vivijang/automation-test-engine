@@ -19,19 +19,39 @@
  * limitations under the License.
  *******************************************************************************/
 package org.bigtester.ate.model.data;
-import java.util.Map;
 
-import org.bigtester.ate.model.page.page.MyWebElement;
+import lombok.Getter;
 
-import lombok.Data;
 // TODO: Auto-generated Javadoc
 /**
- * This class TestStepDataSets defines ....
+ * This class PropertyDataValue defines ....
  * @author Peidong Hu
  *
  */
-@Data
-@SuppressWarnings (value ={"unused","PMD"})
-public abstract class TestStepDataSets {
-	private Map<MyWebElement,  String> dataSets;
+public class StepDataValue extends AbstractDataValue{
+	
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
+	@Getter
+	private String value; //NOPMD
+	
+	
+	/**
+	 * Gets the data value id.
+	 *
+	 * @return the data value id
+	 */
+	@Getter
+	private Long dataValueID; //NOPMD
+	/**
+	 * @param dataValueID the dataValueID to set
+	 */
+	public void setDataValueID(Long dataValueID) {
+		this.dataValueID = dataValueID;
+		value = getElementDataDao().getValue(dataValueID);
+	}
+
 }

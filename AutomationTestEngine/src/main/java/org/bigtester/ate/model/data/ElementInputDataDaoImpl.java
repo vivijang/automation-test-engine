@@ -48,7 +48,19 @@ public class ElementInputDataDaoImpl {
      *
      * @return the db em
      */
+    
+    /**
+     * Gets the db em.
+     *
+     * @return the db em
+     */
     @Getter 
+    
+    /**
+     * Sets the db em.
+     *
+     * @param dbEM the new db em
+     */
     
     /**
      * Sets the db em.
@@ -78,5 +90,15 @@ public class ElementInputDataDaoImpl {
     public List<ElementInputData>getAll() {
         return dbEM.createQuery("SELECT p FROM ElementInputData p", ElementInputData.class).getResultList();
     }
-
+    
+    /**
+     * Gets the value.
+     *
+     * @param inputDataID the input data id
+     * @return the value
+     */
+    public String getValue(Long inputDataID) {
+    	ElementInputData eid = dbEM.find(ElementInputData.class, inputDataID);
+    	return eid.getDataValue();
+    }
 }
