@@ -28,6 +28,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.bigtester.ate.model.data.dbtable.ElementInputData;
 import org.springframework.transaction.annotation.Transactional;
 
 // TODO: Auto-generated Javadoc

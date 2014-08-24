@@ -18,41 +18,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.constant;
+package org.bigtester.ate.model.data.dbtable;
+
+import static javax.persistence.GenerationType.AUTO;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class LogbackTag defines ....
- * 
+ * This class ElementInputData defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public final class LogbackTag {
-
-	/** The Constant TAG_APP_LOG. */
-	public static final String TAG_APP_LOG = "APP_LOG: ";
+@Entity
+@Table
+@Data
+@SuppressWarnings(value = { "PMD" })
+public class ElementInputData {
 	
-	/** The Constant TAG_SYS_LOG. */
-	public static final String TAG_SYS_LOG = "SYS_LOG: ";
-	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
-	public static final String TAG_TEST_ERROR = "Test-Error: ";
+	/** The id. */
+	@Id
+	@GeneratedValue(strategy = AUTO)
+	@Column
+    private Long id;
 	
-	/** The Constant TAG_TEST_WARNING. */
-	public static final String TAG_TEST_WARNING= "Test-Warning: ";
+	/** The data name. */
+	@Getter
+	@Setter
+	@Column(length = 50, nullable = false, unique = false)
+	private String dataName;
+	/** The key in data. */
+	@Getter
+	@Setter
+	@Column(length = 50, nullable = false, unique = true)
+	private String dataValue;
 	
-	/** The Constant TAG_TEST_INFO. */
-	public static final String TAG_TEST_INFO= "Test-Info: ";
-	
-	/** The Constant TAG_UNITTEST_INFO. */
-	public static final String TAG_UNITTEST_INFO= "UnitTest-Info: ";
-	
-	/** The Constant TAG_SEPERATOR. */
-	public static final String TAG_SEPERATOR = "->";
-
-	/**
-	 * Instantiates a new exception error code.
-	 */
-	private LogbackTag() {
-		throw new AssertionError();
+	public ElementInputData(String dataName, String dataValue) {
+		this.dataName = dataName;
+		this.dataValue = dataValue;
+	}
+	public ElementInputData() {
+		this.dataName = "";
+		this.dataValue = "";
 	}
 }

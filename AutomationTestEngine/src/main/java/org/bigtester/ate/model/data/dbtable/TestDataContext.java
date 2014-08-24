@@ -18,41 +18,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.constant;
+package org.bigtester.ate.model.data.dbtable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class LogbackTag defines ....
+ * This class TestDataContext defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public final class LogbackTag {
-
-	/** The Constant TAG_APP_LOG. */
-	public static final String TAG_APP_LOG = "APP_LOG: ";
-	
-	/** The Constant TAG_SYS_LOG. */
-	public static final String TAG_SYS_LOG = "SYS_LOG: ";
-	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
-	public static final String TAG_TEST_ERROR = "Test-Error: ";
-	
-	/** The Constant TAG_TEST_WARNING. */
-	public static final String TAG_TEST_WARNING= "Test-Warning: ";
-	
-	/** The Constant TAG_TEST_INFO. */
-	public static final String TAG_TEST_INFO= "Test-Info: ";
-	
-	/** The Constant TAG_UNITTEST_INFO. */
-	public static final String TAG_UNITTEST_INFO= "UnitTest-Info: ";
-	
-	/** The Constant TAG_SEPERATOR. */
-	public static final String TAG_SEPERATOR = "->";
+@Entity
+@Table
+public class TestDataContext extends AbstractDBTable {
+	@Column(length = 50, nullable = false, unique = false)
+	/**
+	 * Gets the context field value.
+	 *
+	 * @return the context field value
+	 */
+	@Getter
+	/**
+	 * Sets the context field value.
+	 *
+	 * @param contextFieldValue the new context field value
+	 */
+	@Setter
+	private String contextFieldValue; //NOPMD
 
 	/**
-	 * Instantiates a new exception error code.
+	 * Gets the context field name.
+	 * 
+	 * @return the context field name
 	 */
-	private LogbackTag() {
-		throw new AssertionError();
-	}
+	@Getter
+	/**
+	 * Sets the context field name.
+	 *
+	 * @param contextFieldName the new context field name
+	 */
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "contextFieldName_idColumn", referencedColumnName = "idColumn")
+	private TestDataContextFieldName contextFieldName; //NOPMD
+
 }

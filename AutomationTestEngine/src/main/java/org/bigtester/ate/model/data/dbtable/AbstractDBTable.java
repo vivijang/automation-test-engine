@@ -18,40 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.data.dbtable;
+import static javax.persistence.GenerationType.AUTO;
 
-import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import lombok.Data;
+import javax.persistence.MappedSuperclass;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ElementInputData defines ....
+ * This class AbstractDBTable defines ....
  * @author Peidong Hu
  *
  */
-@Entity
-@Data
-@SuppressWarnings(value = { "PMD" })
-public class ElementInputData {
+@MappedSuperclass
+public abstract class AbstractDBTable { //NOPMD
 	
-	/** The id. */
+	
+	/** The id Column. */
 	@Id
-    @GeneratedValue
-    private Long id;
+	@GeneratedValue(strategy = AUTO)
+	@Column
 	
-	/** The data name. */
-	private String dataName;
-	/** The key in data. */
-	private String dataValue;
+	/**
+	 * Gets the id Column.
+	 *
+	 * @return the id Column
+	 */
+	@Getter
 	
-	public ElementInputData(String dataName, String dataValue) {
-		this.dataName = dataName;
-		this.dataValue = dataValue;
-	}
-	public ElementInputData() {
-		this.dataName = "";
-		this.dataValue = "";
-	}
+	/**
+	 * Sets the id Column.
+	 *
+	 * @param cid the new id Column
+	 */
+	@Setter
+	private long idColumn; //NOPMD
+	
+	
 }

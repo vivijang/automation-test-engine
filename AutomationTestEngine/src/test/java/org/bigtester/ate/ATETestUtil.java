@@ -18,41 +18,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.constant;
+package org.bigtester.ate;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class LogbackTag defines ....
+ * This class ATETestUtil defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public final class LogbackTag {
-
-	/** The Constant TAG_APP_LOG. */
-	public static final String TAG_APP_LOG = "APP_LOG: ";
-	
-	/** The Constant TAG_SYS_LOG. */
-	public static final String TAG_SYS_LOG = "SYS_LOG: ";
-	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
-	public static final String TAG_TEST_ERROR = "Test-Error: ";
-	
-	/** The Constant TAG_TEST_WARNING. */
-	public static final String TAG_TEST_WARNING= "Test-Warning: ";
-	
-	/** The Constant TAG_TEST_INFO. */
-	public static final String TAG_TEST_INFO= "Test-Info: ";
-	
-	/** The Constant TAG_UNITTEST_INFO. */
-	public static final String TAG_UNITTEST_INFO= "UnitTest-Info: ";
-	
-	/** The Constant TAG_SEPERATOR. */
-	public static final String TAG_SEPERATOR = "->";
-
+public final class ATETestUtil {
+	private ATETestUtil() {};
 	/**
-	 * Instantiates a new exception error code.
+	 * Get the method name for a depth in call stack. <br />
+	 * Utility function
+	 * 
+	 * @param depth
+	 *            depth in the call stack (0 means current method, 1 means call
+	 *            method, ...)
+	 * @return method name
 	 */
-	private LogbackTag() {
-		throw new AssertionError();
+	public static String getMethodName(final int depth) {
+		final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+
+		//System. out.println(ste[ste.length-depth].getClassName()+"#"+ste[ste.length-depth].getMethodName());
+		// return ste[ste.length - depth].getMethodName();  //Wrong, fails for depth = 0
+		return ste[ste.length - 1 - depth].getMethodName(); //Thank you Tom Tresansky
 	}
 }

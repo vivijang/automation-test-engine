@@ -89,6 +89,23 @@ public final class LogbackWriter {
 			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isInfoEnabled()");
 		}
 	}
+	
+	/**
+	 * Write test info.
+	 *
+	 * @param msg the msg
+	 */
+	public static void writeUnitTestInfo(String msg) {
+		if(MYLOGGER.isInfoEnabled()) {
+			MYLOGGER.info(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_UNITTEST_INFO + msg); //NOPMD
+		} else {
+			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isInfoEnabled()");
+		}
+	}
+	
+	/**
+	 * Instantiates a new logback writer.
+	 */
 	private LogbackWriter() {
 		throw new AssertionError();
 	}
