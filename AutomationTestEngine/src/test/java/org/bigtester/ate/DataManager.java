@@ -20,7 +20,14 @@
  *******************************************************************************/
 package org.bigtester.ate;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +38,13 @@ import org.bigtester.ate.model.data.ElementInputDataDaoImpl;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.dbunit.DatabaseUnitException;
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.DataSetException;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 
@@ -114,13 +128,22 @@ public class DataManager {
 	 * 
 	 * @throws InterruptedException
 	 *             the interrupted exception
+	 * @throws SQLException 
+	 * @throws DatabaseUnitException 
+	 * @throws DataSetException 
+	 * @throws MalformedURLException 
 	 */
 	@Test
-	public void testAutomaticallyCreateTable() throws InterruptedException {
+	public void testAutomaticallyCreateTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
 
 		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				"Test-dbContext.xml");
+		DataSource datas = (DataSource)context.getBean("dataSource");
+		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
+		DatabaseOperation.REFRESH.execute(con, new FlatXmlDataSetBuilder().build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
+		con.close();
+			
 		context.close();
 		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
 	}
