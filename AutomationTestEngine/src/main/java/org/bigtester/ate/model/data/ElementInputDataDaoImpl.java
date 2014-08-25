@@ -28,7 +28,10 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
+import org.bigtester.ate.model.data.exception.TestDataException;
 import org.springframework.transaction.annotation.Transactional;
 
 // TODO: Auto-generated Javadoc
@@ -98,8 +101,13 @@ public class ElementInputDataDaoImpl {
      * @param inputDataID the input data id
      * @return the value
      */
-    public String getValue(Long inputDataID) {
+    public String getValue(Long inputDataID) throws TestDataException{
+    	
     	ElementInputData eid = dbEM.find(ElementInputData.class, inputDataID);
-    	return eid.getDataValue();
+    	if (eid == null) {
+    		throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND, ExceptionErrorCode.TESTDATA_NOTFOUND);
+    	} else {
+    		return eid.getDataValue();
+    	}
     }
 }

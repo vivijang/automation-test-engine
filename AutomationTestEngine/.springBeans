@@ -11,6 +11,7 @@
 		<config>src/main/resources/META-INF/db-services.xml</config>
 		<config>src/test/resources/META-INF/Test-applicationContext.xml</config>
 		<config>src/main/resources/applicationContext.xml</config>
+		<config>src/main/resources/testproject.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

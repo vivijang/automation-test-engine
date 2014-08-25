@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.bigtester.ate.model.data.exception.TestDataException;
+
 import lombok.Getter;
 
 // TODO: Auto-generated Javadoc
@@ -48,8 +50,9 @@ public class StepDataValue extends AbstractDataValue{
 	private Long dataValueID; //NOPMD
 	/**
 	 * @param dataValueID the dataValueID to set
+	 * @throws TestDataException 
 	 */
-	public void setDataValueID(Long dataValueID) {
+	public void setDataValueID(Long dataValueID) throws TestDataException {
 		this.dataValueID = dataValueID;
 		value = getElementDataDao().getValue(dataValueID);
 	}

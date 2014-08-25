@@ -18,24 +18,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
+package org.bigtester.ate.systemlogger.problems;
 
-import org.bigtester.ate.model.data.TestParameters;
+
 import org.bigtester.ate.model.data.exception.TestDataException;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.testng.ITest;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IRunSuites defines ....
- *
+ * This class StepExecutionProblem defines ....
+ * 
  * @author Peidong Hu
+ * 
  */
-public interface IRunTestCase extends ITest {
-	
+public class TestDataProblem extends GenericATEProblem {
+
+	/** The test data exception. */
+	private final transient TestDataException testDataException;
+
 	/**
-	 * Run suites.
-	 * @throws TestDataException 
+	 * Instantiates a new page validation problem.
+	 * 
+	 * @param source
+	 *            the source
+	 * @param tde
+	 *            the see
 	 */
-	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException;
+	public TestDataProblem(Object source, TestDataException tde) {
+		super(source, tde);
+		testDataException = tde;
+	}
+
+	/**
+	 * Gets the step exec exception.
+	 * 
+	 * @return the step exec exception
+	 */
+	public TestDataException getStepExecException() {
+		return testDataException;
+	}
+
 }

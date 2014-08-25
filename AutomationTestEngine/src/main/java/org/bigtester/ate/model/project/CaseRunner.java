@@ -22,15 +22,20 @@ package org.bigtester.ate.model.project;
 
 import java.lang.reflect.Method;
 
+import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
+import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -134,18 +139,34 @@ public class CaseRunner implements IRunTestCase {
 	 * @param ctx
 	 *            the ctx
 	 * @throws StepExecutionException 
+	 * @throws Throwable 
 	 */
 	@Test(dataProvider = "dp")
-	public void runTest(TestParameters testParams) throws StepExecutionException {
+	public void runTest(TestParameters testParams)
+			throws TestDataException, StepExecutionException {
 		String testname = testParams.getTestFilename();
 		// String testname = "applicationContext1.xml";
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				testname);
-		LogbackWriter.writeAppInfo("processing test file: " + testname); 
-		
-		myTestCase = (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE);
-		myTestCase.goSteps();
-		((ConfigurableApplicationContext) context).close();
+		try {
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+					testname);
+
+			LogbackWriter.writeAppInfo("processing test file: " + testname);
+
+			myTestCase = (TestCase) context
+					.getBean(TestCaseConstants.BEANID_TESTCASE);
+			myTestCase.goSteps();
+			((ConfigurableApplicationContext) context).close();
+		} catch (BeanCreationException bce) {
+			ITestResult itr = Reporter.getCurrentTestResult();
+			
+			if (itr.getThrowable() != null && itr.getThrowable() instanceof TestDataException ) {
+				TestDataException tde = (TestDataException) itr.getThrowable();
+				tde.setTestStepName(((BeanCreationException)bce.getCause()).getBeanName());
+				tde.setTestCaseName(bce.getResourceDescription());
+				tde.setMessage(tde.getMessage()+ LogbackTag.TAG_SEPERATOR + tde.getTestCaseName() + LogbackTag.TAG_SEPERATOR + tde.getTestStepName());
+				throw (TestDataException) itr.getThrowable();
+			}
+		}
 
 	}
 

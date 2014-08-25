@@ -34,6 +34,9 @@ public final class ExceptionMessage {
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
 	public static final String MSG_WEBELEMENT_NOTFOUND = "Web Element not Found.";
 	
+	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
+	public static final String MSG_TESTDATA_NOTFOUND = "Test Data not Found.";
+	
 	/** The Constant MSG_UNSUPPORTED_LOGBACK_LEVEL. */
 	public static final String MSG_UNSUPPORTED_LOGBACK_LEVEL = "Unsupported logback error level.";
 	

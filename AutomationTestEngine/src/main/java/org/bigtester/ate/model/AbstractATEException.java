@@ -18,24 +18,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
-
-import org.bigtester.ate.model.data.TestParameters;
-import org.bigtester.ate.model.data.exception.TestDataException;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.testng.ITest;
+package org.bigtester.ate.model;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IRunSuites defines ....
- *
+ * This class Abstract defines ....
+ * 
  * @author Peidong Hu
+ * 
  */
-public interface IRunTestCase extends ITest {
+public abstract class AbstractATEException extends Exception {
 	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -5513011387447019438L;
+	/** The error code. */
+	private final String errorCode;
+
 	/**
-	 * Run suites.
-	 * @throws TestDataException 
+	 * Gets the error code.
+	 * 
+	 * @return the error code
 	 */
-	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException;
+	public String getErrorCode() {
+		return this.errorCode;
+	}
+
+	/**
+	 * Instantiates a new abstract ate exception.
+	 *
+	 * @param message the message
+	 * @param errorCode the error code
+	 */
+	public AbstractATEException(String message, String errorCode) {
+		super(message);
+		this.errorCode = errorCode;
+	}
 }

@@ -18,39 +18,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.exception;
+package org.bigtester.ate.systemlogger.problems;
+
+import org.bigtester.problomatic2.problems.RawProblem;
+import org.testng.internal.Utils;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
- * 
+ * This class GenericATEProblem defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public abstract class AbstractATEException extends Exception {
+public class GenericATEProblem extends RawProblem {
+	/** The full stack trace. */
+	private final String fullStackTrace;
 	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
-
+	/** The short stack trace. */
+	private final String shortStackTrace;
+	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
+	 * Instantiates a new generic ate problem.
+	 *
+	 * @param source the source
+	 * @param see the see
 	 */
-	public String getErrorCode() {
-		return this.errorCode;
+	public GenericATEProblem(Object source, Exception exception) {
+		super (source, exception);
+		String[] stackTraces = Utils.stackTrace(exception, false);
+		fullStackTrace = stackTraces[1];
+		shortStackTrace = stackTraces[0];
+	}
+	
+	/**
+	 * Gets the short stack trace.
+	 *
+	 * @return the shortStackTrace
+	 */
+	public String getShortStackTrace() {
+		return shortStackTrace;
 	}
 
 	/**
-	 * Instantiates a new abstract ate exception.
+	 * Gets the full stack trace.
 	 *
-	 * @param message the message
-	 * @param errorCode the error code
+	 * @return the fullStackTrace
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+	public String getFullStackTrace() {
+		return fullStackTrace;
 	}
 }

@@ -21,9 +21,7 @@
 package org.bigtester.ate;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.MalformedURLException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -42,7 +40,6 @@ import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.DataSetException;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -50,7 +47,7 @@ import org.testng.annotations.Test;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataManager defines ....
+ * The Class DataManager is to test the data model
  * 
  * @author Peidong Hu
  */

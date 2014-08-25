@@ -24,6 +24,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.ate.model.data.exception.TestDataException;
+import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.internal.Utils;
 
 
@@ -36,6 +39,8 @@ import org.testng.internal.Utils;
  */
 @Aspect
 public class GenericSystemLogger {
+	
+	
 	@Pointcut("within(org.bigtester.ate..*)")
 	private void selectAll() {} //NOPMD
 
@@ -47,7 +52,10 @@ public class GenericSystemLogger {
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
-		
+		if (error instanceof TestDataException) {
+			ITestResult itr = Reporter.getCurrentTestResult();
+			itr.setThrowable(error);
+		}
 		String[] fullST = Utils.stackTrace(error, false);
 		LogbackWriter.writeSysError("There has been an exception: " +joinPoint.getTarget().toString() + fullST[1] );
 	}

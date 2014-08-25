@@ -22,23 +22,18 @@ package org.bigtester.ate.systemlogger.problems;
 
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.casestep.TestCase;
-import org.bigtester.problomatic2.problems.RawProblem;
-import org.testng.internal.Utils;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class PageValidationProblem defines ....
+ * This class StepExecutionProblem defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public class StepExecutionProblem extends RawProblem {
+public class StepExecutionProblem extends GenericATEProblem {
 	
-	/** The full stack trace. */
-	private final String fullStackTrace;
 	
-	/** The short stack trace. */
-	private final String shortStackTrace;
 	
 	/** The problem test case. */
 	private final TestCase problemTestCase;	
@@ -54,30 +49,11 @@ public class StepExecutionProblem extends RawProblem {
 	 */
 	public StepExecutionProblem(Object source, StepExecutionException see, TestCase pTc) {
 		super(source, see);
-		String[] stackTraces = Utils.stackTrace(see, false);
-		fullStackTrace = stackTraces[1];
-		shortStackTrace = stackTraces[0];
 		stepExecException = see;
 		problemTestCase = pTc;
 	}
 	
-	/**
-	 * Gets the short stack trace.
-	 *
-	 * @return the shortStackTrace
-	 */
-	public String getShortStackTrace() {
-		return shortStackTrace;
-	}
-
-	/**
-	 * Gets the full stack trace.
-	 *
-	 * @return the fullStackTrace
-	 */
-	public String getFullStackTrace() {
-		return fullStackTrace;
-	}
+	
 
 	/**
 	 * Gets the step exec exception.

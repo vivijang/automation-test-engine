@@ -18,10 +18,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.exception;
+package org.bigtester.ate.model.data.exception;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import org.bigtester.ate.model.AbstractATEException;
-import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,36 +32,65 @@ import org.bigtester.ate.model.page.page.MyWebElement;
  * @author Peidong Hu
  * 
  */
-public class StepExecutionException extends AbstractATEException {
+public class TestDataException extends AbstractATEException {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 6019919237360483659L;
-
-	/** The my web element. */
-	private final MyWebElement myWebElement;
+	private static final long serialVersionUID = -2675548817712757408L;
+	
+	/**
+	 * Sets the message.
+	 *
+	 * @param message the new message
+	 */
+	@Setter
+	
+	/**
+	 * @override
+	 */
+	@Getter
+	private String message; //NOPMD
+	
+	
+	/**
+	 * Gets the test step name.
+	 *
+	 * @return the test step name
+	 */
+	@Getter
+	
+		
+	/**
+	 * Sets the test step name.
+	 *
+	 * @param testStepName the new test step name
+	 */
+	@Setter
+	private String testStepName; //NOPMD
+	
+	/**
+	 * Gets the test case name.
+	 *
+	 * @return the test case name
+	 */
+	@Getter
+	
+	/**
+	 * Sets the test case name.
+	 *
+	 * @param testCaseName the new test case name
+	 */
+	@Setter
+	private String testCaseName; //NOPMD
 
 	/**
 	 * Instantiates a new step execution exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param errorCode
-	 *            the error code
-	 * @param myWebElement
-	 *            the my web element
+	 *
+	 * @param message            the message
+	 * @param errorCode            the error code
 	 */
-	public StepExecutionException(String message, String errorCode,
-			MyWebElement myWebElement) {
+	public TestDataException(String message, String errorCode) {
 		super(message, errorCode);
-		this.myWebElement = myWebElement;
-	}
-
-	/**
-	 * Gets the my web element.
-	 * 
-	 * @return the myWebElement
-	 */
-	public MyWebElement getMyWebElement() {
-		return myWebElement;
+		this.message = message;
+		
 	}
 }

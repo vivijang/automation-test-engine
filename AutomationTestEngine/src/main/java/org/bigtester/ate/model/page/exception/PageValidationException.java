@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.page.exception;
 
 
+import org.bigtester.ate.model.AbstractATEException;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
