@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.model.data.StepDataValue;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -37,5 +38,18 @@ public interface IElementAction {
 	 *            the we
 	 */
 	void doAction(WebElement webElm);
-
+	
+	/**
+	 * Gets the data value.
+	 *
+	 * @return the data value
+	 */
+	StepDataValue getDataValue();
+	
+	/**
+	 * Checks if is data valued action flag.
+	 *
+	 * @return true, if is data valued action flag
+	 */
+	boolean isDataValuedActionFlag();
 }

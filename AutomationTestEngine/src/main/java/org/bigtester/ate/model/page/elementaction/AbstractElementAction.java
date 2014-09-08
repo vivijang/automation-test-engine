@@ -34,6 +34,10 @@ import org.openqa.selenium.WebElement;
  */
 public abstract class AbstractElementAction extends AbstractPageModelBase{
 	
+	
+	/** The data valued action flag. */
+	private transient boolean dataValuedActionFlag; 
+	
 	/** The data value. */
 	//private String dataValue;
 	
@@ -55,6 +59,7 @@ public abstract class AbstractElementAction extends AbstractPageModelBase{
 	 *            the new data value
 	 */
 	public void setDataValue(final StepDataValue dataValue) {
+		this.dataValuedActionFlag = true;
 		this.dataValue = dataValue;
 	}
 
@@ -65,6 +70,15 @@ public abstract class AbstractElementAction extends AbstractPageModelBase{
 	 * @param webElm the web elm
 	 */
 	public abstract void doAction(WebElement webElm);
+
+	/**
+	 * Checks if is data value action flag.
+	 *
+	 * @return the dataValueFlag
+	 */
+	public boolean isDataValuedActionFlag() {
+		return dataValuedActionFlag;
+	}
 
 	
 	

@@ -23,6 +23,8 @@ package org.bigtester.ate.reporter;
 import java.util.List;
 import java.util.Properties;
 
+import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
 import org.testng.reporters.XMLStringBuffer;
@@ -87,7 +89,21 @@ public final class TestStepsXMLReporterUtils {
 		attrs.setProperty(ATEXMLReporterConfig.ATTR_NAME, tsr.getStepName());
 		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP, attrs);
 		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_DESC);
-		xmlBuffer.addCDATA(tsr.getThisStep().getStepDescription());
+		String testData;
+		String stepReportMSG;
+		if (tsr.getThisStep().isElementStepFlag())
+		{
+			MyWebElement mwe = tsr.getThisStep().getMyWebElement();
+			if (mwe.getElementAction().isDataValuedActionFlag()){
+				testData = mwe.getElementAction().getDataValue().getValue();
+				stepReportMSG = tsr.getThisStep().getStepDescription() + ReportMessage.MSG_SEPERATOR + testData;
+			} else {
+				stepReportMSG = tsr.getThisStep().getStepDescription();
+			}
+		} else {
+			stepReportMSG = tsr.getThisStep().getStepDescription();
+		}
+		xmlBuffer.addCDATA(stepReportMSG);
 		xmlBuffer.pop();
 		xmlBuffer.pop();
 	}
