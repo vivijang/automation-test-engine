@@ -78,7 +78,9 @@ public class TestDatabaseInitializer {
 	public void initialize(ApplicationContext context, String dataSource) throws DatabaseUnitException, SQLException, MalformedURLException {
 		DataSource datas = (DataSource)context.getBean(dataSource);
 		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
-		DatabaseOperation.REFRESH.execute(con, new FlatXmlDataSetBuilder().build(initXmlFile)); //Import your data
+		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
+		DatabaseOperation.REFRESH.execute(con, builder.build(initXmlFile)); //Import your data
 		con.close();
 		
 	}

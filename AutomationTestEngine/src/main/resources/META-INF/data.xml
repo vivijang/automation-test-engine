@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-<TESTDATACONTEXTFIELDNAME IDCOLUMN="1" CONTEXTFIELDNAME="ADMIN1" />
-<TESTDATACONTEXTFIELDNAME IDCOLUMN="2" CONTEXTFIELDNAME="Quarry" />
-<TESTDATACONTEXTFIELDNAME IDCOLUMN="3" CONTEXTFIELDNAME="Stockpile" />
+<TESTDATACONTEXTFIELDNAME IDCOLUMN="1" CONTEXTFIELDNAME="User Role" />
+<TESTDATACONTEXT IDCOLUMN="1" contextFieldValue="Customer" contextFieldName_idColumn="1"/>
+<TESTDATACONTEXT IDCOLUMN="2" contextFieldValue="Guest" contextFieldName_idColumn="1"/>
+<TESTDATACONTEXT IDCOLUMN="3" contextFieldValue="Administrator" contextFieldName_idColumn="1"/>
+<TESTDATACONTEXT IDCOLUMN="4" contextFieldValue="Employee" contextFieldName_idColumn="1"/>
+
+<ElementInputData ID="1" dataName="UserName" dataValue="peidonghu1x" testDataContext_idColumn="1" />
+<ElementInputData ID="2" dataName="UserName" dataValue="peidonghu2x" testDataContext_idColumn="1" />
+<ElementInputData ID="3" dataName="Password" dataValue="pa1x" testDataContext_idColumn="1" sunnyParentData_id="1"/>
+<ElementInputData ID="4" dataName="Password" dataValue="pa2x" testDataContext_idColumn="1" sunnyParentData_id="2"/>
 </dataset>

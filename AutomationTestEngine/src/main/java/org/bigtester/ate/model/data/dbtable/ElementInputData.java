@@ -22,10 +22,17 @@ package org.bigtester.ate.model.data.dbtable;
 
 import static javax.persistence.GenerationType.AUTO;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -40,6 +47,11 @@ import lombok.Setter;
  */
 @Entity
 @Table
+
+
+/**
+ * {@inheritDoc}
+ */
 @Data
 @SuppressWarnings(value = { "PMD" })
 public class ElementInputData {
@@ -50,21 +62,114 @@ public class ElementInputData {
 	@Column
     private Long id;
 	
-	/** The data name. */
+	
+	
+	/**
+	 * Gets the data name.
+	 *
+	 * @return the data name
+	 */
 	@Getter
+	
+	
+	/**
+	 * Sets the data name.
+	 *
+	 * @param dataName the new data name
+	 */
 	@Setter
 	@Column(length = 50, nullable = false, unique = false)
 	private String dataName;
 	/** The key in data. */
+	
+	
+	
+	/**
+	 * Gets the data value.
+	 *
+	 * @return the data value
+	 */
 	@Getter
+	
+	
+	/**
+	 * Sets the data value.
+	 *
+	 * @param dataValue the new data value
+	 */
 	@Setter
 	@Column(length = 50, nullable = false, unique = true)
 	private String dataValue;
 	
+	
+	
+	
+	/**
+	 * Gets the test data context.
+	 *
+	 * @return the test data context
+	 */
+	@Getter
+	
+	
+	
+	/**
+	 * Sets the test data context.
+	 *
+	 * @param testDataContext the new test data context
+	 */
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+	private TestDataContext testDataContext; //NOPMD
+	
+	/**
+	 * Sets the sunny parent data.
+	 *
+	 * @param sunnyParentData the new sunny parent data
+	 */
+	@Setter
+	
+	/**
+	 * Gets the sunny parent data.
+	 *
+	 * @return the sunny parent data
+	 */
+	@Getter
+	@ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="sunnyParentData_id", referencedColumnName = "id")
+    private ElementInputData sunnyParentData;
+	
+	/**
+	 * Sets the subordinates.
+	 *
+	 * @param subordinates the new subordinates
+	 */
+	@Setter
+	
+	/**
+	 * Gets the subordinates.
+	 *
+	 * @return the subordinates
+	 */
+	@Getter
+    @OneToMany(mappedBy="sunnyParentData")
+    private Set<ElementInputData> subordinates = new HashSet<ElementInputData>();
+	
+	/**
+	 * Instantiates a new element input data.
+	 *
+	 * @param dataName the data name
+	 * @param dataValue the data value
+	 */
 	public ElementInputData(String dataName, String dataValue) {
 		this.dataName = dataName;
 		this.dataValue = dataValue;
 	}
+	
+	/**
+	 * Instantiates a new element input data.
+	 */
 	public ElementInputData() {
 		this.dataName = "";
 		this.dataValue = "";
