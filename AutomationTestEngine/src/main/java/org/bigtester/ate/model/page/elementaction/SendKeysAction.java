@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -37,7 +38,8 @@ public class SendKeysAction extends AbstractElementAction implements
 	@Override
 	public void doAction(final WebElement webElm) {
 		// TODO Auto-generated method stub
-		webElm.sendKeys(getDataValue());
+		webElm.sendKeys(getDataValue().getValue());
+		LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + getDataValue().getValue());
 
 	}
 

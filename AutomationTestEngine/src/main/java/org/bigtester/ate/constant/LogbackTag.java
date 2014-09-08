@@ -43,6 +43,9 @@ public final class LogbackTag {
 	/** The Constant TAG_TEST_INFO. */
 	public static final String TAG_TEST_INFO= "Test-Info: ";
 	
+	/** The Constant TAG_UNITTEST_INFO. */
+	public static final String TAG_UNITTEST_INFO= "UnitTest-Info: ";
+	
 	/** The Constant TAG_SEPERATOR. */
 	public static final String TAG_SEPERATOR = "->";
 

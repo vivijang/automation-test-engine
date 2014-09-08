@@ -18,39 +18,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.exception;
+package org.bigtester.ate;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
+ * This class ATETestUtil defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public abstract class AbstractATEException extends Exception {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
-
+public final class ATETestUtil {
+	private ATETestUtil() {};
 	/**
-	 * Gets the error code.
+	 * Get the method name for a depth in call stack. <br />
+	 * Utility function
 	 * 
-	 * @return the error code
+	 * @param depth
+	 *            depth in the call stack (0 means current method, 1 means call
+	 *            method, ...)
+	 * @return method name
 	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
+	public static String getMethodName(final int depth) {
+		final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
 
-	/**
-	 * Instantiates a new abstract ate exception.
-	 *
-	 * @param message the message
-	 * @param errorCode the error code
-	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+		//System. out.println(ste[ste.length-depth].getClassName()+"#"+ste[ste.length-depth].getMethodName());
+		// return ste[ste.length - depth].getMethodName();  //Wrong, fails for depth = 0
+		return ste[ste.length - 1 - depth].getMethodName(); //Thank you Tom Tresansky
 	}
 }

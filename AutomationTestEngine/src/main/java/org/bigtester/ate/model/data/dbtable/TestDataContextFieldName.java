@@ -18,39 +18,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
+ * This class TestDataContextFieldName defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface IPageObject {
-	
+@Entity
+@Table
+public class TestDataContextFieldName extends AbstractDBTable {
+
+	/** The context field name. */
+	@Column(length = 50, nullable = false, unique = true)
 	/**
-	 * Gets the page name.
+	 * Gets the context field name.
 	 *
-	 * @return the page name
+	 * @return the context field name
 	 */
-	String getPageName();
+	@Getter
 	/**
-	 * Gets the web element list.
+	 * Sets the context field name.
 	 *
-	 * @return the web element list
+	 * @param contextFieldName the new context field name
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 */
-	void validatePage() throws PageValidationException;
-	
+	@Setter
+	private String contextFieldName; //NOPMD
 }

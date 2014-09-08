@@ -18,30 +18,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.systemlogger.problems;
+
+import org.bigtester.problomatic2.problems.RawProblem;
+import org.testng.internal.Utils;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ValuePair defines ....
- * 
+ * This class GenericATEProblem defines ....
  * @author Peidong Hu
+ *
  */
-public class ValuePair extends AbstractDataSet implements IDataSet {
-
+public class GenericATEProblem extends RawProblem {
+	/** The full stack trace. */
+	private final String fullStackTrace;
+	
+	/** The short stack trace. */
+	private final String shortStackTrace;
+	
 	/**
-	 * {@inheritDoc}
+	 * Instantiates a new generic ate problem.
+	 *
+	 * @param source the source
+	 * @param see the see
 	 */
-	public AbstractDataSet getDS() {
-		// TODO
-		return null;
+	public GenericATEProblem(Object source, Exception exception) {
+		super (source, exception);
+		String[] stackTraces = Utils.stackTrace(exception, false);
+		fullStackTrace = stackTraces[1];
+		shortStackTrace = stackTraces[0];
+	}
+	
+	/**
+	 * Gets the short stack trace.
+	 *
+	 * @return the shortStackTrace
+	 */
+	public String getShortStackTrace() {
+		return shortStackTrace;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Gets the full stack trace.
+	 *
+	 * @return the fullStackTrace
 	 */
-	@Override
-	public IDataSet initDataSet() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getFullStackTrace() {
+		return fullStackTrace;
 	}
 }

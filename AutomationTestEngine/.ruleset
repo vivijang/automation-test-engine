@@ -90,7 +90,7 @@
       </properties>
    </rule>
    <rule ref="rulesets/java/controversial.xml/AssignmentInOperand"/>
-   <rule ref="rulesets/java/controversial.xml/AtLeastOneConstructor"/>
+   <!--<rule ref="rulesets/java/controversial.xml/AtLeastOneConstructor"/>-->
    <rule ref="rulesets/java/controversial.xml/AvoidAccessibilityAlteration"/>
    <rule ref="rulesets/java/controversial.xml/AvoidFinalLocalVariable"/>
    <rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition"/>

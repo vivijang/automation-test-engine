@@ -18,39 +18,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
-
-import java.util.List;
-
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+package org.bigtester.ate.model.data;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class AbstractDataValue defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public abstract class AbstractDataValue {//NOPMD
 	
 	/**
-	 * Gets the page name.
+	 * Gets the element data dao.
 	 *
-	 * @return the page name
+	 * @return the elementDataDao
 	 */
-	String getPageName();
+	public ElementInputDataDaoImpl getElementDataDao() {
+		return elementDataDao;
+	}
+
 	/**
-	 * Gets the web element list.
+	 * Sets the element data dao.
 	 *
-	 * @return the web element list
+	 * @param elementDataDao the elementDataDao to set
 	 */
-	List<MyWebElement> getMyWebElementList();
+	public void setElementDataDao(ElementInputDataDaoImpl elementDataDao) {
+		this.elementDataDao = elementDataDao;
+	}
 	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 */
-	void validatePage() throws PageValidationException;
+	/** The element data dao. */
+	private ElementInputDataDaoImpl elementDataDao;//NOPMD
 	
-}
+}	

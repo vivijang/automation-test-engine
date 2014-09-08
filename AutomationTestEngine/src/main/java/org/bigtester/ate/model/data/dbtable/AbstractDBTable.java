@@ -18,19 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.data.dbtable;
+import static javax.persistence.GenerationType.AUTO;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataSet defines ....
- * 
+ * This class AbstractDBTable defines ....
  * @author Peidong Hu
+ *
  */
-public abstract class AbstractDataSet {
+@MappedSuperclass
+public abstract class AbstractDBTable { //NOPMD
+	
+	
+	/** The id Column. */
+	@Id
+	@GeneratedValue(strategy = AUTO)
+	@Column
 	
 	/**
-	 * Inits the data set.
+	 * Gets the id Column.
+	 *
+	 * @return the id Column
 	 */
-	public abstract IDataSet initDataSet();
-
+	@Getter
+	
+	/**
+	 * Sets the id Column.
+	 *
+	 * @param cid the new id Column
+	 */
+	@Setter
+	private long idColumn; //NOPMD
+	
+	
 }

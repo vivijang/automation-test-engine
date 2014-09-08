@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+ 
+<suite name="TestAll" parallel="methods">
+ 
+	<test name="order">
+		<classes>
+			<class name="org.bigtester.ate.DataManager" />
+		</classes>
+	</test>
+ 
+	 
+</suite>

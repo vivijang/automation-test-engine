@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.project;
 
 import org.bigtester.ate.model.data.TestParameters;
+import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.testng.ITest;
 
@@ -34,6 +35,7 @@ public interface IRunTestCase extends ITest {
 	
 	/**
 	 * Run suites.
+	 * @throws TestDataException 
 	 */
-	void runTest(TestParameters testParams) throws StepExecutionException;
+	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException;
 }

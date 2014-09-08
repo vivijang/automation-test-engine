@@ -24,11 +24,14 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.problemhandler.ProblemLogbackHandler;
 import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
 import org.bigtester.problomatic2.Problomatic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,26 +43,10 @@ import org.bigtester.problomatic2.Problomatic;
 @Aspect
 public class GenericTestCaseLogger {
 	
-	/** The current test case. */
-	private TestCase currentTestCase;
-
-	/**
-	 * Gets the current test case.
-	 *
-	 * @return the currentTestCase
-	 */
-	public TestCase getCurrentTestCase() {
-		return currentTestCase;
-	}
-
-	/**
-	 * Sets the current test case.
-	 *
-	 * @param currentTestCase            the currentTestCase to set
-	 */
-	public void setCurrentTestCase(TestCase currentTestCase) {
-		this.currentTestCase = currentTestCase;
-	}
+	/** The context. */
+	@Autowired
+	static private ApplicationContext context;
+	
 
 	/**
 	 * Select all method as pointcuts.
@@ -82,7 +69,7 @@ public class GenericTestCaseLogger {
 		if (error instanceof StepExecutionException
 				&& joinPoint.getTarget() instanceof TestCase) {
 			StepExecutionProblem sep = new StepExecutionProblem(
-					joinPoint.getTarget(), (StepExecutionException) error, currentTestCase);
+					joinPoint.getTarget(), (StepExecutionException) error, (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE));
 			ProblemLogbackHandler sph = new ProblemLogbackHandler();
 			Problomatic.addProblemHandlerForProblem(sep, sph);
 			Problomatic.handleProblem(sep);

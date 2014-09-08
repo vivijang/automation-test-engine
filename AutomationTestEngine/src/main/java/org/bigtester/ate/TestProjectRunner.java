@@ -21,7 +21,13 @@
 
 package org.bigtester.ate;
 
+import java.net.MalformedURLException;
+import java.sql.SQLException;
+
+
+import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.project.TestProject;
+import org.dbunit.DatabaseUnitException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -34,33 +40,44 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public final class TestProjectRunner {
 	
+	/** The context. */
+	private static ApplicationContext context; 
 	/**
 	 * Instantiates a new test project runner.
 	 */
 	private TestProjectRunner() {
 		
 	}
+	
+	
 	/**
 	 * The main method.
 	 * 
 	 * @param args
 	 *            the arguments
+	 * @throws SQLException 
+	 * @throws DatabaseUnitException 
+	 * @throws MalformedURLException 
 	 */
-	public static void main(final String... args) {
-	
+	public static void main(final String... args) throws DatabaseUnitException, SQLException, MalformedURLException {
+		context = new ClassPathXmlApplicationContext(
+				"testproject.xml");
+		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean("dbInitializer");
+		
+		//TODO add db initialization handler
+		dbinit.initialize(context, "dataSource");
+		
 	  	runTest();
+	  	((ConfigurableApplicationContext)context).close();
 	}
 	
 	/**
 	 * Run test.
 	 */
 	private static void runTest() {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"testproject.xml");
-		
 		TestProject testProj = (TestProject) context.getBean("testproject");
 		testProj.runSuites();
-		((ConfigurableApplicationContext)context).close();
+		
 	}
 
 }

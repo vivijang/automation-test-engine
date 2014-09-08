@@ -18,39 +18,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
-
-import java.util.List;
-
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+package org.bigtester.ate.model;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
+ * This class Abstract defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface IPageObject {
+public abstract class AbstractATEException extends Exception {
 	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -5513011387447019438L;
+	/** The error code. */
+	private final String errorCode;
+
 	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
+	 * Gets the error code.
+	 * 
+	 * @return the error code
 	 */
-	String getPageName();
+	public String getErrorCode() {
+		return this.errorCode;
+	}
+
 	/**
-	 * Gets the web element list.
+	 * Instantiates a new abstract ate exception.
 	 *
-	 * @return the web element list
+	 * @param message the message
+	 * @param errorCode the error code
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 */
-	void validatePage() throws PageValidationException;
-	
+	public AbstractATEException(String message, String errorCode) {
+		super(message);
+		this.errorCode = errorCode;
+	}
 }

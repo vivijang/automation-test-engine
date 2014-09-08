@@ -23,6 +23,7 @@ package org.bigtester.ate.model.casestep; //NOPMD
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.IPageObject;
+import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -63,14 +64,27 @@ public interface ITestStep {
 	 * @return the stepName
 	 */
 	String getStepName();
-
+	
+	/**
+	 * Gets the my web element.
+	 *
+	 * @return the my web element
+	 */
+	MyWebElement getMyWebElement();
 	/**
 	 * Gets the step description.
 	 * 
 	 * @return the stepDescription
 	 */
 	String getStepDescription();
-
+	
+	
+	/**
+	 * Checks if is element step.
+	 *
+	 * @return true, if is element step
+	 */
+	boolean isElementStepFlag();
 	/**
 	 * Do step.
 	 *

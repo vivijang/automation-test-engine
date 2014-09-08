@@ -18,39 +18,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.systemlogger.problems;
 
-import java.util.List;
 
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import org.bigtester.ate.model.data.exception.TestDataException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
+ * This class StepExecutionProblem defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface IPageObject {
-	
+public class TestDataProblem extends GenericATEProblem {
+
+	/** The test data exception. */
+	private final transient TestDataException testDataException;
+
 	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
+	 * Instantiates a new page validation problem.
+	 * 
+	 * @param source
+	 *            the source
+	 * @param tde
+	 *            the see
 	 */
-	String getPageName();
+	public TestDataProblem(Object source, TestDataException tde) {
+		super(source, tde);
+		testDataException = tde;
+	}
+
 	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
+	 * Gets the step exec exception.
+	 * 
+	 * @return the step exec exception
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 */
-	void validatePage() throws PageValidationException;
-	
+	public TestDataException getStepExecException() {
+		return testDataException;
+	}
+
 }

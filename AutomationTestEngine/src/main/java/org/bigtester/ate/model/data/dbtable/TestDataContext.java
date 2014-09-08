@@ -18,39 +18,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
+ * This class TestDataContext defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface IPageObject {
-	
+@Entity
+@Table
+public class TestDataContext extends AbstractDBTable {
+	@Column(length = 50, nullable = false, unique = false)
 	/**
-	 * Gets the page name.
+	 * Gets the context field value.
 	 *
-	 * @return the page name
+	 * @return the context field value
 	 */
-	String getPageName();
+	@Getter
 	/**
-	 * Gets the web element list.
+	 * Sets the context field value.
 	 *
-	 * @return the web element list
+	 * @param contextFieldValue the new context field value
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
+	@Setter
+	private String contextFieldValue; //NOPMD
+
 	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
+	 * Gets the context field name.
+	 * 
+	 * @return the context field name
 	 */
-	void validatePage() throws PageValidationException;
-	
+	@Getter
+	/**
+	 * Sets the context field name.
+	 *
+	 * @param contextFieldName the new context field name
+	 */
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "contextFieldName_idColumn", referencedColumnName = "idColumn")
+	private TestDataContextFieldName contextFieldName; //NOPMD
+
 }

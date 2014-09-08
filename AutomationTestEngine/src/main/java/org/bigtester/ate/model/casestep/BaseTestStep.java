@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 
@@ -45,7 +46,11 @@ public class BaseTestStep {//NOPMD
 
 	/** The step description. */
 	private String stepDescription = "";
-
+	
+	/** The element step flag. */
+	
+	private transient boolean elementStepFlag;
+	
 	/** The my web element. */
 	private MyWebElement myWebElement;
 
@@ -103,6 +108,7 @@ public class BaseTestStep {//NOPMD
 	 *            the myWebElement to set
 	 */
 	public final void setMyWebElement(final MyWebElement myWebElement) {
+		this.elementStepFlag = true;
 		this.myWebElement = myWebElement;
 	}
 
@@ -172,6 +178,13 @@ public class BaseTestStep {//NOPMD
 		
 		return forcedPageValidation ? true : targetStep;
 	
+	}
+
+	/**
+	 * @return the elementStepFlag
+	 */
+	public boolean isElementStepFlag() {
+		return elementStepFlag;
 	}
 
 }

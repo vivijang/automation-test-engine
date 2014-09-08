@@ -20,18 +20,41 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.bigtester.ate.model.data.exception.TestDataException;
+
+import lombok.Getter;
+
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IDataSet defines ....
- * 
+ * This class PropertyDataValue defines ....
  * @author Peidong Hu
+ *
  */
-public interface IDataSet {
+public class StepDataValue extends AbstractDataValue{
 	
 	/**
-	 * Gets the ds.
-	 * 
-	 * @return the ds
+	 * Gets the value.
+	 *
+	 * @return the value
 	 */
-	AbstractDataSet getDS();
+	@Getter
+	private String value; //NOPMD
+	
+	
+	/**
+	 * Gets the data value id.
+	 *
+	 * @return the data value id
+	 */
+	@Getter
+	private Long dataValueID; //NOPMD
+	/**
+	 * @param dataValueID the dataValueID to set
+	 * @throws TestDataException 
+	 */
+	public void setDataValueID(Long dataValueID) throws TestDataException {
+		this.dataValueID = dataValueID;
+		value = getElementDataDao().getValue(dataValueID);
+	}
+
 }

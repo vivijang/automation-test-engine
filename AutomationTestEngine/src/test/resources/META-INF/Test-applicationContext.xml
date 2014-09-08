@@ -100,7 +100,7 @@
 	<bean id="usernameValue" name="usernameValue" parent="dataValueAbstract"
 		class="org.bigtester.ate.model.data.StepDataValue">
 		<property name="dataValueID" >
-		<value type="java.lang.Long">1</value>
+		<value type="java.lang.Long">65</value>
 		</property>
 	</bean>
 	<!-- step2 definition -->
@@ -129,7 +129,7 @@
 	<bean id="usernameValue2" name="usernameValue2" parent="dataValueAbstract"
 		class="org.bigtester.ate.model.data.StepDataValue">
 		<property name="dataValueID" >
-		<value type="java.lang.Long">3</value>
+		<value type="java.lang.Long">66</value>
 		</property>
 	</bean>
 

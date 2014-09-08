@@ -7,11 +7,13 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->  
     <aop:aspectj-autoproxy />  
-    
+    <import resource="db-services.xml"/>
     <bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
     
     <bean id="TestStepResult" class="org.bigtester.ate.model.testresult.TestStepResult" /> 
-    
+    <bean id="dbInitializer" class="org.bigtester.ate.model.data.TestDatabaseInitializer">
+     <property name="initXmlFile" value="classpath:META-INF/data.xml"/>
+    </bean> 
 	<bean id="testproject" name="testproject"
 		class="org.bigtester.ate.model.project.TestProject">
 		<property name="suiteList">
