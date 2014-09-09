@@ -1,5 +1,5 @@
 # Welcome to Automation-Test-Engine (ATE)
---------------------
+
 ATE is an engine to parse and execute test case(s) written in Spring application context xml file format.
 
 It's an open source tool built on top of Selenium for system level (end2end) QA regression testing, NOT for developer unit testing. 
