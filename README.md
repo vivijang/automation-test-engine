@@ -8,7 +8,7 @@ It's the first tool that has solved the conflict of easy-to-use vs. code maintai
 
 Now, with ATE, this world suddenly becomes simple and easy for everyone. QA team could easily convert every manual QA tester to automation QA tester.
 
-User manual should be enough for manual QA tester to start from without any specfic training. Time needed to run first test case is less than the duration of getting familar with a smart TV.
+ATE User Quick Start manual should be enough for manual QA tester to start from without any specfic training. Time needed to run first test case is less than the duration of getting familar with a smart TV.
 
 If needed, manual QA tester needs only minimal training to be capable of using this tool. The training shall have the following knowledge,
 * HTML tag, which has already been possessed by most manual QA testers
