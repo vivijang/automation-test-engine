@@ -16,7 +16,7 @@ If needed, manual QA tester needs only minimal training to be capable of using t
 
 ATE automation testers don't need any programming or domain specific language skills to use this tool.
 
-ATE's design and source code are also a good study material for application programming in java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile Apps etc.
+ATE's design and source code are also a good study material for application programming in java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc.
 
 
 
