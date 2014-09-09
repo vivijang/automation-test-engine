@@ -8,7 +8,7 @@ It's the first tool that has solved the conflict of easy-to-use vs. code maintai
 
 Now, with ATE, this world suddenly becomes simple and easy for everyone.
 
-User manual is supposed to be enough for manual QA tester to start from without any specfic training. 
+User manual should be enough for manual QA tester to start from without any specfic training. 
 
 If needed, manual QA tester needs only minimal training to be capable of using this tool. The training shall have the following knowledge,
 * HTML tag, which has already been possessed by most manual QA testers
