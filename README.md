@@ -18,7 +18,7 @@ If needed, only minimal training will help to be capable of using this tool. The
 
 ATE automation testers don't need any programming or domain specific language skills to use this tool.
 
-ATE's design and source code are also a good study material for application programming in Java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, JPA, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc. At the same time, the industry most popular automation testing tool, Selenium, which is creating jobs doubled as many as QTP, will be learned as well.
+ATE's design and source code are also a perfect study material for application programming in Java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, JPA, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc. At the same time, the industry most popular automation testing tool, Selenium, which is creating jobs doubled as many as QTP, will be learned as well.
 
 NOTE1: Selenium and QTP job opening numbers retrieved from Indeed.com.
 
