@@ -1,5 +1,4 @@
-##Welcome to Automation-Test-Engine 
-##(ATE)
+# Welcome to Automation-Test-Engine (ATE)
 ======================
 ATE is an engine to parse and execute test case(s) written in Spring application context xml file format.
 
