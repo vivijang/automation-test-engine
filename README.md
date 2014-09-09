@@ -10,7 +10,7 @@ Now, with ATE, this world suddenly becomes simple and easy for everyone. QA team
 
 ATE User Quick Start manual should be enough for manual QA tester to start from without any specfic training. Time needed to run first test case is less than the duration of getting familar with a smart TV.
 
-If needed, manual QA tester needs only minimal training to be capable of using this tool. The training shall have the following knowledge,
+If needed, only minimal training will help to be capable of using this tool. The training shall have the following knowledge,
 * HTML tag, which has already been possessed by most manual QA testers
 * Minimal SQL statements, which have been possessed by most manual QA testers
 * Understand Spring Application Context xml format, 2-3 hour's training session.
