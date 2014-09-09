@@ -2,7 +2,7 @@
 
 Automation-Test-Engine (ATE) is an engine to parse and execute test case(s) written in Spring application context xml format.
 
-It's an open source tool built on top of Selenium for system level (end2end) QA regression testing, NOT for developer unit testing. 
+Current verion of ATE is an open source tool built on top of Selenium for system level (end2end) QA regression testing, NOT for developer unit testing. 
 
 It's the first tool that has solved the conflict of easy-to-use vs. code maintainability, which exists in most of the system QA automation tools on the market including QTP, Functional Tester and Test Complete, etc. It's very common for those tools' users to deal with the difficulty of choosing between recording (easy-to-use) and heavy programming (high level coding skills needed) strategies. 
 
@@ -20,7 +20,8 @@ ATE automation testers don't need any programming or domain specific language sk
 
 ATE's design and source code are also a good study material for application programming in Java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, JPA, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc. At the same time, the industry most popular automation testing tool, Selenium, which is creating jobs doubled as many as QTP, will be learned as well.
 
-NOTE: Selenium and QTP job opening numbers retrieved from Indeed.com
+NOTE1: Selenium and QTP job opening numbers retrieved from Indeed.com.
+NOTE2: Current version ATE only supports web application testing. Future version could integrate with other native application testing tools.
 
 
 
