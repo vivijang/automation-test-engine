@@ -1,4 +1,4 @@
-# Welcome to Automation-Test-Engine
+# Welcome to Automation-Test-Engine (ATE)
 
 Automation-Test-Engine (ATE) is an engine to parse and execute test case(s) written in Spring application context xml file format.
 
