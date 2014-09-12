@@ -18,48 +18,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data;
 
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class AbstractERValue defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public abstract class AbstractERValue { //NOPMD
 	
 	/**
-	 * Gets the my wd.
+	 * Gets the step er dao.
 	 *
-	 * @return the my wd
+	 * @return the step er dao
 	 */
-	IMyWebDriver getMyWd();
+	public StepExpectedResultDaoImpl getStepERDao() {
+		return stepERDao;
+	}
+
 	
 	/**
-	 * Gets the page name.
+	 * Sets the step er dao.
 	 *
-	 * @return the page name
+	 * @param stepERDao the new step er dao
 	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
+	public void setStepERDao(StepExpectedResultDaoImpl stepERDao) {
+		this.stepERDao = stepERDao;
+	}
 	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	void validatePage() throws PageValidationException;
 	
+	/** The step er dao. */
+	private StepExpectedResultDaoImpl stepERDao;//NOPMD
 }

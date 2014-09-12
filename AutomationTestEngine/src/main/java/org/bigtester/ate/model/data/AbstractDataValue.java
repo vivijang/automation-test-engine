@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class AbstractDataValue defines ....

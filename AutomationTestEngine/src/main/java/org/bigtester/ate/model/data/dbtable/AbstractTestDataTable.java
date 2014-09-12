@@ -18,48 +18,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
-import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class AbstractTestDataTable defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+@MappedSuperclass
+public class AbstractTestDataTable extends AbstractDBTable{
+
+	/**
+	 * Gets the test data context.
+	 *
+	 * @return the test data context
+	 */
+	@Getter
+	
+	
 	
 	/**
-	 * Gets the my wd.
+	 * Sets the test data context.
 	 *
-	 * @return the my wd
+	 * @param testDataContext the new test data context
 	 */
-	IMyWebDriver getMyWd();
-	
-	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
-	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	void validatePage() throws PageValidationException;
-	
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+	private TestDataContext testDataContext; //NOPMD
 }

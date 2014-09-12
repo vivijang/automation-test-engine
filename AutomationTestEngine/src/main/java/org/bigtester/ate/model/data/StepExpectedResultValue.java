@@ -18,48 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data;
 
 import java.util.List;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
+import org.bigtester.ate.model.data.exception.TestDataException;
 
+import lombok.Getter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class PropertyDataValue defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public class StepExpectedResultValue extends AbstractERValue{
 	
 	/**
-	 * Gets the my wd.
+	 * Gets the value.
 	 *
-	 * @return the my wd
+	 * @return the value
 	 */
-	IMyWebDriver getMyWd();
+	@Getter
+	private List<StepExpectedResult> value; //NOPMD
+	
 	
 	/**
-	 * Gets the page name.
+	 * Gets the data value id.
 	 *
-	 * @return the page name
+	 * @return the data value id
 	 */
-	String getPageName();
+	@Getter
+	private String dataValueID; //NOPMD
 	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
+	 * @param dataValueID the dataValueID to set
+	 * @throws TestDataException 
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	void validatePage() throws PageValidationException;
-	
+	public void setDataValueID(String sERSetID) throws TestDataException {
+		this.dataValueID = sERSetID;
+		value = getStepERDao().getERs(sERSetID);
+	}
+
 }

@@ -18,48 +18,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
+ * This class ElementFindByType defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public interface IPageObject {
-	
+//@Entity
+///@Table
+public class ElementFindByType extends AbstractDBTable {
+
 	/**
-	 * Gets the my wd.
-	 *
-	 * @return the my wd
+	 * Sets the find type.
+	 * 
+	 * @param FindType
+	 *            the new find type
 	 */
-	IMyWebDriver getMyWd();
-	
+	@Setter
 	/**
-	 * Gets the page name.
+	 * Gets the find type.
 	 *
-	 * @return the page name
+	 * @return the find type
 	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	void validatePage() throws PageValidationException;
-	
+	@Getter
+	//@Column(length = 50, nullable = false, unique = true)
+	private String FindType; //NOPMD
 }

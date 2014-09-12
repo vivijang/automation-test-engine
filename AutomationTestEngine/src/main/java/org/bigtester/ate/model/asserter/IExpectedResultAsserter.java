@@ -18,48 +18,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.asserter;
 
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException;
-
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class IExpectedResultAsserter defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public interface IExpectedResultAsserter {
 	
 	/**
-	 * Gets the my wd.
-	 *
-	 * @return the my wd
-	 */
-	IMyWebDriver getMyWd();
-	
-	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
-	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
+	 * Assert er.
 	 *
 	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
 	 */
-	void validatePage() throws PageValidationException;
-	
+	boolean assertER() throws PageValidationException;
 }

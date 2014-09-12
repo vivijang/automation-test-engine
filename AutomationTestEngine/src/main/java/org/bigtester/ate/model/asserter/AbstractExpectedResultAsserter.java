@@ -18,48 +18,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.asserter;
 
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import org.bigtester.ate.model.data.StepExpectedResultValue;
+import org.bigtester.ate.model.page.page.IPageObject;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class AbstractExpectedResultAsserter defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public class AbstractExpectedResultAsserter {
+	/** The result page. */
+	private IPageObject resultPage;
 	
+	/** The step er value. */
+	private StepExpectedResultValue stepERValue; 
+
 	/**
-	 * Gets the my wd.
+	 * Gets the result page.
 	 *
-	 * @return the my wd
+	 * @return the resultPage
 	 */
-	IMyWebDriver getMyWd();
-	
+	public IPageObject getResultPage() {
+		return resultPage;
+	}
+
 	/**
-	 * Gets the page name.
+	 * Sets the result page.
 	 *
-	 * @return the page name
+	 * @param resultPage the resultPage to set
 	 */
-	String getPageName();
+	public void setResultPage(IPageObject resultPage) {
+		this.resultPage = resultPage;
+	}
+
 	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
+	 * @return the stepERValue
 	 */
-	List<MyWebElement> getMyWebElementList();
-	
+	public StepExpectedResultValue getStepERValue() {
+		return stepERValue;
+	}
+
 	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
+	 * @param stepERValue the stepERValue to set
 	 */
-	void validatePage() throws PageValidationException;
-	
+	public void setStepERValue(StepExpectedResultValue stepERValue) {
+		this.stepERValue = stepERValue;
+	}
 }

@@ -78,14 +78,13 @@ public class ATEXMLSuiteResultWriter {
     xmlBuffer.pop();
   }
 
-  @SuppressWarnings("unchecked")
   private void addAllTestResults(Set<ITestResult> testResults, IResultMap resultMap) {
     if (resultMap != null) {
       // Sort the results chronologically before adding them
       List<ITestResult> allResults = new ArrayList<ITestResult>();
       allResults.addAll(resultMap.getAllResults());
 
-      Collections.sort(new ArrayList(allResults), new Comparator<ITestResult>() {
+      Collections.sort(new ArrayList<>(allResults), new Comparator<ITestResult>() {
         @Override
         public int compare(ITestResult o1, ITestResult o2) {
           return (int) (o1.getStartMillis() - o2.getStartMillis());
@@ -204,7 +203,7 @@ public class ATEXMLSuiteResultWriter {
 
     attributes.setProperty(XMLReporterConfig.ATTR_METHOD_SIG, removeClassName(testResult.getMethod().toString()));
 
-    SimpleDateFormat format = new SimpleDateFormat(config.getTimestampFormat());
+    SimpleDateFormat format = new SimpleDateFormat(XMLReporterConfig.getTimestampFormat());
     String startTime = format.format(testResult.getStartMillis());
     String endTime = format.format(testResult.getEndMillis());
     attributes.setProperty(XMLReporterConfig.ATTR_STARTED_AT, startTime);

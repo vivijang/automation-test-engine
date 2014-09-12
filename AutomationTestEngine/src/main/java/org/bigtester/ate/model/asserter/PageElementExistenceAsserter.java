@@ -18,61 +18,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.asserter;
 
-import org.bigtester.ate.annotation.StepLoggable;
+import java.util.List;
+
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestStep defines ....
+ * This class PageElementExistenceAsserter defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public class ElementTestStep extends BaseTestStep implements ITestStep {
-	// TOTO add pageObject as another member.
-
-	/**
-	 * Instantiates a new test step.
-	 * 
-	 * @param myWe
-	 *            the my we
-	 */
-	public ElementTestStep(final MyWebElement myWe) {
-		super();
-		setMyWebElement(myWe);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@StepLoggable
-	public void doStep() throws StepExecutionException {
-		try {
-			getMyWebElement().doAction();
-			//TOTO validatepage
-		} catch (NoSuchElementException e) {
-			StepExecutionException pve = new StepExecutionException(
-					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
-							+ ExceptionMessage.MSG_SEPERATOR + e.getMessage(),
-					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-					this.getMyWebElement());
-			pve.initCause(e);
-			throw pve;
-		}
-	}
-
+public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter implements IExpectedResultAsserter {
+	
+	
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IMyWebDriver getMyWebDriver() {
-		// TODO Auto-generated method stub
-		return super.getMyWebElement().getMyWd();
+	public boolean assertER() throws PageValidationException {
+		
+		boolean retVal = false; // NOPMD
+		List<MyWebElement> myWebElementList = getResultPage().getMyWebElementList();
+		if (!myWebElementList.isEmpty()) {
+			MyWebElement webelement;
+			for (int index = 0; index < myWebElementList.size(); index++) {
+				webelement = myWebElementList.get(index);
+				try {
+					webelement.getElementFind().doFind(getResultPage().getMyWd(),
+							webelement.getElementFind().getFindByValue());
+				} catch (NoSuchElementException e) {
+					PageValidationException pve = new PageValidationException(
+							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
+							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
+							webelement.getElementFind());
+					pve.initCause(e);
+					throw pve;
+				} 
+			}
+			retVal = true;
+		}
+		return retVal;
 	}
+
 }

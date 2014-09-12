@@ -20,46 +20,44 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import org.bigtester.ate.constant.EnumElementFindType;
+import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class IPageFactory defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public interface IATEPageFactory {
 	
 	/**
-	 * Gets the my wd.
+	 * Gets the i page object.
 	 *
-	 * @return the my wd
+	 * @return the i page object
 	 */
-	IMyWebDriver getMyWd();
+	IPageObject getIPageObject();
+	
 	
 	/**
-	 * Gets the page name.
+	 * Gets the i element action.
 	 *
-	 * @return the page name
+	 * @return the i element action
 	 */
-	String getPageName();
+	IElementAction getIElementAction();
+
 	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
+	 * @param elementFindType
+	 * @return
 	 */
-	List<MyWebElement> getMyWebElementList();
+	IElementFind getIElementFind(EnumElementFindType elementFindType);
 	
 	/**
-	 * Validate page.
+	 * Gets the my web element.
 	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
+	 * @param elementFindType the element find type
+	 * @return the my web element
 	 */
-	void validatePage() throws PageValidationException;
-	
+	MyWebElement getMyWebElement(EnumElementFindType elementFindType);
 }

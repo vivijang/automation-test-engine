@@ -18,48 +18,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dao;
 
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class AbstractDaoImpl defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
-	
-	/**
-	 * Gets the my wd.
-	 *
-	 * @return the my wd
-	 */
-	IMyWebDriver getMyWd();
-	
-	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
-	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
-	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	void validatePage() throws PageValidationException;
+public abstract class AbstractDaoImpl { //NOPMD
+	/** The db em. */
+	@PersistenceContext
+    
+    /**
+     * Gets the db em.
+     *
+     * @return the db em
+     */
+    
+    /**
+     * Gets the db em.
+     *
+     * @return the db em
+     */
+    @Getter 
+    
+    /**
+     * Sets the db em.
+     *
+     * @param dbEM the new db em
+     */
+    
+    /**
+     * Sets the db em.
+     *
+     * @param dbEM the new db em
+     */
+    @Setter
+    
+    private EntityManager dbEM;//NOPMD
 	
 }
