@@ -18,48 +18,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
-
-import java.util.List;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IPageObjectAction defines ....
- * 
+ * This class EnumAssertType defines ....
  * @author Peidong Hu
+ *
  */
-public interface IPageObject {
+public final class AssertType {
 	
-	/**
-	 * Gets the my wd.
-	 *
-	 * @return the my wd
-	 */
-	IMyWebDriver getMyWd();
+	/** The Constant Page_Element_Existence. */
+	public final static String PAGE_ELEMENT_EXISTENCE = "Page_Element_Existence";
 	
-	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
-	 */
-	String getPageName();
-	/**
-	 * Gets the web element list.
-	 *
-	 * @return the web element list
-	 */
-	List<MyWebElement> getMyWebElementList();
+	/** The Constant Element_Property_Correctness. */
+	public final static String ELEMENT_PROPERTY_CORRECTNESS = "Element_Property_Correctness";
 	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	boolean validatePage() throws PageValidationException;
+	/** The Constant Element_Value_Correctness. */
+	public final static String ELEMENT_VALUE_CORRECTNESS = "Element_Value_Correctness";
 	
+	/** The Constant Page_Property_Correctness. */
+	public final static String PAGE_PROPERTY_CORRECTNESS = "Page_Property_Correctness";
+	
+	private AssertType() {
+		
+	}
 }

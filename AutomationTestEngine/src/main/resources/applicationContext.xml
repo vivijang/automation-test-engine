@@ -46,6 +46,10 @@
 	<bean id="eaAbstract" name="eaAbstract" abstract="true" 
 		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
 	</bean>
+	<bean id="_abstractERAsserter" name="_abstractERAsserter" abstract="true" 
+		class="org.bigtester.ate.model.asserter.AbstractExpectedResultAsserter">
+	</bean>
+	
 
 	<!-- homestep definition -->
 	<bean id="homestep" class="org.bigtester.ate.model.casestep.HomeStep">
@@ -54,6 +58,21 @@
 		</property>
 		<property name="stepName" value="homestep" />
 		<property name="stepDescription" value="open homepage" />
+		<property name="expectedResultAsserter">
+			<ref bean="homepageAsserter"/>	
+		</property>
+	</bean>
+	<bean id="homepageAsserter" name="homepageAsserter" parent="_abstractERAsserter"
+		class="org.bigtester.ate.model.asserter.PageElementExistenceAsserter">
+		<property name="stepERValue">
+			<ref bean="homestepValue"></ref>
+		</property>
+	</bean>
+	<bean id="homestepValue" name="homestepValue"
+		class="org.bigtester.ate.model.data.StepExpectedResultValue">
+		<property name="dataValueID">
+		<value type="java.lang.Long">1</value>
+		</property>
 	</bean>
 	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
 		class="org.bigtester.ate.model.page.page.Homepage">

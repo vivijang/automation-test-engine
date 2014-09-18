@@ -22,9 +22,13 @@ package org.bigtester.ate.model.asserter;
 
 import java.util.List;
 
+import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.page.ATEPageFactory;
+import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -37,7 +41,21 @@ import org.openqa.selenium.NoSuchElementException;
  */
 public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter implements IExpectedResultAsserter {
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setStepERValue(StepExpectedResultValue stepERValue) {
+		super.setStepERValue(stepERValue);
+		
+		for (int i = 0; i < stepERValue.getValue().size(); i++) {
+			if (stepERValue.getValue().get(i).getTestDataContext().getContextFieldValue().equalsIgnoreCase(AssertType.PAGE_ELEMENT_EXISTENCE))
+			{
+				IATEPageFactory ipf = ATEPageFactory.getInstance();
+				MyWebElement mwe = ipf.getMyWebElement(stepERValue.getValue().get(i).getElementFindBy());
+				super.getResultPage().getMyWebElementList().add(mwe);
+			}
+		}
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -45,27 +63,27 @@ public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter
 	@Override
 	public boolean assertER() throws PageValidationException {
 		
-		boolean retVal = false; // NOPMD
-		List<MyWebElement> myWebElementList = getResultPage().getMyWebElementList();
-		if (!myWebElementList.isEmpty()) {
-			MyWebElement webelement;
-			for (int index = 0; index < myWebElementList.size(); index++) {
-				webelement = myWebElementList.get(index);
-				try {
-					webelement.getElementFind().doFind(getResultPage().getMyWd(),
-							webelement.getElementFind().getFindByValue());
-				} catch (NoSuchElementException e) {
-					PageValidationException pve = new PageValidationException(
-							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-							webelement.getElementFind());
-					pve.initCause(e);
-					throw pve;
-				} 
-			}
-			retVal = true;
-		}
-		return retVal;
+//		boolean retVal = false; // NOPMD
+//		List<MyWebElement> myWebElementList = getResultPage().getMyWebElementList();
+//		if (!myWebElementList.isEmpty()) {
+//			MyWebElement webelement;
+//			for (int index = 0; index < myWebElementList.size(); index++) {
+//				webelement = myWebElementList.get(index);
+//				try {
+//					webelement.getElementFind().doFind(getResultPage().getMyWd(),
+//							webelement.getElementFind().getFindByValue());
+//				} catch (NoSuchElementException e) {
+//					PageValidationException pve = new PageValidationException(
+//							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
+//							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
+//							webelement.getElementFind());
+//					pve.initCause(e);
+//					throw pve;
+//				} 
+//			}
+//			retVal = true;
+//		}
+		return getResultPage().validatePage();
 	}
 
 }

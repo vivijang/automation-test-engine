@@ -5,6 +5,7 @@
  
     <persistence-unit name="jpaData">
 		<class>org.bigtester.ate.model.data.dbtable.ElementInputData</class>
+		<class>org.bigtester.ate.model.data.dbtable.StepExpectedResult</class>
 		<class>org.bigtester.ate.model.data.dbtable.TestDataContext</class>
 		<class>org.bigtester.ate.model.data.dbtable.TestDataContextFieldName</class>
 
