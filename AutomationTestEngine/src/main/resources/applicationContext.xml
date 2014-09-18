@@ -50,7 +50,10 @@
 		class="org.bigtester.ate.model.asserter.AbstractExpectedResultAsserter">
 	</bean>
 	
-
+<bean id="_abstractERValue" name="_abstractERValue" abstract="true" 
+		class="org.bigtester.ate.model.data.AbstractERValue">
+		<property name="stepERDao" ref="StepERDao"/>
+	</bean>
 	<!-- homestep definition -->
 	<bean id="homestep" class="org.bigtester.ate.model.casestep.HomeStep">
 		<property name="homepg">
@@ -68,7 +71,7 @@
 			<ref bean="homestepValue"></ref>
 		</property>
 	</bean>
-	<bean id="homestepValue" name="homestepValue"
+	<bean id="homestepValue" name="homestepValue" parent="_abstractERValue"
 		class="org.bigtester.ate.model.data.StepExpectedResultValue">
 		<property name="dataValueID">
 		<value type="java.lang.Long">1</value>

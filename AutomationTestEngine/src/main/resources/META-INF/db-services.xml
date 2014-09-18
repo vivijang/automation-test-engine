@@ -15,8 +15,9 @@
 
 	<context:annotation-config />
 
+	<bean id="_DaoParent" class="org.bigtester.ate.model.data.dao.AbstractDaoImpl" abstract="true" />
 	<bean id="elementInputDataDao" class="org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl" />
-	<bean id="StepERDao" class="org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl" />
+	<bean id="StepERDao" class="org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl" parent="_DaoParent"/>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

@@ -20,17 +20,13 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-import java.util.List;
 
 import org.bigtester.ate.constant.AssertType;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.MyWebElement;
-import org.openqa.selenium.NoSuchElementException;
 
 // TODO: Auto-generated Javadoc
 /**
