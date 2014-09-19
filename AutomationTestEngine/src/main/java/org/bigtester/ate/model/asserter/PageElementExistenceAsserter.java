@@ -26,6 +26,7 @@ import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
+import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
@@ -38,6 +39,15 @@ import org.bigtester.ate.model.page.page.MyWebElement;
 public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter implements IExpectedResultAsserter {
 	
 	/**
+	 * @param pageObj
+	 */
+	public PageElementExistenceAsserter(IPageObject pageObj) {
+		super();
+		setResultPage(pageObj);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public void setStepERValue(StepExpectedResultValue stepERValue) {
@@ -47,7 +57,8 @@ public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter
 			if (stepERValue.getValue().get(i).getTestDataContext().getContextFieldValue().equalsIgnoreCase(AssertType.PAGE_ELEMENT_EXISTENCE))
 			{
 				IATEPageFactory ipf = ATEPageFactory.getInstance();
-				MyWebElement mwe = ipf.getMyWebElement(stepERValue.getValue().get(i).getElementFindBy());
+				MyWebElement mwe = ipf.getMyWebElement(stepERValue.getValue().get(i).getElementFindBy(), stepERValue.getValue().get(i).getElementFindByValue());
+				
 				super.getResultPage().getMyWebElementList().add(mwe);
 			}
 		}

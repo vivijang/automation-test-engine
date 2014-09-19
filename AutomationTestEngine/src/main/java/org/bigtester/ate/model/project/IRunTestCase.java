@@ -36,6 +36,7 @@ public interface IRunTestCase extends ITest {
 	/**
 	 * Run suites.
 	 * @throws TestDataException 
+	 * @throws Throwable 
 	 */
-	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException;
+	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException, Throwable;
 }

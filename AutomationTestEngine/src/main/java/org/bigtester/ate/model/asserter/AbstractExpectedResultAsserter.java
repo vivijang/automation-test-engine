@@ -29,7 +29,7 @@ import org.bigtester.ate.model.page.page.IPageObject;
  * @author Peidong Hu
  *
  */
-public class AbstractExpectedResultAsserter {
+public abstract class AbstractExpectedResultAsserter { //NOPMD
 	/** The result page. */
 	private IPageObject resultPage;
 	

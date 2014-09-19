@@ -58,6 +58,7 @@ public class BaseTestStep {//NOPMD
 	/** The i expected result asserter. */
 	private IExpectedResultAsserter expectedResultAsserter;
 	
+		
 	/**
 	 * Gets the step name.
 	 * 

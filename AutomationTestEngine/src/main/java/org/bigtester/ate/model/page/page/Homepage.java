@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page.AbstractPageModelBase;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,7 +28,7 @@ import org.bigtester.ate.model.page.AbstractPageModelBase;
  * 
  * @author Peidong Hu
  */
-public class Homepage extends AbstractPageModelBase {
+public class Homepage extends AbstractPageObject implements IHomepage{
 
 	/** The home url. */
 	private String homeUrl;
@@ -58,6 +58,8 @@ public class Homepage extends AbstractPageModelBase {
 	public void startHomepage() {
 		super.getMyWd().getWebDriver().get(homeUrl);
 	}
+
+	
 
 		
 }

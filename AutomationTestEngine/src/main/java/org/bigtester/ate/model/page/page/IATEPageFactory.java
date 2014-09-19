@@ -47,17 +47,22 @@ public interface IATEPageFactory {
 	 */
 	IElementAction getIElementAction();
 
+	
+
 	/**
 	 * @param elementFindType
+	 * @param findByValue
 	 * @return
 	 */
-	IElementFind getIElementFind(EnumElementFindType elementFindType);
-	
+	IElementFind getIElementFind(EnumElementFindType elementFindType,
+			String findByValue);
+
+
 	/**
-	 * Gets the my web element.
-	 *
-	 * @param elementFindType the element find type
-	 * @return the my web element
+	 * @param elementFindType
+	 * @param findByValue
+	 * @return
 	 */
-	MyWebElement getMyWebElement(EnumElementFindType elementFindType);
+	MyWebElement getMyWebElement(EnumElementFindType elementFindType,
+			String findByValue);
 }

@@ -73,9 +73,9 @@ public final class ATEPageFactory implements IATEPageFactory {
 	 */
 	@Override
 	public MyWebElement getMyWebElement(
-			EnumElementFindType elementFindType) {
+			EnumElementFindType elementFindType, String findByValue) {
 		synchronized (this) {
-			return new MyWebElement(getIElementFind(elementFindType), null);
+			return new MyWebElement(getIElementFind(elementFindType, findByValue), null);
 		}
 	}
 
@@ -84,18 +84,25 @@ public final class ATEPageFactory implements IATEPageFactory {
 	 */
 	@Override
 	public IElementFind getIElementFind(
-			EnumElementFindType elementFindType) {
+			EnumElementFindType elementFindType, String findByValue) {
+		//TODO add more findby type
 		synchronized (this) {
 			IElementFind retVal;
 			switch (elementFindType) {
 			case ID:
-				retVal = new ElementFindById();
+				ElementFindById efbID = new ElementFindById();
+				efbID.setFindByValue(findByValue);
+				retVal = (IElementFind) efbID;
 				break;
 			case NAME:
-				retVal = new ElementFindByName();
+				ElementFindByName efbName = new ElementFindByName();
+				efbName.setFindByValue(findByValue);
+				retVal = (IElementFind) efbName;
 				break;
 			default:
-				retVal = new ElementFindById();
+				ElementFindById efbIDd = new ElementFindById();
+				efbIDd.setFindByValue(findByValue);
+				retVal = (IElementFind) efbIDd;
 			}
 			return retVal;
 		}
