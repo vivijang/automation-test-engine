@@ -18,32 +18,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.reporter;
+package org.bigtester.ate.model.data;
 
-import org.testng.reporters.XMLReporterConfig;
+import java.util.Map;
+import java.util.HashMap;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ATEXMLReporterConfig defines ....
- * 
+ * This class ActualResult defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public final class ATEXMLReporterConfig extends XMLReporterConfig {
-	/** The Constant TAG_STEPS. */
-	public final static String TAG_STEPS = "Steps";
-
-	/** The Constant TAG_STEP. */
-	public final static String TAG_STEP = "Step";
-
-	/** The Constant TAG_STEP_DESC. */
-	public final static String TAG_STEP_DESC = "StepDescription";
+public class ActualResult {
 	
-	/** The Constant TAG_STEP_RESULT. */
-	public final static String TAG_STEP_RESULT = "StepResult";
+	/** The result set. */
+	private final transient Map<Long, String> resultSet = new HashMap<Long, String>(); //NOPMD 
 
-	private ATEXMLReporterConfig() {
-		super();
+	/**
+	 * @return the resultSet
+	 */
+	public Map<Long, String> getResultSet() {
+		return resultSet;
 	}
 
+	
 }

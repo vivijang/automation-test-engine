@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.data.StepExecutionResult;
+import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
@@ -104,6 +106,23 @@ public final class TestStepsXMLReporterUtils {
 			stepReportMSG = tsr.getThisStep().getStepDescription();
 		}
 		xmlBuffer.addCDATA(stepReportMSG);
+		xmlBuffer.pop();
+		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_DESC);
+		StepExecutionResult ser = tsr.getThisStep().getExpectedResultAsserter().getExecResult();
+		StepExpectedResultValue serv = ser.getStepExpectedResultValue();
+		StringBuffer stepResultMSG = new StringBuffer("");
+		for (int index = 0; index < serv.getValue().size(); index++) {
+			stepResultMSG.append(serv.getValue().get(index).getTestDataContext().getContextFieldValue());
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getElementFindBy());
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getElementFindByValue());
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getAssertProperty());
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getAssertValue());
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + ReportMessage.MSG_SEPERATOR + 
+			ser.getActualResult().getResultSet().get(serv.getValue().get(index).getIdColumn()));
+			stepResultMSG.append(ReportMessage.MSG_SEPERATOR + ReportMessage.MSG_SEPERATOR + 
+			ser.getComparedResult().get(serv.getValue().get(index).getIdColumn()).toString());
+		}
+		xmlBuffer.addCDATA(stepResultMSG.toString());
 		xmlBuffer.pop();
 		xmlBuffer.pop();
 	}

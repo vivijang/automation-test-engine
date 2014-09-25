@@ -18,14 +18,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class IActualResult defines ....
+ * This class EnumAssertResult defines ....
  * @author Peidong Hu
  *
  */
-public interface IActualResult {
-	
+public enum EnumAssertResult {
+	//TOTO add more result values
+	PAGEELEMENTEXIST, PAGEELEMENTNOTEXIST, ELEMENTPROPERTYCORRECT, ELEMENTPROPERTYNOTCORRECT
 }

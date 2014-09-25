@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
+
+import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.page.exception.PageValidationException;
 
 // TODO: Auto-generated Javadoc
@@ -36,4 +38,13 @@ public interface IExpectedResultAsserter {
 	 * @return true, if successful
 	 */
 	boolean assertER() throws PageValidationException;
+	
+	/**
+	 * Gets the exec result.
+	 *
+	 * @return the exec result
+	 */
+	StepExecutionResult getExecResult();
+	
+	//List<Long> getInterestingERDBIndexes();
 }

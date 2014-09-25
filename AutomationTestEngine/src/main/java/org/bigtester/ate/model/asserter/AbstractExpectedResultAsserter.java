@@ -20,6 +20,10 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.page.IPageObject;
 
@@ -33,8 +37,23 @@ public abstract class AbstractExpectedResultAsserter { //NOPMD
 	/** The result page. */
 	private IPageObject resultPage;
 	
+	/** The interesting erdb indexes. */
+	protected final transient List<Long> interestingERDBIndexes = new ArrayList<Long>(); //NOPMD
+	
 	/** The step er value. */
 	private StepExpectedResultValue stepERValue; 
+	
+	/** The exec result. */
+	protected final transient StepExecutionResult execResult = new StepExecutionResult();
+	
+	
+	
+	/**
+	 * @return the interestingERDBIndexes
+	 */
+	public List<Long> getInterestingERDBIndexes() {
+		return interestingERDBIndexes;
+	}
 
 	/**
 	 * Gets the result page.
@@ -67,4 +86,12 @@ public abstract class AbstractExpectedResultAsserter { //NOPMD
 	public void setStepERValue(StepExpectedResultValue stepERValue) {
 		this.stepERValue = stepERValue;
 	}
+
+	/**
+	 * @return the execResult
+	 */
+	public StepExecutionResult getExecResult() {
+		return execResult;
+	}
+
 }
