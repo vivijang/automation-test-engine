@@ -27,7 +27,6 @@ import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
@@ -39,6 +38,7 @@ import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.internal.Utils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -138,12 +138,11 @@ public class CaseRunner implements IRunTestCase {
 	 * 
 	 * @param ctx
 	 *            the ctx
-	 * @throws StepExecutionException 
 	 * @throws Throwable 
 	 */
 	@Test(dataProvider = "dp")
 	public void runTest(TestParameters testParams)
-			throws TestDataException, StepExecutionException {
+			throws Throwable {
 		String testname = testParams.getTestFilename();
 		// String testname = "applicationContext1.xml";
 		try {
@@ -165,9 +164,12 @@ public class CaseRunner implements IRunTestCase {
 				tde.setTestCaseName(bce.getResourceDescription());
 				tde.setMessage(tde.getMessage()+ LogbackTag.TAG_SEPERATOR + tde.getTestCaseName() + LogbackTag.TAG_SEPERATOR + tde.getTestStepName());
 				throw (TestDataException) itr.getThrowable();
+			} else { // other test case bean creation errors. need to create another exception to handle it.
+				String[] fullST = Utils.stackTrace(bce, false);
+				LogbackWriter.writeSysError( fullST[1] );
+				throw bce;
 			}
-		}
-
+		} 
 	}
 
 }

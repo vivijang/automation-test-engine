@@ -18,23 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
-
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class EnumElementFindType defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
-	/**
-	 * Close lastpage.
-	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
-	
+public enum EnumElementFindType {
+	ID, NAME
 }

@@ -18,23 +18,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class AbstractTestDataTable defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
+@MappedSuperclass
+public class AbstractTestDataTable extends AbstractDBTable{
 
 	/**
-	 * Close lastpage.
+	 * Gets the test data context.
+	 *
+	 * @return the test data context
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
+	@Getter
 	
+	
+	
+	/**
+	 * Sets the test data context.
+	 *
+	 * @param testDataContext the new test data context
+	 */
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+	private TestDataContext testDataContext; //NOPMD
 }

@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.casestep; //NOPMD
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
@@ -89,7 +90,8 @@ public interface ITestStep {
 	 * Do step.
 	 *
 	 * @throws StepExecutionException the step execution exception
+	 * @throws PageValidationException 
 	 */
 
-	void doStep () throws StepExecutionException;
+	void doStep () throws StepExecutionException, PageValidationException;
 }

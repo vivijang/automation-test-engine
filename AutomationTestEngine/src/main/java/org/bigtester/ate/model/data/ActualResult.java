@@ -18,22 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data;
 
+import java.util.Map;
+import java.util.HashMap;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class ActualResult defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
+public class ActualResult {
+	
+	/** The result set. */
+	private final transient Map<Long, String> resultSet = new HashMap<Long, String>(); //NOPMD 
 
 	/**
-	 * Close lastpage.
+	 * @return the resultSet
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
+	public Map<Long, String> getResultSet() {
+		return resultSet;
 	}
 
 	

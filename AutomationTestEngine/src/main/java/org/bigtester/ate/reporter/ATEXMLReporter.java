@@ -257,7 +257,7 @@ public class ATEXMLReporter implements IReporter {
 	}
 
 	public String getTimestampFormat() {
-		return config.getTimestampFormat();
+		return XMLReporterConfig.getTimestampFormat();
 	}
 
 	public void setTimestampFormat(String timestampFormat) {

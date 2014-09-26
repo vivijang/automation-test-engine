@@ -24,6 +24,7 @@ import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -50,11 +51,15 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 
 	/**
 	 * {@inheritDoc}
+	 * @throws PageValidationException 
 	 */
 	@StepLoggable
-	public void doStep() throws StepExecutionException {
+	public void doStep() throws StepExecutionException, PageValidationException {
 		try {
 			getMyWebElement().doAction();
+			if (getExpectedResultAsserter() != null) {
+				getExpectedResultAsserter().assertER();
+			}
 		} catch (NoSuchElementException e) {
 			StepExecutionException pve = new StepExecutionException(
 					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND

@@ -23,7 +23,7 @@ package org.bigtester.ate.model.casestep;
 
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.page.Lastpage;
+import org.bigtester.ate.model.page.page.ILastpage;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,7 +35,7 @@ public class LastStep extends BaseTestStep implements ITestStep{
 	
 	
 	/** The last page. */
-	private Lastpage lastPage;
+	private ILastpage lastPage;
 
 	
 	
@@ -46,7 +46,7 @@ public class LastStep extends BaseTestStep implements ITestStep{
 	 *
 	 * @return the lastPage
 	 */
-	public Lastpage getLastPage() {
+	public ILastpage getLastPage() {
 		return lastPage;
 	}
 
@@ -59,7 +59,7 @@ public class LastStep extends BaseTestStep implements ITestStep{
 	 *
 	 * @param lastPage the lastPage to set
 	 */
-	public void setLastPage(final Lastpage lastPage) {
+	public void setLastPage(final ILastpage lastPage) {
 		this.lastPage = lastPage;
 	}
 

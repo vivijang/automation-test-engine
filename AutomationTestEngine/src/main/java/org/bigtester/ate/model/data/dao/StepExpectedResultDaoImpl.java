@@ -18,25 +18,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
+package org.bigtester.ate.model.data.dao;
 
-import org.bigtester.ate.model.data.TestParameters;
+import java.util.List;
+
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
 import org.bigtester.ate.model.data.exception.TestDataException;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.testng.ITest;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IRunSuites defines ....
- *
+ * This class StepExpectedResultDaoImpl defines ....
  * @author Peidong Hu
+ *
  */
-public interface IRunTestCase extends ITest {
-	
-	/**
-	 * Run suites.
-	 * @throws TestDataException 
-	 * @throws Throwable 
-	 */
-	void runTest(TestParameters testParams) throws StepExecutionException, TestDataException, Throwable;
+public class StepExpectedResultDaoImpl extends AbstractDaoImpl{
+	 
+    /**
+     * Gets the step expected results list.
+     *
+     * @param sERSetID the s er set id
+     * @return the e rs
+     * @throws TestDataException the test data exception
+     */
+    public List<StepExpectedResult> getERs(String sERSetID) throws TestDataException{
+    	
+    	List<StepExpectedResult> sERs = (List<StepExpectedResult>) getDbEM()
+		.createQuery("select p from StepExpectedResult p where p.stepERSetID = :stepERSetID", StepExpectedResult.class)
+		.setParameter("stepERSetID", sERSetID)
+		.getResultList();
+    	if (sERs.isEmpty()) {
+    		throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND, ExceptionErrorCode.TESTDATA_NOTFOUND);
+    	} else {
+    		return sERs;
+    	}
+    }
+    
+    
 }

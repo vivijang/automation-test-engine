@@ -18,23 +18,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class AbstractDaoImpl defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
-	/**
-	 * Close lastpage.
-	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
+public abstract class AbstractDaoImpl { //NOPMD
+	/** The db em. */
+	@PersistenceContext
+    
+    /**
+     * Gets the db em.
+     *
+     * @return the db em
+     */
+    
+    /**
+     * Gets the db em.
+     *
+     * @return the db em
+     */
+    @Getter 
+    
+    /**
+     * Sets the db em.
+     *
+     * @param dbEM the new db em
+     */
+    
+    /**
+     * Sets the db em.
+     *
+     * @param dbEM the new db em
+     */
+    @Setter
+    
+    private EntityManager dbEM;//NOPMD
 	
 }

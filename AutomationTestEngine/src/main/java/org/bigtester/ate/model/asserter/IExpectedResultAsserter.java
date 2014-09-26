@@ -18,23 +18,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.asserter;
 
+
+import org.bigtester.ate.model.data.StepExecutionResult;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class IExpectedResultAsserter defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
-	/**
-	 * Close lastpage.
-	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
+public interface IExpectedResultAsserter {
 	
+	/**
+	 * Assert er.
+	 *
+	 * @return true, if successful
+	 */
+	boolean assertER() throws PageValidationException;
+	
+	/**
+	 * Gets the exec result.
+	 *
+	 * @return the exec result
+	 */
+	StepExecutionResult getExecResult();
+	
+	//List<Long> getInterestingERDBIndexes();
 }

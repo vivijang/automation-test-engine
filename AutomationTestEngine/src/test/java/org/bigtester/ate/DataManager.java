@@ -32,8 +32,9 @@ import lombok.Setter;
 
 import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
-import org.bigtester.ate.model.data.ElementInputDataDaoImpl;
+import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.dbunit.DatabaseUnitException;
@@ -75,10 +76,11 @@ public class DataManager {
 	 *             the interrupted exception
 	 * @throws StepExecutionException
 	 *             the step execution exception
+	 * @throws PageValidationException 
 	 */
 	@Test
 	public void testDataClassTestCase() throws InterruptedException,
-			StepExecutionException {
+			StepExecutionException, PageValidationException {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				"Test-applicationContext.xml");
 		/** The my tc. */
@@ -132,6 +134,33 @@ public class DataManager {
 	 */
 	@Test
 	public void testAutomaticallyCreateTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
+
+		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+				"Test-dbContext.xml");
+		DataSource datas = (DataSource)context.getBean("dataSource");
+		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
+		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
+		DatabaseOperation.REFRESH.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
+		con.close();
+			
+		context.close();
+		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
+	}
+	
+	/**
+	 * Test first data class.
+	 * 
+	 * @throws InterruptedException
+	 *             the interrupted exception
+	 * @throws SQLException 
+	 * @throws DatabaseUnitException 
+	 * @throws DataSetException 
+	 * @throws MalformedURLException 
+	 */
+	@Test
+	public void testEnumConstantTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
 
 		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(

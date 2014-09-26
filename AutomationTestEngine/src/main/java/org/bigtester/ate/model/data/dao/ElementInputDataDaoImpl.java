@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.data.dao;
 
 import java.util.List;
 
@@ -91,7 +91,7 @@ public class ElementInputDataDaoImpl {
      *
      * @return the all
      */
-    public List<ElementInputData>getAll() {
+    public List<ElementInputData> getAll() {
         return dbEM.createQuery("SELECT p FROM ElementInputData p", ElementInputData.class).getResultList();
     }
     

@@ -18,23 +18,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data;
 
+import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class AbstractERValue defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
+public abstract class AbstractERValue { //NOPMD
+	
 	/**
-	 * Close lastpage.
+	 * Gets the step er dao.
+	 *
+	 * @return the step er dao
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
+	public StepExpectedResultDaoImpl getStepERDao() {
+		return stepERDao;
 	}
 
 	
+	/**
+	 * Sets the step er dao.
+	 *
+	 * @param stepERDao the new step er dao
+	 */
+	public void setStepERDao(StepExpectedResultDaoImpl stepERDao) {
+		this.stepERDao = stepERDao;
+	}
+	
+	
+	/** The step er dao. */
+	private StepExpectedResultDaoImpl stepERDao;//NOPMD
 }

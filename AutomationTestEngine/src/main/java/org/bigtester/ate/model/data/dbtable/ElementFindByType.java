@@ -18,23 +18,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data.dbtable;
 
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
+ * This class ElementFindByType defines ....
  * 
  * @author Peidong Hu
+ * 
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
+//@Entity
+///@Table
+public class ElementFindByType extends AbstractDBTable {
 
 	/**
-	 * Close lastpage.
+	 * Sets the find type.
+	 * 
+	 * @param FindType
+	 *            the new find type
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
-	
+	@Setter
+	/**
+	 * Gets the find type.
+	 *
+	 * @return the find type
+	 */
+	@Getter
+	//@Column(length = 50, nullable = false, unique = true)
+	private String FindType; //NOPMD
 }

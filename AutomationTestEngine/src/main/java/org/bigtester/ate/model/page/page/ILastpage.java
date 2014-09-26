@@ -20,21 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class ILastpage defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
+public interface ILastpage extends IPageObject {
+	
 	/**
 	 * Close lastpage.
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
-	
+	void closeLastpage();
 }

@@ -22,6 +22,7 @@ package org.bigtester.ate.model.page.page;
 
 import java.util.List;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException;
 
 
@@ -32,6 +33,13 @@ import org.bigtester.ate.model.page.exception.PageValidationException;
  * @author Peidong Hu
  */
 public interface IPageObject {
+	
+	/**
+	 * Gets the my wd.
+	 *
+	 * @return the my wd
+	 */
+	IMyWebDriver getMyWd();
 	
 	/**
 	 * Gets the page name.
@@ -50,7 +58,8 @@ public interface IPageObject {
 	 * Validate page.
 	 *
 	 * @return true, if successful
+	 * @throws PageValidationException the page validation exception
 	 */
-	void validatePage() throws PageValidationException;
+	boolean validatePage() throws PageValidationException;
 	
 }

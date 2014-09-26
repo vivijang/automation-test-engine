@@ -35,6 +35,9 @@
 			<ref bean="MyFirefoxWebDriver"></ref>
 		</property>
 	</bean>
+	<bean id="_PageObj" name="_PageObj" abstract="true" parent="_PageObjModel"
+		class="org.bigtester.ate.model.page.page.AbstractPageObject">
+	</bean>
 	<bean id="dataValueAbstract" name="dataValueAbstract" abstract="true"
 		class="org.bigtester.ate.model.data.AbstractDataValue">
 		<property name="elementDataDao" ref="elementInputDataDao"/>
@@ -46,7 +49,14 @@
 	<bean id="eaAbstract" name="eaAbstract" abstract="true" 
 		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
 	</bean>
-
+	<bean id="_abstractERAsserter" name="_abstractERAsserter" abstract="true" 
+		class="org.bigtester.ate.model.asserter.AbstractExpectedResultAsserter">
+	</bean>
+	
+<bean id="_abstractERValue" name="_abstractERValue" abstract="true" 
+		class="org.bigtester.ate.model.data.AbstractERValue">
+		<property name="stepERDao" ref="StepERDao"/>
+	</bean>
 	<!-- homestep definition -->
 	<bean id="homestep" class="org.bigtester.ate.model.casestep.HomeStep">
 		<property name="homepg">
@@ -54,8 +64,24 @@
 		</property>
 		<property name="stepName" value="homestep" />
 		<property name="stepDescription" value="open homepage" />
+		<property name="expectedResultAsserter">
+			<ref bean="homepageAsserter"/>	
+		</property>
 	</bean>
-	<bean id="myHomepage" name="myHomepage" parent="_PageObjModel"
+	<bean id="homepageAsserter" name="homepageAsserter" parent="_abstractERAsserter"
+		class="org.bigtester.ate.model.asserter.PageElementExistenceAsserter">
+		<constructor-arg ref="myHomepage"></constructor-arg>
+		<property name="stepERValue">
+			<ref bean="homestepValue"></ref>
+		</property>
+	</bean>
+	<bean id="homestepValue" name="homestepValue" parent="_abstractERValue"
+		class="org.bigtester.ate.model.data.StepExpectedResultValue">
+		<property name="dataValueID">
+		<value type="java.lang.Long">1</value>
+		</property>
+	</bean>
+	<bean id="myHomepage" name="myHomepage" parent="_PageObj"
 		class="org.bigtester.ate.model.page.page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
 	</bean>
@@ -67,7 +93,7 @@
 		<property name="stepName" value="laststep" />
 		<property name="stepDescription" value="closeBrowser" />
 	</bean>
-	<bean id="myLastpage" name="myLastpage" parent="_PageObjModel"
+	<bean id="myLastpage" name="myLastpage" parent="_PageObj"
 		class="org.bigtester.ate.model.page.page.Lastpage">
 	</bean>
 

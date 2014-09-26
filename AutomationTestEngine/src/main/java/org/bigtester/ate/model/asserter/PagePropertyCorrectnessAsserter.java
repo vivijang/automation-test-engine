@@ -18,23 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.asserter;
 
+
+
+import org.bigtester.ate.model.page.exception.PageValidationException;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class PagePropertyCorrectnessAsserter defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
+public class PagePropertyCorrectnessAsserter extends AbstractExpectedResultAsserter implements IExpectedResultAsserter{
+	
 	/**
-	 * Close lastpage.
+	 * {@inheritDoc}
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
+	@Override
+	public boolean assertER() throws PageValidationException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	
 }

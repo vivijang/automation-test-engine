@@ -22,7 +22,8 @@ package org.bigtester.ate.model.casestep;
 
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.page.Homepage;
+import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.page.IHomepage;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,14 +35,14 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	
 	
 	/** The homepg. */
-	private Homepage homepg;
+	private IHomepage homepg;
 
 	/**
 	 * Gets the homepg.
 	 * 
 	 * @return the homepg
 	 */
-	public Homepage getHomepg() {
+	public IHomepage getHomepg() {
 		return homepg;
 	}
 
@@ -51,7 +52,7 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	 * @param homepg
 	 *            the new homepg
 	 */
-	public void setHomepg(final Homepage homepg) {
+	public void setHomepg(final IHomepage homepg) {
 		this.homepg = homepg;
 	}
 
@@ -61,10 +62,14 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	 */
 	/**
 	 * {@inheritDoc}
+	 * @throws PageValidationException 
 	 */
 	@StepLoggable
-	public void doStep(){
+	public void doStep() throws PageValidationException{
 		homepg.startHomepage();
+		if (getExpectedResultAsserter() != null) {
+			getExpectedResultAsserter().assertER();
+		}
 	}
 
 	/**

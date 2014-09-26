@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.casestep;
 
 
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 
@@ -53,7 +54,11 @@ public class BaseTestStep {//NOPMD
 	
 	/** The my web element. */
 	private MyWebElement myWebElement;
-
+	
+	/** The i expected result asserter. */
+	private IExpectedResultAsserter expectedResultAsserter;
+	
+		
 	/**
 	 * Gets the step name.
 	 * 
@@ -185,6 +190,20 @@ public class BaseTestStep {//NOPMD
 	 */
 	public boolean isElementStepFlag() {
 		return elementStepFlag;
+	}
+
+	/**
+	 * @return the iExpectedResultAsserter
+	 */
+	public IExpectedResultAsserter getExpectedResultAsserter() {
+		return expectedResultAsserter;
+	}
+
+	/**
+	 * @param iExpectedResultAsserter the iExpectedResultAsserter to set
+	 */
+	public void setExpectedResultAsserter(IExpectedResultAsserter iExpectedResultAsserter) {
+		this.expectedResultAsserter = iExpectedResultAsserter;
 	}
 
 }

@@ -20,21 +20,49 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.constant.EnumElementFindType;
+import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class IPageFactory defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
+public interface IATEPageFactory {
+	
 	/**
-	 * Close lastpage.
+	 * Gets the i page object.
+	 *
+	 * @return the i page object
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
+	IPageObject getIPageObject();
+	
+	
+	/**
+	 * Gets the i element action.
+	 *
+	 * @return the i element action
+	 */
+	IElementAction getIElementAction();
 
 	
+
+	/**
+	 * @param elementFindType
+	 * @param findByValue
+	 * @return
+	 */
+	IElementFind getIElementFind(EnumElementFindType elementFindType,
+			String findByValue);
+
+
+	/**
+	 * @param elementFindType
+	 * @param findByValue
+	 * @return
+	 */
+	MyWebElement getMyWebElement(EnumElementFindType elementFindType,
+			String findByValue);
 }

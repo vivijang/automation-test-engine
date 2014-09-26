@@ -18,23 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.model.data;
 
+import java.util.List;
+
+import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
+import org.bigtester.ate.model.data.exception.TestDataException;
+
+import lombok.Getter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class PropertyDataValue defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
+public class StepExpectedResultValue extends AbstractERValue{
+	
 	/**
-	 * Close lastpage.
+	 * Gets the value.
+	 *
+	 * @return the value
 	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
+	@Getter
+	private List<StepExpectedResult> value; //NOPMD
+	
+	
+	/**
+	 * Gets the data value id.
+	 *
+	 * @return the data value id
+	 */
+	@Getter
+	private String dataValueID; //NOPMD
+	/**
+	 * @param dataValueID the dataValueID to set
+	 * @throws TestDataException 
+	 */
+	public void setDataValueID(String sERSetID) throws TestDataException {
+		this.dataValueID = sERSetID;
+		value = getStepERDao().getERs(sERSetID);
 	}
 
-	
 }

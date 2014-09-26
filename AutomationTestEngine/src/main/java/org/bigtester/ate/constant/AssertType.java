@@ -18,23 +18,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
-
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Lastpage defines ....
- * 
+ * This class EnumAssertType defines ....
  * @author Peidong Hu
+ *
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
-
-	/**
-	 * Close lastpage.
-	 */
-	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
-	}
-
+public final class AssertType {
 	
+	/** The Constant Page_Element_Existence. */
+	public final static String PAGE_ELEMENT_EXISTENCE = "Page_Element_Existence";
+	
+	/** The Constant Element_Property_Correctness. */
+	public final static String ELEMENT_PROPERTY_CORRECTNESS = "Element_Property_Correctness";
+	
+	/** The Constant Element_Value_Correctness. */
+	public final static String ELEMENT_VALUE_CORRECTNESS = "Element_Value_Correctness";
+	
+	/** The Constant Page_Property_Correctness. */
+	public final static String PAGE_PROPERTY_CORRECTNESS = "Page_Property_Correctness";
+	
+	private AssertType() {
+		
+	}
 }

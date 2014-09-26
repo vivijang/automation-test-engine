@@ -38,6 +38,9 @@ public final class ATEXMLReporterConfig extends XMLReporterConfig {
 
 	/** The Constant TAG_STEP_DESC. */
 	public final static String TAG_STEP_DESC = "StepDescription";
+	
+	/** The Constant TAG_STEP_RESULT. */
+	public final static String TAG_STEP_RESULT = "StepResult";
 
 	private ATEXMLReporterConfig() {
 		super();

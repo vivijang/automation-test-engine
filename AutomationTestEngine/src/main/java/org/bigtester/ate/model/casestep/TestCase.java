@@ -23,6 +23,7 @@ package org.bigtester.ate.model.casestep;
 import java.util.List;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
 
 
@@ -66,8 +67,9 @@ public class TestCase {
 	/**
 	 * run steps.
 	 * @throws StepExecutionException 
+	 * @throws PageValidationException 
 	 */
-	public void goSteps() throws StepExecutionException {
+	public void goSteps() throws StepExecutionException, PageValidationException {
 		
 		for (int i=0; i<testStepList.size(); i++) {
 			
