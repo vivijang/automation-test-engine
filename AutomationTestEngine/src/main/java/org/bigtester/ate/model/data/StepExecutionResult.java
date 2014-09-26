@@ -39,7 +39,7 @@ public class StepExecutionResult {
 	private StepExpectedResultValue stepExpectedResultValue;
 	
 	/** The actual result. */
-	private ActualResult actualResult;
+	private ActualResult actualResult = new ActualResult();
 	
 	/** The exec result. */
 	private final transient Map<Long, EnumAssertResult> comparedResult = new HashMap<Long, EnumAssertResult>(); //NOPMD
