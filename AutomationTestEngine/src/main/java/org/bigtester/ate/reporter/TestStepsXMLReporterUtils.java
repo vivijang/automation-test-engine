@@ -123,7 +123,7 @@ public final class TestStepsXMLReporterUtils {
 					ser.getActualResult().getResultSet().get(serv.getValue().get(index).getIdColumn()));
 					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + ReportMessage.MSG_SEPERATOR + 
 					ser.getComparedResult().get(serv.getValue().get(index).getIdColumn()).toString());
-					stepResultMSG.append("\n");
+					stepResultMSG.append('\n');
 				}
 			}
 			xmlBuffer.addCDATA(stepResultMSG.toString());

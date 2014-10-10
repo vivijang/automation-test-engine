@@ -69,8 +69,10 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 	 * @return true, if successful
 	 */
 	public boolean validatePage() throws PageValidationException {
-		boolean retVal = false;
-		if (!myWebElementList.isEmpty()) {
+		boolean retVal;
+		if (myWebElementList.isEmpty()) {
+			retVal = false;
+		} else {
 			MyWebElement webelement;
 			for (int index = 0; index < myWebElementList.size(); index++) {
 				webelement = myWebElementList.get(index);
@@ -87,7 +89,7 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 				}
 			}
 			retVal = true;	
-		}
+		} 
 		return retVal;
 	}
 

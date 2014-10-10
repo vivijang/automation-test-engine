@@ -10,11 +10,11 @@
 	<bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
 	<bean id="TestCaseLogger" class="org.bigtester.ate.systemlogger.GenericTestCaseLogger">
 <!-- 		<property name="currentTestCase" ref="testcase" /> -->
-		<!-- <property name="currentWebDriver" ref="MyFirefoxWebDriver"/> -->
+		<!-- <property name="currentWebDriver" ref="MyWebDriver"/> -->
 	</bean>
 	<bean id="TestStepResult" class="org.bigtester.ate.resultmaker.StepResultMaker" />
 
-	<bean id="MyFirefoxWebDriver"
+	<bean id="MyWebDriver"
 		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
 	<bean id="testcase" name="testcase2name"
 		class="org.bigtester.ate.model.casestep.TestCase">
@@ -32,7 +32,7 @@
 	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
 		class="org.bigtester.ate.model.page.AbstractPageModelBase">
 		<property name="myWd">
-			<ref bean="MyFirefoxWebDriver"></ref>
+			<ref bean="MyWebDriver"></ref>
 		</property>
 	</bean>
 	<bean id="_PageObj" name="_PageObj" abstract="true" parent="_PageObjModel"

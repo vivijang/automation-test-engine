@@ -32,7 +32,7 @@ import org.testng.internal.Utils;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class GenericSystemLogger defines ....
+ * This class GenericSystemLogger handles the error happened out of test case
  * 
  * @author Peidong Hu
  * 

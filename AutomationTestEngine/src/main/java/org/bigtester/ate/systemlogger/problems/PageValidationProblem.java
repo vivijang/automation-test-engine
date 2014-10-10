@@ -18,23 +18,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.constant;
+package org.bigtester.ate.systemlogger.problems;
+
+
+import org.bigtester.ate.model.page.exception.PageValidationException;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class TestCase defines ....
+ * This class StepExecutionProblem defines ....
+ * 
  * @author Peidong Hu
- *
+ * 
  */
-public final class TestCaseConstants {
-	
-	/** The Constant BEANID_TESTCASE. */
-	public static final String BEANID_TESTCASE = "testcase";
-	
-	/** The Constant BEANID_MYWEBDRIVER. */
-	public static final String BEANID_MYWEBDRIVER = "MyWebDriver";
-	private TestCaseConstants () {
-		throw new AssertionError();
+public class PageValidationProblem extends GenericATEProblem {
+
+	/** The test data exception. */
+	private final transient PageValidationException pageValException;
+
+	/**
+	 * Instantiates a new page validation problem.
+	 * 
+	 * @param source
+	 *            the source
+	 * @param tde
+	 *            the see
+	 */
+	public PageValidationProblem(Object source, PageValidationException pageValException) {
+		super(source, pageValException);
+		this.pageValException = pageValException;
 	}
-	
+
+	/**
+	 * Gets the step exec exception.
+	 * 
+	 * @return the step exec exception
+	 */
+	public PageValidationException getStepExecException() {
+		return pageValException;
+	}
+
 }
