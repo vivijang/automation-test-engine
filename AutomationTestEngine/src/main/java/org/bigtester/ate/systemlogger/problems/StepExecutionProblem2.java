@@ -18,56 +18,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model;
+package org.bigtester.ate.systemlogger.problems;
+
+import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.bigtester.ate.model.casestep.TestCase;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
+ * This class StepExecutionProblem defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public abstract class AbstractATEException extends Exception {
+public class StepExecutionProblem2 extends GenericATEProblem {
 	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
-
-	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
+	
+	
+	/** The problem test case. */
+	private final TestCase problemTestCase;	
+	/** The step exec exception. */
+	private final StepExecutionException2 stepExecException;
 	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
-
-	/**
-	 * Instantiates a new abstract ate exception.
+	 * Instantiates a new page validation problem.
 	 *
-	 * @param message the message
-	 * @param errorCode the error code
+	 * @param source the source
+	 * @param see the see
+	 * @param pTc the tc
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+	public StepExecutionProblem2(Object source, StepExecutionException2 see) {
+		super(source, see);
+		stepExecException = see;
+		problemTestCase = see.getCurrentTestCase();
+	}
+	
+	
+
+	/**
+	 * Gets the step exec exception.
+	 *
+	 * @return the stepExecException
+	 */
+	public StepExecutionException2 getStepExecException() {
+		return stepExecException;
 	}
 
 	/**
-	 * @return the pointCutFlag
+	 * Gets the problem test case.
+	 *
+	 * @return the problemTestCase
 	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
+	public TestCase getProblemTestCase() {
+		return problemTestCase;
 	}
+	
 
-	/**
-	 * @param pointCutFlag the pointCutFlag to set
-	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
-	}
 }

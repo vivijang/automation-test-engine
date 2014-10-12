@@ -18,56 +18,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model;
+package org.bigtester.ate.model.page.exception;
+
+import org.bigtester.ate.model.AbstractATECaseExecE;
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
+ * This class StepExecutionException defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public abstract class AbstractATEException extends Exception {
-	
+public class StepExecutionException2 extends AbstractATECaseExecE {
+
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
+	private static final long serialVersionUID = 6019919237360483689L;
 
-	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
+	/** The my web element. */
+	private final MyWebElement myWebElement;
+
 	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
-
-	/**
-	 * Instantiates a new abstract ate exception.
+	 * Instantiates a new step execution exception2.
 	 *
 	 * @param message the message
 	 * @param errorCode the error code
+	 * @param myWebElement the my web element
+	 * @param myWebDriver the my web driver
+	 * @param currentTestCase the current test case
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+	public StepExecutionException2(String message, String errorCode,
+			MyWebElement myWebElement, IMyWebDriver myWebDriver, TestCase currentTestCase) {
+		super(message, errorCode);
+		this.myWebElement = myWebElement;
+		setMyWebDriver(myWebDriver);
+		setCurrentTestCase(currentTestCase);
 	}
 
 	/**
-	 * @return the pointCutFlag
+	 * Gets the my web element.
+	 * 
+	 * @return the myWebElement
 	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
-	}
-
-	/**
-	 * @param pointCutFlag the pointCutFlag to set
-	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
+	public MyWebElement getMyWebElement() {
+		return myWebElement;
 	}
 }

@@ -27,13 +27,18 @@ import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -81,7 +86,7 @@ public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean assertER() throws PageValidationException {
+	public boolean assertER() throws PageValidationException2 {
 		execResult.setStepExpectedResultValue(getStepERValue());
 		
 		boolean retVal = false; // NOPMD
@@ -97,10 +102,12 @@ public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter
 					execResult.getActualResult().getResultSet().put(interestingERDBIndexes.get(index), NOTEXIST);
 					execResult.getComparedResult().put(interestingERDBIndexes.get(index), EnumAssertResult.PAGEELEMENTEXIST);
 					//Restricted page validation, fail test case if any element 
-					PageValidationException pve = new PageValidationException(
+					PageValidationException2 pve = new PageValidationException2(
 							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
 							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-							webelement.getElementFind());
+							webelement.getElementFind(),
+							getResultPage().getMyWd(),
+							(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
 					pve.initCause(e);
 					throw pve;
 				} 
@@ -111,5 +118,7 @@ public class PageElementExistenceAsserter extends AbstractExpectedResultAsserter
 		}
 		return retVal;
 	}
+
+	
 
 }

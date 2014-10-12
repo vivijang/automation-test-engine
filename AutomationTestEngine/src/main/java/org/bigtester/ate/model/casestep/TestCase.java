@@ -24,7 +24,9 @@ import java.util.List;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.page.exception.StepExecutionException2;
 
 
 // TODO: Auto-generated Javadoc
@@ -69,7 +71,7 @@ public class TestCase {
 	 * @throws StepExecutionException 
 	 * @throws PageValidationException 
 	 */
-	public void goSteps() throws StepExecutionException, PageValidationException {
+	public void goSteps() throws StepExecutionException2, PageValidationException2 {
 		
 		for (int i=0; i<testStepList.size(); i++) {
 			

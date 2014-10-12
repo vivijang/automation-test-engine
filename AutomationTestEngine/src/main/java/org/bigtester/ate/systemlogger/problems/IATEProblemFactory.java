@@ -18,56 +18,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model;
+package org.bigtester.ate.systemlogger.problems;
+
+import org.bigtester.ate.model.AbstractATEException;
+import org.bigtester.problomatic2.Problem;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
- * 
+ * This class IPageFactory defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public abstract class AbstractATEException extends Exception {
+public interface IATEProblemFactory {
 	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
-
-	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
 	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
-
-	/**
-	 * Instantiates a new abstract ate exception.
+	 * Gets the ATE problem.
 	 *
-	 * @param message the message
-	 * @param errorCode the error code
+	 * @param exceptionErrorCode the exception error code
+	 * @return the ATE problem
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
-	}
-
-	/**
-	 * @return the pointCutFlag
-	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
-	}
-
-	/**
-	 * @param pointCutFlag the pointCutFlag to set
-	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
-	}
+	Problem getATEProblem(Object source, AbstractATEException ateException);
+	
 }

@@ -20,54 +20,28 @@
  *******************************************************************************/
 package org.bigtester.ate.model;
 
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
- * 
+ * This class IATECaseException defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public abstract class AbstractATEException extends Exception {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
-
-	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
+public interface IATECaseExecException {
 	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
-
-	/**
-	 * Instantiates a new abstract ate exception.
+	 * Gets the current test case.
 	 *
-	 * @param message the message
-	 * @param errorCode the error code
+	 * @return the current test case
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
-	}
-
+	TestCase getCurrentTestCase();
+	
 	/**
-	 * @return the pointCutFlag
+	 * Gets the my web driver.
+	 *
+	 * @return the my web driver
 	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
-	}
-
-	/**
-	 * @param pointCutFlag the pointCutFlag to set
-	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
-	}
+	IMyWebDriver getMyWebDriver();
 }

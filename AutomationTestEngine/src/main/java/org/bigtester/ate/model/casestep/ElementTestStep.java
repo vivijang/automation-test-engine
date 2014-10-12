@@ -23,9 +23,12 @@ package org.bigtester.ate.model.casestep;
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -54,18 +57,20 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	 * @throws PageValidationException 
 	 */
 	@StepLoggable
-	public void doStep() throws StepExecutionException, PageValidationException {
+	public void doStep() throws StepExecutionException2, PageValidationException2 {
 		try {
 			getMyWebElement().doAction();
 			if (getExpectedResultAsserter() != null) {
 				getExpectedResultAsserter().assertER();
 			}
 		} catch (NoSuchElementException e) {
-			StepExecutionException pve = new StepExecutionException(
+			StepExecutionException2 pve = new StepExecutionException2(
 					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
 							+ ExceptionMessage.MSG_SEPERATOR + e.getMessage(),
 					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-					this.getMyWebElement());
+					this.getMyWebElement(),
+					this.getMyWebDriver(),
+					(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
 			pve.initCause(e);
 			throw pve;
 		}

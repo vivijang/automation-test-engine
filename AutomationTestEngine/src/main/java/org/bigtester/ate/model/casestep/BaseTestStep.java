@@ -24,6 +24,9 @@ package org.bigtester.ate.model.casestep;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,7 +35,7 @@ import org.bigtester.ate.model.page.page.MyWebElement;
  * @author Peidong Hu
  * 
  */
-public class BaseTestStep {//NOPMD
+public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/** The page object. */
 	private IPageObject pageObject;
 
@@ -58,6 +61,7 @@ public class BaseTestStep {//NOPMD
 	/** The i expected result asserter. */
 	private IExpectedResultAsserter expectedResultAsserter;
 	
+	private ApplicationContext applicationContext;
 		
 	/**
 	 * Gets the step name.
@@ -206,4 +210,16 @@ public class BaseTestStep {//NOPMD
 		this.expectedResultAsserter = iExpectedResultAsserter;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.applicationContext = applicationContext;
+		
+	}
+	public ApplicationContext getApplicationContext(){
+		return applicationContext;
+	}
 }

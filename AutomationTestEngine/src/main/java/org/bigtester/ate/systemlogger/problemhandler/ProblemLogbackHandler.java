@@ -26,9 +26,14 @@ import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.model.casestep.ITestStep;
 import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
+import org.bigtester.ate.systemlogger.problems.PageValidationProblem2;
 import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
+import org.bigtester.ate.systemlogger.problems.StepExecutionProblem2;
 import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
@@ -67,15 +72,17 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		//2) non-target Step exeception or error: test dependency error; (test dependency error)
 		//3) page validation error : test error; (failed test)
 		//4) page validation exception: test pass with bug; (passed test with bug)
-		if (aProblem instanceof StepExecutionProblem) {
-			StepExecutionProblem sep = (StepExecutionProblem) aProblem;
-			StepExecutionException see = sep.getStepExecException();
-			TestCase pTC;
-			ITestStep pTS;
-			String logMsg; 
-			switch (see.getErrorCode()) {
+		TestCase pTC;
+		ITestStep pTS;
+		String errorCode;
+		String logMsg;
+		if (aProblem instanceof StepExecutionProblem2) {
+			StepExecutionProblem2 sep = (StepExecutionProblem2) aProblem;
+			StepExecutionException2 see = sep.getStepExecException();
+			errorCode = see.getErrorCode();
+			switch (errorCode) {
 			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				pTC = sep.getProblemTestCase();
+				pTC = see.getCurrentTestCase();
 				pTS = pTC.getCurrentTestStep();
 				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
 				+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
@@ -86,7 +93,7 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 				} else {
 					LogbackWriter.writeAppWarning(logMsg);
 				}
-				pTC.getCurrentWebDriver().getWebDriver().quit();
+				//pTC.getCurrentWebDriver().getWebDriver().quit();
 				break;
 			case ExceptionErrorCode.UNKNOWN_ERROR:
 				LogbackWriter.writeAppError("Uncaught Application Error.");
@@ -95,8 +102,39 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
 				break;
 			}
-			
+		} else if (aProblem instanceof PageValidationProblem2) {
+			PageValidationProblem2 sep = (PageValidationProblem2) aProblem;
+			PageValidationException2 see = sep.getStepExecException();
+			errorCode = see.getErrorCode();
+			switch (errorCode) {
+			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
+				pTC = see.getCurrentTestCase();
+				pTS = pTC.getCurrentTestStep();
+				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
+				+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
+				+ pTS.getStepDescription() + LogbackTag.TAG_SEPERATOR
+				+ ((PageValidationProblem2) aProblem).getStepExecException().getMessage();
+				if (pTS.isTargetStep() ) {
+					LogbackWriter.writeAppError(logMsg);
+				} else {
+					LogbackWriter.writeAppWarning(logMsg);
+				}
+				//pTC.getCurrentWebDriver().getWebDriver().quit();
+				break;
+			case ExceptionErrorCode.UNKNOWN_ERROR:
+				LogbackWriter.writeAppError("Uncaught Application Error.");
+				break;
+			default:
+				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
+				break;
+			}
+		} else {
+			LogbackWriter.writeAppError("Uncaught Application Error.");
 		}
+		
+			
+		
+		
 	}
 
 	/**

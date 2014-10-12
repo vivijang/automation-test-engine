@@ -18,56 +18,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model;
+package org.bigtester.ate.systemlogger.problems;
+
+
+import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.page.exception.PageValidationException2;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
+ * This class StepExecutionProblem defines ....
  * 
  * @author Peidong Hu
  * 
  */
-public abstract class AbstractATEException extends Exception {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
+public class PageValidationProblem2 extends GenericATEProblem {
 
-	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
-	
+	/** The test data exception. */
+	private final transient PageValidationException2 pageValException;
+
 	/**
-	 * Gets the error code.
+	 * Instantiates a new page validation problem.
 	 * 
-	 * @return the error code
+	 * @param source
+	 *            the source
+	 * @param tde
+	 *            the see
 	 */
-	public String getErrorCode() {
-		return this.errorCode;
+	public PageValidationProblem2(Object source, PageValidationException2 pageValException) {
+		super(source, pageValException);
+		this.pageValException = pageValException;
 	}
 
 	/**
-	 * Instantiates a new abstract ate exception.
-	 *
-	 * @param message the message
-	 * @param errorCode the error code
+	 * Gets the step exec exception.
+	 * 
+	 * @return the step exec exception
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+	public PageValidationException2 getStepExecException() {
+		return pageValException;
 	}
 
-	/**
-	 * @return the pointCutFlag
-	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
-	}
-
-	/**
-	 * @param pointCutFlag the pointCutFlag to set
-	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
-	}
 }
