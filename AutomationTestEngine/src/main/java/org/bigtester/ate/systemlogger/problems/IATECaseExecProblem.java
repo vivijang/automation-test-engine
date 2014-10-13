@@ -18,61 +18,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.systemlogger.problems;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.bigtester.ate.model.IATECaseExecException;
+import org.bigtester.ate.model.casestep.ITestStep;
+import org.bigtester.ate.model.casestep.TestCase;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractPageObject defines ....
- * 
+ * This class IATECaseExecProblem defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public abstract class AbstractPageObject extends AbstractPageModelBase {
-
-	/** The page name. */
-	private String pageName;
-
-	/** The web element list. */
-	private List<MyWebElement> myWebElementList = new ArrayList<MyWebElement>();
-
-	/**
-	 * Sets the my web element list.
-	 * 
-	 * @param myWebElementList
-	 *            the myWebElementList to set
-	 */
-	public void setMyWebElementList(List<MyWebElement> myWebElementList) {
-		this.myWebElementList = myWebElementList;
-	}
-
-	/**
-	 * Gets the web element list.
-	 * 
-	 * @return the web element list
-	 */
-	public List<MyWebElement> getMyWebElementList() {
-		return myWebElementList;
-	}
-
+public interface IATECaseExecProblem {
 	
 	/**
-	 * @return the pageName
+	 * Gets the current test case.
+	 *
+	 * @return the current test case
 	 */
-	public String getPageName() {
-		return pageName;
-	}
-
+	TestCase getCurrentTestCase();
+	
 	/**
-	 * @param pageName
-	 *            the pageName to set
+	 * Gets the current test step.
+	 *
+	 * @return the current test step
 	 */
-	public void setPageName(String pageName) {
-		this.pageName = pageName;
-	}
-
+	ITestStep getCurrentTestStep();
+	
+	/**
+	 * Gets the problem message.
+	 *
+	 * @return the problem message
+	 */
+	String getProblemMessage();
+	
+	/**
+	 * Gets the ATE case exec exception.
+	 *
+	 * @return the ATE case exec exception
+	 */
+	IATECaseExecException getATECaseExecException();
+	
+	/**
+	 * Gets the error code.
+	 *
+	 * @return the error code
+	 */
+	String getErrorCode();
 }

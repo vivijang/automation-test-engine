@@ -18,43 +18,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.systemlogger.problems;
+package org.bigtester.ate.model;
 
-
-import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class StepExecutionProblem defines ....
- * 
+ * This class IATECaseException defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public class PageValidationProblem extends GenericATEProblem {
-
-	/** The test data exception. */
-	private final transient PageValidationException pageValException;
-
+public interface IATECaseExecException {
+	
 	/**
-	 * Instantiates a new page validation problem.
-	 * 
-	 * @param source
-	 *            the source
-	 * @param tde
-	 *            the see
+	 * Gets the current test case.
+	 *
+	 * @return the current test case
 	 */
-	public PageValidationProblem(Object source, PageValidationException pageValException) {
-		super(source, pageValException);
-		this.pageValException = pageValException;
-	}
-
+	TestCase getCurrentTestCase();
+	
 	/**
-	 * Gets the step exec exception.
-	 * 
-	 * @return the step exec exception
+	 * Gets the my web driver.
+	 *
+	 * @return the my web driver
 	 */
-	public PageValidationException getStepExecException() {
-		return pageValException;
-	}
-
+	IMyWebDriver getMyWebDriver();
+	
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
+	String getMessage();
 }

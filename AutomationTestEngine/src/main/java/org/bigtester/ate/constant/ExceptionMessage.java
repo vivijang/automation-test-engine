@@ -37,6 +37,9 @@ public final class ExceptionMessage {
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
 	public static final String MSG_TESTDATA_NOTFOUND = "Test Data not Found.";
 	
+	/** The Constant MSG_UNCAUGHT_APP_ERROR. */
+	public static final String MSG_UNCAUGHT_APP_ERRORS = "Uncaught Application Error.";
+	
 	/** The Constant MSG_UNSUPPORTED_LOGBACK_LEVEL. */
 	public static final String MSG_UNSUPPORTED_LOGBACK_LEVEL = "Unsupported logback error level.";
 	

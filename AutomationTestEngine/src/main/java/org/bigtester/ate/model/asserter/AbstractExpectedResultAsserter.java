@@ -26,6 +26,9 @@ import java.util.List;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.page.IPageObject;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,7 +36,7 @@ import org.bigtester.ate.model.page.page.IPageObject;
  * @author Peidong Hu
  *
  */
-public abstract class AbstractExpectedResultAsserter { //NOPMD
+public abstract class AbstractExpectedResultAsserter implements ApplicationContextAware { //NOPMD
 	/** The result page. */
 	private IPageObject resultPage;
 	
@@ -46,6 +49,8 @@ public abstract class AbstractExpectedResultAsserter { //NOPMD
 	/** The exec result. */
 	protected final transient StepExecutionResult execResult = new StepExecutionResult();
 	
+	/** The application context. */
+	private ApplicationContext applicationContext;
 	
 	
 	/**
@@ -93,5 +98,22 @@ public abstract class AbstractExpectedResultAsserter { //NOPMD
 	public StepExecutionResult getExecResult() {
 		return execResult;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.applicationContext = applicationContext;
+		
+	}
+	
+	/**
+	 * Gets the application context.
+	 *
+	 * @return the application context
+	 */
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
 }

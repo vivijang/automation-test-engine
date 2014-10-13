@@ -20,71 +20,68 @@
  *******************************************************************************/
 package org.bigtester.ate.model;
 
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 // TODO: Auto-generated Javadoc
 /**
- * This class Abstract defines ....
- * 
+ * This class AbstractATECEException defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public abstract class AbstractATEException extends Exception {
-	
+abstract public class AbstractATECaseExecE extends AbstractATEException implements IATECaseExecException{
+
+
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = -5513011387447019438L;
-	/** The error code. */
-	private final String errorCode;
+	private static final long serialVersionUID = 7308181663474968945L;
 
-	/** The flag of already point cut. */
-	private boolean alreadyCasePointCut;
+	/** The current test case. */
+	private TestCase currentTestCase;
 	
-	/** The already sys point cut. */
-	private boolean alreadySysPointCut;
+	/** The my web driver. */
+	private IMyWebDriver myWebDriver;
 	
 	/**
-	 * Gets the error code.
-	 * 
-	 * @return the error code
-	 */
-	public String getErrorCode() {
-		return this.errorCode;
-	}
-
-	/**
-	 * Instantiates a new abstract ate exception.
+	 * Instantiates a new abstract ate case exec e.
 	 *
 	 * @param message the message
 	 * @param errorCode the error code
 	 */
-	public AbstractATEException(String message, String errorCode) {
-		super(message);
-		this.errorCode = errorCode;
+	public AbstractATECaseExecE(String message, String errorCode) {
+		super(message, errorCode);
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Gets the current test case.
+	 *
+	 * @return the currentTestCase
+	 */
+	public TestCase getCurrentTestCase() {
+		return currentTestCase;
+	}
+	
+	/**
+	 * Sets the current test case.
+	 *
+	 * @param currentTestCase the currentTestCase to set
+	 */
+	public void setCurrentTestCase(TestCase currentTestCase) {
+		this.currentTestCase = currentTestCase;
 	}
 
 	/**
-	 * @return the pointCutFlag
+	 * @return the myWebDriver
 	 */
-	public boolean isAlreadyCasePointCut() {
-		return alreadyCasePointCut;
+	public IMyWebDriver getMyWebDriver() {
+		return myWebDriver;
 	}
 
 	/**
-	 * @param pointCutFlag the pointCutFlag to set
+	 * @param myWebDriver the myWebDriver to set
 	 */
-	public void setAlreadyCasePointCut(boolean alreadyPointCut) {
-		this.alreadyCasePointCut = alreadyPointCut;
+	public void setMyWebDriver(IMyWebDriver myWebDriver) {
+		this.myWebDriver = myWebDriver;
 	}
 
-	/**
-	 * @return the alreadySysPointCut
-	 */
-	public boolean isAlreadySysPointCut() {
-		return alreadySysPointCut;
-	}
-
-	/**
-	 * @param alreadySysPointCut the alreadySysPointCut to set
-	 */
-	public void setAlreadySysPointCut(boolean alreadySysPointCut) {
-		this.alreadySysPointCut = alreadySysPointCut;
-	}
 }

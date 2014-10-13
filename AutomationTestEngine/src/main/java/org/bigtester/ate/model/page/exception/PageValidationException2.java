@@ -21,7 +21,9 @@
 package org.bigtester.ate.model.page.exception;
 
 
-import org.bigtester.ate.model.AbstractATEException;
+import org.bigtester.ate.model.AbstractATECaseExecE;
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
@@ -30,16 +32,17 @@ import org.bigtester.ate.model.page.elementfind.IElementFind;
  * @author Peidong Hu
  *
  */
-public class PageValidationException extends AbstractATEException {
+public class PageValidationException2 extends AbstractATECaseExecE {
 	
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -7144577815429959403L;
+    private static final long serialVersionUID = -7144577815429959503L;
 	
 	
 	
 	/** The element find. */
 	private final IElementFind elementFind;
      
+    
     /**
      * Instantiates a new page validation exception.
      *
@@ -47,12 +50,13 @@ public class PageValidationException extends AbstractATEException {
      * @param errorCode the error code
      * @param eFind the e find
      */
-    public PageValidationException(String message, String errorCode, IElementFind eFind){
+    public PageValidationException2(String message, String errorCode, IElementFind eFind, IMyWebDriver myWebDriver, TestCase currentTestCase){
         super(message, errorCode);
         elementFind = eFind;
+        setCurrentTestCase(currentTestCase);
+        setMyWebDriver(myWebDriver);
     }
      
-    
 
 	/**
 	 * Gets the element find.
@@ -62,4 +66,7 @@ public class PageValidationException extends AbstractATEException {
 	public IElementFind getElementFind() {
 		return elementFind;
 	}
+
+	
+	
 }

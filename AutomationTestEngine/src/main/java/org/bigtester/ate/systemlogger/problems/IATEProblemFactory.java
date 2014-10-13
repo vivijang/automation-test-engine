@@ -18,48 +18,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.exception;
+package org.bigtester.ate.systemlogger.problems;
 
 import org.bigtester.ate.model.AbstractATEException;
-import org.bigtester.ate.model.page.page.MyWebElement;
+import org.bigtester.problomatic2.Problem;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class StepExecutionException defines ....
- * 
+ * This class IPageFactory defines ....
  * @author Peidong Hu
- * 
+ *
  */
-public class StepExecutionException extends AbstractATEException {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 6019919237360483659L;
-
-	/** The my web element. */
-	private final MyWebElement myWebElement;
-
+public interface IATEProblemFactory {
+	
+	
 	/**
-	 * Instantiates a new step execution exception.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param errorCode
-	 *            the error code
-	 * @param myWebElement
-	 *            the my web element
+	 * Gets the ATE problem.
+	 *
+	 * @param exceptionErrorCode the exception error code
+	 * @return the ATE problem
 	 */
-	public StepExecutionException(String message, String errorCode,
-			MyWebElement myWebElement) {
-		super(message, errorCode);
-		this.myWebElement = myWebElement;
-	}
-
+	Problem getATEProblem(Object source, AbstractATEException ateException);
+	
 	/**
-	 * Gets the my web element.
-	 * 
-	 * @return the myWebElement
+	 * Gets the ATE case exec problem.
+	 *
+	 * @param source the source
+	 * @param ateException the ate exception
+	 * @return the ATE case exec problem
 	 */
-	public MyWebElement getMyWebElement() {
-		return myWebElement;
-	}
+	IATECaseExecProblem getATECaseExecProblem(Object source, AbstractATEException ateException);
+	
 }
