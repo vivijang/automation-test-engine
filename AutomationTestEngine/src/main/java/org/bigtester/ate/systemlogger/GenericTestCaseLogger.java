@@ -24,29 +24,16 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.AbstractATECaseExecE;
 import org.bigtester.ate.model.AbstractATEException;
-import org.bigtester.ate.model.asserter.AbstractExpectedResultAsserter;
-import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.page.ATEPageFactory;
-import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.systemlogger.problemhandler.ProblemBrowserHandler;
 import org.bigtester.ate.systemlogger.problemhandler.ProblemLogbackHandler;
 import org.bigtester.ate.systemlogger.problems.ATEProblemFactory;
 import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
 import org.bigtester.ate.systemlogger.problems.IATEProblemFactory;
-import org.bigtester.ate.systemlogger.problems.PageValidationProblem;
-import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.Problomatic;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,11 +44,7 @@ import org.springframework.context.ApplicationContextAware;
  * 
  */
 @Aspect
-public class GenericTestCaseLogger implements ApplicationContextAware {
-
-	/** The context. */
-
-	private transient ApplicationContext context;
+public class GenericTestCaseLogger {
 
 	/**
 	 * Select all method as pointcuts.
@@ -87,7 +70,7 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
 		if (error instanceof AbstractATEException
-				&& ((AbstractATEException) error).isAlreadyPointCut()) {
+				&& ((AbstractATEException) error).isAlreadyCasePointCut()) {
 			return;
 		}
 
@@ -96,25 +79,6 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 		IMyWebDriver myWebDriver;
 		Problem prb;
 		ProblemBrowserHandler pbh;
-
-		//		if (joinPoint.getTarget() instanceof TestCase && error instanceof StepExecutionException) {
-		//			TestCase thisTestCase = (TestCase) joinPoint.getTarget();
-		//			prb = new StepExecutionProblem(
-		//					//thisTestCase, (StepExecutionException) error, (TestCase) context.getBean(TestCaseConstants.BEANID_TESTCASE));
-		//					thisTestCase, (StepExecutionException) error, thisTestCase);
-		//			myWebDriver =  thisTestCase.getCurrentWebDriver();
-		//			pbh = new ProblemBrowserHandler(myWebDriver);
-		//			Problomatic.addProblemHandlerForProblem(prb, plbh);
-		//			Problomatic.addProblemHandlerForProblem(prb, pbh);
-
-		//		} else if (joinPoint.getTarget() instanceof AbstractExpectedResultAsserter && error instanceof PageValidationException ) {
-		//			AbstractExpectedResultAsserter thisAserter = (AbstractExpectedResultAsserter) joinPoint.getTarget();
-		//			prb = new PageValidationProblem(
-		//					thisAserter, (PageValidationException) error);
-		//			myWebDriver =  thisAserter.getResultPage().getMyWd();
-		//			pbh = new ProblemBrowserHandler(myWebDriver);
-		//			Problomatic.addProblemHandlerForProblem(prb, plbh);
-		//			Problomatic.addProblemHandlerForProblem(prb, pbh);
 
 		if (error instanceof AbstractATEException
 				&& error instanceof AbstractATECaseExecE) {
@@ -125,7 +89,7 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 			myWebDriver = ((AbstractATECaseExecE) error).getMyWebDriver();
 			pbh = new ProblemBrowserHandler(myWebDriver);
 			Problomatic.addProblemHandlerForProblem(prb, pbh);
-			((AbstractATECaseExecE) error).setAlreadyPointCut(true);
+			((AbstractATECaseExecE) error).setAlreadyCasePointCut(true);
 		} else {
 			prb = new GenericATEProblem(joinPoint.getTarget(),
 					(Exception) error);
@@ -133,16 +97,6 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 		}
 		Problomatic.addProblemHandlerForProblem(prb, plbh);
 		Problomatic.handleProblem(prb);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		// TODO Auto-generated method stub
-		this.context = applicationContext;
 	}
 
 }

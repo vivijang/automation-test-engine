@@ -30,15 +30,12 @@ import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
-import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
 
 // TODO: Auto-generated Javadoc
 /**

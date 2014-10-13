@@ -20,15 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.systemlogger.problems;
 
-import org.bigtester.ate.constant.EnumElementFindType;
-import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.model.AbstractATEException;
-import org.bigtester.ate.model.page.elementaction.IElementAction;
-import org.bigtester.ate.model.page.elementfind.ElementFindById;
-import org.bigtester.ate.model.page.elementfind.ElementFindByName;
-import org.bigtester.ate.model.page.elementfind.IElementFind;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.problomatic2.Problem;
 
@@ -65,31 +58,50 @@ public final class ATEProblemFactory implements IATEProblemFactory {
 
 	}
 
-	
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Problem getATEProblem(Object source, AbstractATEException ateException) {
-		//TODO add more findby type
+	public Problem getATEProblem(Object source,
+			AbstractATEException ateException) {
+		//TODO add more exception and problem type
 		synchronized (this) {
 			Problem retVal;
-			if ( ateException instanceof StepExecutionException2) {
-				retVal = new StepExecutionProblem2(
-						source, (StepExecutionException2)ateException);
-			
-			} else if ( ateException instanceof PageValidationException2) {
-					retVal = new PageValidationProblem2(
-							source, (PageValidationException2)ateException);
+			if (ateException instanceof StepExecutionException2) {
+				retVal = new StepExecutionProblem2(source,
+						(StepExecutionException2) ateException);
+
+			} else if (ateException instanceof PageValidationException2) {
+				retVal = new PageValidationProblem2(source,
+						(PageValidationException2) ateException);
 			} else {
-				retVal = new GenericATEProblem(
-						source, ateException);
+				retVal = new GenericATEProblem(source, ateException);
 			}
 			return retVal;
 		}
 	}
 
-	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IATECaseExecProblem getATECaseExecProblem(Object source,
+			AbstractATEException ateException) {
+		//TODO add more exception and problem type
+		synchronized (this) {
+			IATECaseExecProblem retVal;
+			if (ateException instanceof StepExecutionException2) {
+				retVal = (IATECaseExecProblem) new StepExecutionProblem2(source,
+						(StepExecutionException2) ateException);
+
+			} else if (ateException instanceof PageValidationException2) {
+				retVal = (IATECaseExecProblem) new PageValidationProblem2(source,
+						(PageValidationException2) ateException);
+			} else {
+				retVal = (IATECaseExecProblem) new GenericATEProblem(source, ateException);
+			}
+			return retVal;
+		}
+	}
 
 }

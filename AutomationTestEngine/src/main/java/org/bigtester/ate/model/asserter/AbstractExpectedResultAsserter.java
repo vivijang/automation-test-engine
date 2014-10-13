@@ -108,6 +108,11 @@ public abstract class AbstractExpectedResultAsserter implements ApplicationConte
 		
 	}
 	
+	/**
+	 * Gets the application context.
+	 *
+	 * @return the application context
+	 */
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}

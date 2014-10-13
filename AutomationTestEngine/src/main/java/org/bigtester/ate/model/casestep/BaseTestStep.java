@@ -61,6 +61,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/** The i expected result asserter. */
 	private IExpectedResultAsserter expectedResultAsserter;
 	
+	/** The application context. */
 	private ApplicationContext applicationContext;
 		
 	/**
@@ -219,6 +220,12 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 		this.applicationContext = applicationContext;
 		
 	}
+	
+	/**
+	 * Gets the application context.
+	 *
+	 * @return the application context
+	 */
 	public ApplicationContext getApplicationContext(){
 		return applicationContext;
 	}

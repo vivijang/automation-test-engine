@@ -23,11 +23,7 @@ package org.bigtester.ate.model.page.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.page.AbstractPageModelBase;
-import org.bigtester.ate.model.page.exception.PageValidationException;
-import org.openqa.selenium.NoSuchElementException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -63,36 +59,7 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 		return myWebElementList;
 	}
 
-	/**
-	 * Validate page.
-	 * 
-	 * @return true, if successful
-	 */
-	public boolean validatePage() throws PageValidationException {
-		boolean retVal;
-		if (myWebElementList.isEmpty()) {
-			retVal = false;
-		} else {
-			MyWebElement webelement;
-			for (int index = 0; index < myWebElementList.size(); index++) {
-				webelement = myWebElementList.get(index);
-				try {
-					webelement.getElementFind().doFind(getMyWd(),
-							webelement.getElementFind().getFindByValue());
-				} catch (NoSuchElementException e) {
-					PageValidationException pve = new PageValidationException(
-							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-							webelement.getElementFind());
-					pve.initCause(e);
-					throw pve;
-				}
-			}
-			retVal = true;	
-		} 
-		return retVal;
-	}
-
+	
 	/**
 	 * @return the pageName
 	 */

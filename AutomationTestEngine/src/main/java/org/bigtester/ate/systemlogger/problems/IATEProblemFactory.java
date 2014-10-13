@@ -40,4 +40,13 @@ public interface IATEProblemFactory {
 	 */
 	Problem getATEProblem(Object source, AbstractATEException ateException);
 	
+	/**
+	 * Gets the ATE case exec problem.
+	 *
+	 * @param source the source
+	 * @param ateException the ate exception
+	 * @return the ATE case exec problem
+	 */
+	IATECaseExecProblem getATECaseExecProblem(Object source, AbstractATEException ateException);
+	
 }

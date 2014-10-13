@@ -21,7 +21,9 @@
 package org.bigtester.ate.systemlogger.problems;
 
 
-import org.bigtester.ate.model.page.exception.PageValidationException;
+import org.bigtester.ate.model.IATECaseExecException;
+import org.bigtester.ate.model.casestep.ITestStep;
+import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 
 // TODO: Auto-generated Javadoc
@@ -31,7 +33,7 @@ import org.bigtester.ate.model.page.exception.PageValidationException2;
  * @author Peidong Hu
  * 
  */
-public class PageValidationProblem2 extends GenericATEProblem {
+public class PageValidationProblem2 extends GenericATEProblem implements IATECaseExecProblem {
 
 	/** The test data exception. */
 	private final transient PageValidationException2 pageValException;
@@ -56,6 +58,46 @@ public class PageValidationProblem2 extends GenericATEProblem {
 	 */
 	public PageValidationException2 getStepExecException() {
 		return pageValException;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TestCase getCurrentTestCase() {
+		return this.pageValException.getCurrentTestCase();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ITestStep getCurrentTestStep() {
+		return this.pageValException.getCurrentTestCase().getCurrentTestStep();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getProblemMessage() {
+		return getATECaseExecException().getMessage();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IATECaseExecException getATECaseExecException() {
+		return this.getStepExecException();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getErrorCode() {
+		return this.getStepExecException().getErrorCode();
 	}
 
 }

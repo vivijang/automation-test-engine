@@ -22,7 +22,6 @@ package org.bigtester.ate.model.asserter;
 
 
 
-import org.bigtester.ate.model.page.exception.PageValidationException;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 
 // TODO: Auto-generated Javadoc

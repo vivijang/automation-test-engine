@@ -23,7 +23,6 @@ package org.bigtester.ate.model.page.page;
 import java.util.List;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.exception.PageValidationException;
 
 
 // TODO: Auto-generated Javadoc
@@ -54,12 +53,5 @@ public interface IPageObject {
 	 */
 	List<MyWebElement> getMyWebElementList();
 	
-	/**
-	 * Validate page.
-	 *
-	 * @return true, if successful
-	 * @throws PageValidationException the page validation exception
-	 */
-	boolean validatePage() throws PageValidationException;
-	
+		
 }

@@ -23,22 +23,16 @@ package org.bigtester.ate.systemlogger.problemhandler;
 import java.util.Properties;
 
 import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.model.casestep.ITestStep;
 import org.bigtester.ate.model.casestep.TestCase;
-import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.exception.StepExecutionException;
-import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
-import org.bigtester.ate.systemlogger.problems.PageValidationProblem2;
-import org.bigtester.ate.systemlogger.problems.StepExecutionProblem;
-import org.bigtester.ate.systemlogger.problems.StepExecutionProblem2;
+import org.bigtester.ate.systemlogger.problems.IATECaseExecProblem;
 import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
 import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -49,22 +43,14 @@ import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
  */
 public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		ProblemHandler {
-	
+
 	/** The Constant slf4jLogger. */
-	
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void handleProblem(Problem aProblem) {
-
-		//		slf4jLogger.trace("Hello World!");
-		//        System.out.println("test on screen!");
-		//        String name = "Abhijit";
-		//        slf4jLogger.debug("Hi, {}", name);
-		//        slf4jLogger.info("Welcome to the HelloWorld example of Logback.");
-		//        slf4jLogger.warn("Dummy warning message.");
 
 		//TODO add code to handle the other problems
 		//problems are clasified as the following categories,
@@ -74,67 +60,35 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 		//4) page validation exception: test pass with bug; (passed test with bug)
 		TestCase pTC;
 		ITestStep pTS;
-		String errorCode;
 		String logMsg;
-		if (aProblem instanceof StepExecutionProblem2) {
-			StepExecutionProblem2 sep = (StepExecutionProblem2) aProblem;
-			StepExecutionException2 see = sep.getStepExecException();
-			errorCode = see.getErrorCode();
-			switch (errorCode) {
+		if (aProblem instanceof IATECaseExecProblem) {
+			IATECaseExecProblem caseExecProblem = (IATECaseExecProblem) aProblem;
+			switch (caseExecProblem.getErrorCode()) {
 			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				pTC = see.getCurrentTestCase();
-				pTS = pTC.getCurrentTestStep();
+				pTC = caseExecProblem.getCurrentTestCase();
+				pTS = caseExecProblem.getCurrentTestStep();
 				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
-				+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
-				+ pTS.getStepDescription() + LogbackTag.TAG_SEPERATOR
-				+ ((StepExecutionProblem) aProblem).getStepExecException().getMessage();
-				if (pTS.isTargetStep() ) {
+						+ pTS.getStepName()	+ LogbackTag.TAG_SEPERATOR
+						+ pTS.getStepDescription()	+ LogbackTag.TAG_SEPERATOR
+						+ caseExecProblem.getProblemMessage();
+				if (pTS.isTargetStep()) {
 					LogbackWriter.writeAppError(logMsg);
 				} else {
 					LogbackWriter.writeAppWarning(logMsg);
 				}
-				//pTC.getCurrentWebDriver().getWebDriver().quit();
 				break;
 			case ExceptionErrorCode.UNKNOWN_ERROR:
-				LogbackWriter.writeAppError("Uncaught Application Error.");
+				LogbackWriter.writeAppError(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS);
 				break;
 			default:
-				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
-				break;
-			}
-		} else if (aProblem instanceof PageValidationProblem2) {
-			PageValidationProblem2 sep = (PageValidationProblem2) aProblem;
-			PageValidationException2 see = sep.getStepExecException();
-			errorCode = see.getErrorCode();
-			switch (errorCode) {
-			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				pTC = see.getCurrentTestCase();
-				pTS = pTC.getCurrentTestStep();
-				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
-				+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
-				+ pTS.getStepDescription() + LogbackTag.TAG_SEPERATOR
-				+ ((PageValidationProblem2) aProblem).getStepExecException().getMessage();
-				if (pTS.isTargetStep() ) {
-					LogbackWriter.writeAppError(logMsg);
-				} else {
-					LogbackWriter.writeAppWarning(logMsg);
-				}
-				//pTC.getCurrentWebDriver().getWebDriver().quit();
-				break;
-			case ExceptionErrorCode.UNKNOWN_ERROR:
-				LogbackWriter.writeAppError("Uncaught Application Error.");
-				break;
-			default:
-				LogbackWriter.writeAppInfo("//TODO problem default handling msg.");
+				LogbackWriter
+						.writeAppInfo("//TODO problem default handling msg.");
 				break;
 			}
 		} else {
-			LogbackWriter.writeAppError("Uncaught Application Error.");
+			LogbackWriter.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS + LogbackTag.TAG_SEPERATOR
+										+ aProblem.getSource().toString() + aProblem.getMessages().toString());
 		}
-		
-			
-		
-		
 	}
 
 	/**
@@ -146,5 +100,4 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 
 	}
 
-	
 }

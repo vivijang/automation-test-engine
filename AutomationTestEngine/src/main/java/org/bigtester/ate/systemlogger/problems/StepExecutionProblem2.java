@@ -20,8 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.systemlogger.problems;
 
-import org.bigtester.ate.model.page.exception.StepExecutionException;
+import org.bigtester.ate.model.IATECaseExecException;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.bigtester.ate.model.casestep.ITestStep;
 import org.bigtester.ate.model.casestep.TestCase;
 
 
@@ -32,7 +33,7 @@ import org.bigtester.ate.model.casestep.TestCase;
  * @author Peidong Hu
  * 
  */
-public class StepExecutionProblem2 extends GenericATEProblem {
+public class StepExecutionProblem2 extends GenericATEProblem implements IATECaseExecProblem{
 	
 	
 	
@@ -73,6 +74,54 @@ public class StepExecutionProblem2 extends GenericATEProblem {
 	public TestCase getProblemTestCase() {
 		return problemTestCase;
 	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TestCase getCurrentTestCase() {
+		return this.stepExecException.getCurrentTestCase();
+	}
+
+
+
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ITestStep getCurrentTestStep() {
+		return this.getCurrentTestCase().getCurrentTestStep();
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getProblemMessage() {
+		return this.getATECaseExecException().getMessage();
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IATECaseExecException getATECaseExecException() {
+		return this.getStepExecException();
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getErrorCode() {
+		return this.getStepExecException().getErrorCode();
+	}
+
 
 }

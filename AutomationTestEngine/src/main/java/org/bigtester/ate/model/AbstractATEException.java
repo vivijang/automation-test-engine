@@ -35,7 +35,10 @@ public abstract class AbstractATEException extends Exception {
 	private final String errorCode;
 
 	/** The flag of already point cut. */
-	private boolean alreadyPointCut;
+	private boolean alreadyCasePointCut;
+	
+	/** The already sys point cut. */
+	private boolean alreadySysPointCut;
 	
 	/**
 	 * Gets the error code.
@@ -60,14 +63,28 @@ public abstract class AbstractATEException extends Exception {
 	/**
 	 * @return the pointCutFlag
 	 */
-	public boolean isAlreadyPointCut() {
-		return alreadyPointCut;
+	public boolean isAlreadyCasePointCut() {
+		return alreadyCasePointCut;
 	}
 
 	/**
 	 * @param pointCutFlag the pointCutFlag to set
 	 */
-	public void setAlreadyPointCut(boolean alreadyPointCut) {
-		this.alreadyPointCut = alreadyPointCut;
+	public void setAlreadyCasePointCut(boolean alreadyPointCut) {
+		this.alreadyCasePointCut = alreadyPointCut;
+	}
+
+	/**
+	 * @return the alreadySysPointCut
+	 */
+	public boolean isAlreadySysPointCut() {
+		return alreadySysPointCut;
+	}
+
+	/**
+	 * @param alreadySysPointCut the alreadySysPointCut to set
+	 */
+	public void setAlreadySysPointCut(boolean alreadySysPointCut) {
+		this.alreadySysPointCut = alreadySysPointCut;
 	}
 }

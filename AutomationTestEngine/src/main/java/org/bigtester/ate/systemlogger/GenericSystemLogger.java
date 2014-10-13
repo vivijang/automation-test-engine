@@ -24,6 +24,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.ate.model.AbstractATEException;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -52,12 +53,19 @@ public class GenericSystemLogger {
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
+		if (error instanceof AbstractATEException
+				&& ((AbstractATEException) error).isAlreadyCasePointCut() && ((AbstractATEException) error).isAlreadySysPointCut()) {
+			return;
+		}
 		if (error instanceof TestDataException) {
 			ITestResult itr = Reporter.getCurrentTestResult();
 			itr.setThrowable(error);
 		}
 		String[] fullST = Utils.stackTrace(error, false);
 		LogbackWriter.writeSysError("There has been an exception: " +joinPoint.getTarget().toString() + fullST[1] );
+		if (error instanceof AbstractATEException) {
+			((AbstractATEException) error).setAlreadySysPointCut(true);
+		}
 	}
 
 }

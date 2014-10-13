@@ -44,4 +44,11 @@ public interface IATECaseExecException {
 	 * @return the my web driver
 	 */
 	IMyWebDriver getMyWebDriver();
+	
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
+	String getMessage();
 }
