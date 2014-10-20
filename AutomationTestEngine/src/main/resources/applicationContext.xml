@@ -6,16 +6,10 @@
 	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
-	<import resource="db-services.xml"/>
-	<bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
-	<bean id="TestCaseLogger" class="org.bigtester.ate.systemlogger.GenericTestCaseLogger">
-<!-- 		<property name="currentTestCase" ref="testcase" /> -->
-		<!-- <property name="currentWebDriver" ref="MyWebDriver"/> -->
-	</bean>
-	<bean id="TestStepResult" class="org.bigtester.ate.resultmaker.StepResultMaker" />
 
-	<bean id="MyWebDriver"
-		class="org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver" />
+	<import resource="logger-reporter.xml" />
+	<import resource="abstract_parent_bean.xml" />
+
 	<bean id="testcase" name="testcase2name"
 		class="org.bigtester.ate.model.casestep.TestCase">
 		<property name="testCaseName" value="testcase name" />
@@ -28,35 +22,7 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="_PageObjModel" name="_PageObjModel" abstract="true"
-		class="org.bigtester.ate.model.page.AbstractPageModelBase">
-		<property name="myWd">
-			<ref bean="MyWebDriver"></ref>
-		</property>
-	</bean>
-	<bean id="_PageObj" name="_PageObj" abstract="true" parent="_PageObjModel"
-		class="org.bigtester.ate.model.page.page.AbstractPageObject">
-	</bean>
-	<bean id="dataValueAbstract" name="dataValueAbstract" abstract="true"
-		class="org.bigtester.ate.model.data.AbstractDataValue">
-		<property name="elementDataDao" ref="elementInputDataDao"/>
-	</bean>
-	<!-- abstract beans, won't be initialized by Spring -->
-	<bean id="efAbstract" name="efAbstract" abstract="true" 
-		class="org.bigtester.ate.model.page.elementfind.AbstractElementFind">
-	</bean>
-	<bean id="eaAbstract" name="eaAbstract" abstract="true" 
-		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
-	</bean>
-	<bean id="_abstractERAsserter" name="_abstractERAsserter" abstract="true" 
-		class="org.bigtester.ate.model.asserter.AbstractExpectedResultAsserter">
-	</bean>
-	
-<bean id="_abstractERValue" name="_abstractERValue" abstract="true" 
-		class="org.bigtester.ate.model.data.AbstractERValue">
-		<property name="stepERDao" ref="StepERDao"/>
-	</bean>
+
 	<!-- homestep definition -->
 	<bean id="homestep" class="org.bigtester.ate.model.casestep.HomeStep">
 		<property name="homepg">
@@ -65,7 +31,7 @@
 		<property name="stepName" value="homestep" />
 		<property name="stepDescription" value="open homepage" />
 		<property name="expectedResultAsserter">
-			<ref bean="homepageAsserter"/>	
+			<ref bean="homepageAsserter" />
 		</property>
 	</bean>
 	<bean id="homepageAsserter" name="homepageAsserter" parent="_abstractERAsserter"
@@ -78,13 +44,77 @@
 	<bean id="homestepValue" name="homestepValue" parent="_abstractERValue"
 		class="org.bigtester.ate.model.data.StepExpectedResultValue">
 		<property name="dataValueID">
-		<value type="java.lang.Long">1</value>
+			<value type="java.lang.Long">1</value>
 		</property>
 	</bean>
-	<bean id="myHomepage" name="myHomepage" parent="_PageObj"
+	<bean id="myHomepage" name="myHomepage" parent="_pageObj"
 		class="org.bigtester.ate.model.page.page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />
 	</bean>
+
+	<!-- step1 definition -->
+	<bean id="step1" class="org.bigtester.ate.model.casestep.ElementTestStep">
+		<constructor-arg ref="myWebElement1"></constructor-arg>
+
+		<property name="stepName" value="step1" />
+		<property name="targetStep">
+			<value type="java.lang.Boolean">true</value>
+		</property>
+		<property name="stepDescription" value="input user name" />
+	</bean>
+	<bean id="myWebElement1" name="myWebElement1" parent="_pageObjModel"
+		class="org.bigtester.ate.model.page.page.MyWebElement">
+		<constructor-arg ref="elementFind1"></constructor-arg>
+		<constructor-arg ref="elementAction1"></constructor-arg>
+	</bean>
+	<bean id="elementFind1" name="elementFind1" parent="_elementFindAbstract"
+		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
+		<property name="findByValue" value="modlgn_username" />
+	</bean>
+
+	<bean id="elementAction1" name="elementAction1" parent="_elementActionAbstract"
+		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
+		<property name="dataValue">
+			<ref bean="usernameValue" />
+		</property>
+	</bean>
+	<bean id="usernameValue" name="usernameValue" parent="_inputDataValueAbstract"
+		class="org.bigtester.ate.model.data.StepDataValue">
+		<property name="dataValueID">
+			<value type="java.lang.Long">1</value>
+		</property>
+	</bean>
+
+	<!-- step2 definition -->
+	<bean id="step2" class="org.bigtester.ate.model.casestep.ElementTestStep">
+		<constructor-arg ref="myWebElement2"></constructor-arg>
+		<property name="stepName" value="step2" />
+		<property name="stepDescription" value="fill password" />
+	</bean>
+	<bean id="myWebElement2" name="myWebElement2" parent="_pageObjModel"
+		class="org.bigtester.ate.model.page.page.MyWebElement">
+		<constructor-arg ref="elementFind2"></constructor-arg>
+		<constructor-arg ref="elementAction2"></constructor-arg>
+	</bean>
+	<bean id="elementFind2" name="elementFind2" parent="_elementFindAbstract"
+		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
+		<property name="findByValue" value="modlgn_passwd" />
+	</bean>
+
+	<bean id="elementAction2" name="elementAction2" parent="_elementActionAbstract"
+		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
+		<property name="dataValue">
+			<ref bean="usernameValue2" />
+		</property>
+	</bean>
+
+	<bean id="usernameValue2" name="usernameValue2" parent="_inputDataValueAbstract"
+		class="org.bigtester.ate.model.data.StepDataValue">
+		<property name="dataValueID">
+			<value type="java.lang.Long">3</value>
+		</property>
+	</bean>
+
 	<!-- laststep definition -->
 	<bean id="laststep" class="org.bigtester.ate.model.casestep.LastStep">
 		<property name="lastPage">
@@ -93,70 +123,7 @@
 		<property name="stepName" value="laststep" />
 		<property name="stepDescription" value="closeBrowser" />
 	</bean>
-	<bean id="myLastpage" name="myLastpage" parent="_PageObj"
+	<bean id="myLastpage" name="myLastpage" parent="_pageObj"
 		class="org.bigtester.ate.model.page.page.Lastpage">
 	</bean>
-
-	<!-- step1 definition -->
-	<bean id="step1" class="org.bigtester.ate.model.casestep.ElementTestStep">
-		<constructor-arg ref="myWe1"></constructor-arg>
-
-		<property name="stepName" value="step1" />
-		<property name="targetStep">
-			<value type="java.lang.Boolean">true</value>
-		</property>
-		<property name="stepDescription" value="input user name" />
-	</bean>
-	<bean id="myWe1" name="myWe1" parent="_PageObjModel"
-		class="org.bigtester.ate.model.page.page.MyWebElement">
-		<constructor-arg ref="ef1"></constructor-arg>
-		<constructor-arg ref="ea1"></constructor-arg>
-	</bean>
-	<bean id="ef1" name="ef1" parent="efAbstract"
-		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
-		<property name="findByValue" value="modlgn_username" />
-	</bean>
-
-	<bean id="ea1" name="ea1" parent="eaAbstract"
-		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
-		<property name="dataValue">
-		<ref bean="usernameValue"/>
-		</property>
-	</bean>
-	<bean id="usernameValue" name="usernameValue" parent="dataValueAbstract"
-		class="org.bigtester.ate.model.data.StepDataValue">
-		<property name="dataValueID" >
-		<value type="java.lang.Long">1</value>
-		</property>
-	</bean>
-	<!-- step2 definition -->
-	<bean id="step2" class="org.bigtester.ate.model.casestep.ElementTestStep">
-		<constructor-arg ref="myWe2"></constructor-arg>
-		<property name="stepName" value="step2" />
-		<property name="stepDescription" value="fill password" />
-	</bean>
-	<bean id="myWe2" name="myWe2" parent="_PageObjModel"
-		class="org.bigtester.ate.model.page.page.MyWebElement">
-		<constructor-arg ref="ef2"></constructor-arg>
-		<constructor-arg ref="ea2"></constructor-arg>
-	</bean>
-	<bean id="ef2" name="ef2" parent="efAbstract"
-		class="org.bigtester.ate.model.page.elementfind.ElementFindById">
-		<property name="findByValue" value="modlgn_passwd" />
-	</bean>
-
-	<bean id="ea2" name="ea2" parent="eaAbstract"
-		class="org.bigtester.ate.model.page.elementaction.SendKeysAction">
-		<property name="dataValue">
-		<ref bean="usernameValue2"/>
-		</property>
-	</bean>
-	
-	<bean id="usernameValue2" name="usernameValue2" parent="dataValueAbstract"
-		class="org.bigtester.ate.model.data.StepDataValue">
-		<property name="dataValueID" >
-		<value type="java.lang.Long">3</value>
-		</property>
-	</bean>
-
 </beans>

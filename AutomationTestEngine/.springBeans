@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.5.1.201404300732-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.6.2.201410090854-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -12,6 +12,9 @@
 		<config>src/test/resources/META-INF/Test-applicationContext.xml</config>
 		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/testproject.xml</config>
+		<config>src/main/resources/META-INF/logger-reporter.xml</config>
+		<config>src/main/resources/META-INF/mywebdriver.xml</config>
+		<config>src/main/resources/META-INF/abstract_parent_bean.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

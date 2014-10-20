@@ -103,6 +103,7 @@ public final class ATEPageFactory implements IATEPageFactory {
 				ElementFindById efbIDd = new ElementFindById();
 				efbIDd.setFindByValue(findByValue);
 				retVal = (IElementFind) efbIDd;
+				break;
 			}
 			return retVal;
 		}
