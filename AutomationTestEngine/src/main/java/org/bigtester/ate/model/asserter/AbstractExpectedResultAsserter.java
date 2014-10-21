@@ -59,7 +59,7 @@ public abstract class AbstractExpectedResultAsserter implements ApplicationConte
 	public List<Long> getInterestingERDBIndexes() {
 		return interestingERDBIndexes;
 	}
-
+	
 	/**
 	 * Gets the result page.
 	 *

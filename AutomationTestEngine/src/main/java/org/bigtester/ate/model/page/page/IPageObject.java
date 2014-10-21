@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.page;
 import java.util.List;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.openqa.selenium.Cookie;
 
 
 // TODO: Auto-generated Javadoc
@@ -53,5 +54,24 @@ public interface IPageObject {
 	 */
 	List<MyWebElement> getMyWebElementList();
 	
-		
+	/**
+	 * Gets the cookies.
+	 *
+	 * @return the cookies
+	 */
+	List<Cookie> getCookies();	
+	
+	/**
+	 * Gets the page title.
+	 *
+	 * @return the page title
+	 */
+	String getPageTitle();
+	
+	/**
+	 * Sets the page title.
+	 *
+	 * @param pageTitle the new page title
+	 */
+	void setPageTitle(String pageTitle);
 }

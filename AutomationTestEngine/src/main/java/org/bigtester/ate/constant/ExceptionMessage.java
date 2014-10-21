@@ -37,6 +37,10 @@ public final class ExceptionMessage {
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
 	public static final String MSG_TESTDATA_NOTFOUND = "Test Data not Found.";
 	
+	
+	/** The Constant MSG_NONCORRECT_PAGEPROPERTY. */
+	public static final String MSG_NONCORRECT_PAGEPROPERTY = "Page PROPERTY is wrong.";
+	
 	/** The Constant MSG_UNCAUGHT_APP_ERROR. */
 	public static final String MSG_UNCAUGHT_APP_ERRORS = "Uncaught Application Error.";
 	

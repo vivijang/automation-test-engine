@@ -35,7 +35,7 @@
 		</property>
 	</bean>
 	<bean id="homepageAsserter" name="homepageAsserter" parent="_abstractERAsserter"
-		class="org.bigtester.ate.model.asserter.PageElementExistenceAsserter">
+		class="org.bigtester.ate.model.asserter.PagePropertyCorrectnessAsserter">
 		<constructor-arg ref="myHomepage"></constructor-arg>
 		<property name="stepERValue">
 			<ref bean="homestepValue"></ref>

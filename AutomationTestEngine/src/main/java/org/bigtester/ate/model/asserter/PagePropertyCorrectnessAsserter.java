@@ -20,25 +20,161 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-
-
+import org.bigtester.ate.constant.AssertType;
+import org.bigtester.ate.constant.EnumAssertResult;
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.constant.PagePropertyType;
+import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
+import org.bigtester.ate.model.page.page.IPageObject;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class PagePropertyCorrectnessAsserter defines ....
+ * This class PagePropertyCorrectnessAsserter validates non web element property
+ * value including 1) cookie; 2) page title
+ * 
  * @author Peidong Hu
  *
  */
-public class PagePropertyCorrectnessAsserter extends AbstractExpectedResultAsserter implements IExpectedResultAsserter{
-	
+public class PagePropertyCorrectnessAsserter extends
+		AbstractExpectedResultAsserter implements IExpectedResultAsserter {
+	/** The Constant EXIST. */
+	public final static String CORRECT = "Correct";
+
+	/** The Constant NOTEXIST. */
+	public final static String NOTCORRECT = "NotCorrect";
+	/**
+	 * @param pageObj
+	 */
+	public PagePropertyCorrectnessAsserter(IPageObject pageObj) {
+		super();
+		setResultPage(pageObj);
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setStepERValue(StepExpectedResultValue stepERValue) {
+		super.setStepERValue(stepERValue);
+
+		for (int i = 0; i < stepERValue.getValue().size(); i++) {
+			if (stepERValue.getValue().get(i).getTestDataContext()
+					.getContextFieldValue()
+					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
+				String assertProperty = stepERValue.getValue().get(i)
+						.getAssertProperty();
+				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
+					Cookie cki = new Cookie(stepERValue.getValue().get(i)
+							.getAssertValue(), stepERValue.getValue().get(i)
+							.getElementFindByValue());
+					super.getResultPage().getCookies().add(cki);
+					interestingERDBIndexes.add(stepERValue.getValue().get(i)
+							.getIdColumn());
+				} else if (PagePropertyType.PAGE_TITLE
+						.equalsIgnoreCase(assertProperty)) {
+					super.getResultPage().setPageTitle(
+							stepERValue.getValue().get(i).getAssertValue());
+					interestingERDBIndexes.add(stepERValue.getValue().get(i)
+							.getIdColumn());
+				}
+			}
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean assertER() throws PageValidationException2 {
-		// TODO Auto-generated method stub
-		return false;
+		execResult.setStepExpectedResultValue(getStepERValue());
+
+		boolean retVal = true; // NOPMD
+
+		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
+
+		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
+			if (getStepERValue().getValue().get(i).getTestDataContext()
+					.getContextFieldValue()
+					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
+				String assertProperty = getStepERValue().getValue().get(i)
+						.getAssertProperty();
+				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
+
+					Cookie cki = new Cookie(getStepERValue().getValue().get(i)
+							.getAssertValue(), getStepERValue().getValue()
+							.get(i).getElementFindByValue());
+					if (webDriver.manage().getCookies().contains(cki)) {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), CORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYCORRECT);
+					} else {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), NOTCORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						PageValidationException2 pve = new PageValidationException2(
+								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
+								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
+								cki.toString(),
+								getResultPage().getMyWd(),
+								(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
+						retVal = false;// NOPMD
+						throw pve;
+						
+					}
+				} else if (PagePropertyType.PAGE_TITLE
+						.equalsIgnoreCase(assertProperty)) {
+					if (webDriver.getTitle()
+							.equals(getStepERValue().getValue().get(i)
+									.getAssertValue())) {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), CORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYCORRECT);
+					} else {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), NOTCORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						PageValidationException2 pve = new PageValidationException2(
+								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
+								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
+								PagePropertyType.PAGE_TITLE,
+								getResultPage().getMyWd(),
+								(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
+						retVal = false; // NOPMD
+						throw pve;
+					}
+				}
+			}
+		}
+		return retVal;
 	}
 
 }

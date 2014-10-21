@@ -22,12 +22,28 @@ package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class EnumAssertResult defines ....
+ * This class ExceptionErrorCode defines ....
  * @author Peidong Hu
  *
  */
-public enum EnumAssertResult {
-	//TOTO add more result values
-	PAGEELEMENTEXIST, PAGEELEMENTNOTEXIST, ELEMENTPROPERTYCORRECT, ELEMENTPROPERTYNOTCORRECT,
-	PAGEPROPERTYCORRECT, PAGEPROPERTYNOTCORRECT
+public final class PagePropertyType {
+	
+	
+	
+	/** The Constant PAGE_TITLE. */
+	public static final String PAGE_TITLE = "Page_Title";
+	
+	
+	/** The Constant COOKIE. */
+	public static final String COOKIE = "Cookie";
+	
+	/** The Constant UNKNOWN TYPE. */
+	public static final String UNKNOWN_TYPE = "0000";
+	
+	/**
+	 * Instantiates a new exception error code.
+	 */
+	private PagePropertyType(){
+	    throw new AssertionError();
+	  }
 }

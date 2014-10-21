@@ -37,18 +37,47 @@ public class PageValidationException2 extends AbstractATECaseExecE {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7144577815429959503L;
 	
-	
-	
+	/** The page property. */
+	private transient String pageProperty;
 	/** The element find. */
-	private final IElementFind elementFind;
-     
+	private transient IElementFind elementFind;
+	
+	/**
+	 * Gets the page property.
+	 *
+	 * @return the pageProperty
+	 */
+	public String getPageProperty() {
+		return pageProperty;
+	}
+
+
+	
+	/**
+	 * Instantiates a new page validation exception2.
+	 *
+	 * @param message the message
+	 * @param errorCode the error code
+	 * @param pageProperty the page property
+	 * @param myWebDriver the my web driver
+	 * @param currentTestCase the current test case
+	 */
+	public PageValidationException2(String message, String errorCode, String pageProperty, IMyWebDriver myWebDriver, TestCase currentTestCase){
+        super(message, errorCode);
+        this.pageProperty = pageProperty;
+        setCurrentTestCase(currentTestCase);
+        setMyWebDriver(myWebDriver);
+    }
+    
     
     /**
-     * Instantiates a new page validation exception.
+     * Instantiates a new page validation exception2.
      *
      * @param message the message
      * @param errorCode the error code
      * @param eFind the e find
+     * @param myWebDriver the my web driver
+     * @param currentTestCase the current test case
      */
     public PageValidationException2(String message, String errorCode, IElementFind eFind, IMyWebDriver myWebDriver, TestCase currentTestCase){
         super(message, errorCode);

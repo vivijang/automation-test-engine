@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.openqa.selenium.Cookie;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,6 +40,40 @@ public abstract class AbstractPageObject extends AbstractPageModelBase {
 
 	/** The web element list. */
 	private List<MyWebElement> myWebElementList = new ArrayList<MyWebElement>();
+
+	/** The cookies. */
+	private List<Cookie> cookies = new ArrayList<Cookie>();
+	
+	/** The page title. */
+	private String pageTitle;
+	
+	/**
+	 * @return the pageTitle
+	 */
+	public String getPageTitle() {
+		return pageTitle;
+	}
+
+	/**
+	 * @param pageTitle the pageTitle to set
+	 */
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
+	}
+
+	/**
+	 * @return the cookies
+	 */
+	public List<Cookie> getCookies() {
+		return cookies;
+	}
+
+	/**
+	 * @param cookies the cookies to set
+	 */
+	public void setCookies(List<Cookie> cookies) {
+		this.cookies = cookies;
+	}
 
 	/**
 	 * Sets the my web element list.
