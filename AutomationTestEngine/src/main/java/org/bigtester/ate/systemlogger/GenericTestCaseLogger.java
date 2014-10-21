@@ -24,6 +24,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.AbstractATECaseExecE;
 import org.bigtester.ate.model.AbstractATEException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
@@ -34,6 +36,9 @@ import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
 import org.bigtester.ate.systemlogger.problems.IATEProblemFactory;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.Problomatic;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,8 +49,10 @@ import org.bigtester.problomatic2.Problomatic;
  * 
  */
 @Aspect
-public class GenericTestCaseLogger {
-
+public class GenericTestCaseLogger implements ApplicationContextAware{
+	
+	/** The app context. */
+	private transient ApplicationContext appContext;
 	/**
 	 * Select all method as pointcuts.
 	 */
@@ -53,6 +60,26 @@ public class GenericTestCaseLogger {
 	private void selectAll() { //NOPMD
 	}
 
+	private boolean isAlreadyCasePointCut(Throwable error) {
+		boolean retVal = false; //NOPMD
+		for (int i =0; i <error.getSuppressed().length; i++) {
+			if (error.getSuppressed()[i].getMessage().equalsIgnoreCase(ExceptionMessage.MSG_ALREADY_CASEPOINTCUT)) {
+				retVal = true; //NOPMD
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Sets the already case point cut.
+	 *
+	 * @param error the new already case point cut
+	 */
+	private void setAlreadyCasePointCut(Throwable error) {
+		Throwable flagT = new Exception(ExceptionMessage.MSG_ALREADY_CASEPOINTCUT);
+		error.addSuppressed(flagT);
+	}
+	
 	/**
 	 * After throwing advice.
 	 * 
@@ -69,17 +96,18 @@ public class GenericTestCaseLogger {
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
-		if (error instanceof AbstractATEException
-				&& ((AbstractATEException) error).isAlreadyCasePointCut()) {
+		if (isAlreadyCasePointCut(error)) {
 			return;
 		}
-
+		
 		ProblemLogbackHandler plbh = new ProblemLogbackHandler();
 
 		IMyWebDriver myWebDriver;
 		Problem prb;
 		ProblemBrowserHandler pbh;
-
+		
+		setAlreadyCasePointCut(error);
+		
 		if (error instanceof AbstractATEException
 				&& error instanceof AbstractATECaseExecE) {
 			IATEProblemFactory ipf = ATEProblemFactory.getInstance();
@@ -89,14 +117,32 @@ public class GenericTestCaseLogger {
 			myWebDriver = ((AbstractATECaseExecE) error).getMyWebDriver();
 			pbh = new ProblemBrowserHandler(myWebDriver);
 			Problomatic.addProblemHandlerForProblem(prb, pbh);
-			((AbstractATECaseExecE) error).setAlreadyCasePointCut(true);
 		} else {
 			prb = new GenericATEProblem(joinPoint.getTarget(),
-					(Exception) error);
-
+					error);
+			try {
+				myWebDriver = (IMyWebDriver) appContext.getBean(TestCaseConstants.BEANID_MYWEBDRIVER);
+				myWebDriver.getWebDriver().getCurrentUrl();
+				pbh = new ProblemBrowserHandler(myWebDriver);
+				Problomatic.addProblemHandlerForProblem(prb, pbh);
+			} catch (Exception ext) { //NOPMD
+				//if webdriver can't be successfully accessed, do nothing
+			}
 		}
+		
 		Problomatic.addProblemHandlerForProblem(prb, plbh);
 		Problomatic.handleProblem(prb);
+		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setApplicationContext(ApplicationContext arg0)
+			throws BeansException {
+		this.appContext = arg0;
+		
 	}
 
 }

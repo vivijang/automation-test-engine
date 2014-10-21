@@ -24,7 +24,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.bigtester.ate.model.AbstractATEException;
+import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -45,6 +45,25 @@ public class GenericSystemLogger {
 	@Pointcut("within(org.bigtester.ate..*)")
 	private void selectAll() {} //NOPMD
 
+	private boolean isAlreadySysPointCut(Throwable error) {
+		boolean retVal = false; //NOPMD
+		for (int i =0; i <error.getSuppressed().length; i++) {
+			if (error.getSuppressed()[i].getMessage().equalsIgnoreCase(ExceptionMessage.MSG_ALREADY_SYSPOINTCUT)) {
+				retVal = true; //NOPMD
+			}
+		}
+		return retVal;
+	}
+	
+	/**
+	 * Sets the already case point cut.
+	 *
+	 * @param error the new already case point cut
+	 */
+	private void setAlreadySysPointCut(Throwable error) {
+		Throwable flagT = new Exception(ExceptionMessage.MSG_ALREADY_SYSPOINTCUT);
+		error.addSuppressed(flagT);
+	}
 	/**
 	 * After throwing advice.
 	 *
@@ -53,19 +72,18 @@ public class GenericSystemLogger {
 	 */
 	@AfterThrowing(pointcut = "selectAll()", throwing = "error")
 	public void afterThrowingAdvice(JoinPoint joinPoint, Throwable error) {
-		if (error instanceof AbstractATEException
-				&& ((AbstractATEException) error).isAlreadyCasePointCut() && ((AbstractATEException) error).isAlreadySysPointCut()) {
+		if (isAlreadySysPointCut(error)) {
 			return;
 		}
+		setAlreadySysPointCut(error);
 		if (error instanceof TestDataException) {
 			ITestResult itr = Reporter.getCurrentTestResult();
 			itr.setThrowable(error);
 		}
 		String[] fullST = Utils.stackTrace(error, false);
-		LogbackWriter.writeSysError("There has been an exception: " +joinPoint.getTarget().toString() + fullST[1] );
-		if (error instanceof AbstractATEException) {
-			((AbstractATEException) error).setAlreadySysPointCut(true);
-		}
+		LogbackWriter.writeSysError(joinPoint.getTarget().toString() + fullST[1] );
+
+		
 	}
 
 }

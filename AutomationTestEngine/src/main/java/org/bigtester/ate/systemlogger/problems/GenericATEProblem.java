@@ -50,6 +50,19 @@ public class GenericATEProblem extends RawProblem {
 	}
 	
 	/**
+	 * Instantiates a new generic ate problem.
+	 *
+	 * @param source the source
+	 * @param exception the exception
+	 */
+	public GenericATEProblem(Object source, Throwable exception) {
+		super (source, exception);
+		String[] stackTraces = Utils.stackTrace(exception, false);
+		fullStackTrace = stackTraces[1];
+		shortStackTrace = stackTraces[0];
+	}
+	
+	/**
 	 * Gets the short stack trace.
 	 *
 	 * @return the shortStackTrace

@@ -40,8 +40,16 @@ public final class ExceptionMessage {
 	/** The Constant MSG_UNCAUGHT_APP_ERROR. */
 	public static final String MSG_UNCAUGHT_APP_ERRORS = "Uncaught Application Error.";
 	
+	
+	/** The Constant MSG_ALREADY_CASEPOINTCUT. */
+	public static final String MSG_ALREADY_CASEPOINTCUT = "Error Already Test Case Level Pointcut.";
+	
+	/** The Constant MSG_ALREADY_SYSPOINTCUT. */
+	public static final String MSG_ALREADY_SYSPOINTCUT = "Error Already System Level Pointcut.";
+	
 	/** The Constant MSG_UNSUPPORTED_LOGBACK_LEVEL. */
 	public static final String MSG_UNSUPPORTED_LOGBACK_LEVEL = "Unsupported logback error level.";
+	
 	
 	/**
 	 * Instantiates a new exception error code.
