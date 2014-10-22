@@ -26,6 +26,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumElementFindType;
 
 import lombok.Getter;
@@ -78,6 +79,14 @@ public class StepExpectedResult extends AbstractTestDataTable{
 	@Enumerated(EnumType.STRING)
 	@Column
 	private EnumElementFindType ElementFindBy; //NOPMD
+	
+	/** The assert priority. */
+	@Getter
+	@Setter
+	@Enumerated(EnumType.STRING)
+	@Column
+	private EnumAssertPriority assertPriority; //NOPMD
+	
 	
 	/**
 	 * Gets the element find by value.

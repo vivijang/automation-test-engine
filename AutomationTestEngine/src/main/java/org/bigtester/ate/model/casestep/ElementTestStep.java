@@ -20,14 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-
 import org.bigtester.ate.model.page.exception.PageValidationException2;
-
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -60,11 +62,11 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	public void doStep() throws StepExecutionException2, PageValidationException2 {
 		try {
 			getMyWebElement().doAction();
-			if (getExpectedResultAsserter() != null) {
-				for (int i=0; i < getExpectedResultAsserter().size(); i++) {
-					getExpectedResultAsserter().get(i).assertER();
-				}
-			}
+//			if (getExpectedResultAsserter() != null) {
+//				for (int i=0; i < getExpectedResultAsserter().size(); i++) {
+//					getExpectedResultAsserter().get(i).assertER();
+//				}
+//			}
 		} catch (NoSuchElementException e) {
 			StepExecutionException2 pve = new StepExecutionException2(
 					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
@@ -75,6 +77,27 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 					(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
 			pve.initCause(e);
 			throw pve;
+		}
+		if (getExpectedResultAsserter() != null) {
+			boolean flagThrowE = false;
+			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();
+			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
+				getExpectedResultAsserter().get(i).assertER2();
+				if (getExpectedResultAsserter().get(i).getExecResult().isFlagFailCase()) {
+					flagThrowE = true;
+				}
+				listAsserters.add(getExpectedResultAsserter().get(i));
+			}
+			if (flagThrowE) {
+				PageValidationException2 pve = new PageValidationException2(
+						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
+						ExceptionErrorCode.PAGEVALIDATION_HIGH,
+						listAsserters, getExpectedResultAsserter().get(0).getResultPage().getMyWd(),
+						(TestCase) getApplicationContext().getBean(
+								TestCaseConstants.BEANID_TESTCASE));
+				throw pve;
+			}
+			
 		}
 	}
 

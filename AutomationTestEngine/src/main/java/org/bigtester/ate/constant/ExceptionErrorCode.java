@@ -38,6 +38,9 @@ public final class ExceptionErrorCode {
 	/** The Constant WEBELEMENT_NOTFOUND. */
 	public static final String TESTDATA_NOTFOUND = "0002";
 	
+	/** The Constant PAGEVALIDATION_HIGH. */
+	public static final String PAGEVALIDATION_HIGH = "0004";
+	
 	/** The Constant UNKNOWN_ERROR. */
 	public static final String UNKNOWN_ERROR = "0000";
 	

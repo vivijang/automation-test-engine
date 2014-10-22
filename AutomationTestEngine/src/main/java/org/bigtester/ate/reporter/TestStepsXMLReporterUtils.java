@@ -122,6 +122,9 @@ public final class TestStepsXMLReporterUtils {
 									.getContextFieldValue());
 							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
 									+ serv.getValue().get(index)
+											.getAssertPriority());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ serv.getValue().get(index)
 											.getElementFindBy());
 							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
 									+ serv.getValue().get(index)

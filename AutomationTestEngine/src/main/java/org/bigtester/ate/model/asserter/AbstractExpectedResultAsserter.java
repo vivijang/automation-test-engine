@@ -52,6 +52,17 @@ public abstract class AbstractExpectedResultAsserter implements ApplicationConte
 	/** The application context. */
 	private ApplicationContext applicationContext;
 	
+	/** The Constant EXIST. */
+	public final static String CORRECT = "Correct";
+
+	/** The Constant NOTEXIST. */
+	public final static String NOTCORRECT = "NotCorrect";
+	
+	/** The Constant EXIST. */
+	public final static String EXIST = "Exist";
+	
+	/** The Constant NOTEXIST. */
+	public final static String NOTEXIST = "NotExist";
 	
 	/**
 	 * @return the interestingERDBIndexes

@@ -43,6 +43,13 @@ public class StepExecutionResult {
 	
 	/** The exec result. */
 	private final transient Map<Long, EnumAssertResult> comparedResult = new HashMap<Long, EnumAssertResult>(); //NOPMD
+	
+	/** The failed results. */
+	private Map<Long, EnumAssertResult> failedResults = new HashMap<Long, EnumAssertResult>(); //NOPMD
+	
+	/** The flag fail case. */
+	private boolean flagFailCase;
+	
 	/**
 	 * @return the stepExpectedResultValue
 	 */
@@ -76,6 +83,34 @@ public class StepExecutionResult {
 	 */
 	public Map<Long, EnumAssertResult> getComparedResult() {
 		return comparedResult;
+	}
+
+	/**
+	 * @return the failedResults
+	 */
+	public Map<Long, EnumAssertResult> getFailedResults() {
+		return failedResults;
+	}
+
+	/**
+	 * @param failedResults the failedResults to set
+	 */
+	public void setFailedResults(Map<Long, EnumAssertResult> failedResults) {
+		this.failedResults = failedResults;
+	}
+
+	/**
+	 * @return the flagFailCase
+	 */
+	public boolean isFlagFailCase() {
+		return flagFailCase;
+	}
+
+	/**
+	 * @param flagFailCase the flagFailCase to set
+	 */
+	public void setFlagFailCase(boolean flagFailCase) {
+		this.flagFailCase = flagFailCase;
 	}
 
 		

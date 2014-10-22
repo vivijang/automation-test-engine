@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.asserter;
 
 import org.bigtester.ate.constant.AssertType;
+import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
@@ -43,11 +44,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class PagePropertyCorrectnessAsserter extends
 		AbstractExpectedResultAsserter implements IExpectedResultAsserter {
-	/** The Constant EXIST. */
-	public final static String CORRECT = "Correct";
 
-	/** The Constant NOTEXIST. */
-	public final static String NOTCORRECT = "NotCorrect";
 	/**
 	 * @param pageObj
 	 */
@@ -56,6 +53,7 @@ public class PagePropertyCorrectnessAsserter extends
 		setResultPage(pageObj);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -131,12 +129,12 @@ public class PagePropertyCorrectnessAsserter extends
 						PageValidationException2 pve = new PageValidationException2(
 								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
 								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
-								cki.toString(),
-								getResultPage().getMyWd(),
-								(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
+								cki.toString(), getResultPage().getMyWd(),
+								(TestCase) getApplicationContext().getBean(
+										TestCaseConstants.BEANID_TESTCASE));
 						retVal = false;// NOPMD
 						throw pve;
-						
+
 					}
 				} else if (PagePropertyType.PAGE_TITLE
 						.equalsIgnoreCase(assertProperty)) {
@@ -165,9 +163,10 @@ public class PagePropertyCorrectnessAsserter extends
 						PageValidationException2 pve = new PageValidationException2(
 								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
 								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
-								PagePropertyType.PAGE_TITLE,
-								getResultPage().getMyWd(),
-								(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
+								PagePropertyType.PAGE_TITLE, getResultPage()
+										.getMyWd(),
+								(TestCase) getApplicationContext().getBean(
+										TestCaseConstants.BEANID_TESTCASE));
 						retVal = false; // NOPMD
 						throw pve;
 					}
@@ -177,4 +176,89 @@ public class PagePropertyCorrectnessAsserter extends
 		return retVal;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void assertER2() {
+		execResult.setStepExpectedResultValue(getStepERValue());
+
+		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
+
+		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
+			if (getStepERValue().getValue().get(i).getTestDataContext()
+					.getContextFieldValue()
+					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
+				String assertProperty = getStepERValue().getValue().get(i)
+						.getAssertProperty();
+				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
+
+					Cookie cki = new Cookie(getStepERValue().getValue().get(i)
+							.getAssertValue(), getStepERValue().getValue()
+							.get(i).getElementFindByValue());
+					if (webDriver.manage().getCookies().contains(cki)) {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), CORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYCORRECT);
+					} else {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), NOTCORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
+										.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						if (getStepERValue().getValue().get(i)
+								.getAssertPriority() != null && getStepERValue().getValue().get(i)
+										.getAssertPriority().equals(EnumAssertPriority.HIGH)) {
+							execResult.setFlagFailCase(true);
+						}
+					}
+				} else if (PagePropertyType.PAGE_TITLE
+						.equalsIgnoreCase(assertProperty)) {
+					if (webDriver.getTitle()
+							.equals(getStepERValue().getValue().get(i)
+									.getAssertValue())) {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), CORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYCORRECT);
+					} else {
+						execResult
+								.getActualResult()
+								.getResultSet()
+								.put(getStepERValue().getValue().get(i)
+										.getIdColumn(), NOTCORRECT);
+						execResult.getComparedResult().put(
+								getStepERValue().getValue().get(i)
+										.getIdColumn(),
+								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
+								.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+						if (getStepERValue().getValue().get(i)
+								.getAssertPriority() != null && getStepERValue().getValue().get(i)
+										.getAssertPriority().equals(EnumAssertPriority.HIGH)) {
+							execResult.setFlagFailCase(true);
+						}
+					}
+				}
+			}
+		}
+
+	}
 }

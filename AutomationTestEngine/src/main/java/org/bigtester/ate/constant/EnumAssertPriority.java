@@ -18,46 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.asserter;
-
-
-import org.bigtester.ate.model.data.StepExecutionResult;
-import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.page.IPageObject;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class IExpectedResultAsserter defines ....
+ * This class EnumElementFindType defines ....
  * @author Peidong Hu
  *
  */
-public interface IExpectedResultAsserter {
-	
-	/**
-	 * Assert er.
-	 *
-	 * @return true, if successful
-	 */
-	boolean assertER() throws PageValidationException2;
-	
-	/**
-	 * Assert e r2.
-	 */
-	void assertER2();
-	
-	/**
-	 * Gets the result page.
-	 *
-	 * @return the result page
-	 */
-	IPageObject getResultPage();
-	
-	/**
-	 * Gets the exec result.
-	 *
-	 * @return the exec result
-	 */
-	StepExecutionResult getExecResult();
-	
-	//List<Long> getInterestingERDBIndexes();
+public enum EnumAssertPriority {
+	HIGH, MEDIUM, LOW
 }

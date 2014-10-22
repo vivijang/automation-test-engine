@@ -21,7 +21,10 @@
 package org.bigtester.ate.model.page.exception;
 
 
+import java.util.List;
+
 import org.bigtester.ate.model.AbstractATECaseExecE;
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
@@ -42,6 +45,27 @@ public class PageValidationException2 extends AbstractATECaseExecE {
 	/** The element find. */
 	private transient IElementFind elementFind;
 	
+	/** The list asserters. */
+	private List<IExpectedResultAsserter> listAsserters;
+	
+	/**
+	 * @return the listAsserters
+	 */
+	public List<IExpectedResultAsserter> getListAsserters() {
+		return listAsserters;
+	}
+
+
+
+	/**
+	 * @param listAsserters the listAsserters to set
+	 */
+	public void setListAsserters(List<IExpectedResultAsserter> listAsserters) {
+		this.listAsserters = listAsserters;
+	}
+
+
+
 	/**
 	 * Gets the page property.
 	 *
@@ -85,7 +109,24 @@ public class PageValidationException2 extends AbstractATECaseExecE {
         setCurrentTestCase(currentTestCase);
         setMyWebDriver(myWebDriver);
     }
-     
+
+    /**
+     * Instantiates a new page validation exception2.
+     *
+     * @param message the message
+     * @param errorCode the error code
+     * @param listAsserters the list asserters
+     * @param myWebDriver the my web driver
+     * @param currentTestCase the current test case
+     */
+    public PageValidationException2(String message, String errorCode, List<IExpectedResultAsserter> listAsserters, IMyWebDriver myWebDriver, TestCase currentTestCase){
+        super(message, errorCode);
+        this.listAsserters = listAsserters;
+        setCurrentTestCase(currentTestCase);
+        setMyWebDriver(myWebDriver);
+    }
+
+        
 
 	/**
 	 * Gets the element find.

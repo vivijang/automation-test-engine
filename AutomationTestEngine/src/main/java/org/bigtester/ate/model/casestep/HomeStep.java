@@ -20,9 +20,15 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
-import org.bigtester.ate.annotation.StepLoggable;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.bigtester.ate.annotation.StepLoggable;
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.page.IHomepage;
 
@@ -68,10 +74,28 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	@StepLoggable
 	public void doStep() throws PageValidationException2{
 		homepg.startHomepage();
+		
 		if (getExpectedResultAsserter() != null) {
+			boolean flagThrowE = false;
+			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();
 			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
-				getExpectedResultAsserter().get(i).assertER();
+				listAsserters.add(getExpectedResultAsserter().get(i));
+				getExpectedResultAsserter().get(i).assertER2();
+				if (getExpectedResultAsserter().get(i).getExecResult().isFlagFailCase()) {
+					flagThrowE = true;
+				}
+				
 			}
+			if (flagThrowE) {
+				PageValidationException2 pve = new PageValidationException2(
+						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
+						ExceptionErrorCode.PAGEVALIDATION_HIGH,
+						listAsserters, getExpectedResultAsserter().get(0).getResultPage().getMyWd(),
+						(TestCase) getApplicationContext().getBean(
+								TestCaseConstants.BEANID_TESTCASE));
+				throw pve;
+			}
+			
 		}
 	}
 
