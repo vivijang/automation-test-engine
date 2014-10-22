@@ -61,7 +61,9 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 		try {
 			getMyWebElement().doAction();
 			if (getExpectedResultAsserter() != null) {
-				getExpectedResultAsserter().assertER();
+				for (int i=0; i < getExpectedResultAsserter().size(); i++) {
+					getExpectedResultAsserter().get(i).assertER();
+				}
 			}
 		} catch (NoSuchElementException e) {
 			StepExecutionException2 pve = new StepExecutionException2(

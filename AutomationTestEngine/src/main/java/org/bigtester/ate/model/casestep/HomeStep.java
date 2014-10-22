@@ -69,7 +69,9 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	public void doStep() throws PageValidationException2{
 		homepg.startHomepage();
 		if (getExpectedResultAsserter() != null) {
-			getExpectedResultAsserter().assertER();
+			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
+				getExpectedResultAsserter().get(i).assertER();
+			}
 		}
 	}
 

@@ -31,7 +31,10 @@
 		<property name="stepName" value="homestep" />
 		<property name="stepDescription" value="open homepage" />
 		<property name="expectedResultAsserter">
-			<ref bean="homepageAsserter" />
+			<list>
+				<ref bean="homepageAsserter" />
+				<ref bean="homepageAsserter2" />
+			</list>
 		</property>
 	</bean>
 	<bean id="homepageAsserter" name="homepageAsserter" parent="_abstractERAsserter"
@@ -41,12 +44,22 @@
 			<ref bean="homestepValue"></ref>
 		</property>
 	</bean>
+	
+	<bean id="homepageAsserter2" name="homepageAsserter2" parent="_abstractERAsserter"
+		class="org.bigtester.ate.model.asserter.PageElementExistenceAsserter">
+		<constructor-arg ref="myHomepage"></constructor-arg>
+		<property name="stepERValue">
+			<ref bean="homestepValue"></ref>
+		</property>
+	</bean>
+	
 	<bean id="homestepValue" name="homestepValue" parent="_abstractERValue"
 		class="org.bigtester.ate.model.data.StepExpectedResultValue">
 		<property name="dataValueID">
 			<value type="java.lang.Long">1</value>
 		</property>
 	</bean>
+	
 	<bean id="myHomepage" name="myHomepage" parent="_pageObj"
 		class="org.bigtester.ate.model.page.page.Homepage">
 		<property name="homeUrl" value="http://www.bigtester.com" />

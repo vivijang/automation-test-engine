@@ -31,8 +31,6 @@ import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
 import org.testng.reporters.XMLStringBuffer;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
  * This class TestStepsXMLReporter defines ....
@@ -83,8 +81,8 @@ public final class TestStepsXMLReporterUtils {
 	 * @param iCount
 	 *            the i
 	 */
-	private static void addStep(XMLStringBuffer xmlBuffer,
-			TestStepResult tsr, int iCount) {
+	private static void addStep(XMLStringBuffer xmlBuffer, TestStepResult tsr,
+			int iCount) {
 		Properties attrs = new Properties();
 		attrs.setProperty(ATEXMLReporterConfig.ATTR_INDEX,
 				String.valueOf(iCount));
@@ -93,12 +91,12 @@ public final class TestStepsXMLReporterUtils {
 		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_DESC);
 		String testData;
 		String stepReportMSG;
-		if (tsr.getThisStep().isElementStepFlag())
-		{
+		if (tsr.getThisStep().isElementStepFlag()) {
 			MyWebElement mwe = tsr.getThisStep().getMyWebElement();
-			if (mwe.getElementAction().isDataValuedActionFlag()){
+			if (mwe.getElementAction().isDataValuedActionFlag()) {
 				testData = mwe.getElementAction().getDataValue().getValue();
-				stepReportMSG = tsr.getThisStep().getStepDescription() + ReportMessage.MSG_SEPERATOR + testData;
+				stepReportMSG = tsr.getThisStep().getStepDescription()
+						+ ReportMessage.MSG_SEPERATOR + testData;
 			} else {
 				stepReportMSG = tsr.getThisStep().getStepDescription();
 			}
@@ -109,20 +107,45 @@ public final class TestStepsXMLReporterUtils {
 		xmlBuffer.pop();
 		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_RESULT);
 		if (tsr.getThisStep().getExpectedResultAsserter() != null) {
-			StepExecutionResult ser = tsr.getThisStep().getExpectedResultAsserter().getExecResult();
-			StepExpectedResultValue serv = ser.getStepExpectedResultValue();
 			StringBuffer stepResultMSG = new StringBuffer("");
-			for (int index = 0; index < serv.getValue().size(); index++) {
-				if (ser.getActualResult().getResultSet().get(serv.getValue().get(index).getIdColumn()) != null ) {
-					stepResultMSG.append(serv.getValue().get(index).getTestDataContext().getContextFieldValue());
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getElementFindBy());
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getElementFindByValue());
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getAssertProperty());
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + serv.getValue().get(index).getAssertValue());
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + ReportMessage.MSG_SEPERATOR + 
-					ser.getActualResult().getResultSet().get(serv.getValue().get(index).getIdColumn()));
-					stepResultMSG.append(ReportMessage.MSG_SEPERATOR + ReportMessage.MSG_SEPERATOR + 
-					ser.getComparedResult().get(serv.getValue().get(index).getIdColumn()).toString());
+			for (int i = 0; i < tsr.getThisStep().getExpectedResultAsserter()
+					.size(); i++) {
+				StepExecutionResult ser = tsr.getThisStep()
+						.getExpectedResultAsserter().get(i).getExecResult();
+				StepExpectedResultValue serv = ser.getStepExpectedResultValue();
+				if (serv != null) {
+					for (int index = 0; index < serv.getValue().size(); index++) {
+						if (ser.getActualResult().getResultSet()
+								.get(serv.getValue().get(index).getIdColumn()) != null) {
+							stepResultMSG.append(serv.getValue().get(index)
+									.getTestDataContext()
+									.getContextFieldValue());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ serv.getValue().get(index)
+											.getElementFindBy());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ serv.getValue().get(index)
+											.getElementFindByValue());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ serv.getValue().get(index)
+											.getAssertProperty());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ serv.getValue().get(index)
+											.getAssertValue());
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ ReportMessage.MSG_SEPERATOR
+									+ ser.getActualResult()
+											.getResultSet()
+											.get(serv.getValue().get(index)
+													.getIdColumn()));
+							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+									+ ReportMessage.MSG_SEPERATOR
+									+ ser.getComparedResult()
+											.get(serv.getValue().get(index)
+													.getIdColumn()).toString());
+							stepResultMSG.append('\n');
+						}
+					}
 					stepResultMSG.append('\n');
 				}
 			}

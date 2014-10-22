@@ -21,6 +21,8 @@
 package org.bigtester.ate.model.casestep;
 
 
+import java.util.List;
+
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
@@ -59,7 +61,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	private MyWebElement myWebElement;
 	
 	/** The i expected result asserter. */
-	private IExpectedResultAsserter expectedResultAsserter;
+	private List<IExpectedResultAsserter> expectedResultAsserter;
 	
 	/** The application context. */
 	private ApplicationContext applicationContext;
@@ -200,14 +202,14 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/**
 	 * @return the iExpectedResultAsserter
 	 */
-	public IExpectedResultAsserter getExpectedResultAsserter() {
+	public List<IExpectedResultAsserter> getExpectedResultAsserter() {
 		return expectedResultAsserter;
 	}
 
 	/**
 	 * @param iExpectedResultAsserter the iExpectedResultAsserter to set
 	 */
-	public void setExpectedResultAsserter(IExpectedResultAsserter iExpectedResultAsserter) {
+	public void setExpectedResultAsserter(List<IExpectedResultAsserter> iExpectedResultAsserter) {
 		this.expectedResultAsserter = iExpectedResultAsserter;
 	}
 
