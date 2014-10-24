@@ -76,13 +76,13 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 		homepg.startHomepage();
 		
 		if (getExpectedResultAsserter() != null) {
-			boolean flagThrowE = false;
-			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();
+			boolean flagThrowE = false;//NOPMD
+			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();//NOPMD
 			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
 				listAsserters.add(getExpectedResultAsserter().get(i));
 				getExpectedResultAsserter().get(i).assertER2();
 				if (getExpectedResultAsserter().get(i).getExecResult().isFlagFailCase()) {
-					flagThrowE = true;
+					flagThrowE = true;//NOPMD
 				}
 				
 			}
