@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Properties;
 
 import org.bigtester.ate.constant.ReportMessage;
-import org.bigtester.ate.model.data.StepExecutionResult;
-import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
@@ -110,47 +108,50 @@ public final class TestStepsXMLReporterUtils {
 			StringBuffer stepResultMSG = new StringBuffer("");
 			for (int i = 0; i < tsr.getThisStep().getExpectedResultAsserter()
 					.size(); i++) {
-				StepExecutionResult ser = tsr.getThisStep()
-						.getExpectedResultAsserter().get(i).getExecResult();
-				StepExpectedResultValue serv = ser.getStepExpectedResultValue();
-				if (serv != null) {
-					for (int index = 0; index < serv.getValue().size(); index++) {
-						if (ser.getActualResult().getResultSet()
-								.get(serv.getValue().get(index).getIdColumn()) != null) {
-							stepResultMSG.append(serv.getValue().get(index)
-									.getTestDataContext()
-									.getContextFieldValue());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ serv.getValue().get(index)
-											.getAssertPriority());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ serv.getValue().get(index)
-											.getElementFindBy());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ serv.getValue().get(index)
-											.getElementFindByValue());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ serv.getValue().get(index)
-											.getAssertProperty());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ serv.getValue().get(index)
-											.getAssertValue());
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ ReportMessage.MSG_SEPERATOR
-									+ ser.getActualResult()
-											.getResultSet()
-											.get(serv.getValue().get(index)
-													.getIdColumn()));
-							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
-									+ ReportMessage.MSG_SEPERATOR
-									+ ser.getComparedResult()
-											.get(serv.getValue().get(index)
-													.getIdColumn()).toString());
-							stepResultMSG.append('\n');
-						}
-					}
-					stepResultMSG.append('\n');
-				}
+				stepResultMSG.append(tsr.getThisStep()
+				.getExpectedResultAsserter().get(i).getAssertReportMSG());
+				stepResultMSG.append('\n');
+//				StepExecutionResult ser = tsr.getThisStep()
+//						.getExpectedResultAsserter().get(i).getExecResult();
+//				StepExpectedResultValue serv = ser.getStepExpectedResultValue();
+//				if (serv != null) {
+//					for (int index = 0; index < serv.getValue().size(); index++) {
+//						if (ser.getActualResult().getResultSet()
+//								.get(serv.getValue().get(index).getIdColumn()) != null) {
+//							stepResultMSG.append(serv.getValue().get(index)
+//									.getTestDataContext()
+//									.getContextFieldValue());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ serv.getValue().get(index)
+//											.getAssertPriority());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ serv.getValue().get(index)
+//											.getElementFindBy());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ serv.getValue().get(index)
+//											.getElementFindByValue());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ serv.getValue().get(index)
+//											.getAssertProperty());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ serv.getValue().get(index)
+//											.getAssertValue());
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ ReportMessage.MSG_SEPERATOR
+//									+ ser.getActualResult()
+//											.getResultSet()
+//											.get(serv.getValue().get(index)
+//													.getIdColumn()));
+//							stepResultMSG.append(ReportMessage.MSG_SEPERATOR
+//									+ ReportMessage.MSG_SEPERATOR
+//									+ ser.getComparedResult()
+//											.get(serv.getValue().get(index)
+//													.getIdColumn()).toString());
+//							stepResultMSG.append('\n');
+//						}
+//					}
+//					stepResultMSG.append('\n');
+//				}
 			}
 			xmlBuffer.addCDATA(stepResultMSG.toString());
 		}

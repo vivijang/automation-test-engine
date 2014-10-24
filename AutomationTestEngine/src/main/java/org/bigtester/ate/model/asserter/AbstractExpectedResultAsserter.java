@@ -64,6 +64,16 @@ public abstract class AbstractExpectedResultAsserter implements ApplicationConte
 	/** The Constant NOTEXIST. */
 	public final static String NOTEXIST = "NotExist";
 	
+	/** The assert report msg. */
+	protected transient String assertReportMSG="";
+	/**
+	 * @return the assertReportMSG
+	 */
+	public String getAssertReportMSG() {
+		return assertReportMSG;
+	}
+
+	
 	/**
 	 * @return the interestingERDBIndexes
 	 */

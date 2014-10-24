@@ -86,7 +86,7 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 				}
 				
 			}
-			if (flagThrowE) {
+			if (flagThrowE && isTargetStep()) {
 				PageValidationException2 pve = new PageValidationException2(
 						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
 						ExceptionErrorCode.PAGEVALIDATION_HIGH,

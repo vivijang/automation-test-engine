@@ -88,7 +88,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 				}
 				listAsserters.add(getExpectedResultAsserter().get(i));
 			}
-			if (flagThrowE) {
+			if (flagThrowE && isTargetStep()) {
 				PageValidationException2 pve = new PageValidationException2(
 						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
 						ExceptionErrorCode.PAGEVALIDATION_HIGH,

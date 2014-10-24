@@ -28,6 +28,9 @@
 		<property name="homepg">
 			<ref bean="myHomepage" />
 		</property>
+		<property name="targetStep">
+			<value type="java.lang.Boolean">false</value>
+		</property>
 		<property name="stepName" value="homestep" />
 		<property name="stepDescription" value="open homepage" />
 		<property name="expectedResultAsserter">

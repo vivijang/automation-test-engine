@@ -22,7 +22,6 @@ package org.bigtester.ate.systemlogger.problemhandler;
 
 import java.util.Properties;
 
-import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.model.casestep.ITestStep;
@@ -52,42 +51,35 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 	@Override
 	public void handleProblem(Problem aProblem) {
 
-		//TODO add code to handle the other problems
-		//problems are clasified as the following categories,
-		//1) target Step element not found: test error; (failed test)
-		//2) non-target Step exeception or error: test dependency error; (test dependency error)
-		//3) page validation error : test error; (failed test)
-		//4) page validation exception: test pass with bug; (passed test with bug)
+		// TODO add code to handle the other problems
+		// problems are clasified as the following categories,
+		// 1) target Step element not found: test error; (failed test)
+		// 2) non-target Step exeception or error: test dependency error; (test
+		// dependency error)
+		// 3) page validation error : test error; (failed test)
+		// 4) page validation exception: test pass with bug; (passed test with
+		// bug)
 		TestCase pTC;
 		ITestStep pTS;
-		String logMsg;
+
 		if (aProblem instanceof IATECaseExecProblem) {
 			IATECaseExecProblem caseExecProblem = (IATECaseExecProblem) aProblem;
-			switch (caseExecProblem.getErrorCode()) {
-			case ExceptionErrorCode.WEBELEMENT_NOTFOUND:
-				pTC = caseExecProblem.getCurrentTestCase();
-				pTS = caseExecProblem.getCurrentTestStep();
-				logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
-						+ pTS.getStepName()	+ LogbackTag.TAG_SEPERATOR
-						+ pTS.getStepDescription()	+ LogbackTag.TAG_SEPERATOR
-						+ caseExecProblem.getProblemMessage();
-				if (pTS.isTargetStep()) {
-					LogbackWriter.writeAppError(logMsg);
-				} else {
-					LogbackWriter.writeAppWarning(logMsg);
-				}
-				break;
-			case ExceptionErrorCode.UNKNOWN_ERROR:
-				LogbackWriter.writeAppError(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS);
-				break;
-			default:
-				LogbackWriter
-						.writeAppInfo("//TODO problem default handling msg.");
-				break;
+			pTC = caseExecProblem.getCurrentTestCase();
+			pTS = caseExecProblem.getCurrentTestStep();
+			String logMsg = pTC.getTestCaseName() + LogbackTag.TAG_SEPERATOR
+					+ pTS.getStepName() + LogbackTag.TAG_SEPERATOR
+					+ pTS.getStepDescription() + LogbackTag.TAG_SEPERATOR
+					+ caseExecProblem.getProblemMessage();
+			if (pTS.isTargetStep()) {
+				LogbackWriter.writeAppError(logMsg);
+			} else {
+				LogbackWriter.writeAppWarning(logMsg);
 			}
 		} else {
-			LogbackWriter.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS + LogbackTag.TAG_SEPERATOR
-										+ aProblem.getSource().toString() + aProblem.getMessages().toString());
+			LogbackWriter.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS
+					+ LogbackTag.TAG_SEPERATOR
+					+ aProblem.getSource().toString()
+					+ aProblem.getMessages().toString());
 		}
 	}
 

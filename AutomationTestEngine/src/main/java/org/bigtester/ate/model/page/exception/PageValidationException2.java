@@ -120,7 +120,7 @@ public class PageValidationException2 extends AbstractATECaseExecE {
      * @param currentTestCase the current test case
      */
     public PageValidationException2(String message, String errorCode, List<IExpectedResultAsserter> listAsserters, IMyWebDriver myWebDriver, TestCase currentTestCase){
-        super(message, errorCode);
+    	super(message, errorCode);
         this.listAsserters = listAsserters;
         setCurrentTestCase(currentTestCase);
         setMyWebDriver(myWebDriver);

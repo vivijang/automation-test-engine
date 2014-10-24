@@ -59,5 +59,10 @@ public interface IExpectedResultAsserter {
 	 */
 	StepExecutionResult getExecResult();
 	
-	//List<Long> getInterestingERDBIndexes();
+	/**
+	 * Gets the assert report msg.
+	 *
+	 * @return the assert report msg
+	 */
+	String getAssertReportMSG();
 }

@@ -26,8 +26,10 @@ import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.PagePropertyType;
+import org.bigtester.ate.constant.ReportMessage;
 import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.page.IPageObject;
@@ -256,6 +258,45 @@ public class PagePropertyCorrectnessAsserter extends
 							execResult.setFlagFailCase(true);
 						}
 					}
+				}
+			}
+		}
+		StepExecutionResult ser = getExecResult();
+		StepExpectedResultValue serv = ser.getStepExpectedResultValue();
+		if (serv != null) {
+			for (int index = 0; index < serv.getValue().size(); index++) {
+				if (ser.getActualResult().getResultSet()
+						.get(serv.getValue().get(index).getIdColumn()) != null) {
+					assertReportMSG += serv.getValue().get(index)
+							.getTestDataContext()
+							.getContextFieldValue();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ serv.getValue().get(index)
+									.getAssertPriority();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ serv.getValue().get(index)
+									.getAssertProperty();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ serv.getValue().get(index)
+									.getAssertValue();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ serv.getValue().get(index)
+									.getElementFindBy();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ serv.getValue().get(index)
+									.getElementFindByValue();
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ ReportMessage.MSG_SEPERATOR
+							+ ser.getActualResult()
+									.getResultSet()
+									.get(serv.getValue().get(index)
+											.getIdColumn());
+					assertReportMSG += ReportMessage.MSG_SEPERATOR
+							+ ReportMessage.MSG_SEPERATOR
+							+ ser.getComparedResult()
+									.get(serv.getValue().get(index)
+											.getIdColumn()).toString();
+					assertReportMSG += '\n';
 				}
 			}
 		}
