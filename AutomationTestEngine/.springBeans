@@ -10,11 +10,11 @@
 		<config>src/test/resources/META-INF/Test-dbContext.xml</config>
 		<config>src/main/resources/META-INF/db-services.xml</config>
 		<config>src/test/resources/META-INF/Test-applicationContext.xml</config>
-		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/testproject.xml</config>
 		<config>src/main/resources/META-INF/logger-reporter.xml</config>
 		<config>src/main/resources/META-INF/mywebdriver.xml</config>
 		<config>src/main/resources/META-INF/abstract_parent_bean.xml</config>
+		<config>src/main/resources/TestCase1.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
