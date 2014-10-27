@@ -18,6 +18,7 @@
 				<ref bean="homestep" />
 				<ref bean="step1" />
 				<ref bean="step2" />
+				<ref bean="step3" />
 				<ref bean="laststep" />
 			</list>
 		</property>
@@ -130,6 +131,27 @@
 			<value type="java.lang.Long">3</value>
 		</property>
 	</bean>
+
+<!-- step3 definition -->
+	<bean id="step3" class="org.bigtester.ate.model.casestep.ElementTestStep">
+		<constructor-arg ref="myWebElement3"></constructor-arg>
+		<property name="stepName" value="step3" />
+		<property name="stepDescription" value="about menu" />
+	</bean>
+	<bean id="myWebElement3" name="myWebElement3" parent="_pageObjModel"
+		class="org.bigtester.ate.model.page.page.MyWebElement">
+		<constructor-arg ref="elementFind3"></constructor-arg>
+		<constructor-arg ref="elementAction3"></constructor-arg>
+	</bean>
+	<bean id="elementFind3" name="elementFind3" parent="_elementFindAbstract"
+		class="org.bigtester.ate.model.page.elementfind.ElementFindByLinkText">
+		<property name="findByValue" value="About" />
+	</bean>
+
+	<bean id="elementAction3" name="elementAction3" parent="_elementActionAbstract"
+		class="org.bigtester.ate.model.page.elementaction.CursorMoveAction">
+	</bean>
+
 
 	<!-- laststep definition -->
 	<bean id="laststep" class="org.bigtester.ate.model.casestep.LastStep">

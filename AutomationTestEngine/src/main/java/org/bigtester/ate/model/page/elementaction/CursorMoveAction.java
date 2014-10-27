@@ -18,24 +18,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.annotation;
+package org.bigtester.ate.model.page.elementaction;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.ElementType;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
-
+// TODO: Auto-generated Javadoc
 /**
- * This class StepLoggable defines ....
+ * The Class ClickAction defines ....
+ * 
  * @author Peidong Hu
- *
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(
-{
-    ElementType.METHOD, ElementType.TYPE
-})
-public @interface StepLoggable {
+public class CursorMoveAction extends AbstractElementAction implements
+		IElementAction {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void doAction(final WebElement webElm) {
+		Actions act = new Actions(getMyWd().getWebDriver());
+		act.moveToElement(webElm).build().perform();
+	}
+
+	
 
 }

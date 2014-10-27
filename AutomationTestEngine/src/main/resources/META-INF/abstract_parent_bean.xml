@@ -25,7 +25,7 @@
 	<bean id="_elementFindAbstract" name="_elementFindAbstract" abstract="true"
 		class="org.bigtester.ate.model.page.elementfind.AbstractElementFind">
 	</bean>
-	<bean id="_elementActionAbstract" name="_elementActionAbstract" abstract="true"
+	<bean id="_elementActionAbstract" name="_elementActionAbstract" abstract="true" parent="_pageObjModel"
 		class="org.bigtester.ate.model.page.elementaction.AbstractElementAction">
 	</bean>
 	<bean id="_abstractERAsserter" name="_abstractERAsserter"
