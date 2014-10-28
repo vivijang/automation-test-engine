@@ -9,8 +9,11 @@
 
 	<name>AutomationTestEngine</name>
 	<url>http://maven.apache.org</url>
-
 	<repositories>
+		<repository>
+			<id>github-repo</id>
+			<url>https://github.com/kpelykh/mvnrepo/raw/master/releases</url>
+		</repository>
 		<repository>
 			<id>ProjectRepo</id>
 			<name>ProjectRepo</name>
@@ -200,6 +203,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>net.xeon</groupId>
+			<artifactId>jspf.core</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
@@ -223,4 +231,5 @@
 		</dependency>
 
 	</dependencies>
+
 </project>
