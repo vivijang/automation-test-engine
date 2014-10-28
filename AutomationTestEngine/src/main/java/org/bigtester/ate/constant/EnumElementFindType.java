@@ -27,5 +27,5 @@ package org.bigtester.ate.constant;
  *
  */
 public enum EnumElementFindType {
-	ID, NAME
+	ID, NAME, LINKTEXT
 }

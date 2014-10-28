@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.page;
 import org.bigtester.ate.constant.EnumElementFindType;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.elementfind.ElementFindById;
+import org.bigtester.ate.model.page.elementfind.ElementFindByLinkText;
 import org.bigtester.ate.model.page.elementfind.ElementFindByName;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
@@ -98,6 +99,11 @@ public final class ATEPageFactory implements IATEPageFactory {
 				ElementFindByName efbName = new ElementFindByName();
 				efbName.setFindByValue(findByValue);
 				retVal = (IElementFind) efbName;
+				break;
+			case LINKTEXT:
+				ElementFindByLinkText efbLinkText = new ElementFindByLinkText();
+				efbLinkText.setFindByValue(findByValue);
+				retVal = (IElementFind) efbLinkText;
 				break;
 			default:
 				ElementFindById efbIDd = new ElementFindById();
