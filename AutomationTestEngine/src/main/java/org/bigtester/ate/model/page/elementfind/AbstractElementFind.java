@@ -34,6 +34,23 @@ public abstract class AbstractElementFind {
 	/** The find by value. */
 	private String findByValue;
 	
+	/** The find by index. */
+	private int findByIndex;
+	
+	/**
+	 * @return the findByIndex
+	 */
+	public int getFindByIndex() {
+		return findByIndex;
+	}
+
+	/**
+	 * @param findByIndex the findByIndex to set
+	 */
+	public void setFindByIndex(int findByIndex) {
+		this.findByIndex = findByIndex;
+	}
+
 	/**
 	 * Do find.
 	 * 
@@ -41,13 +58,14 @@ public abstract class AbstractElementFind {
 	 *            the find by value
 	 * @return the web element
 	 */
-	public abstract WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
+	public abstract WebElement doFind(IMyWebDriver myWebDriver, String findByValue, int index);
 	
 	/**
 	 * Gets the find by value.
 	 * 
 	 * @return the find by value
 	 */
+	
 	public String getFindByValue() {
 		return findByValue;
 	}

@@ -35,8 +35,14 @@ public class ElementFindByClassName extends AbstractElementFind implements IElem
 	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
-		return myWebDriver.getWebDriver().findElement(By.className(findByValue));
+	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue, int index) {
+		WebElement wel;
+		if (index == 0) {
+			wel = myWebDriver.getWebDriver().findElement(By.className(findByValue));
+		} else {
+			wel = myWebDriver.getWebDriver().findElements(By.className(findByValue)).get(index);
+		}
+		return wel;
 	}
 
 

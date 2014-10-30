@@ -96,7 +96,7 @@ public class PageElementExistenceAsserter extends
 				try {
 					webelement.getElementFind().doFind(
 							getResultPage().getMyWd(),
-							webelement.getElementFind().getFindByValue());
+							webelement.getElementFind().getFindByValue(), webelement.getElementFind().getFindByIndex());
 				} catch (NoSuchElementException e) {
 					execResult.getActualResult().getResultSet()
 							.put(interestingERDBIndexes.get(index), NOTEXIST);
@@ -141,7 +141,7 @@ public class PageElementExistenceAsserter extends
 				try {
 					webelement.getElementFind().doFind(
 							getResultPage().getMyWd(),
-							webelement.getElementFind().getFindByValue());
+							webelement.getElementFind().getFindByValue(), webelement.getElementFind().getFindByIndex());
 					execResult.getActualResult().getResultSet()
 							.put(interestingERDBIndexes.get(index), EXIST);
 					execResult.getComparedResult().put(

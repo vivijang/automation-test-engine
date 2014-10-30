@@ -159,7 +159,7 @@
 		<property name="stepName" value="step4" />
 		<property name="stepDescription" value="Quebec NEQ Certificate menu" />
 		<property name="targetStep">
-			<value type="java.lang.Boolean">true</value>
+			<value type="java.lang.Boolean">false</value>
 		</property>
 		<property name="expectedResultAsserter">
 			<list>

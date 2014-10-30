@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementfind;
 
+import net.xeoh.plugins.base.Plugin;
+
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -29,16 +31,18 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public interface IElementFind {
+public interface IElementFind extends Plugin{
+	
 	
 	/**
-	 * Do find of the element.
-	 * 
-	 * @param findByValue
-	 *            the find by value
+	 * Do find.
+	 *
+	 * @param myWebDriver the my web driver
+	 * @param findByValue the find by value
+	 * @param index the index
 	 * @return the web element
 	 */
-	WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
+	WebElement doFind(IMyWebDriver myWebDriver, String findByValue, int index);
 	
 	/**
 	 * Gets the find by value.
@@ -46,4 +50,12 @@ public interface IElementFind {
 	 * @return the find by value
 	 */
 	String getFindByValue();
+	
+	
+	/**
+	 * Gets the find by index.
+	 *
+	 * @return the find by index
+	 */
+	int getFindByIndex();
 }

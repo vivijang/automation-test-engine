@@ -90,7 +90,7 @@ public class MyWebElement extends AbstractPageModelBase{
 	 * Do action.
 	 */
 	public void doAction() {
-		elementAction.doAction(elementFind.doFind(getMyWd(), elementFind.getFindByValue()));
+		elementAction.doAction(elementFind.doFind(getMyWd(), elementFind.getFindByValue(), elementFind.getFindByIndex()));
 	}
 
 }

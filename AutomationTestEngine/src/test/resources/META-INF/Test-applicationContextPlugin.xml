@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xmlns:jcl="http://www.xeustechnologies.org/schema/jcl" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.xeustechnologies.org/schema/jcl http://www.xeustechnologies.org/schema/jcl/jcl.xsd">
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+	<jcl:jcl id="jcl1">
+        <constructor-arg>
+            <list>
+                <value>target/testplugin.jar</value>
+            </list>
+        </constructor-arg>
+    </jcl:jcl>
+   <bean id="jclFactory" class="org.xeustechnologies.jcl.JclObjectFactory" />
+   
+	<bean id="usernameValue2" name="usernameValue2" factory-bean="jclFactory" factory-method="create">
+		 <!-- Factory-method arguments -->
+        <constructor-arg>
+            <ref bean="jcl1" />
+        </constructor-arg>
+        <constructor-arg>
+            <value>org.bigtester.ate.plugins.elementfind.impl.ElementFindByJS</value>
+        </constructor-arg>
+        
+<!-- 		<jcl:jcl-ref ref="jcl1" /> -->
+		<property name="findByValue" value="abdd">
+		</property>
+	</bean>
+
+</beans>

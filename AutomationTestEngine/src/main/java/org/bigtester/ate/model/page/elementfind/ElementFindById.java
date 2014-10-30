@@ -30,18 +30,16 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public class ElementFindById extends AbstractElementFind implements IElementFind {
-
+public class ElementFindById extends AbstractElementFind implements
+		IElementFind {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
+	public WebElement doFind(IMyWebDriver myWebDriver,
+			final String findByValue, int index) {
 		return myWebDriver.getWebDriver().findElement(By.id(findByValue));
 	}
-
-	
-	
 
 }

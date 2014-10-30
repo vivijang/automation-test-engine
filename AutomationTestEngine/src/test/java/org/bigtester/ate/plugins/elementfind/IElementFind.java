@@ -1,3 +1,7 @@
+package org.bigtester.ate.plugins.elementfind;
+
+import org.springframework.plugin.core.Plugin;
+
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
@@ -18,33 +22,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementfind;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ElementFindByLinkText defines ....
- * @author Grace Hu
- *
+ * The Interface IElementFind defines ....
+ * 
+ * @author Peidong Hu
  */
-public class ElementFindByLinkText extends AbstractElementFind implements IElementFind{
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue, int index) {
-		WebElement wel;
-		if (index == 0) {
-			wel = myWebDriver.getWebDriver().findElement(By.linkText(findByValue));
-		} else {
-			wel = myWebDriver.getWebDriver().findElements(By.linkText(findByValue)).get(index);
-		}
-		return wel;
-	}
-
-
+public interface IElementFind {
 	
+	
+	/**
+	 * Do find.
+	 *
+	 * @param myWebDriver the my web driver
+	 * @param findByValue the find by value
+	 * @param index the index
+	 * @return the web element
+	 */
+	String doFind( String findByValue, int index);
+	
+	/**
+	 * Gets the find by value.
+	 * 
+	 * @return the find by value
+	 */
+	String getFindByValue();
+	
+	
+	/**
+	 * Gets the find by index.
+	 *
+	 * @return the find by index
+	 */
+	int getFindByIndex();
 }

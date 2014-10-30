@@ -32,32 +32,22 @@ import org.openqa.selenium.WebElement;
  */
 public class ElementFindByName extends AbstractElementFind implements IElementFind {
 	
-	/** The find by value. */
-	private String findByValue;
 	
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public String getFindByValue() {
-		return findByValue;
-	}
-	
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setFindByValue(final String findByValue) {
-		this.findByValue = findByValue;
-	}
 	
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
-		return myWebDriver.getWebDriver().findElement(By.name(findByValue));
+	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue, int index) {
+		WebElement wel;
+		if (index == 0) {
+			wel = myWebDriver.getWebDriver().findElement(By.name(findByValue));
+		} else {
+			wel = myWebDriver.getWebDriver().findElements(By.name(findByValue)).get(index);
+		}
+		return wel;
+		
 	}
 
 
