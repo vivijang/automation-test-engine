@@ -35,14 +35,26 @@ This document is built for developers to setup your code style and JAutoDoc tool
 	n) press 'Ctrl-Alt-j', All comments should be added automatically including the header and class comments. 
 	
  3) Install PMD through Eclipse marketplace
- 	a) click on menus window->preferences-java->PMD->rule configuration
- 	b) click 'Use global rule management'	
+    If you have previously installed a version of the PMD Eclipse plugin prior to November 2012, then you should remove/uninstall it first.
+    To install the PMD for Eclipse plugin:
+    In Eclipse, click on Help -> Install New Software...
+    Click on Add..
+    Enter the following:
+       Name: PMD for Eclipse Update Site
+       URL: https://sourceforge.net/projects/pmd/files/pmd-eclipse/update-site/
+    and click OK.
+    You should see PMD for Eclipse 4. Select the checkbox next to it and click Next >.
+    You'll need to accept the license and confirm you want to install a plugin that is not digitally signed. Go ahead and install it anyway.
+    Restart eclipse.
+ 
+    a) click on menus window->preferences-java->PMD->rule configuration
+    b) click 'Use global rule management' 
  	c) find rule 'CommentSize' and click on it
  	d) click on properties tab of this rule
  	e) change the maximum line length to 200
  	f) change the maximum lines to 50
  	f')click Rule Configuration,
- 	f'') uncheck rules 'LawofDemeter', 'LocalVariableCouldBeFinal', 'AvoidInstantiatingObjectsInLoops', all JUnit related rules
+ 	f'') uncheck rules 'AvoidInstantiatingObjectsInLoops', all JUnit related rules, 'LawofDemeter', 'LocalVariableCouldBeFinal', 
  	g) exit window->preferences dialog
  	h) enable PMD on your project by right click on 'AutomationTestEngine' project->properties->PMD 
  	i) click 'enable PMD'
