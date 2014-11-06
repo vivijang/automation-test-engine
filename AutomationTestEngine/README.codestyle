@@ -47,7 +47,7 @@ This document is built for developers to setup your code style and JAutoDoc tool
     You'll need to accept the license and confirm you want to install a plugin that is not digitally signed. Go ahead and install it anyway.
     Restart eclipse.
  
-    a) click on menus window->preferences-java->PMD->rule configuration
+    a) click on menus window->preferences->PMD->rule configuration
     b) click 'Use global rule management' 
  	c) find rule 'CommentSize' and click on it
  	d) click on properties tab of this rule
