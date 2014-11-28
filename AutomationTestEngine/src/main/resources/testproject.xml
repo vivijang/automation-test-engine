@@ -7,6 +7,7 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- this registers beans annotated with @Aspect -->  
     <aop:aspectj-autoproxy />  
+    
     <import resource="db-services.xml"/>
     <bean id="systemlogger" class="org.bigtester.ate.systemlogger.GenericSystemLogger" /> 
     
