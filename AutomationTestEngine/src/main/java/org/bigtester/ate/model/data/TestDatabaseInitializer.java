@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
