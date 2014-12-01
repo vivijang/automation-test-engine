@@ -20,8 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 
@@ -45,14 +45,14 @@ import org.springframework.core.io.Resource;
 public class TestDatabaseInitializer {
 	
 	/** The init xml file. */
-	private File initXmlFile;
+	private InputStream initXmlFile;
 
 	/**
 	 * Gets the inits the xml file.
 	 *
 	 * @return the initXmlFile
 	 */
-	public File getInitXmlFile() {
+	public InputStream getInitXmlFile() {
 		return initXmlFile;
 	}
 
@@ -63,7 +63,7 @@ public class TestDatabaseInitializer {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void setInitXmlFile(Resource initXmlFile) throws IOException {
-		this.initXmlFile = initXmlFile.getFile();
+		this.initXmlFile = initXmlFile.getInputStream();
 	}
 	
 	/**
