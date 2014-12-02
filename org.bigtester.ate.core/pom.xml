@@ -1,31 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
 	<groupId>org.bigtester</groupId>
-	<artifactId>AutomationTestEngine</artifactId>
+	<artifactId>org.bigtester.ate.core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>AutomationTestEngine</name>
+	<name>Automation Test Engine Core</name>
+	<description>The Automation Test Engine Core project</description>
 	<url>http://maven.apache.org</url>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/bigtester/automation-test-engine/tree/master/org.bigtester.ate.core</url>
+	</scm>
+
+
 	<repositories>
 		<!-- <repository> -->
 		<!-- <id>github-repo</id> -->
 		<!-- <url>https://github.com/kpelykh/mvnrepo/raw/master/releases</url> -->
 		<!-- </repository> -->
-		<repository>
-			<id>ProjectRepo</id>
-			<name>ProjectRepo</name>
-			<url>file://${project.basedir}/src/lib</url>
-		</repository>
-
-		<repository>
-			<id>projectlombok.org</id>
-			<url>http://projectlombok.org/mavenrepo</url>
-		</repository>
+		<!-- <repository> -->
+		<!-- <id>ProjectRepo</id> -->
+		<!-- <name>ProjectRepo</name> -->
+		<!-- <url>file://${project.basedir}/src/lib</url> -->
+		<!-- </repository> -->
 
 	</repositories>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
@@ -33,7 +47,20 @@
 		<logback.version>1.1.2</logback.version>
 	</properties>
 	<build>
-
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.5</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.4.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -74,7 +101,11 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
+							
 							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
+							<arguments>
+								<argument>testproject/testproject01.xml</argument>
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -100,69 +131,69 @@
 			<!-- </archive> -->
 			<!-- </configuration> -->
 			<!-- </plugin> -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.1</version>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-shade-plugin</artifactId> -->
+			<!-- <version>2.1</version> -->
 
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<finalName>ate</finalName>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>jar-with-dependencies</shadedClassifierName>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.handlers</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.schemas</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.tooling</resource>
-								</transformer>
-							</transformers>
-							<filters>
-								<filter>
-									<artifact>*:*</artifact>
-									<excludes>
-										<exclude>META-INF/*.SF</exclude>
-										<exclude>META-INF/*.DSA</exclude>
-										<exclude>META-INF/*.RSA</exclude>
-									</excludes>
-								</filter>
-							</filters>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <phase>package</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>shade</goal> -->
+			<!-- </goals> -->
+			<!-- <configuration> -->
+			<!-- <finalName>ate</finalName> -->
+			<!-- <shadedArtifactAttached>true</shadedArtifactAttached> -->
+			<!-- <shadedClassifierName>jar-with-dependencies</shadedClassifierName> -->
+			<!-- <transformers> -->
+			<!-- <transformer -->
+			<!-- implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> -->
+			<!-- <mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
+			<!-- </transformer> -->
+			<!-- <transformer -->
+			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
+			<!-- <resource>META-INF/spring.handlers</resource> -->
+			<!-- </transformer> -->
+			<!-- <transformer -->
+			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
+			<!-- <resource>META-INF/spring.schemas</resource> -->
+			<!-- </transformer> -->
+			<!-- <transformer -->
+			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
+			<!-- <resource>META-INF/spring.tooling</resource> -->
+			<!-- </transformer> -->
+			<!-- </transformers> -->
+			<!-- <filters> -->
+			<!-- <filter> -->
+			<!-- <artifact>*:*</artifact> -->
+			<!-- <excludes> -->
+			<!-- <exclude>META-INF/*.SF</exclude> -->
+			<!-- <exclude>META-INF/*.DSA</exclude> -->
+			<!-- <exclude>META-INF/*.RSA</exclude> -->
+			<!-- </excludes> -->
+			<!-- </filter> -->
+			<!-- </filters> -->
+			<!-- </configuration> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 
-<!-- 			<plugin> -->
-<!-- 				Build an executable JAR -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-jar-plugin</artifactId> -->
-<!-- 				<version>2.4</version> -->
-<!-- 				<configuration> -->
-<!-- 				<archive> -->
-<!-- 				<manifest> -->
-<!-- 				<addClasspath>true</addClasspath> -->
-<!-- 				<classpathPrefix></classpathPrefix> -->
-<!-- 				<mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
-<!-- 				</manifest> -->
-<!-- 				</archive> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- Build an executable JAR -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-jar-plugin</artifactId> -->
+			<!-- <version>2.4</version> -->
+			<!-- <configuration> -->
+			<!-- <archive> -->
+			<!-- <manifest> -->
+			<!-- <addClasspath>true</addClasspath> -->
+			<!-- <classpathPrefix></classpathPrefix> -->
+			<!-- <mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
+			<!-- </manifest> -->
+			<!-- </archive> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 		</plugins>
 
 	</build>
@@ -276,7 +307,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.bigtester</groupId>
-			<artifactId>problomatic2</artifactId>
+			<artifactId>org.bigtester.general.problomatic2</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- <dependency> -->

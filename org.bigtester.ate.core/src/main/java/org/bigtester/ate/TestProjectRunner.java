@@ -24,13 +24,13 @@ package org.bigtester.ate;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 
-
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.project.TestProject;
 import org.dbunit.DatabaseUnitException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -60,8 +60,12 @@ public final class TestProjectRunner {
 	 * @throws MalformedURLException 
 	 */
 	public static void main(final String... args) throws DatabaseUnitException, SQLException, MalformedURLException {
-		context = new ClassPathXmlApplicationContext(
+		if (args.length > 0) {
+			context = new FileSystemXmlApplicationContext(args[0]);
+		} else {
+			context = new ClassPathXmlApplicationContext(
 				"testproject.xml");
+		}
 		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean("dbInitializer");
 		
 		//TODO add db initialization handler
