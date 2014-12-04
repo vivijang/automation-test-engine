@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<snapshotDependencyAllowed>true</snapshotDependencyAllowed>
+		<snapshotDependencyAllowed>false</snapshotDependencyAllowed>
 	</properties>
 	<dependencies>
 		<dependency>
