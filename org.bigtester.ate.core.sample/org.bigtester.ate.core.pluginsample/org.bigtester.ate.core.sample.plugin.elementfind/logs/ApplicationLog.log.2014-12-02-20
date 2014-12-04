@@ -1,0 +1,37 @@
+2014-12-02 20:10:24,254 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="testproject/TestCase01.xml">
+    <classes>
+      <class name="org.bigtester.ate.model.project.CaseRunner"/>
+    </classes>
+  </test> <!-- testproject/TestCase01.xml -->
+</suite> <!-- suite1 -->
+
+2014-12-02 20:13:03,022 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="testproject/TestCase01.xml">
+    <classes>
+      <class name="org.bigtester.ate.model.project.CaseRunner"/>
+    </classes>
+  </test> <!-- testproject/TestCase01.xml -->
+</suite> <!-- suite1 -->
+
+2014-12-02 20:14:46,860 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="testproject/TestCase01.xml">
+    <classes>
+      <class name="org.bigtester.ate.model.project.CaseRunner"/>
+    </classes>
+  </test> <!-- testproject/TestCase01.xml -->
+</suite> <!-- suite1 -->
+
+2014-12-02 20:15:22,478 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: action tracing: send keys to browser: peidonghu1x
+2014-12-02 20:15:23,072 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: action tracing: send keys to browser: pa1x

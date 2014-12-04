@@ -1,0 +1,22 @@
+2014-12-02 19:08:14,443 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="testproject/TestCase01.xml">
+    <classes>
+      <class name="org.bigtester.ate.model.project.CaseRunner"/>
+    </classes>
+  </test> <!-- testproject/TestCase01.xml -->
+</suite> <!-- suite1 -->
+
+2014-12-02 19:08:42,848 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: Uncaught Application Error.->org.bigtester.ate.model.page.elementfind.ElementFindById@1a98f1fb[]
+2014-12-02 19:08:43,068 [main]           ERROR [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Error: testcase name->step2->input user name->Web Element not Found. ==> Unable to locate element: {"method":"id","selector":"modlgn_username"}
+Command duration or timeout: 2.49 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.43.1', revision: '5163bceef1bc36d43f3dc0b83c88998168a363a0', time: '2014-09-10 09:43:55'
+System info: host: 'ubuntu_file', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '3.13.0-39-generic', java.version: '1.7.0_65'
+Session ID: 648f0d10-bc9b-4089-b115-03473d8fee99
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{platform=LINUX, databaseEnabled=true, cssSelectorsEnabled=true, javascriptEnabled=true, acceptSslCerts=true, handlesAlerts=true, browserName=firefox, webStorageEnabled=true, nativeEvents=false, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=33.0}]

@@ -1,0 +1,15 @@
+2014-12-03 07:05:20,002 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+  <test name="testproject/TestCase01.xml">
+    <classes>
+      <class name="org.bigtester.ate.model.project.CaseRunner"/>
+    </classes>
+  </test> <!-- testproject/TestCase01.xml -->
+</suite> <!-- suite1 -->
+
+2014-12-03 07:06:18,069 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: action tracing: send keys to browser: peidonghu1x
+2014-12-03 07:06:18,174 [main]           INFO  [M: ]
+				org.bigtester.ate.systemlogger.LogbackWriter    :: APP_LOG: Test-Info: action tracing: send keys to browser: pa1x

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="suite1" duration-ms="58471" started-at="2014-12-03T15:05:20Z" finished-at="2014-12-03T15:06:18Z">
+    <groups>
+    </groups>
+    <test name="testproject/TestCase01.xml" duration-ms="58471" started-at="2014-12-03T15:05:20Z" finished-at="2014-12-03T15:06:18Z">
+      <class name="org.bigtester.ate.model.project.CaseRunner">
+        <test-method status="PASS" signature="testData(java.lang.reflect.Method, [Ljava.lang.Object;)[pri:0, instance:org.bigtester.ate.model.project.CaseRunner@26d5a1f5]" test-instance-name="" name="testData" is-config="true" duration-ms="2" started-at="2014-12-03T07:05:20Z" finished-at="2014-12-03T07:05:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void org.bigtester.ate.model.project.CaseRunner.runTest(org.bigtester.ate.model.data.TestParameters) throws java.lang.Throwable]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[[Ljava.lang.Object;@56b7219c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testData -->
+        <test-method status="PASS" signature="runTest(org.bigtester.ate.model.data.TestParameters)[pri:0, instance:org.bigtester.ate.model.project.CaseRunner@26d5a1f5]" test-instance-name="testproject/TestCase01.xml" name="runTest" duration-ms="58466" started-at="2014-12-03T07:05:20Z" data-provider="dp" finished-at="2014-12-03T07:06:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.bigtester.ate.model.data.TestParameters@1f826d31]]>
+              </value>
+            </param>
+          </params>
+          <Steps>
+            <Step name="homestep" index="0">
+              <StepDescription>
+                <![CDATA[open homepage]]>
+              </StepDescription>
+              <StepResult>
+                <![CDATA[
+Page_Element_Existence ==> null ==> ID ==> logo1 ==>  ==> NotExist ==>  ==> PAGEELEMENTNOTEXIST
+Page_Element_Existence ==> null ==> ID ==> banner ==>  ==> Exist ==>  ==> PAGEELEMENTEXIST
+Page_Element_Existence ==> null ==> ID ==> search_phu ==>  ==> Exist ==>  ==> PAGEELEMENTEXIST
+
+]]>
+              </StepResult>
+            </Step> <!-- homestep -->
+            <Step name="step1" index="1">
+              <StepDescription>
+                <![CDATA[Change homepage language]]>
+              </StepDescription>
+              <StepResult>
+              </StepResult>
+            </Step> <!-- step1 -->
+            <Step name="step2" index="2">
+              <StepDescription>
+                <![CDATA[input user name ==> peidonghu1x]]>
+              </StepDescription>
+              <StepResult>
+              </StepResult>
+            </Step> <!-- step2 -->
+            <Step name="step3" index="3">
+              <StepDescription>
+                <![CDATA[fill password1 ==> pa1x]]>
+              </StepDescription>
+              <StepResult>
+              </StepResult>
+            </Step> <!-- step3 -->
+            <Step name="step4" index="4">
+              <StepDescription>
+                <![CDATA[about menu]]>
+              </StepDescription>
+              <StepResult>
+              </StepResult>
+            </Step> <!-- step4 -->
+            <Step name="laststep" index="5">
+              <StepDescription>
+                <![CDATA[closeBrowser]]>
+              </StepDescription>
+              <StepResult>
+              </StepResult>
+            </Step> <!-- laststep -->
+          </Steps>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runTest -->
+      </class> <!-- org.bigtester.ate.model.project.CaseRunner -->
+    </test> <!-- testproject/TestCase01.xml -->
+  </suite> <!-- suite1 -->
+</testng-results>
