@@ -5,7 +5,16 @@
 	<artifactId>org.bigtester.ate.core.sample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	<repositories>
+    <repository>
+        <id>repo-id</id>
+        <name>repo-name</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </repository>
+</repositories>
+<!-- 	<properties> -->
+<!-- 		<snapshotDependencyAllowed>true</snapshotDependencyAllowed> -->
+<!-- 	</properties> -->
 	<dependencies>
 		<dependency>
 			<groupId>org.bigtester</groupId>
@@ -15,6 +24,31 @@
 	</dependencies>
 	<build>
 		<plugins>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-enforcer-plugin</artifactId> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						Make sure that only non-snapshot versions are used for the dependencies. 
+ 							Only active when property 'snapshotDependencyAllowed' is false. --> 
+<!-- 						<id>enforce-no-snapshots</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>enforce</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<skip>${snapshotDependencyAllowed}</skip> -->
+<!-- 							<rules> -->
+<!-- 								<requireReleaseDeps> -->
+<!-- 									<message>No Snapshots Allowed!</message> -->
+<!-- 								</requireReleaseDeps> -->
+<!-- 								<requireReleaseVersion> -->
+<!-- 									<message>No Snapshots Allowed!</message> -->
+<!-- 								</requireReleaseVersion> -->
+<!-- 							</rules> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
