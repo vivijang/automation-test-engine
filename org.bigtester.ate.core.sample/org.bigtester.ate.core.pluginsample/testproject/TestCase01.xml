@@ -90,7 +90,7 @@
 	
 	<bean id="elementFind1" name="elementFind1" parent="_elementFindAbstract"
 		class="org.bigtester.ate.model.page.elementfind.ElementFindByXpath">
-		<property name="findByValue" value="//img[@alt='English (United Kingdom)']" />
+		<property name="findByValue" value="//img[@alt='English (United Kingdom)']1" />
 	</bean>
 
 	<bean id="elementAction1" name="elementAction1" parent="_elementActionAbstract"
