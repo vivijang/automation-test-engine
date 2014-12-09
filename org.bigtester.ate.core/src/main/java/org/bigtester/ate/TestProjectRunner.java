@@ -61,18 +61,10 @@ public final class TestProjectRunner {
 	 */
 	public static void main(final String... args) throws DatabaseUnitException, SQLException, MalformedURLException {
 		if (args.length > 0) {
-			context = new FileSystemXmlApplicationContext(args[0]);
+			runTest(args[0]);
 		} else {
-			context = new ClassPathXmlApplicationContext(
-				"testproject.xml");
+			runTest("");
 		}
-		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean("dbInitializer");
-		
-		//TODO add db initialization handler
-		dbinit.initialize(context, "dataSource");
-		
-	  	runTest();
-	  	((ConfigurableApplicationContext)context).close();
 	}
 	
 	/**
@@ -82,6 +74,32 @@ public final class TestProjectRunner {
 		TestProject testProj = (TestProject) context.getBean("testproject");
 		testProj.runSuites();
 		
+	}
+	
+	/**
+	 * Run test.
+	 *
+	 * @param testProjectXml the test project xml
+	 * @throws DatabaseUnitException the database unit exception
+	 * @throws SQLException the SQL exception
+	 * @throws MalformedURLException the malformed url exception
+	 */
+	public static void runTest(final String testProjectXml) throws DatabaseUnitException, SQLException, MalformedURLException  {
+		if (testProjectXml.isEmpty()) {
+			context = new ClassPathXmlApplicationContext(
+					"testproject.xml");
+		} else {
+			context = new FileSystemXmlApplicationContext(testProjectXml);
+			
+		}
+		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean("dbInitializer");
+		
+		//TODO add db initialization handler
+		dbinit.initialize(context, "dataSource");
+		
+		runTest();
+		
+	  	((ConfigurableApplicationContext)context).close();
 	}
 
 }

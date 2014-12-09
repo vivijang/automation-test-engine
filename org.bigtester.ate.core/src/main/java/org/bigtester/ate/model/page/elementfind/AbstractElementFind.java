@@ -36,9 +36,9 @@ public abstract class AbstractElementFind {
 	
 	/**
 	 * Do find.
-	 * 
-	 * @param findByValue
-	 *            the find by value
+	 *
+	 * @param myWebDriver the my web driver
+	 * @param findByValue            the find by value
 	 * @return the web element
 	 */
 	public abstract WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
@@ -62,4 +62,17 @@ public abstract class AbstractElementFind {
 		this.findByValue = findByValue;
 	}
 	
+	
+
+	/**
+	 * Supports plugin = false.
+	 *
+	 * @param arg0 the arg0
+	 * @return true, if successful
+	 */
+	public boolean supports(final String arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

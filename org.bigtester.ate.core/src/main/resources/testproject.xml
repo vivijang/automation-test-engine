@@ -41,7 +41,7 @@
 	</bean>
 	<bean id="mytc1" name="mytc1"
 		class="org.bigtester.ate.model.project.TestCase">
-		<property name="testCaseName" value="TestCase91.xml" />
+		<property name="testCaseName" value="TestCase1.xml" />
 	</bean>
 	<bean id="mytc2" name="mytc2"
 		class="org.bigtester.ate.model.project.TestCase">
