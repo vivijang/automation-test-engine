@@ -15,4 +15,12 @@ NOTE2) Let Eclipse understand lombok compiling library.
 		-javaagent:lombok.jar
 		-Xbootclasspath/a:lombok.jar
 		
- 
+NOTE3) Update the project
+    a) right click on project org.bigtester.ate.core,
+    b) click 'Maven',
+    c) click update project
+    
+NOTE4) Display all the files
+    a) in the project window, click the View Menu(in the upper right corner of the window)
+    b) click Filters
+    c) deselect 'Inner class files' and '.*resources'
