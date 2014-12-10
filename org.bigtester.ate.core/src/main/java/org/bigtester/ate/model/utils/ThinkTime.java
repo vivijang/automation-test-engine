@@ -18,38 +18,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
+package org.bigtester.ate.model.utils;
+
+import org.bigtester.ate.constant.ThinkTimeConstants;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestCase defines ....
- * 
+ * This class ThinkTime defines ....
  * @author Peidong Hu
+ *
  */
-public class TestCase {
+public class ThinkTime {
 	
+	/** The think time in seconds */
+	int thinkTime;
 	
-	/** The test case name. */
-	private String testCaseName;
-
 	/**
-	 * Gets the test case name.
-	 *
-	 * @return the testCaseName
+	 * Instantiates a new think time.
 	 */
-	public String getTestCaseName() {
-		return testCaseName;
+	public ThinkTime() {
+		thinkTime = ThinkTimeConstants.DEFAULT_THINK_TIME;
 	}
-
-	/**
-	 * Sets the test case name.
-	 *
-	 * @param testCaseName the testCaseName to set
-	 */
-	public void setTestCaseName(final String testCaseName) {
-		this.testCaseName = testCaseName;
-	}
-
 	
-
+	/**
+	 * Instantiates a new think time.
+	 *
+	 * @param thinkTime the think time
+	 */
+	public ThinkTime(int thinkTime) {
+		this.thinkTime = thinkTime;
+	}
+	
+	public void setTimer() {
+		
+		try {
+		    Thread.sleep(thinkTime * 1000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
+	}
 }
