@@ -32,16 +32,19 @@ import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanDefinitionStoreException;
+
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.TestRunner;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+
 import org.testng.annotations.Test;
 import org.testng.internal.Utils;
 
@@ -51,8 +54,10 @@ import org.testng.internal.Utils;
  * 
  * @author Peidong Hu
  */
-public class CaseRunner implements IRunTestCase {
+public class CaseRunner implements IRunTestCase{
 
+	
+	
 	/** The my tc. */
 	private TestCase myTestCase;
 
@@ -98,9 +103,19 @@ public class CaseRunner implements IRunTestCase {
 	 */
 	@DataProvider(name = "dp")
 	public Object[][] getTestData(ITestContext ctx) {
-		Object[][] data = new Object[][] { { new TestParameters(ctx
+		TestParameters params = new TestParameters(ctx
 				.getCurrentXmlTest().getName(), ctx.getCurrentXmlTest()
-				.getName()) } };
+				.getName());
+		for (int index = 0; index < ((TestRunner) ctx).getTestListeners().size(); index ++) {
+			if (((TestRunner) ctx).getTestListeners().get(index) instanceof TestProjectListener) {
+				int thinkT = ((TestProjectListener) ((TestRunner) ctx).getTestListeners().get(index)).getMytp().getStepThinkTime();
+				params.setStepThinkTime(thinkT);
+				break;
+			}
+		}
+		
+		
+		Object[][] data = new Object[][] { { params } };
 		return data;
 	}
 
@@ -148,20 +163,23 @@ public class CaseRunner implements IRunTestCase {
 	@Test(dataProvider = "dp")
 	public void runTest(TestParameters testParams) throws Throwable {
 		String testname = testParams.getTestFilename();
+		
 		ApplicationContext context;
 		try {
 			context = new FileSystemXmlApplicationContext(testname);
 			myTestCase = (TestCase) context
 					.getBean(TestCaseConstants.BEANID_TESTCASE);
+			myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 			myTestCase.goSteps();
-			((ConfigurableApplicationContext)context).close();
+			((ConfigurableApplicationContext) context).close();
 		} catch (FatalBeanException fbe) {
 			if (fbe.getCause() instanceof FileNotFoundException) {
 				context = new ClassPathXmlApplicationContext(testname);
 				myTestCase = (TestCase) context
 						.getBean(TestCaseConstants.BEANID_TESTCASE);
+				myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 				myTestCase.goSteps();
-				((ConfigurableApplicationContext)context).close();
+				((ConfigurableApplicationContext) context).close();
 			} else if (fbe instanceof BeanCreationException) {
 				ITestResult itr = Reporter.getCurrentTestResult();
 
@@ -186,7 +204,8 @@ public class CaseRunner implements IRunTestCase {
 			} else {
 				throw fbe;
 			}
-		} 
+		}
 	}
+
 
 }

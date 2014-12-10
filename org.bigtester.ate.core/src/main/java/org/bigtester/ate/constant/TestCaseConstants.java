@@ -30,7 +30,8 @@ public final class TestCaseConstants {
 	
 	/** The Constant BEANID_TESTCASE. */
 	public static final String BEANID_TESTCASE = "testcase";
-	
+	/** The Constant BEANID_TESTPROJECT. */
+	public static final String BEANID_TESTPROJECT = "testproject";
 	/** The Constant BEANID_MYWEBDRIVER. */
 	public static final String BEANID_MYWEBDRIVER = "MyWebDriver";
 	private TestCaseConstants () {

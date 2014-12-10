@@ -20,59 +20,36 @@
  *******************************************************************************/
 package org.bigtester.ate.model.project;
 
-import java.util.List;
-
 // TODO: Auto-generated Javadoc
 /**
- * The Class TestSuite defines ....
+ * The Class TestCase defines ....
  * 
  * @author Peidong Hu
  */
-public class TestSuite {
-
-	/** The test case list. */
-	private List<XmlTestCase> testCaseList;
-
-	/** The suite name. */
-	private String suiteName;
+public class XmlTestCase {
+	
+	
+	/** The test case name. */
+	private String testCaseName;
 
 	/**
-	 * Gets the test case list.
-	 * 
-	 * @return the testCaseList
+	 * Gets the test case name.
+	 *
+	 * @return the testCaseName
 	 */
-	public List<XmlTestCase> getTestCaseList() {
-		return testCaseList;
+	public String getTestCaseName() {
+		return testCaseName;
 	}
 
 	/**
-	 * Sets the test case list.
-	 * 
-	 * @param testCaseList
-	 *            the testCaseList to set
+	 * Sets the test case name.
+	 *
+	 * @param testCaseName the testCaseName to set
 	 */
-	public void setTestCaseList(final List<XmlTestCase> testCaseList) {
-		this.testCaseList = testCaseList;
-	}
-
-	/**
-	 * Gets the suite name.
-	 * 
-	 * @return the suite name
-	 */
-	public String getSuiteName() {
-		return suiteName;
-	}
-
-	/**
-	 * Sets the suite name.
-	 * 
-	 * @param suiteName
-	 *            the new suite name
-	 */
-	public void setSuiteName(final String suiteName) {
-		this.suiteName = suiteName;
+	public void setTestCaseName(final String testCaseName) {
+		this.testCaseName = testCaseName;
 	}
 
 	
+
 }

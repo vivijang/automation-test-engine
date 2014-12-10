@@ -17,6 +17,7 @@
     </bean> 
 	<bean id="testproject" name="testproject"
 		class="org.bigtester.ate.model.project.TestProject">
+		<property name="stepThinkTime" value="6"></property>
 		<property name="suiteList">
 			<list>
 				<ref bean="suite1" />
@@ -40,11 +41,11 @@
 
 	</bean>
 	<bean id="mytc1" name="mytc1"
-		class="org.bigtester.ate.model.project.TestCase">
-		<property name="testCaseName" value="TestCase1.xml" />
+		class="org.bigtester.ate.model.project.XmlTestCase">
+		<property name="testCaseName" value="classpath:TestCase1.xml" />
 	</bean>
 	<bean id="mytc2" name="mytc2"
-		class="org.bigtester.ate.model.project.TestCase">
+		class="org.bigtester.ate.model.project.XmlTestCase">
 		<property name="testCaseName" value="TestCase2.xml" />
 	</bean>
 
@@ -61,11 +62,11 @@
 		</property>
 	</bean>
 	<bean id="mytc3" name="mytc3"
-		class="org.bigtester.ate.model.project.TestCase">
+		class="org.bigtester.ate.model.project.XmlTestCase">
 		<property name="testCaseName" value="TestCase3.xml" />
 	</bean>
 	<bean id="mytc4" name="mytc4"
-		class="org.bigtester.ate.model.project.TestCase">
+		class="org.bigtester.ate.model.project.XmlTestCase">
 		<property name="testCaseName" value="TestCase4.xml" />
 	</bean>
 </beans>

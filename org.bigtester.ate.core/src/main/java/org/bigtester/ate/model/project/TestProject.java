@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.reporters.XMLReporterConfig;
 import org.testng.xml.XmlClass;
@@ -43,6 +42,10 @@ public class TestProject {
 	/** The suite list. */
 	private List<TestSuite> suiteList;
 
+	/** The step think time. */
+	private int stepThinkTime = 0;
+	
+	private TestProjectListener testProjectListener;
 	/**
 	 * Gets the suite list.
 	 * 
@@ -67,7 +70,8 @@ public class TestProject {
 	 */
 	public void runSuites() {
 
-		final TestListenerAdapter tla = new TestListenerAdapter();
+		final TestProjectListener tla = new TestProjectListener();
+		tla.setMytp(this);
 		final TestNG testng = new TestNG();
 		testng.addListener(tla);
 		
@@ -82,7 +86,7 @@ public class TestProject {
 			XmlSuite suite = new XmlSuite();
 			suite.setName(tempSuite.getSuiteName());
 
-			for (TestCase tempTC : tempSuite.getTestCaseList()) {
+			for (XmlTestCase tempTC : tempSuite.getTestCaseList()) {
 
 				XmlClass xmlClass = new XmlClass(
 						"org.bigtester.ate.model.project.CaseRunner");
@@ -91,6 +95,7 @@ public class TestProject {
 				classes.add(xmlClass);
 
 				XmlTest test = new XmlTest(suite);
+				//test.addParameter(ThinkTimeConstants.TESTNG_THINKTIME_PARAM_NAME, Integer.toString(stepThinkTime));
 				test.setName(tempTC.getTestCaseName());
 				test.setXmlClasses(classes);
 			}
@@ -106,6 +111,37 @@ public class TestProject {
 
 		}
 
+	}
+
+	
+	
+
+	/**
+	 * @return the stepThinkTime
+	 */
+	public int getStepThinkTime() {
+		return stepThinkTime;
+	}
+
+	/**
+	 * @param stepThinkTime the stepThinkTime to set
+	 */
+	public void setStepThinkTime(int stepThinkTime) {
+		this.stepThinkTime = stepThinkTime;
+	}
+
+	/**
+	 * @return the testProjectListener
+	 */
+	public TestProjectListener getTestProjectListener() {
+		return testProjectListener;
+	}
+
+	/**
+	 * @param testProjectListener the testProjectListener to set
+	 */
+	public void setTestProjectListener(TestProjectListener testProjectListener) {
+		this.testProjectListener = testProjectListener;
 	}
 
 }

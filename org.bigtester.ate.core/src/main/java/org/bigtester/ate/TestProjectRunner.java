@@ -24,6 +24,7 @@ package org.bigtester.ate;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 
+import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.project.TestProject;
 import org.dbunit.DatabaseUnitException;
@@ -71,7 +72,7 @@ public final class TestProjectRunner {
 	 * Run test.
 	 */
 	private static void runTest() {
-		TestProject testProj = (TestProject) context.getBean("testproject");
+		TestProject testProj = (TestProject) context.getBean(TestCaseConstants.BEANID_TESTPROJECT);
 		testProj.runSuites();
 		
 	}

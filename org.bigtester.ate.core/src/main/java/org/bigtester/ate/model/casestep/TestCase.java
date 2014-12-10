@@ -23,9 +23,9 @@ package org.bigtester.ate.model.casestep;
 import java.util.List;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.bigtester.ate.model.utils.ThinkTime;
 
 
 // TODO: Auto-generated Javadoc
@@ -41,6 +41,23 @@ public class TestCase {
 	/** The test case name. */
 	private String testCaseName;
 	
+	/** The step think time. */
+	private int stepThinkTime = 0;
+	
+	/**
+	 * @return the stepThinkTime
+	 */
+	public int getStepThinkTime() {
+		return stepThinkTime;
+	}
+
+	/**
+	 * @param stepThinkTime the stepThinkTime to set
+	 */
+	public void setStepThinkTime(int stepThinkTime) {
+		this.stepThinkTime = stepThinkTime;
+	}
+
 	/** The current test step. */
 	private ITestStep currentTestStep;
 	/** The test step list. */
@@ -76,7 +93,14 @@ public class TestCase {
 			
 			currentTestStep = testStepList.get(i);
 			currentWebDriver = currentTestStep.getMyWebDriver();
+			
 			currentTestStep.doStep();//NOPMD
+			
+			if (stepThinkTime > 0) {
+				ThinkTime thinkTimer = new ThinkTime (stepThinkTime);
+				thinkTimer.setTimer();
+			}
+			
 		}
 	}
 

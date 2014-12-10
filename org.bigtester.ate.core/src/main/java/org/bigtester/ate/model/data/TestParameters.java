@@ -35,7 +35,23 @@ public class TestParameters
     /** The test file name. */
     private String testFileName;
 
+    /** The step think time. */
+    private int stepThinkTime;
     /**
+	 * @return the stepThinkTime
+	 */
+	public int getStepThinkTime() {
+		return stepThinkTime;
+	}
+
+	/**
+	 * @param stepThinkTime the stepThinkTime to set
+	 */
+	public void setStepThinkTime(int stepThinkTime) {
+		this.stepThinkTime = stepThinkTime;
+	}
+
+	/**
      * Instantiates a new test parameters.
      *
      * @param name the name
