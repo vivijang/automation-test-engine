@@ -18,38 +18,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.xmlschema;
 
-import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
+import java.text.SimpleDateFormat;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractERValue defines ....
+ * This class JobDetailTemplate defines ....
  * @author Peidong Hu
  *
  */
-public abstract class AbstractERValue { //NOPMD
+public class JobDetailTemplate {
+	
+	/** The date. */
+	SimpleDateFormat dateFormat;
 	
 	/**
-	 * Gets the step er dao.
-	 *
-	 * @return the step er dao
+	 * @return the dateFormat
 	 */
-	public StepExpectedResultDaoImpl getStepERDao() {
-		return stepERDao;
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
 	}
 
-	
 	/**
-	 * Sets the step er dao.
-	 *
-	 * @param stepERDao the new step er dao
+	 * @param dateFormat the dateFormat to set
 	 */
-	public void setStepERDao(final StepExpectedResultDaoImpl stepERDao) {
-		this.stepERDao = stepERDao;
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
 	}
-	
-	
-	/** The step er dao. */
-	private StepExpectedResultDaoImpl stepERDao;//NOPMD
+
+	/**
+	 * 
+	 */
+	public JobDetailTemplate() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

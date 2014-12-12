@@ -52,7 +52,7 @@ public class PageElementExistenceAsserter extends
 	/**
 	 * @param pageObj
 	 */
-	public PageElementExistenceAsserter(IPageObject pageObj) {
+	public PageElementExistenceAsserter(final IPageObject pageObj) {
 		super();
 		setResultPage(pageObj);
 		// TODO Auto-generated constructor stub

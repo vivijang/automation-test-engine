@@ -95,7 +95,7 @@ public abstract class AbstractExpectedResultAsserter implements ApplicationConte
 	 *
 	 * @param resultPage the resultPage to set
 	 */
-	public void setResultPage(IPageObject resultPage) {
+	public void setResultPage(final IPageObject resultPage) {
 		this.resultPage = resultPage;
 	}
 

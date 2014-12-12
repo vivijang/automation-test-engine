@@ -44,7 +44,7 @@ public abstract class AbstractDataValue {//NOPMD
 	 *
 	 * @param elementDataDao the elementDataDao to set
 	 */
-	public void setElementDataDao(ElementInputDataDaoImpl elementDataDao) {
+	public void setElementDataDao(final ElementInputDataDaoImpl elementDataDao) {
 		this.elementDataDao = elementDataDao;
 	}
 	

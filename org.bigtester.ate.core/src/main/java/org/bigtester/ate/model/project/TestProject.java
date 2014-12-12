@@ -43,8 +43,9 @@ public class TestProject {
 	private List<TestSuite> suiteList;
 
 	/** The step think time. */
-	private int stepThinkTime = 0;
+	private int stepThinkTime;
 	
+	/** The test project listener. */
 	private TestProjectListener testProjectListener;
 	/**
 	 * Gets the suite list.

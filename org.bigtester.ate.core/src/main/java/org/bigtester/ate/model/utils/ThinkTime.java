@@ -31,7 +31,7 @@ import org.bigtester.ate.constant.ThinkTimeConstants;
 public class ThinkTime {
 	
 	/** The think time in seconds */
-	int thinkTime;
+	transient int thinkTime; //NOPMD
 	
 	/**
 	 * Instantiates a new think time.
@@ -49,6 +49,9 @@ public class ThinkTime {
 		this.thinkTime = thinkTime;
 	}
 	
+	/**
+	 * Sets the timer.
+	 */
 	public void setTimer() {
 		
 		try {

@@ -18,81 +18,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+package org.bigtester.ate.xmlschema;
 
-package org.bigtester.ate.model.casestep;
 
-import org.bigtester.ate.annotation.StepLoggable;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.page.ILastpage;
+import org.bigtester.ate.model.data.TestDatabaseInitializer;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.w3c.dom.Element;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class LastStep defines ....
+ * This class SimpleDateFormatBeanDefinitionParser defines ....
  * 
  * @author Peidong Hu
+ *
  */
-public class LastStep extends BaseTestStep implements ITestStep{
-	
-	
-
-
-
-
-	/** The last page. */
-	private ILastpage lastPage;
-
-	
-
-
-
-	/**
-	 * Gets the last page.
-	 *
-	 * @return the lastPage
-	 */
-	public ILastpage getLastPage() {
-		return lastPage;
-	}
-
-
-
-
-
-	/**
-	 * Sets the last page.
-	 *
-	 * @param lastPage the lastPage to set
-	 */
-	public void setLastPage(final ILastpage lastPage) {
-		this.lastPage = lastPage;
-	}
-
-
-
-
-
-	/* (non-Javadoc)
-	 * @see org.bigtester.ate.model.casestep.ITestStep#doStep()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@StepLoggable
-	public void doStep(){
-		lastPage.closeLastpage();
-	}
-
-
-
-
+public class TestDatabaseInitializerBeanDefinitionParser extends
+		AbstractSingleBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public IMyWebDriver getMyWebDriver() {
-		// TODO Auto-generated method stub
-		return lastPage.getMyWd();
-	}
+	protected Class<TestDatabaseInitializer> getBeanClass(Element element) {
+	        return TestDatabaseInitializer.class; 
+    }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void doParse(Element element, BeanDefinitionBuilder bean) {
+        // this will never be null since the schema explicitly requires that a value be supplied
+        String initXmlFile = element.getAttribute("initXmlFile");
+        bean.addPropertyValue("initXmlFile", initXmlFile);
+//
+//        // this however is an optional property
+//        String lenient = element.getAttribute("list-class");
+//        if (StringUtils.hasText(lenient)) {
+//            bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
+//        }
+    }
 
 }

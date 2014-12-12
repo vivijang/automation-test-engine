@@ -15,6 +15,7 @@
 		<config>src/main/resources/META-INF/mywebdriver.xml</config>
 		<config>src/main/resources/META-INF/abstract_parent_bean.xml</config>
 		<config>src/main/resources/TestCase1.xml</config>
+		<config>src/test/resources/META-INF/XmlSchemaTest-applicationContext.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

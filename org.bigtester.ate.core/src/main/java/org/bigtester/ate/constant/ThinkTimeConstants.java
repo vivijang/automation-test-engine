@@ -30,6 +30,7 @@ public final class ThinkTimeConstants {
 	/** The Constant default think time in second unit*/
 	public static final int DEFAULT_THINK_TIME = 2;
 	
+	/** The Constant TESTNG_THINKTIME_PARAM_NAME. */
 	public static final String TESTNG_THINKTIME_PARAM_NAME = "stepThinkTime";
 	
 	private ThinkTimeConstants () {

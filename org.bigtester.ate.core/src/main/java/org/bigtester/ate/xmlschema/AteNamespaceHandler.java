@@ -1,4 +1,5 @@
 /*******************************************************************************
+
  * ATE, Automation Test Engine
  *
  * Copyright 2014, Montreal PROT, or individual contributors as
@@ -18,38 +19,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.xmlschema;
 
-import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
+import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractERValue defines ....
+ * This class AteNamespaceHandler defines ....
  * @author Peidong Hu
  *
  */
-public abstract class AbstractERValue { //NOPMD
-	
-	/**
-	 * Gets the step er dao.
-	 *
-	 * @return the step er dao
-	 */
-	public StepExpectedResultDaoImpl getStepERDao() {
-		return stepERDao;
-	}
+public class AteNamespaceHandler extends NamespaceHandlerSupport {
 
 	
 	/**
-	 * Sets the step er dao.
-	 *
-	 * @param stepERDao the new step er dao
+	 * {@inheritDoc}
 	 */
-	public void setStepERDao(final StepExpectedResultDaoImpl stepERDao) {
-		this.stepERDao = stepERDao;
+	@Override
+	public void init() {
+		 
+		registerBeanDefinitionParser("TestProject", new TestProjectBeanDefinitionParser());
+		registerBeanDefinitionParser("TestSuite", new TestSuiteBeanDefinitionParser());
+		registerBeanDefinitionParser("XmlTestCase", new XmlTestCaseBeanDefinitionParser());
+		registerBeanDefinitionParser("TestStepResult", new TestStepResultBeanDefinitionParser());
+		registerBeanDefinitionParser("GenericSystemLogger", new GenericSystemLoggerBeanDefinitionParser());
+		registerBeanDefinitionParser("TestDatabaseInitializer", new TestDatabaseInitializerBeanDefinitionParser());
 	}
-	
-	
-	/** The step er dao. */
-	private StepExpectedResultDaoImpl stepERDao;//NOPMD
+
 }

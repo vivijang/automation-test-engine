@@ -29,6 +29,8 @@ import org.testng.TestListenerAdapter;
  *
  */
 public class TestProjectListener extends TestListenerAdapter {
+	
+	/** The my test plan. */
 	private TestProject mytp;
 
 	/**

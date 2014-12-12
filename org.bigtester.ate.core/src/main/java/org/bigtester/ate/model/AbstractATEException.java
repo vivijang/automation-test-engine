@@ -50,7 +50,7 @@ public abstract class AbstractATEException extends Exception {
 	 * @param message the message
 	 * @param errorCode the error code
 	 */
-	public AbstractATEException(String message, String errorCode) {
+	public AbstractATEException(final String message, final String errorCode) {
 		super(message);
 		this.errorCode = errorCode;
 	}

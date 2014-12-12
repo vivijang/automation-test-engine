@@ -81,7 +81,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * @param stepName
 	 *            the stepName to set
 	 */
-	public void setStepName(String stepName) {
+	public void setStepName(final String stepName) {
 		this.stepName = stepName;
 	}
 

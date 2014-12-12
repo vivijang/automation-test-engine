@@ -29,12 +29,10 @@ import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -115,8 +113,8 @@ public class CaseRunner implements IRunTestCase{
 		}
 		
 		
-		Object[][] data = new Object[][] { { params } };
-		return data;
+		return new Object[][] { { params } };
+		
 	}
 
 	/**
@@ -128,7 +126,7 @@ public class CaseRunner implements IRunTestCase{
 	 *            the test data
 	 */
 	@BeforeMethod(alwaysRun = true)
-	public void testData(Method method, Object[] testData) {
+	public void testData(Method method, Object[] testData) { //NOPMD
 		String testCase;
 		if (testData != null && testData.length > 0) {
 			TestParameters testParams;
@@ -180,7 +178,7 @@ public class CaseRunner implements IRunTestCase{
 				myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 				myTestCase.goSteps();
 				((ConfigurableApplicationContext) context).close();
-			} else if (fbe instanceof BeanCreationException) {
+			} else if (fbe instanceof BeanCreationException) { //NOPMD
 				ITestResult itr = Reporter.getCurrentTestResult();
 
 				if (itr.getThrowable() != null

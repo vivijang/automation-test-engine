@@ -50,7 +50,7 @@ public class PagePropertyCorrectnessAsserter extends
 	/**
 	 * @param pageObj
 	 */
-	public PagePropertyCorrectnessAsserter(IPageObject pageObj) {
+	public PagePropertyCorrectnessAsserter(final IPageObject pageObj) {
 		super();
 		setResultPage(pageObj);
 		// TODO Auto-generated constructor stub

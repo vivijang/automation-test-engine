@@ -42,8 +42,12 @@ public class TestCase {
 	private String testCaseName;
 	
 	/** The step think time. */
-	private int stepThinkTime = 0;
+	private int stepThinkTime;
 	
+	/** The current test step. */
+	private ITestStep currentTestStep;
+	/** The test step list. */
+	private List<ITestStep> testStepList;
 	/**
 	 * @return the stepThinkTime
 	 */
@@ -58,10 +62,7 @@ public class TestCase {
 		this.stepThinkTime = stepThinkTime;
 	}
 
-	/** The current test step. */
-	private ITestStep currentTestStep;
-	/** The test step list. */
-	private List<ITestStep> testStepList;
+	
 
 	/**
 	 * Gets the test step list.

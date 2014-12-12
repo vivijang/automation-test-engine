@@ -47,7 +47,7 @@ abstract public class AbstractATECaseExecE extends AbstractATEException implemen
 	 * @param message the message
 	 * @param errorCode the error code
 	 */
-	public AbstractATECaseExecE(String message, String errorCode) {
+	public AbstractATECaseExecE(final String message, final String errorCode) {
 		super(message, errorCode);
 		// TODO Auto-generated constructor stub
 	}
