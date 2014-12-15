@@ -23,7 +23,7 @@ package org.bigtester.ate.xmlschema;
 import java.util.List;
 
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.project.TestSuite;
+import org.bigtester.ate.model.casestep.TestCase;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -42,7 +42,7 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestSuiteBeanDefinitionParser extends
+public class TestCaseBeanDefinitionParser extends
 		AbstractBeanDefinitionParser {
 
 	/**
@@ -52,28 +52,36 @@ public class TestSuiteBeanDefinitionParser extends
 	protected AbstractBeanDefinition parseInternal(Element element,
 			ParserContext parserContext) {
 		// this will never be null since the schema explicitly requires that a value be supplied
-        String testSuiteName = element.getAttribute(XsdElementConstants.ATTR_TESTSUITE_SUITENAME);
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(TestSuite.class);
-        if (StringUtils.hasText(testSuiteName))
-        	factory.addPropertyValue(XsdElementConstants.ATTR_TESTSUITE_SUITENAME, testSuiteName);
+        String testCaseName = element.getAttribute(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME);
+        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(TestCase.class);
+        if (StringUtils.hasText(testCaseName))
+        	factory.addPropertyValue(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME, testCaseName);
         
         
-		List<Element> suiteListElements = (List<Element>) DomUtils.getChildElementsByTagName(element, XsdElementConstants.ELEMENT_XMLTESTCASE);
+		List<Element> testStepElements = (List<Element>) DomUtils.getChildElements(element);
         
-        if (suiteListElements != null && !suiteListElements.isEmpty()) {
-            parseXmlTestCaseComponents(suiteListElements, factory,  parserContext);
+        if (testStepElements != null && !testStepElements.isEmpty()) {
+            parseTestStepComponents(testStepElements, factory,  parserContext);
         }
         
         return factory.getBeanDefinition();
 	}
 	
-	private static void parseXmlTestCaseComponents(List<Element> childElements, BeanDefinitionBuilder factory, ParserContext parserContext) {
+	private static void parseTestStepComponents(List<Element> childElements, BeanDefinitionBuilder factory, ParserContext parserContext) {
         ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(childElements.size());
         for (Element element : childElements) {
-        	XmlTestCaseBeanDefinitionParser xmltestcase = new XmlTestCaseBeanDefinitionParser();
-        	children.add(xmltestcase.parse(element, parserContext));
+        	if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_HOMESTEP) {
+        		HomeStepBeanDefinitionParser homeStep = new HomeStepBeanDefinitionParser();
+        		children.add(homeStep.parse(element, parserContext));
+        	} else if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_ELEMENTSTEP) {
+        		ElementStepBeanDefinitionParser elementStep = new ElementStepBeanDefinitionParser();
+        		children.add(elementStep.parse(element, parserContext));
+        	} else if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_LASTSTEP) {
+        		LastStepBeanDefinitionParser lastStep = new LastStepBeanDefinitionParser();
+        		children.add(lastStep.parse(element, parserContext));
+        	}
         }
-        factory.addPropertyValue(XsdElementConstants.PROP_TESTSUITE_TESTCASELIST, children);
+        factory.addPropertyValue(XsdElementConstants.PROP_TESTCASE_TESTSTEPLIST, children);
     }
 
 }

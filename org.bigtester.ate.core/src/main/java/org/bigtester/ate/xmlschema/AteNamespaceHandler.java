@@ -21,6 +21,7 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 // TODO: Auto-generated Javadoc
@@ -38,12 +39,39 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 	@Override
 	public void init() {
 		 
-		registerBeanDefinitionParser("TestProject", new TestProjectBeanDefinitionParser());
-		registerBeanDefinitionParser("TestSuite", new TestSuiteBeanDefinitionParser());
-		registerBeanDefinitionParser("XmlTestCase", new XmlTestCaseBeanDefinitionParser());
-		registerBeanDefinitionParser("TestStepResult", new TestStepResultBeanDefinitionParser());
-		registerBeanDefinitionParser("GenericSystemLogger", new GenericSystemLoggerBeanDefinitionParser());
-		registerBeanDefinitionParser("TestDatabaseInitializer", new TestDatabaseInitializerBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTPROJECT, new TestProjectBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTSUITE, new TestSuiteBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_XMLTESTCASE, new XmlTestCaseBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTSTEPRESULT, new TestStepResultBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_GENERICSYSTEMLOGGER, new GenericSystemLoggerBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTDATABASEINITIALIZER, new TestDatabaseInitializerBeanDefinitionParser());
+		//testcase elements
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_FIREFOXDRIVER, new FireFoxDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HOMEPAGE, new HomepageBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_LASTPAGE, new LastPageBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEPAGEOBJECT, new BasePageObjectBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEPAGEMODEL, new BasePageModelBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTCASE, new TestCaseBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HOMESTEP, new HomeStepBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_LASTSTEP, new LastStepBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEERVALUE, new BaseERValueBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_STEPEXPECTEDRESULTVALUE, new StepERValueBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_PAGEELEMENTEXISTENCE, new PageElementExistBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_PAGEPROPERTYCORRECTNESS, new PagePropertyCorrectBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_CLICKACTION, new ClickActionBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTFINDBYID, new FindByIdBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTSTEP, new ElementStepBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_MYWEBELEMENT, new MyWebElementBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_SENDKEYSACTION, new SendKeysActionBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTFINDBYXPATH, new FindByXpathBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_STEPDATAVALUE, new StepDataValueBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEDATAVALUE, new BaseDataValueBeanDefinitionParser());
+		//registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASETESTSTEP, new BaseTestStepBeanDefinitionParser());
 	}
 
 }

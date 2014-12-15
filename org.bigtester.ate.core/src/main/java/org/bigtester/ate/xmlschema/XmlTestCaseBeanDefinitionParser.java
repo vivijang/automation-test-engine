@@ -21,9 +21,11 @@
 package org.bigtester.ate.xmlschema;
 
 
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.XmlTestCase;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 
@@ -49,8 +51,9 @@ public class XmlTestCaseBeanDefinitionParser extends
 	 */
 	protected void doParse(Element element, BeanDefinitionBuilder bean) {
         // this will never be null since the schema explicitly requires that a value be supplied
-        String testCaseName = element.getAttribute("testCaseName");
-        bean.addPropertyValue("testCaseName", testCaseName);
+        String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME);
+        if (StringUtils.hasText(testCaseName))
+        	bean.addPropertyValue(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME, testCaseName);
 //
 //        // this however is an optional property
 //        String lenient = element.getAttribute("list-class");

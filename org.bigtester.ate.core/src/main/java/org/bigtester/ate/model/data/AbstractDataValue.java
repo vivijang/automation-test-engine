@@ -28,7 +28,7 @@ import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
  * @author Peidong Hu
  *
  */
-public abstract class AbstractDataValue {//NOPMD
+public class AbstractDataValue {//NOPMD
 	
 	/**
 	 * Gets the element data dao.

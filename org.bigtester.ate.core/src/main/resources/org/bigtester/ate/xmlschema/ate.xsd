@@ -11,10 +11,10 @@
 			<xsd:complexContent>
 				<xsd:extension base="beans:identifiedType">
 					<xsd:choice minOccurs="1" maxOccurs="unbounded">
-						<xsd:element ref="TestSuite"/>
+						<xsd:element ref="TestSuite" />
 					</xsd:choice>
 					<xsd:attribute name="stepThinkTime" type="xsd:int" />
-					
+
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
@@ -24,7 +24,7 @@
 		<xsd:complexType>
 			<xsd:complexContent>
 				<xsd:extension base="beans:identifiedType">
-					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+					<xsd:choice minOccurs="1" maxOccurs="unbounded">
 						<xsd:element ref="XmlTestCase" />
 					</xsd:choice>
 					<xsd:attribute name="suiteName" type="xsd:string" />
@@ -41,7 +41,7 @@
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-	
+
 	<xsd:element name="TestStepResult">
 		<xsd:complexType>
 			<xsd:complexContent>
@@ -58,7 +58,7 @@
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-	
+
 	<xsd:element name="TestDatabaseInitializer">
 		<xsd:complexType>
 			<xsd:complexContent>
@@ -68,5 +68,259 @@
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-	
+
+	<!-- above for testproject.xml -->
+
+	<!-- following for TestCase.xml -->
+
+	<xsd:complexType name="AbstractWebDriverBaseType"
+		abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MyFireFoxDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="AbstractPageModelBaseType"
+		abstract="false">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="BasePageObjectType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractPageModelBaseType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="PageObjectType">
+		<xsd:group ref="pageObjectGroup" minOccurs="1" maxOccurs="unbounded" />
+	</xsd:complexType>
+
+	<xsd:group name="pageObjectGroup">
+		<xsd:choice>
+			<xsd:element ref="lastPage" />
+			<xsd:element ref="homePage" />
+			<xsd:element ref="regularPage" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:complexType name="LastpageType">
+		<xsd:complexContent>
+			<xsd:extension base="BasePageObjectType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="HomepageType">
+		<xsd:complexContent>
+			<xsd:extension base="BasePageObjectType">
+				<xsd:attribute name="homeUrl" type="xsd:string"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="RegularPageType">
+		<xsd:complexContent>
+			<xsd:extension base="BasePageObjectType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="BaseTestStepType" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="targetStep" type="xsd:boolean"
+					use="required" />
+				<xsd:attribute name="stepName" type="xsd:string" use="required" />
+				<xsd:attribute name="stepDescription" type="xsd:string"
+					use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="BaseERValueType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="BaseDataValueType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="PagePropertyCorrectnessAsserterType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="StepDataValueType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseDataValueType">
+				<xsd:attribute name="dataValueID" type="xsd:long" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="StepExpectedResultValueType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseERValueType">
+				<xsd:attribute name="dataValueID" type="xsd:long" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="PageElementExistenceAsserterType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ElementFindByIdType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="findByValue" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ElementFindByXpathType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="findByValue" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="ClickActionType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="SendKeysActionType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="dataValue" type="xsd:string" use="required"></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MyWebElementType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractPageModelBaseType">
+				<!-- <xsd:attribute name="elementFind" type="xsd:string" use="required"/> -->
+				<!-- <xsd:attribute name="elementAction" type="xsd:string" use="required"/> -->
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="HomeStepType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseTestStepType">
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ElementStepType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseTestStepType">
+				<xsd:attribute name="myWebElement" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="LastStepType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseTestStepType">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:group name="testStepGroup">
+		<xsd:sequence>
+			<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element ref="elementStep" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:complexType name="TestCaseType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="testStepGroup" />
+				<xsd:attribute name="testCaseName" type="xsd:string"
+					use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="elementFindById" type="ElementFindByIdType" />
+	<xsd:element name="elementFindByXpath" type="ElementFindByXpathType" />
+	<xsd:element name="clickAction" type="ClickActionType" />
+	<xsd:element name="sendKeysAction" type="SendKeysActionType" />
+	<xsd:element name="myWebElement" type="MyWebElementType" />
+	<xsd:element name="elementStep" type="ElementStepType" />
+
+
+	<xsd:element name="baseERValue" type="BaseERValueType" />
+	<xsd:element name="baseDataValue" type="BaseERValueType" />
+	<xsd:element name="pagePropertyCorrectnessAsserter" type="PagePropertyCorrectnessAsserterType" />
+	<xsd:element name="pageElementExistenceAsserter" type="PageElementExistenceAsserterType" />
+	<xsd:element name="stepExpectedResultValue" type="StepExpectedResultValueType" />
+	<xsd:element name="stepDataValue" type="StepDataValueType" />
+
+	<xsd:element name="testCase" type="TestCaseType" />
+	<xsd:element name="lastStep" type="LastStepType" />
+	<xsd:element name="homeStep" type="HomeStepType" />
+	<xsd:element name="basePageObject" type="BasePageObjectType" />
+	<xsd:element name="basePageModel" type="AbstractPageModelBaseType" />
+	<xsd:element name="fireFoxDriver" type="MyFireFoxDriverType" />
+	<xsd:element name="lastPage" type="LastpageType" />
+	<xsd:element name="homePage" type="HomepageType" />
+	<xsd:element name="regularPage" type="RegularPageType" />
+
+
+
 </xsd:schema>

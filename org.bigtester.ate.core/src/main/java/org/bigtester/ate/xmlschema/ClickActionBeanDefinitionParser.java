@@ -18,20 +18,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.page;
+package org.bigtester.ate.xmlschema;
 
 
+import org.bigtester.ate.model.page.elementaction.ClickAction;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class PageObject defines ....
+ * This class SimpleDateFormatBeanDefinitionParser defines ....
  * 
  * @author Peidong Hu
+ *
  */
-public class PageObject extends AbstractPageObject implements IPageObject{
+public class ClickActionBeanDefinitionParser extends
+		AbstractBeanDefinitionParser {
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected AbstractBeanDefinition parseInternal(Element element,
+			ParserContext parserContext) {
+		// this will never be null since the schema explicitly requires that a value be supplied
+        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ClickAction.class);
+        
+        return factory.getBeanDefinition();
+	}
 	
 	
-
 }

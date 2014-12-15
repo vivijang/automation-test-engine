@@ -28,7 +28,7 @@ import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
  * @author Peidong Hu
  *
  */
-public abstract class AbstractERValue { //NOPMD
+public class AbstractERValue { //NOPMD
 	
 	/**
 	 * Gets the step er dao.

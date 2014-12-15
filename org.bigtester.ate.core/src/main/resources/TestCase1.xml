@@ -225,7 +225,7 @@
 	</bean>
 	
 	<bean id="NEQpage" name="NEQpage" parent="_pageObj"
-		class="org.bigtester.ate.model.page.page.PageObject">
+		class="org.bigtester.ate.model.page.page.RegularPage">
 	</bean>
 	
 	<bean id="NEQStepValue" name="NEQStepValue" parent="_abstractERValue"

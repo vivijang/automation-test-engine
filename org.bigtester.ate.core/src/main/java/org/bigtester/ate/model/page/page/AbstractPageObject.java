@@ -33,7 +33,7 @@ import org.openqa.selenium.Cookie;
  * @author Peidong Hu
  * 
  */
-public abstract class AbstractPageObject extends AbstractPageModelBase {
+public class AbstractPageObject extends AbstractPageModelBase {
 
 	/** The page name. */
 	private String pageName;

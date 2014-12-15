@@ -21,11 +21,14 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.TestDatabaseInitializer;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
-import org.springframework.util.StringUtils;
+import org.bigtester.ate.model.page.page.Homepage;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,34 +37,29 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestDatabaseInitializerBeanDefinitionParser extends
-		AbstractSingleBeanDefinitionParser {
+public class HomepageBeanDefinitionParser extends
+		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<TestDatabaseInitializer> getBeanClass(Element element) {
-		return TestDatabaseInitializer.class;
+	@Override
+	protected AbstractBeanDefinition parseInternal(Element element,
+			ParserContext parserContext) {
+		// Here we parse the Spring elements such as < property>
+        BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
+        BeanDefinition bDef = holder.getBeanDefinition();
+        bDef.setBeanClassName(Homepage.class.getName());
+        		
+        String homeUrl = element.getAttribute(XsdElementConstants.ATTR_HOMEPAGE_HOMEURL);
+        bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_HOMEPAGE_HOMEURL, homeUrl);
+        
+        String idstring = element.getAttribute("id");
+        
+        parserContext.getRegistry().registerBeanDefinition(idstring, bDef);
+        return (AbstractBeanDefinition) bDef;
+        
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	protected void doParse(Element element, BeanDefinitionBuilder bean) {
-		// this will never be null since the schema explicitly requires that a
-		// value be supplied
-		String initXmlFile = element
-				.getAttribute(XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE);
-		if (StringUtils.hasText(initXmlFile))
-			bean.addPropertyValue(
-				XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE,
-				initXmlFile);
-		//
-		// // this however is an optional property
-		// String lenient = element.getAttribute("list-class");
-		// if (StringUtils.hasText(lenient)) {
-		// bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
-		// }
-	}
+	
 
 }

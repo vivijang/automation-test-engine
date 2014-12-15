@@ -18,38 +18,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page;
+package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AbstractPageModelBase defines ....
+ * The Class PageObject defines ....
  * 
  * @author Peidong Hu
  */
-public class AbstractPageModelBase {//NOPMD
+public class RegularPage extends AbstractPageObject implements IPageObject{
+
 	
-	/** The i my wd. */
-	protected IMyWebDriver myWd;
+	
 
-	/**
-	 * Gets the my wd.
-	 *
-	 * @return the myWd
-	 */
-	public  IMyWebDriver getMyWd() {
-		return myWd;
-	}
-
-	/**
-	 * Sets the my wd.
-	 *
-	 * @param myWd the myWd to set
-	 */
-	public  void setMyWd(final IMyWebDriver myWd) {
-		this.myWd = myWd;
-	}
-				
 }

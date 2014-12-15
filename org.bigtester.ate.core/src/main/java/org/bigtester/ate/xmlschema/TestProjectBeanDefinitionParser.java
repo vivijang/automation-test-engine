@@ -22,6 +22,7 @@ package org.bigtester.ate.xmlschema;
 
 import java.util.List;
 
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.TestProject;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -31,7 +32,6 @@ import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -49,28 +49,37 @@ public class TestProjectBeanDefinitionParser extends
 	@Override
 	protected AbstractBeanDefinition parseInternal(Element element,
 			ParserContext parserContext) {
-		// this will never be null since the schema explicitly requires that a value be supplied
-        int stepThinkTime = Integer.parseInt(element.getAttribute("stepThinkTime"));
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(TestProject.class);
-        factory.addPropertyValue("stepThinkTime", stepThinkTime);
-        
-        List<Element> suiteListElements = (List<Element>) DomUtils.getChildElementsByTagName(element, "TestSuite");
-        
-        if (suiteListElements != null && !suiteListElements.isEmpty()) {
-            parseSuiteComponents(suiteListElements, factory, parserContext);
-        }
-        
-        return factory.getBeanDefinition();
+		// this will never be null since the schema explicitly requires that a
+		// value be supplied
+		int stepThinkTime = Integer.parseInt(element
+				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME));
+		BeanDefinitionBuilder factory = BeanDefinitionBuilder
+				.rootBeanDefinition(TestProject.class);
+		
+		factory.addPropertyValue(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME,
+				stepThinkTime);
+
+		List<Element> suiteListElements = (List<Element>) DomUtils
+				.getChildElementsByTagName(element,
+						XsdElementConstants.ELEMENT_TESTSUITE);
+
+		if (suiteListElements != null && !suiteListElements.isEmpty()) {
+			parseSuiteComponents(suiteListElements, factory, parserContext);
+		}
+
+		return factory.getBeanDefinition();
 	}
-	
-	private static void parseSuiteComponents(List<Element> childElements, BeanDefinitionBuilder factory, ParserContext parserContext) {
-        ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(childElements.size());
-        for (Element element : childElements) {
-        	TestSuiteBeanDefinitionParser xmltestcase = new TestSuiteBeanDefinitionParser();
-        	children.add(xmltestcase.parse(element, parserContext));
-           
-        }
-        factory.addPropertyValue("suiteList", children);
-    }
+
+	private static void parseSuiteComponents(List<Element> childElements,
+			BeanDefinitionBuilder factory, ParserContext parserContext) {
+		ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(
+				childElements.size());
+		for (Element element : childElements) {
+			TestSuiteBeanDefinitionParser xmltestcase = new TestSuiteBeanDefinitionParser();
+			children.add(xmltestcase.parse(element, parserContext));
+
+		}
+		factory.addPropertyValue(XsdElementConstants.PROP_TESTPROJECT_SUITELIST, children);
+	}
 
 }

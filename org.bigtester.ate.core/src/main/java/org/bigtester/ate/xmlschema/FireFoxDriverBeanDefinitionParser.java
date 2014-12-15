@@ -20,12 +20,12 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.TestDatabaseInitializer;
+
+import org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
-import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,34 +34,29 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestDatabaseInitializerBeanDefinitionParser extends
+public class FireFoxDriverBeanDefinitionParser extends
 		AbstractSingleBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<TestDatabaseInitializer> getBeanClass(Element element) {
-		return TestDatabaseInitializer.class;
-	}
+	protected Class<MyFirefoxDriver> getBeanClass(Element element) {
+	        return MyFirefoxDriver.class; 
+    }
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected void doParse(Element element, BeanDefinitionBuilder bean) {
-		// this will never be null since the schema explicitly requires that a
-		// value be supplied
-		String initXmlFile = element
-				.getAttribute(XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE);
-		if (StringUtils.hasText(initXmlFile))
-			bean.addPropertyValue(
-				XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE,
-				initXmlFile);
-		//
-		// // this however is an optional property
-		// String lenient = element.getAttribute("list-class");
-		// if (StringUtils.hasText(lenient)) {
-		// bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
-		// }
-	}
+        // this will never be null since the schema explicitly requires that a value be supplied
+        //String testCaseName = element.getAttribute("testCaseName");
+        //bean.addPropertyValue("testCaseName", testCaseName);
+//
+//        // this however is an optional property
+//        String lenient = element.getAttribute("list-class");
+//        if (StringUtils.hasText(lenient)) {
+//            bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
+//        }
+    }
 
 }

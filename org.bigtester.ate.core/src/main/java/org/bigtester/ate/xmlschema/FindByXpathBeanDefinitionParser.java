@@ -20,12 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
+
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.TestDatabaseInitializer;
+import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,34 +38,23 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestDatabaseInitializerBeanDefinitionParser extends
-		AbstractSingleBeanDefinitionParser {
+public class FindByXpathBeanDefinitionParser extends
+		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<TestDatabaseInitializer> getBeanClass(Element element) {
-		return TestDatabaseInitializer.class;
+	@Override
+	protected AbstractBeanDefinition parseInternal(Element element,
+			ParserContext parserContext) {
+		// this will never be null since the schema explicitly requires that a value be supplied
+        String testSuiteName = element.getAttribute(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE);
+        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementFindByXpath.class);
+        if (StringUtils.hasText(testSuiteName))
+        	factory.addPropertyValue(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE, testSuiteName);
+        
+        return factory.getBeanDefinition();
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	protected void doParse(Element element, BeanDefinitionBuilder bean) {
-		// this will never be null since the schema explicitly requires that a
-		// value be supplied
-		String initXmlFile = element
-				.getAttribute(XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE);
-		if (StringUtils.hasText(initXmlFile))
-			bean.addPropertyValue(
-				XsdElementConstants.ATTR_TESTDBINITIALIZER_INITXMLFILE,
-				initXmlFile);
-		//
-		// // this however is an optional property
-		// String lenient = element.getAttribute("list-class");
-		// if (StringUtils.hasText(lenient)) {
-		// bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
-		// }
-	}
-
+	
+	
 }
