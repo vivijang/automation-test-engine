@@ -198,7 +198,7 @@
 	<xsd:complexType name="StepExpectedResultValueType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseERValueType">
-				<xsd:attribute name="dataValueID" type="xsd:long" />
+				<xsd:attribute name="dataValueID" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -280,7 +280,7 @@
 	<xsd:group name="testStepGroup">
 		<xsd:sequence>
 			<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
-			<xsd:element ref="elementStep" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element ref="elementStep" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:group>
