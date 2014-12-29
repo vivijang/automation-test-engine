@@ -20,16 +20,18 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.casestep.ElementTestStep;
+
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,25 +49,67 @@ public class ElementStepBeanDefinitionParser extends
 	@Override
 	protected AbstractBeanDefinition parseInternal(Element element,
 			ParserContext parserContext) {
-		// this will never be null since the schema explicitly requires that a value be supplied
-        String testSuiteName = element.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_MYWEBELEMENT);
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementTestStep.class);
-        if (StringUtils.hasText(testSuiteName))
-        	factory.addConstructorArgReference(testSuiteName);
-        
-        boolean target = Boolean.parseBoolean(element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
-        factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);
-        
-        String stepName = element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
-        if (StringUtils.hasText(stepName))
-        	factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_STEPNAME, stepName);
-        
-        String stepDesc = element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
-        if (StringUtils.hasText(stepDesc))
-        	factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
-        
-        return factory.getBeanDefinition();
+		// Here we parse the Spring elements such as < property>
+		BeanDefinitionHolder holder = parserContext.getDelegate()
+				.parseBeanDefinitionElement(element);
+		BeanDefinition bDef = holder.getBeanDefinition();
+		bDef.setBeanClassName(ElementTestStep.class.getName());
+
+		String myWE = element
+				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_MYWEBELEMENT);
+		if (StringUtils.hasText(myWE)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(myWE));
+		}
+		boolean target = Boolean.parseBoolean(element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);
+
+		String stepName = element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_STEPNAME, stepName);
+
+		String stepDesc = element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
+
+		parserContext.getRegistry().registerBeanDefinition(
+				element.getAttribute("id"), bDef);
+		return (AbstractBeanDefinition) bDef;
+
+		// this will never be null since the schema explicitly requires that a
+		// value be supplied
+		// String myWE =
+		// element.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_MYWEBELEMENT);
+		// BeanDefinitionBuilder factory =
+		// BeanDefinitionBuilder.rootBeanDefinition(ElementTestStep.class);
+		// if (StringUtils.hasText(myWE))
+		// factory.addConstructorArgReference(myWE);
+		//
+		// boolean target =
+		// Boolean.parseBoolean(element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
+		// factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP,
+		// target);
+		//
+		// String stepName =
+		// element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
+		// if (StringUtils.hasText(stepName))
+		// factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_STEPNAME,
+		// stepName);
+		//
+		// String stepDesc =
+		// element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
+		// if (StringUtils.hasText(stepDesc))
+		// factory.addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION,
+		// stepDesc);
+		//
+		// factory.getBeanDefinition().setBeanClassName(ElementTestStep.class.getName());
+		// parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"),
+		// factory.getBeanDefinition());
+		// return factory.getBeanDefinition();
 	}
-	
-	
+
 }

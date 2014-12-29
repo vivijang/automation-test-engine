@@ -30,6 +30,8 @@ import javax.sql.DataSource;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.CompositeDataSet;
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.context.ApplicationContext;
@@ -80,7 +82,10 @@ public class TestDatabaseInitializer {
 		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
-		DatabaseOperation.REFRESH.execute(con, builder.build(initXmlFile)); //Import your data
+		IDataSet[] datasets = new IDataSet[] {
+				builder.build(initXmlFile)
+		};
+		DatabaseOperation.REFRESH.execute(con, new CompositeDataSet(datasets)); //Import your data
 		con.close();
 		
 	}

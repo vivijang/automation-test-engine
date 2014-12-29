@@ -130,6 +130,9 @@ public final class XsdElementConstants {
 	public static final String ATTR_HOMEPAGE_HOMEURL = "homeUrl";
 	
 	
+	/** The Constant ATTR_REGULARPAGE_PAGEOBJECT. */
+	public static final String ATTR_REGULARPAGE_PAGEOBJECT = "pageObject";
+	
 	/** The Constant ATTR_STEPTHINKTIME. */
 	public static final String ATTR_TESTPROJECT_STEPTHINKTIME = "stepThinkTime";
 	
@@ -172,6 +175,9 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_TESTCASE_TESTCASENAME. */
 	public static final String ATTR_TESTCASE_TESTCASENAME = "testCaseName";
 	
+	/**
+	 * Instantiates a new xsd element constants.
+	 */
 	private XsdElementConstants () {
 		throw new AssertionError();
 	}

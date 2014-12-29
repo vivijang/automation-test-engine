@@ -49,6 +49,7 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_FIREFOXDRIVER, new FireFoxDriverBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HOMEPAGE, new HomepageBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_LASTPAGE, new LastPageBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_REGULARPAGE, new RegularPageBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEPAGEOBJECT, new BasePageObjectBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEPAGEMODEL, new BasePageModelBeanDefinitionParser());
 		

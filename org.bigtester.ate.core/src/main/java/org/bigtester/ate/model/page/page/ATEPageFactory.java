@@ -25,6 +25,7 @@ import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.elementfind.ElementFindById;
 import org.bigtester.ate.model.page.elementfind.ElementFindByLinkText;
 import org.bigtester.ate.model.page.elementfind.ElementFindByName;
+import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
@@ -94,6 +95,11 @@ public final class ATEPageFactory implements IATEPageFactory {
 				ElementFindById efbID = new ElementFindById();
 				efbID.setFindByValue(findByValue);
 				retVal = (IElementFind) efbID;
+				break;
+			case XPATH:
+				ElementFindByXpath efbXpath = new ElementFindByXpath();
+				efbXpath.setFindByValue(findByValue);
+				retVal = (IElementFind) efbXpath;
 				break;
 			case NAME:
 				ElementFindByName efbName = new ElementFindByName();
