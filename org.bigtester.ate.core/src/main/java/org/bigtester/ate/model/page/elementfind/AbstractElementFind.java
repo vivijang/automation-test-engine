@@ -20,8 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementfind;
 
+import java.util.concurrent.TimeUnit;
+
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,6 +41,10 @@ public abstract class AbstractElementFind {
 	
 	/** The find by value. */
 	private String findByValue;
+	
+	/** The wait. */
+	transient protected Wait<WebDriver> wait;
+
 	
 	/**
 	 * Do find.
@@ -73,6 +85,18 @@ public abstract class AbstractElementFind {
 	public boolean supports(final String arg0) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	/**
+	 * Creates the wait.
+	 *
+	 * @param driver the driver
+	 */
+	public void createWait(WebDriver driver) {
+		wait = new FluentWait<WebDriver>(driver)
+	            .withTimeout(30, TimeUnit.SECONDS)
+	            .pollingEvery(5, TimeUnit.SECONDS)
+	            .ignoring(NoSuchElementException.class);
 	}
 
 }

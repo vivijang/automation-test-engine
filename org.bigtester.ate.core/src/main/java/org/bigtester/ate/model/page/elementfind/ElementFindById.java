@@ -22,7 +22,12 @@ package org.bigtester.ate.model.page.elementfind;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.google.common.base.Function;
+
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,7 +43,13 @@ public class ElementFindById extends AbstractElementFind implements IElementFind
 	 */
 	@Override
 	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
-		return myWebDriver.getWebDriver().findElement(By.id(findByValue));
+		//return myWebDriver.getWebDriver().findElement(By.id(findByValue));
+		createWait(myWebDriver.getWebDriver());
+		return wait.until(new Function<WebDriver, WebElement>() {
+	        public WebElement apply(WebDriver driver) { //NOPMD
+	            return driver.findElement(By.id(findByValue));
+	        }
+	    });
 	}
 
 	
