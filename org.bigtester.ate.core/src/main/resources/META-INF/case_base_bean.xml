@@ -8,23 +8,9 @@
 
 	
 	<import resource="db-services.xml" />
+	<import resource="classpath:META-INF/db-services.xml" />
+	<ate:fireFoxDriver id="MyWebDriver2" />
+	<bean class="org.bigtester.ate.model.data.CaseDataProcessor" />
+	<ate:TestDatabaseInitializer id="dbInitializer"/>
 	
-	
-	
-	<ate:basePageModel id = "myBasePageModel">
-		<property name="myWd">
-			<ref bean="MyWebDriver2" />
-		</property>
-	</ate:basePageModel>
-	<ate:basePageObject id="myAbstractPageObject" parent="myBasePageModel"/>
-	
-	<ate:baseERValue id="baseERValue">
-		<property name="stepERDao" ref="StepERDao"/>
-	</ate:baseERValue>
-	
-	<ate:baseDataValue id="baseInputDataValue">
-		<property name="elementDataDao" ref="elementInputDataDao" />
-	</ate:baseDataValue>
-
-
 </beans>

@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.springframework.beans.factory.FactoryBean;
 
 
 
@@ -61,33 +60,7 @@ public class Homepage extends AbstractPageObject implements IHomepage{
 		super.getMyWd().getWebDriver().get(homeUrl);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	//@Override
-	public Homepage getObject() throws Exception {
-		// TODO Auto-generated method stub
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	//@Override
-	public Class<Homepage> getObjectType() {
-		// TODO Auto-generated method stub
-		return Homepage.class;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	//@Override
-	public boolean isSingleton() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
+	
 	
 
 		

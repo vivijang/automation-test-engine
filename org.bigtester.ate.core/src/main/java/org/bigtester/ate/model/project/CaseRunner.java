@@ -29,13 +29,10 @@ import java.util.Map;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.LogbackTag;
 import org.bigtester.ate.model.casestep.TestCase;
-import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.bigtester.ate.systemlogger.problemhandler.ProblemBrowserHandler;
-import org.bigtester.problomatic2.Problomatic;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
@@ -71,9 +68,7 @@ public class CaseRunner implements IRunTestCase {
 	/** The current executing tc name. */
 	protected String currentExecutingTCName; // must not be null
 
-	/** The db initializer. */
-	transient private TestDatabaseInitializer dbInitializer;
-
+	
 	/** The page object data files. */
 	private List<Resource> pageObjectDataFiles = new ArrayList<Resource>();
 
@@ -247,8 +242,8 @@ public class CaseRunner implements IRunTestCase {
 			for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
 				myWebDriver2.getWebDriver().close();
 			}
-		} catch (UnreachableBrowserException e) {
-			
+		} catch (UnreachableBrowserException e) {//NOPMD
+			//browser has been closed, no action needs to be done here.
 		}
 
 		((ConfigurableApplicationContext) context).close();

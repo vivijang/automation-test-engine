@@ -22,7 +22,6 @@ package org.bigtester.ate.model.page.elementfind;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.plugin.core.Plugin;
 
 // TODO: Auto-generated Javadoc
 /**
