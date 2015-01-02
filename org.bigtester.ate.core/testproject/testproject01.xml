@@ -13,11 +13,12 @@
     
     <bean id="TestStepResult" class="org.bigtester.ate.model.testresult.TestStepResult" /> 
     <bean id="dbInitializer" class="org.bigtester.ate.model.data.TestDatabaseInitializer">
-     <property name="initXmlFile" value="testproject/data.xml"/>
+     
     </bean> 
 	<bean id="testproject" name="testproject"
 		class="org.bigtester.ate.model.project.TestProject">
 		<property name="stepThinkTime" value="6"/>
+		<property name="globalInitXmlFile" value="dentistSmokeTest/data.xml"/>
 		<property name="suiteList">
 			<list>
 				<ref bean="suite1" />

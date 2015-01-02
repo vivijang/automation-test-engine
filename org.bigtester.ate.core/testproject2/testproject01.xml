@@ -13,11 +13,11 @@
 	
 	<ate:GenericSystemLogger id="systemlogger"/>
 	<ate:TestStepResult id="TestStepResult"/>
-	<ate:TestDatabaseInitializer id="dbInitializer" initXmlFile="testproject2/data.xml"/>
+	<ate:TestDatabaseInitializer id="dbInitializer"/>
 	
-	<ate:TestProject id="testproject" stepThinkTime="6">
+	<ate:TestProject id="testproject" stepThinkTime="6" globalInitXmlFile="dentistSmokeTest/data.xml">
 		<ate:TestSuite id="suite01" suiteName="suite01">
-			<ate:XmlTestCase id="tc01" testCaseName="testproject2/TestCase01x.xml"/>
+			<ate:XmlTestCase id="tc01" testCaseName="testproject2/testSuite1/TestCase01x.xml"/>
 <!-- 			<ate:XmlTestCase id="tc03" testCaseName="classpath:TestCase2.xml"/>  -->
 		</ate:TestSuite>
 <!-- 		<ate:TestSuite id="suite02" suiteName="suite02"> -->

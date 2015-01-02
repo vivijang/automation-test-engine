@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:ate="http://www.bigtester.org/schema/ate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.bigtester.org/schema/ate http://www.bigtester.org/schema/ate/ate.xsd">
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/abstract_parent_bean2.xml" />
+	<import resource="classpath:META-INF/case_base_bean.xml" />
+	<import resource="../pageObjects/homePage.xml" />
+	<import resource="../pageObjects/lastPage.xml" />
+	
+	<!-- here test case id has to be "testcase" -->
+	<ate:testCase id="testcase" testCaseName="first test case">
+		<ate:homeStep id="myhomestep" stepName="homestep"
+			stepDescription="open my home step" targetStep="false">
+			<property name="homepg">
+				<ref bean="homepg" />
+			</property>
+			<property name="expectedResultAsserter">
+				<list>
+					<ref bean="homePagePropertyAsserter" />
+					<ref bean="homeElementExistenceAsserter" />
+				</list>
+			</property>
+		</ate:homeStep>
+
+		<ate:elementStep id="step0" stepName="click english page"
+			stepDescription="ste1 desc" targetStep="true" myWebElement="mywe0" />
+
+		<ate:elementStep id="step1" stepName="input user name"
+			stepDescription="ste1 desc" targetStep="true" myWebElement="mywe1" />
+		<ate:elementStep id="step2" stepName="input password"
+			stepDescription="ste2 desc" targetStep="true" myWebElement="mywe2" />
+		<ate:lastStep id="mylaststep" stepName="laststep"
+			stepDescription="last step close browser" targetStep="false">
+			<property name="lastPage">
+				<ref bean="myLastPage" />
+			</property>
+		</ate:lastStep>
+
+	</ate:testCase>
+
+	
+</beans>

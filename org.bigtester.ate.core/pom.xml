@@ -90,26 +90,26 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-						<configuration>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
+<!-- 				<version>1.1.1</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>install</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>java</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
 							
-							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
-							<arguments>
-								<argument>testproject/testproject01.xml</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
+<!-- 							<arguments> -->
+<!-- 								<argument>testproject/testproject01.xml</argument> -->
+<!-- 							</arguments> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 
 <!-- 	<plugin> -->
 <!-- 		<groupId>org.apache.maven.plugins</groupId> -->

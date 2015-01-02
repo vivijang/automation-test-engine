@@ -13,9 +13,7 @@
 	<import resource="classpath:META-INF/abstract_parent_bean2.xml" />
 	
 	<ate:homePage id="homepg" homeUrl="http://www.bigtester.com"
-		parent="myAbstractPageObject" />
-
-	<ate:lastPage id="myLastPage" parent="myAbstractPageObject" />
+		parent="myAbstractPageObject" dataFile="testproject2/pageObjects/homePage.data.xml"/>
 
 	<ate:stepExpectedResultValue id="homeStepExpectedValue"
 		dataValueID="1" parent="baseERValue" />
@@ -40,38 +38,7 @@
 		</property>
 	</ate:pageElementExistenceAsserter>
 	
-	<!-- here test case id has to be "testcase" -->
-	<ate:testCase id="testcase" testCaseName="first test case">
-		<ate:homeStep id="myhomestep" stepName="homestep"
-			stepDescription="open my home step" targetStep="false">
-			<property name="homepg">
-				<ref bean="homepg" />
-			</property>
-			<property name="expectedResultAsserter">
-				<list>
-					<ref bean="homePagePropertyAsserter" />
-					<ref bean="homeElementExistenceAsserter" />
-				</list>
-			</property>
-		</ate:homeStep>
 
-		<ate:elementStep id="step0" stepName="click english page"
-			stepDescription="ste1 desc" targetStep="true" myWebElement="mywe0" />
-
-		<ate:elementStep id="step1" stepName="input user name"
-			stepDescription="ste1 desc" targetStep="true" myWebElement="mywe1" />
-		<ate:elementStep id="step2" stepName="input password"
-			stepDescription="ste2 desc" targetStep="true" myWebElement="mywe2" />
-		<ate:lastStep id="mylaststep" stepName="laststep"
-			stepDescription="last step close browser" targetStep="false">
-			<property name="lastPage">
-				<ref bean="myLastPage" />
-			</property>
-		</ate:lastStep>
-
-	</ate:testCase>
-
-	<!-- step0 definition -->
 	<ate:myWebElement id="mywe0" parent="myBasePageModel">
 		<constructor-arg ref="ef0" />
 		<constructor-arg ref="ea0" />
@@ -80,14 +47,15 @@
 		findByValue="//img[@alt='English (United Kingdom)']" />
 	<ate:clickAction id="ea0" />
 
-	<!-- step1 definition -->
+
 	<ate:myWebElement id="mywe1" parent="myBasePageModel">
 		<constructor-arg ref="ef1" />
 		<constructor-arg ref="ea1" />
 	</ate:myWebElement>
 	<ate:elementFindById id="ef1" findByValue="modlgn_username" />
 	<ate:sendKeysAction id="ea1" dataValue="userNameValue" />
-	<!-- step2 definition -->
+
+
 	<ate:myWebElement id="mywe2" parent="myBasePageModel">
 		<constructor-arg ref="ef2" />
 		<constructor-arg ref="ea2" />

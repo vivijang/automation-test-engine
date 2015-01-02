@@ -13,7 +13,7 @@
 	
 	<ate:GenericSystemLogger id="systemlogger"/>
 	<ate:TestStepResult id="TestStepResult"/>
-	<ate:TestDatabaseInitializer id="dbInitializer" initXmlFile="classpath:META-INF/data.xml"/>
+	<ate:TestDatabaseInitializer id="dbInitializer" />
 	
 	<ate:TestProject id="testproject" stepThinkTime="6">
 		<ate:TestSuite id="suite01" suiteName="suite01">
