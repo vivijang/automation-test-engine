@@ -129,12 +129,17 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_HOMEPAGE_HOMEURL. */
 	public static final String ATTR_HOMEPAGE_HOMEURL = "homeUrl";
 	
-	
+	/** The Constant ATTR_BASEPAGEOBJECT_DATAFILE. */
+	public static final String ATTR_BASEPAGEOBJECT_DATAFILE = "dataFile";
+		
 	/** The Constant ATTR_REGULARPAGE_PAGEOBJECT. */
 	public static final String ATTR_REGULARPAGE_PAGEOBJECT = "pageObject";
 	
 	/** The Constant ATTR_STEPTHINKTIME. */
 	public static final String ATTR_TESTPROJECT_STEPTHINKTIME = "stepThinkTime";
+	
+	/** The Constant ATTR_TESTPROJECT_GLOBALINITXMLFILE. */
+	public static final String ATTR_TESTPROJECT_GLOBALINITXMLFILE = "globalInitXmlFile";
 	
 	/** The Constant ATTR_TESTSTEP_TARGETSTEP. */
 	public static final String ATTR_TESTSTEP_TARGETSTEP = "targetStep";

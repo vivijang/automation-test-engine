@@ -14,7 +14,7 @@
 						<xsd:element ref="TestSuite" />
 					</xsd:choice>
 					<xsd:attribute name="stepThinkTime" type="xsd:int" />
-
+					<xsd:attribute name="globalInitXmlFile" type="xsd:string" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
@@ -62,9 +62,11 @@
 	<xsd:element name="TestDatabaseInitializer">
 		<xsd:complexType>
 			<xsd:complexContent>
-				<xsd:extension base="beans:identifiedType">
-					<xsd:attribute name="initXmlFile" type="xsd:string" />
-				</xsd:extension>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+			</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
@@ -104,6 +106,7 @@
 	<xsd:complexType name="BasePageObjectType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractPageModelBaseType">
+				<xsd:attribute name="dataFile" type="xsd:string"/>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

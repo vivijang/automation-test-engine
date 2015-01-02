@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.springframework.context.ApplicationContext;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestParameters defines ....
@@ -37,6 +39,9 @@ public class TestParameters
 
     /** The step think time. */
     private int stepThinkTime;
+    
+    /** The global app ctx. */
+    private ApplicationContext globalAppCtx;
     /**
 	 * @return the stepThinkTime
 	 */
@@ -114,5 +119,19 @@ public class TestParameters
 	 */
 	public boolean isEmpty(){
 		return testName.isEmpty() && testFileName.isEmpty();
+	}
+
+	/**
+	 * @return the globalAppCtx
+	 */
+	public ApplicationContext getGlobalAppCtx() {
+		return globalAppCtx;
+	}
+
+	/**
+	 * @param globalAppCtx the globalAppCtx to set
+	 */
+	public void setGlobalAppCtx(ApplicationContext globalAppCtx) {
+		this.globalAppCtx = globalAppCtx;
 	}
 }

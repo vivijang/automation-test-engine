@@ -51,13 +51,20 @@ public class TestProjectBeanDefinitionParser extends
 			ParserContext parserContext) {
 		// this will never be null since the schema explicitly requires that a
 		// value be supplied
-		int stepThinkTime = Integer.parseInt(element
-				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME));
+		
 		BeanDefinitionBuilder factory = BeanDefinitionBuilder
 				.rootBeanDefinition(TestProject.class);
 		
+		int stepThinkTime = Integer.parseInt(element
+				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME));
 		factory.addPropertyValue(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME,
 				stepThinkTime);
+		
+		String globalInitXml = element
+				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_GLOBALINITXMLFILE);
+		
+		factory.addPropertyValue(XsdElementConstants.ATTR_TESTPROJECT_GLOBALINITXMLFILE,
+				globalInitXml);
 
 		List<Element> suiteListElements = (List<Element>) DomUtils
 				.getChildElementsByTagName(element,

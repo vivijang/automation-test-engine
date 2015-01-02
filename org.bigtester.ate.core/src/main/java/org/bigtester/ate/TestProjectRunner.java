@@ -21,10 +21,10 @@
 
 package org.bigtester.ate;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.sql.SQLException;
 
-import org.bigtester.ate.constant.TestCaseConstants;
+import org.bigtester.ate.constant.GlobalConstants;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.project.TestProject;
 import org.dbunit.DatabaseUnitException;
@@ -58,9 +58,9 @@ public final class TestProjectRunner {
 	 *            the arguments
 	 * @throws SQLException 
 	 * @throws DatabaseUnitException 
-	 * @throws MalformedURLException 
+	 * @throws IOException 
 	 */
-	public static void main(final String... args) throws DatabaseUnitException, SQLException, MalformedURLException {
+	public static void main(final String... args) throws DatabaseUnitException, SQLException, IOException {
 		if (args.length > 0) {
 			runTest(args[0]);
 		} else {
@@ -72,7 +72,7 @@ public final class TestProjectRunner {
 	 * Run test.
 	 */
 	private static void runTest() {
-		TestProject testProj = (TestProject) context.getBean(TestCaseConstants.BEANID_TESTPROJECT);
+		TestProject testProj = GlobalUtils.findTestProjectBean(context);
 		testProj.runSuites();
 		
 	}
@@ -83,9 +83,9 @@ public final class TestProjectRunner {
 	 * @param testProjectXml the test project xml
 	 * @throws DatabaseUnitException the database unit exception
 	 * @throws SQLException the SQL exception
-	 * @throws MalformedURLException the malformed url exception
+	 * @throws IOException 
 	 */
-	public static void runTest(final String testProjectXml) throws DatabaseUnitException, SQLException, MalformedURLException  {
+	public static void runTest(final String testProjectXml) throws DatabaseUnitException, SQLException, IOException  {
 		if (testProjectXml.isEmpty()) {
 			context = new ClassPathXmlApplicationContext(
 					"testproject.xml");
@@ -93,10 +93,15 @@ public final class TestProjectRunner {
 			context = new FileSystemXmlApplicationContext(testProjectXml);
 			
 		}
-		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean("dbInitializer");
 		
+		TestProject testplan = GlobalUtils.findTestProjectBean(context);
+		testplan.setAppCtx(context);
+		
+		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean(GlobalConstants.BEAN_ID_GLOBAL_DBINITIALIZER);
+		
+		dbinit.setSingleInitXmlFile(testplan.getGlobalInitXmlFile());
 		//TODO add db initialization handler
-		dbinit.initialize(context, "dataSource");
+		dbinit.initializeGlobalDataFile(context);
 		
 		runTest();
 		

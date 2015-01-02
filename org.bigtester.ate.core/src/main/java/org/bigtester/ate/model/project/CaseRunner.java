@@ -22,27 +22,35 @@ package org.bigtester.ate.model.project;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.LogbackTag;
-import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.bigtester.ate.systemlogger.problemhandler.ProblemBrowserHandler;
+import org.bigtester.problomatic2.Problomatic;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.Resource;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestRunner;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-
 import org.testng.annotations.Test;
 import org.testng.internal.Utils;
 
@@ -52,15 +60,37 @@ import org.testng.internal.Utils;
  * 
  * @author Peidong Hu
  */
-public class CaseRunner implements IRunTestCase{
+public class CaseRunner implements IRunTestCase {
 
-	
-	
+	/** The context. */
+	private ApplicationContext context;
+
 	/** The my tc. */
 	private TestCase myTestCase;
 
 	/** The current executing tc name. */
 	protected String currentExecutingTCName; // must not be null
+
+	/** The db initializer. */
+	transient private TestDatabaseInitializer dbInitializer;
+
+	/** The page object data files. */
+	private List<Resource> pageObjectDataFiles = new ArrayList<Resource>();
+
+	/**
+	 * @return the pageObjectDataFiles
+	 */
+	public List<Resource> getPageObjectDataFiles() {
+		return pageObjectDataFiles;
+	}
+
+	/**
+	 * @param pageObjectDataFiles
+	 *            the pageObjectDataFiles to set
+	 */
+	public void setPageObjectDataFiles(List<Resource> pageObjectDataFiles) {
+		this.pageObjectDataFiles = pageObjectDataFiles;
+	}
 
 	/**
 	 * @return the currentExecutingTCName
@@ -101,20 +131,23 @@ public class CaseRunner implements IRunTestCase{
 	 */
 	@DataProvider(name = "dp")
 	public Object[][] getTestData(ITestContext ctx) {
-		TestParameters params = new TestParameters(ctx
-				.getCurrentXmlTest().getName(), ctx.getCurrentXmlTest()
-				.getName());
-		for (int index = 0; index < ((TestRunner) ctx).getTestListeners().size(); index ++) {
+		TestParameters params = new TestParameters(ctx.getCurrentXmlTest()
+				.getName(), ctx.getCurrentXmlTest().getName());
+		for (int index = 0; index < ((TestRunner) ctx).getTestListeners()
+				.size(); index++) {
 			if (((TestRunner) ctx).getTestListeners().get(index) instanceof TestProjectListener) {
-				int thinkT = ((TestProjectListener) ((TestRunner) ctx).getTestListeners().get(index)).getMytp().getStepThinkTime();
+				int thinkT = ((TestProjectListener) ((TestRunner) ctx)
+						.getTestListeners().get(index)).getMytp()
+						.getStepThinkTime();
 				params.setStepThinkTime(thinkT);
+				params.setGlobalAppCtx(((TestProjectListener) ((TestRunner) ctx)
+						.getTestListeners().get(index)).getMytp().getAppCtx());
 				break;
 			}
 		}
-		
-		
+
 		return new Object[][] { { params } };
-		
+
 	}
 
 	/**
@@ -126,7 +159,7 @@ public class CaseRunner implements IRunTestCase{
 	 *            the test data
 	 */
 	@BeforeMethod(alwaysRun = true)
-	public void testData(Method method, Object[] testData) { //NOPMD
+	public void testData(Method method, Object[] testData) { // NOPMD
 		String testCase;
 		if (testData != null && testData.length > 0) {
 			TestParameters testParams;
@@ -161,24 +194,22 @@ public class CaseRunner implements IRunTestCase{
 	@Test(dataProvider = "dp")
 	public void runTest(TestParameters testParams) throws Throwable {
 		String testname = testParams.getTestFilename();
-		
-		ApplicationContext context;
+
+		// ApplicationContext context;
 		try {
 			context = new FileSystemXmlApplicationContext(testname);
-			myTestCase = (TestCase) context
-					.getBean(TestCaseConstants.BEANID_TESTCASE);
+			myTestCase = GlobalUtils.findTestCaseBean(context);
 			myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 			myTestCase.goSteps();
-			((ConfigurableApplicationContext) context).close();
+
 		} catch (FatalBeanException fbe) {
 			if (fbe.getCause() instanceof FileNotFoundException) {
 				context = new ClassPathXmlApplicationContext(testname);
-				myTestCase = (TestCase) context
-						.getBean(TestCaseConstants.BEANID_TESTCASE);
+				myTestCase = GlobalUtils.findTestCaseBean(context);
 				myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 				myTestCase.goSteps();
-				((ConfigurableApplicationContext) context).close();
-			} else if (fbe instanceof BeanCreationException) { //NOPMD
+
+			} else if (fbe instanceof BeanCreationException) { // NOPMD
 				ITestResult itr = Reporter.getCurrentTestResult();
 
 				if (itr.getThrowable() != null
@@ -205,5 +236,37 @@ public class CaseRunner implements IRunTestCase{
 		}
 	}
 
+	/**
+	 * Tear down.
+	 */
+	@AfterMethod(alwaysRun = true)
+	public void tearDown() {
+		try {
+			Map<String, IMyWebDriver> myWebDrivers = context
+					.getBeansOfType(IMyWebDriver.class);
+			for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
+				myWebDriver2.getWebDriver().close();
+			}
+		} catch (UnreachableBrowserException e) {
+			
+		}
+
+		((ConfigurableApplicationContext) context).close();
+	}
+
+	/**
+	 * @return the context
+	 */
+	public ApplicationContext getContext() {
+		return context;
+	}
+
+	/**
+	 * @param context
+	 *            the context to set
+	 */
+	public void setContext(ApplicationContext context) {
+		this.context = context;
+	}
 
 }

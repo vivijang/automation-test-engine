@@ -30,7 +30,6 @@ import javax.sql.DataSource;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
@@ -85,8 +84,7 @@ public class DataManager {
 				"Test-applicationContext.xml");
 		/** The my tc. */
 		TestCase myTestCase;
-		myTestCase = (TestCase) context
-				.getBean(TestCaseConstants.BEANID_TESTCASE);
+		myTestCase = GlobalUtils.findTestCaseBean(context);
 		myTestCase.goSteps();
 		context.close();
 	}
@@ -142,7 +140,7 @@ public class DataManager {
 		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
-		DatabaseOperation.REFRESH.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
+		DatabaseOperation.CLEAN_INSERT.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
 		con.close();
 			
 		context.close();

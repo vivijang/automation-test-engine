@@ -39,7 +39,8 @@
 			<ref bean="homeStepExpectedValue" />
 		</property>
 	</ate:pageElementExistenceAsserter>
-
+	
+	<!-- here test case id has to be "testcase" -->
 	<ate:testCase id="testcase" testCaseName="first test case">
 		<ate:homeStep id="myhomestep" stepName="homestep"
 			stepDescription="open my home step" targetStep="false">

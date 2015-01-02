@@ -54,6 +54,10 @@ public class HomepageBeanDefinitionParser extends
         String homeUrl = element.getAttribute(XsdElementConstants.ATTR_HOMEPAGE_HOMEURL);
         bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_HOMEPAGE_HOMEURL, homeUrl);
         
+        String dataFile = element.getAttribute(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE);
+        bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE, dataFile);
+        
+        
         String idstring = element.getAttribute("id");
         
         parserContext.getRegistry().registerBeanDefinition(idstring, bDef);

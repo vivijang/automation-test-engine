@@ -30,7 +30,7 @@ import org.springframework.plugin.core.Plugin;
  * 
  * @author Peidong Hu
  */
-public interface IElementFind extends Plugin<String>{
+public interface IElementFind {
 	
 	/**
 	 * Do find of the element.

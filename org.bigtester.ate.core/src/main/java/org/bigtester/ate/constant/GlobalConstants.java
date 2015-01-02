@@ -26,15 +26,15 @@ package org.bigtester.ate.constant;
  * @author Peidong Hu
  *
  */
-public final class TestCaseConstants {
+public final class GlobalConstants {
 	
-	/** The Constant BEANID_TESTCASE. */
-	public static final String BEANID_TESTCASE = "testcase";
-	/** The Constant BEANID_TESTPROJECT. */
-	public static final String BEANID_TESTPROJECT = "testproject";
-	/** The Constant BEANID_MYWEBDRIVER. */
-	public static final String BEANID_MYWEBDRIVER = "MyWebDriver";
-	private TestCaseConstants () {
+	/** The Constant BEAN_ID_DATASOURCE. */
+	public static final String BEAN_ID_DATASOURCE = "dataSource";
+	
+	/** The Constant BEAN_ID_GLOBAL_DBINITIALIZER. */
+	public static final String BEAN_ID_GLOBAL_DBINITIALIZER = "dbInitializer";
+		
+	private GlobalConstants () {
 		throw new AssertionError();
 	}
 	

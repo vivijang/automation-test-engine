@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.page.page;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.Cookie;
@@ -52,7 +53,7 @@ public interface IPageObject {
 	 *
 	 * @return the web element list
 	 */
-	List<MyWebElement> getMyWebElementList();
+	Map<Long, MyWebElement> getMyWebElementList();
 	
 	/**
 	 * Gets the cookies.

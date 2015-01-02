@@ -24,9 +24,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.bigtester.ate.GlobalUtils;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
@@ -34,60 +37,173 @@ import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class DatabaseInitializer defines ....
+ * 
  * @author Peidong Hu
  *
  */
 
 public class TestDatabaseInitializer {
-	
+
 	/** The init xml file. */
-	private InputStream initXmlFile;
+	final private List<InputStream> initXmlFile = new ArrayList<InputStream>();
+
+	/** The datasets. */
+	transient private IDataSet[] datasets;
+
+	/** The single init xml file. */
+	private InputStream singleInitXmlFile;
 
 	/**
 	 * Gets the inits the xml file.
 	 *
 	 * @return the initXmlFile
 	 */
-	public InputStream getInitXmlFile() {
+	public List<InputStream> getInitXmlFile() {
 		return initXmlFile;
 	}
 
 	/**
 	 * Sets the inits the xml file.
 	 *
-	 * @param initXmlFile the initXmlFile to set
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param initXmlFile
+	 *            the initXmlFile to set
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void setInitXmlFile(Resource initXmlFile) throws IOException {
-		this.initXmlFile = initXmlFile.getInputStream();
+	public void setInitXmlFile(List<Resource> initXmlFile) throws IOException {
+		for (int i = 0; i < initXmlFile.size(); i++) {
+
+			this.initXmlFile.add(initXmlFile.get(i).getInputStream());
+
+		}
 	}
-	
+
 	/**
 	 * Initialize.
 	 *
-	 * @param context the context
-	 * @param dataSource the data source
-	 * @throws DatabaseUnitException the database unit exception
-	 * @throws SQLException the SQL exception
-	 * @throws MalformedURLException the malformed url exception
+	 * @param context
+	 *            the context
+	 * @param dataSource
+	 *            the data source
+	 * @throws DatabaseUnitException
+	 *             the database unit exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws MalformedURLException
+	 *             the malformed url exception
 	 */
-	public void initialize(ApplicationContext context, String dataSource) throws DatabaseUnitException, SQLException, MalformedURLException {
-		DataSource datas = (DataSource)context.getBean(dataSource);
-		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
+	public void initializeGlobalDataFile(ApplicationContext context)
+			throws DatabaseUnitException, SQLException, MalformedURLException {
+		DataSource datas = GlobalUtils.findDataSourceBean(context);
+		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); // Create
+																					// DBUnit
+																					// Database
+																					// connection
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
-		IDataSet[] datasets = new IDataSet[] {
-				builder.build(initXmlFile)
-		};
-		DatabaseOperation.REFRESH.execute(con, new CompositeDataSet(datasets)); //Import your data
+
+		datasets = new IDataSet[] { builder.build(singleInitXmlFile) };
+		DatabaseOperation.REFRESH.execute(con, new CompositeDataSet(datasets)); // Import
+																				// your
+																				// data
+
+		// TODO handle the empty data file case.
 		con.close();
-		
+
+	}
+
+	/**
+	 * Initialize.
+	 *
+	 * @param context
+	 *            the context
+	 * @throws DatabaseUnitException
+	 *             the database unit exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws MalformedURLException
+	 *             the malformed url exception
+	 */
+	public void initialize(ApplicationContext context)
+			throws DatabaseUnitException, SQLException, MalformedURLException {
+		DataSource datas = GlobalUtils.findDataSourceBean(context);
+		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); // Create
+																					// DBUnit
+																					// Database
+																					// connection
+		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
+
+		if (!initXmlFile.isEmpty()) {
+			datasets = new IDataSet[initXmlFile.size()];
+			for (int i = 0; i < initXmlFile.size(); i++) {
+				datasets[i] = builder.build(initXmlFile.get(i));
+			}
+			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
+					datasets)); // Import your data
+		}
+		// TODO handle the empty data file case.
+		con.close();
+
+	}
+
+	/**
+	 * Initialize.
+	 *
+	 * @param beanFac
+	 *            the bean factory
+	 * @throws DatabaseUnitException
+	 *             the database unit exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws MalformedURLException
+	 *             the malformed url exception
+	 */
+	public void initialize(BeanFactory beanFac) throws DatabaseUnitException,
+			SQLException, MalformedURLException {
+		DataSource datas = GlobalUtils.findDataSourceBean(beanFac);
+		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); // Create
+																					// DBUnit
+																					// Database
+																					// connection
+		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+		builder.setColumnSensing(true);
+
+		if (!initXmlFile.isEmpty()) {
+			datasets = new IDataSet[initXmlFile.size()];
+			for (int i = 0; i < initXmlFile.size(); i++) {
+				datasets[i] = builder.build(initXmlFile.get(i));
+			}
+			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
+					datasets)); // Import your data
+		}
+		// TODO handle the empty data file case.
+		con.close();
+
+	}
+
+	/**
+	 * @return the singleInitXmlFile
+	 */
+	public InputStream getSingleInitXmlFile() {
+		return singleInitXmlFile;
+	}
+
+	/**
+	 * @param singleInitXmlFile
+	 *            the singleInitXmlFile to set
+	 * @throws IOException
+	 */
+	public void setSingleInitXmlFile(Resource singleInitXmlFile)
+			throws IOException {
+		this.singleInitXmlFile = singleInitXmlFile.getInputStream();
 	}
 
 }

@@ -23,16 +23,17 @@ package org.bigtester.ate.model.casestep;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -74,8 +75,18 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
 					this.getMyWebElement(),
 					this.getMyWebDriver(),
-					(TestCase) getApplicationContext().getBean(TestCaseConstants.BEANID_TESTCASE));
+					GlobalUtils.findTestCaseBean(getApplicationContext()));
 			pve.initCause(e);
+			throw pve;
+		} catch (TimeoutException et) {
+			StepExecutionException2 pve = new StepExecutionException2(
+					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
+							+ ExceptionMessage.MSG_SEPERATOR + et.getMessage(),
+					ExceptionErrorCode.WEBELEMENT_NOTFOUND,
+					this.getMyWebElement(),
+					this.getMyWebDriver(),
+					GlobalUtils.findTestCaseBean(getApplicationContext()));
+			pve.initCause(et);
 			throw pve;
 		}
 		if (getExpectedResultAsserter() != null) {
@@ -93,8 +104,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
 						ExceptionErrorCode.PAGEVALIDATION_HIGH,
 						listAsserters, getExpectedResultAsserter().get(0).getResultPage().getMyWd(),
-						(TestCase) getApplicationContext().getBean(
-								TestCaseConstants.BEANID_TESTCASE));
+						GlobalUtils.findTestCaseBean(getApplicationContext()));
 				throw pve;
 			}
 			

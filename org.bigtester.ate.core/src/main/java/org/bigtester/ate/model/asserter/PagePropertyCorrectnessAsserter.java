@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
@@ -27,8 +28,6 @@ import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.PagePropertyType;
 import org.bigtester.ate.constant.ReportMessage;
-import org.bigtester.ate.constant.TestCaseConstants;
-import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
@@ -132,8 +131,7 @@ public class PagePropertyCorrectnessAsserter extends
 								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
 								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
 								cki.toString(), getResultPage().getMyWd(),
-								(TestCase) getApplicationContext().getBean(
-										TestCaseConstants.BEANID_TESTCASE));
+								GlobalUtils.findTestCaseBean(getApplicationContext()));
 						retVal = false;// NOPMD
 						throw pve;
 
@@ -167,8 +165,7 @@ public class PagePropertyCorrectnessAsserter extends
 								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
 								PagePropertyType.PAGE_TITLE, getResultPage()
 										.getMyWd(),
-								(TestCase) getApplicationContext().getBean(
-										TestCaseConstants.BEANID_TESTCASE));
+										GlobalUtils.findTestCaseBean(getApplicationContext()));
 						retVal = false; // NOPMD
 						throw pve;
 					}

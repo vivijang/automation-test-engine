@@ -21,10 +21,13 @@
 package org.bigtester.ate.model.page.page;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bigtester.ate.model.page.AbstractPageModelBase;
 import org.openqa.selenium.Cookie;
+import org.springframework.core.io.Resource;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,9 +40,12 @@ public class AbstractPageObject extends AbstractPageModelBase {
 
 	/** The page name. */
 	private String pageName;
-
+	
+	/** The data file. */
+	private Resource dataFile;
+	
 	/** The web element list. */
-	private List<MyWebElement> myWebElementList = new ArrayList<MyWebElement>();
+	private Map<Long, MyWebElement> myWebElementList = new HashMap<Long, MyWebElement>();//NOPMD
 
 	/** The cookies. */
 	private List<Cookie> cookies = new ArrayList<Cookie>();
@@ -48,6 +54,8 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	private String pageTitle;
 	
 	/**
+	 * Gets the page title.
+	 *
 	 * @return the pageTitle
 	 */
 	public String getPageTitle() {
@@ -55,6 +63,8 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	}
 
 	/**
+	 * Sets the page title.
+	 *
 	 * @param pageTitle the pageTitle to set
 	 */
 	public void setPageTitle(String pageTitle) {
@@ -62,6 +72,8 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	}
 
 	/**
+	 * Gets the cookies.
+	 *
 	 * @return the cookies
 	 */
 	public List<Cookie> getCookies() {
@@ -69,6 +81,8 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	}
 
 	/**
+	 * Sets the cookies.
+	 *
 	 * @param cookies the cookies to set
 	 */
 	public void setCookies(List<Cookie> cookies) {
@@ -81,7 +95,7 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 * @param myWebElementList
 	 *            the myWebElementList to set
 	 */
-	public void setMyWebElementList(List<MyWebElement> myWebElementList) {
+	public void setMyWebElementList(Map<Long, MyWebElement> myWebElementList) {
 		this.myWebElementList = myWebElementList;
 	}
 
@@ -90,12 +104,14 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 * 
 	 * @return the web element list
 	 */
-	public List<MyWebElement> getMyWebElementList() {
+	public Map<Long, MyWebElement> getMyWebElementList() {
 		return myWebElementList;
 	}
 
 	
 	/**
+	 * Gets the page name.
+	 *
 	 * @return the pageName
 	 */
 	public String getPageName() {
@@ -103,11 +119,30 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	}
 
 	/**
-	 * @param pageName
-	 *            the pageName to set
+	 * Sets the page name.
+	 *
+	 * @param pageName            the pageName to set
 	 */
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
+	}
+
+	/**
+	 * Gets the data file.
+	 *
+	 * @return the dataFile
+	 */
+	public Resource getDataFile() {
+		return dataFile;
+	}
+
+	/**
+	 * Sets the data file.
+	 *
+	 * @param dataFile the dataFile to set
+	 */
+	public void setDataFile(Resource dataFile) {
+		this.dataFile = dataFile;
 	}
 
 }

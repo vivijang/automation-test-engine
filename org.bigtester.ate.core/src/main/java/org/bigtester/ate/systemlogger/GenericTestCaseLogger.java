@@ -20,12 +20,13 @@
  *******************************************************************************/
 package org.bigtester.ate.systemlogger;
 
+import java.util.Map;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.constant.TestCaseConstants;
 import org.bigtester.ate.model.AbstractATECaseExecE;
 import org.bigtester.ate.model.AbstractATEException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
@@ -121,10 +122,12 @@ public class GenericTestCaseLogger implements ApplicationContextAware{
 			prb = new GenericATEProblem(joinPoint.getTarget(),
 					error);
 			try {
-				myWebDriver = (IMyWebDriver) appContext.getBean(TestCaseConstants.BEANID_MYWEBDRIVER);
-				myWebDriver.getWebDriver().getCurrentUrl();
-				pbh = new ProblemBrowserHandler(myWebDriver);
-				Problomatic.addProblemHandlerForProblem(prb, pbh);
+				Map<String, IMyWebDriver> myWebDrivers = appContext.getBeansOfType(IMyWebDriver.class);
+				for(IMyWebDriver myWebDriver2: myWebDrivers.values()){
+					//myWebDriver2.getWebDriver().getCurrentUrl();
+					pbh = new ProblemBrowserHandler(myWebDriver2);
+					Problomatic.addProblemHandlerForProblem(prb, pbh);
+				}
 			} catch (Exception ext) { //NOPMD
 				//if webdriver can't be successfully accessed, do nothing
 			}

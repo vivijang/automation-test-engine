@@ -20,16 +20,15 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-import java.util.List;
+import java.util.Map;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.ReportMessage;
-import org.bigtester.ate.constant.TestCaseConstants;
-import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
@@ -38,6 +37,7 @@ import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -72,7 +72,8 @@ public class PageElementExistenceAsserter extends
 				MyWebElement mwe = ipf.getMyWebElement(stepERValue.getValue()
 						.get(i).getElementFindBy(),
 						stepERValue.getValue().get(i).getElementFindByValue());
-				super.getResultPage().getMyWebElementList().add(mwe);
+				super.getResultPage().getMyWebElementList().put(stepERValue.getValue()
+						.get(i).getIdColumn(), mwe);
 				interestingERDBIndexes.add(stepERValue.getValue().get(i)
 						.getIdColumn());
 			}
@@ -87,12 +88,12 @@ public class PageElementExistenceAsserter extends
 		execResult.setStepExpectedResultValue(getStepERValue());
 
 		boolean retVal = false; // NOPMD
-		List<MyWebElement> myWebElementList = getResultPage()
+		Map<Long, MyWebElement> myWebElementList = getResultPage()
 				.getMyWebElementList();
 		if (!myWebElementList.isEmpty()) {
 			MyWebElement webelement;
-			for (int index = 0; index < myWebElementList.size(); index++) {
-				webelement = myWebElementList.get(index);
+			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
+				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
 				try {
 					webelement.getElementFind().doFind(
 							getResultPage().getMyWd(),
@@ -109,8 +110,8 @@ public class PageElementExistenceAsserter extends
 							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
 							webelement.getElementFind(), getResultPage()
 									.getMyWd(),
-							(TestCase) getApplicationContext().getBean(
-									TestCaseConstants.BEANID_TESTCASE));
+							GlobalUtils
+									.findTestCaseBean(getApplicationContext()));
 					pve.initCause(e);
 					throw pve;
 				}
@@ -132,12 +133,12 @@ public class PageElementExistenceAsserter extends
 	public void assertER2() {
 		execResult.setStepExpectedResultValue(getStepERValue());
 
-		List<MyWebElement> myWebElementList = getResultPage()
+		Map<Long, MyWebElement> myWebElementList = getResultPage()
 				.getMyWebElementList();
 		if (!myWebElementList.isEmpty()) {
 			MyWebElement webelement;
-			for (int index = 0; index < myWebElementList.size(); index++) {
-				webelement = myWebElementList.get(index);
+			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
+				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
 				try {
 					webelement.getElementFind().doFind(
 							getResultPage().getMyWd(),
@@ -165,6 +166,23 @@ public class PageElementExistenceAsserter extends
 						execResult.setFlagFailCase(true);
 					}
 
+				} catch (TimeoutException et) {
+					execResult.getActualResult().getResultSet()
+							.put(interestingERDBIndexes.get(index), NOTEXIST);
+					execResult.getComparedResult().put(
+							interestingERDBIndexes.get(index),
+							EnumAssertResult.PAGEELEMENTNOTEXIST);
+					execResult.getFailedResults().put(
+							getStepERValue().getValue().get(index)
+									.getIdColumn(),
+							EnumAssertResult.PAGEELEMENTNOTEXIST);
+					if (getStepERValue().getValue().get(index)
+							.getAssertPriority() != null
+							&& getStepERValue().getValue().get(index)
+									.getAssertPriority()
+									.equals(EnumAssertPriority.HIGH)) {
+						execResult.setFlagFailCase(true);
+					}
 				}
 
 			}
@@ -175,14 +193,12 @@ public class PageElementExistenceAsserter extends
 					if (ser.getActualResult().getResultSet()
 							.get(serv.getValue().get(index).getIdColumn()) != null) {
 						assertReportMSG += serv.getValue().get(index)
-								.getTestDataContext()
-								.getContextFieldValue();
+								.getTestDataContext().getContextFieldValue();
 						assertReportMSG += ReportMessage.MSG_SEPERATOR
 								+ serv.getValue().get(index)
 										.getAssertPriority();
 						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ serv.getValue().get(index)
-										.getElementFindBy();
+								+ serv.getValue().get(index).getElementFindBy();
 						assertReportMSG += ReportMessage.MSG_SEPERATOR
 								+ serv.getValue().get(index)
 										.getElementFindByValue();

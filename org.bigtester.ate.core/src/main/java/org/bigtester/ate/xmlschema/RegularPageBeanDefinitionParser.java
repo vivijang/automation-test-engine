@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.page.page.RegularPage;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -50,8 +51,8 @@ public class RegularPageBeanDefinitionParser extends
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(RegularPage.class.getName());
         		
-        //String pageObj = element.getAttribute(XsdElementConstants.ATTR_REGULARPAGE_PAGEOBJECT);
-       // bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_REGULARPAGE_PAGEOBJECT, pageObj);
+        String dataFile = element.getAttribute(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE);
+        bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE, dataFile);
         
         String idstring = element.getAttribute("id");
         

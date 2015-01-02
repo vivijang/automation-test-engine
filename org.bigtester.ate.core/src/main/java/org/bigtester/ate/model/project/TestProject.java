@@ -20,11 +20,14 @@
  *******************************************************************************/
 package org.bigtester.ate.model.project;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.testng.TestNG;
 import org.testng.reporters.XMLReporterConfig;
 import org.testng.xml.XmlClass;
@@ -42,6 +45,12 @@ public class TestProject {
 	/** The suite list. */
 	private List<TestSuite> suiteList;
 
+	/** The app ctx. */
+	private ApplicationContext appCtx;
+	
+	/** The global init xmlfiles. */
+	private Resource globalInitXmlFile;
+	
 	/** The step think time. */
 	private int stepThinkTime;
 	
@@ -143,6 +152,35 @@ public class TestProject {
 	 */
 	public void setTestProjectListener(TestProjectListener testProjectListener) {
 		this.testProjectListener = testProjectListener;
+	}
+
+	/**
+	 * @return the appCtx
+	 */
+	public ApplicationContext getAppCtx() {
+		return appCtx;
+	}
+
+	/**
+	 * @param appCtx the appCtx to set
+	 */
+	public void setAppCtx(ApplicationContext appCtx) {
+		this.appCtx = appCtx;
+	}
+
+	/**
+	 * @return the globalInitXmlfile
+	 */
+	public Resource getGlobalInitXmlFile() {
+		return globalInitXmlFile;
+	}
+
+	/**
+	 * @param globalInitXmlfile the globalInitXmlfile to set
+	 * @throws IOException 
+	 */
+	public void setGlobalInitXmlFile(Resource globalInitXmlFile) throws IOException {
+		this.globalInitXmlFile = globalInitXmlFile;
 	}
 
 }
