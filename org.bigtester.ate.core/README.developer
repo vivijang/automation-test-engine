@@ -24,3 +24,10 @@ NOTE4) Display all the files
     a) in the project window, click the View Menu(in the upper right corner of the window)
     b) click Filters
     c) deselect 'Inner class files' and '.*resources'
+    
+NOTE5) How to improve code quality of handling Null Pointer Exception
+	a) go through step 4) in README.codestyle
+	b) create package-info.java in newly created package
+	c) use @NonNullByDefault annotation in package-info.java
+	d) use @Nullable annotation on any argument, return value or field which could be Nullable during runtime.
+	e) Eclipse will automatically find possible NPE in IDE compiler. 

@@ -80,4 +80,21 @@ This document is built for developers to setup your code style and JAutoDoc tool
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-	
+4) Setting Null Analysis to improve code quality of handling potential null pointer exceptions.
+	a) right click on project->properties->java compiler->Errors/Warnings
+	b) check on 'Enable project specific settings'
+	c) scroll down to find 'Null Analysis'
+	d) set the following options,
+		Null pointer access: Error
+		Potential null pointer access: Error
+		Redundant null check: Warning
+		Check on 'Enable annotation-based null analysis'
+		Violation of null specification: Error
+		Conflict between null annotations and null inference: Error
+		Unchecked conversion from non-annotated type to @NonNull type: Error
+		Redundant null annotation: Warning
+		@NonNull parameter not annotated in overriding method: warning
+		Missing '@NonNullByDefault' annotation on package: Error
+		Check on 'Use default annotations for null specifications'
+		Enable syntactic null analysis for fields
+	e) click on Apply button and Close 
