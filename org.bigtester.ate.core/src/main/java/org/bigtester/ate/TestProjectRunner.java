@@ -100,6 +100,7 @@ public final class TestProjectRunner {
 		TestDatabaseInitializer dbinit = (TestDatabaseInitializer) context.getBean(GlobalConstants.BEAN_ID_GLOBAL_DBINITIALIZER);
 		
 		dbinit.setSingleInitXmlFile(testplan.getGlobalInitXmlFile());
+		
 		//TODO add db initialization handler
 		dbinit.initializeGlobalDataFile(context);
 		

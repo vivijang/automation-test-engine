@@ -21,6 +21,7 @@
 package org.bigtester.ate.xmlschema;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.bigtester.ate.model.page.atewebdriver.MyFirefoxDriver;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
@@ -48,9 +49,10 @@ public class FireFoxDriverBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	protected void doParse(Element element, BeanDefinitionBuilder bean) {
-        // this will never be null since the schema explicitly requires that a value be supplied
-        //String testCaseName = element.getAttribute("testCaseName");
-        //bean.addPropertyValue("testCaseName", testCaseName);
+        String profileName = element.getAttribute("profileName");
+        if (!StringUtils.isEmpty(profileName)) {
+        	bean.addConstructorArgValue(profileName);
+        }
 //
 //        // this however is an optional property
 //        String lenient = element.getAttribute("list-class");

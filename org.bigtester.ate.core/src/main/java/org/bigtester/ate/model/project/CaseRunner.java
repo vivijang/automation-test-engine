@@ -33,6 +33,7 @@ import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
@@ -242,7 +243,7 @@ public class CaseRunner implements IRunTestCase {
 			for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
 				myWebDriver2.getWebDriver().close();
 			}
-		} catch (UnreachableBrowserException e) {//NOPMD
+		} catch (UnreachableBrowserException | NoSuchWindowException e) {//NOPMD
 			//browser has been closed, no action needs to be done here.
 		}
 

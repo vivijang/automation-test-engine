@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.testng.TestNG;
@@ -33,6 +34,7 @@ import org.testng.reporters.XMLReporterConfig;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -49,6 +51,7 @@ public class TestProject {
 	private ApplicationContext appCtx;
 	
 	/** The global init xmlfiles. */
+	@Nullable
 	private Resource globalInitXmlFile;
 	
 	/** The step think time. */
@@ -171,6 +174,7 @@ public class TestProject {
 	/**
 	 * @return the globalInitXmlfile
 	 */
+	@Nullable
 	public Resource getGlobalInitXmlFile() {
 		return globalInitXmlFile;
 	}

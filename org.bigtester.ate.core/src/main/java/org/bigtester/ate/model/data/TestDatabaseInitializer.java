@@ -37,9 +37,15 @@ import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
+
+import edu.umd.cs.findbugs.annotations.NonNull;
+
+
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -201,7 +207,7 @@ public class TestDatabaseInitializer {
 	 *            the singleInitXmlFile to set
 	 * @throws IOException
 	 */
-	public void setSingleInitXmlFile(Resource singleInitXmlFile)
+	public void setSingleInitXmlFile(@org.eclipse.jdt.annotation.NonNull Resource singleInitXmlFile)
 			throws IOException {
 		this.singleInitXmlFile = singleInitXmlFile.getInputStream();
 	}

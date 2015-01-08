@@ -87,6 +87,7 @@
 	<xsd:complexType name="MyFireFoxDriverType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractWebDriverBaseType">
+			<xsd:attribute name="profileName" type="xsd:string"/>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

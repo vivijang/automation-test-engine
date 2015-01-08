@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,44 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.atewebdriver;
-
-import org.openqa.selenium.WebDriver;
+package org.bigtester.ate.browser;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class WebDriverBase defines ....
- * 
+ * This class IProfileSelector defines ....
  * @author Peidong Hu
+ *
  */
-public abstract class AbstractWebDriverBase {
-	
-	
-	/** The web driver. */
-	protected WebDriver webDriver;
-	
-	
-	/**
-	 * Gets the web driver.
-	 *
-	 * @return the webDriver
-	 */
-	public final WebDriver getWebDriver() {
-		return webDriver;
-	}
-
-	/**
-	 * Sets the web driver.
-	 *
-	 * @param webDriver the webDriver to set
-	 */
-	public final void setWebDriver(final WebDriver webDriver) {
-		this.webDriver = webDriver;
-	}
-	
-	/**
-	 * Driver capacity.
-	 * @return 
-	 */
-	public abstract void driverCapacity();
+public interface IBrowserProfileSelector {
+	public <T> T getProfile(Class<T> cls);
 }
