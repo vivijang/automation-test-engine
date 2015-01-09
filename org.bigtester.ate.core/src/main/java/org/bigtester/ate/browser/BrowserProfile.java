@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.browser;
 
-import net.jodah.typetools.TypeResolver;
-
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.springframework.util.StringUtils;
@@ -47,6 +45,24 @@ public class BrowserProfile<T> {
 	
 	
 	
+	/**
+	 * @return the profileType
+	 */
+	public Class<T> getProfileType() {
+		return profileType;
+	}
+
+
+
+	/**
+	 * @param profileType the profileType to set
+	 */
+	public void setProfileType(Class<T> profileType) {
+		this.profileType = profileType;
+	}
+
+
+
 	/**
 	 * @return the driverType
 	 */
@@ -80,13 +96,22 @@ public class BrowserProfile<T> {
 		if (this.profileType == FirefoxProfile.class) {
 			
 			ProfilesIni profileIni = new ProfilesIni();
-
-			profile = (T) profileIni.getProfile(profileName);
+			T tmpProfile = (T) profileIni.getProfile(profileName); 
+			if (null == tmpProfile) {
+				throw new IllegalArgumentException();
+			} else {
+				this.profile = tmpProfile;
+			}
 		} else {
 			//TODO set default profile type to firefox profile type
 			ProfilesIni profileIni = new ProfilesIni();
 
-			profile = (T) profileIni.getProfile(profileName);
+			T tmpProfile = (T) profileIni.getProfile(profileName); 
+			if (null == tmpProfile) {
+				throw new IllegalArgumentException();
+			} else {
+				this.profile = tmpProfile;
+			}
 		}
 	}
 	

@@ -47,11 +47,12 @@ abstract public class AbstractATECaseExecE extends AbstractATEException implemen
 	 * @param message the message
 	 * @param errorCode the error code
 	 */
-	public AbstractATECaseExecE(final String message, final String errorCode) {
+	public AbstractATECaseExecE(final String message, final String errorCode, final TestCase currentTestCase, final IMyWebDriver myWebDriver) {
 		super(message, errorCode);
+		this.currentTestCase = currentTestCase;
+		this.myWebDriver = myWebDriver;
 		// TODO Auto-generated constructor stub
 	}
-	
 	/**
 	 * Gets the current test case.
 	 *
@@ -83,5 +84,7 @@ abstract public class AbstractATECaseExecE extends AbstractATEException implemen
 	public void setMyWebDriver(IMyWebDriver myWebDriver) {
 		this.myWebDriver = myWebDriver;
 	}
+	
+	
 
 }

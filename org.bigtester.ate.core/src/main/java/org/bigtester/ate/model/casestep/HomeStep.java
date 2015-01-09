@@ -30,7 +30,9 @@ import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
+import org.bigtester.ate.model.page.page.Homepage;
 import org.bigtester.ate.model.page.page.IHomepage;
+import org.bigtester.ate.model.page.page.MyWebElement;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,16 +44,37 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	
 	
 	/** The homepg. */
-	private IHomepage homepg;
+	private IHomepage homePage;
 
+	/**
+	 * Instantiates a new home step.
+	 *
+	 * @param pageObject the page object
+	 * @param myWebElement the my web element
+	 */
+	public HomeStep(IHomepage pageObject, MyWebElement myWebElement) {
+		super(pageObject, myWebElement);
+		this.homePage = pageObject;
+	}
+	
+	/**
+	 * Instantiates a new home step.
+	 *
+	 * @param pageObject the page object
+	 * @param myWebElement the my web element
+	 */
+	public HomeStep(IHomepage pageObject) {
+		super(pageObject);
+		this.homePage = pageObject;
+	}
 	
 	/**
 	 * Gets the homepg.
 	 * 
 	 * @return the homepg
 	 */
-	public IHomepage getHomepg() {
-		return homepg;
+	public IHomepage getHomePage() {
+		return homePage;
 	}
 
 	/**
@@ -60,8 +83,8 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	 * @param homepg
 	 *            the new homepg
 	 */
-	public void setHomepg(final IHomepage homepg) {
-		this.homepg = homepg;
+	public void setHomePage(final IHomepage homepg) {
+		this.homePage = homepg;
 	}
 
 	
@@ -74,15 +97,15 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	 */
 	@StepLoggable
 	public void doStep() throws PageValidationException2{
-		homepg.startHomepage();
-		
-		if (getExpectedResultAsserter() != null) {
+		homePage.startHomepage();
+		List<IExpectedResultAsserter> asserters = getExpectedResultAsserter();
+		if (null != asserters) {
 			boolean flagThrowE = false;//NOPMD
 			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();//NOPMD
-			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
-				listAsserters.add(getExpectedResultAsserter().get(i));
-				getExpectedResultAsserter().get(i).assertER2();
-				if (getExpectedResultAsserter().get(i).getExecResult().isFlagFailCase()) {
+			for (int i=0; i < asserters.size(); i++) {
+				listAsserters.add(asserters.get(i));
+				asserters.get(i).assertER2();
+				if (asserters.get(i).getExecResult().isFlagFailCase()) {
 					flagThrowE = true;//NOPMD
 				}
 				
@@ -91,7 +114,7 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 				PageValidationException2 pve = new PageValidationException2(
 						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
 						ExceptionErrorCode.PAGEVALIDATION_HIGH,
-						listAsserters, getExpectedResultAsserter().get(0).getResultPage().getMyWd(),
+						listAsserters, asserters.get(0).getResultPage().getMyWd(),
 						GlobalUtils.findTestCaseBean(getApplicationContext()));
 				throw pve;
 			}
@@ -105,7 +128,7 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 	@Override
 	public IMyWebDriver getMyWebDriver() {
 		// TODO Auto-generated method stub
-		return homepg.getMyWd();
+		return homePage.getMyWd();
 	}
 
 }

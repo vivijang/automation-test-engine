@@ -28,10 +28,12 @@ import org.bigtester.ate.constant.GlobalConstants;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.project.TestProject;
 import org.dbunit.DatabaseUnitException;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.util.StringUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,16 +43,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  */
 public final class TestProjectRunner {
 	
-	/** The context. */
-	private static ApplicationContext context; 
-	/**
-	 * Instantiates a new test project runner.
-	 */
 	private TestProjectRunner() {
 		
 	}
-	
-	
 	/**
 	 * The main method.
 	 * 
@@ -71,7 +66,7 @@ public final class TestProjectRunner {
 	/**
 	 * Run test.
 	 */
-	private static void runTest() {
+	private static void runTest(ApplicationContext context) {
 		TestProject testProj = GlobalUtils.findTestProjectBean(context);
 		testProj.runSuites();
 		
@@ -85,8 +80,9 @@ public final class TestProjectRunner {
 	 * @throws SQLException the SQL exception
 	 * @throws IOException 
 	 */
-	public static void runTest(final String testProjectXml) throws DatabaseUnitException, SQLException, IOException  {
-		if (testProjectXml.isEmpty()) {
+	public static void runTest(@Nullable final String testProjectXml) throws DatabaseUnitException, SQLException, IOException  {
+		ApplicationContext context;
+		if (StringUtils.isEmpty(testProjectXml)) {
 			context = new ClassPathXmlApplicationContext(
 					"testproject.xml");
 		} else {
@@ -104,7 +100,7 @@ public final class TestProjectRunner {
 		//TODO add db initialization handler
 		dbinit.initializeGlobalDataFile(context);
 		
-		runTest();
+		runTest(context);
 		
 	  	((ConfigurableApplicationContext)context).close();
 	}

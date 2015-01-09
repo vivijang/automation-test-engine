@@ -52,7 +52,7 @@ public class StepExecutionException2 extends AbstractATECaseExecE {
 	 */
 	public StepExecutionException2(String message, String errorCode,
 			MyWebElement myWebElement, IMyWebDriver myWebDriver, TestCase currentTestCase) {
-		super(message, errorCode);
+		super(message, errorCode, currentTestCase, myWebDriver);
 		this.myWebElement = myWebElement;
 		setMyWebDriver(myWebDriver);
 		setCurrentTestCase(currentTestCase);

@@ -130,7 +130,7 @@ public class PagePropertyCorrectnessAsserter extends
 						PageValidationException2 pve = new PageValidationException2(
 								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
 								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
-								cki.toString(), getResultPage().getMyWd(),
+								assertProperty, getResultPage().getMyWd(),
 								GlobalUtils.findTestCaseBean(getApplicationContext()));
 						retVal = false;// NOPMD
 						throw pve;
@@ -217,9 +217,8 @@ public class PagePropertyCorrectnessAsserter extends
 								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
 						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
 										.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						if (getStepERValue().getValue().get(i)
-								.getAssertPriority() != null && getStepERValue().getValue().get(i)
-										.getAssertPriority().equals(EnumAssertPriority.HIGH)) {
+						EnumAssertPriority failPriority = getStepERValue().getValue().get(i).getAssertPriority();
+						if (null != failPriority && failPriority.equals(EnumAssertPriority.HIGH)) {
 							execResult.setFlagFailCase(true);
 						}
 					}
@@ -249,9 +248,9 @@ public class PagePropertyCorrectnessAsserter extends
 								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
 						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
 								.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						if (getStepERValue().getValue().get(i)
-								.getAssertPriority() != null && getStepERValue().getValue().get(i)
-										.getAssertPriority().equals(EnumAssertPriority.HIGH)) {
+						EnumAssertPriority failPriority = getStepERValue().getValue().get(i)
+								.getAssertPriority(); 
+						if (null != failPriority && failPriority.equals(EnumAssertPriority.HIGH)) {
 							execResult.setFlagFailCase(true);
 						}
 					}

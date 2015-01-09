@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns="http://www.bigtester.org/schema/ate"
+	xmlns:tool="http://www.springframework.org/schema/tool"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
 	targetNamespace="http://www.bigtester.org/schema/ate" xmlns:tns="http://www.bigtester.org/schema/ate"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
@@ -14,7 +15,8 @@
 						<xsd:element ref="TestSuite" />
 					</xsd:choice>
 					<xsd:attribute name="stepThinkTime" type="xsd:int" />
-					<xsd:attribute name="globalInitXmlFile" type="xsd:string" />
+					<xsd:attribute name="globalInitXmlFile" type="xsd:string"
+						use="required" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
@@ -62,11 +64,11 @@
 	<xsd:element name="TestDatabaseInitializer">
 		<xsd:complexType>
 			<xsd:complexContent>
-			<xsd:extension base="beans:identifiedType">
-				<!-- Here we re-use Spring elements and attributes -->
-				<xsd:group ref="beans:beanElements" />
-				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
-			</xsd:extension>
+				<xsd:extension base="beans:identifiedType">
+					<!-- Here we re-use Spring elements and attributes -->
+					<xsd:group ref="beans:beanElements" />
+					<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
@@ -87,7 +89,7 @@
 	<xsd:complexType name="MyFireFoxDriverType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractWebDriverBaseType">
-			<xsd:attribute name="profileName" type="xsd:string"/>
+				<xsd:attribute name="profileName" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -107,7 +109,7 @@
 	<xsd:complexType name="BasePageObjectType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractPageModelBaseType">
-				<xsd:attribute name="dataFile" type="xsd:string"/>
+				<xsd:attribute name="dataFile" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -157,6 +159,27 @@
 				<xsd:attribute name="stepName" type="xsd:string" use="required" />
 				<xsd:attribute name="stepDescription" type="xsd:string"
 					use="required" />
+				<xsd:attribute name="myWebElement" type="xsd:string"
+					>
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.MyWebElement" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="pageObject" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -269,7 +292,6 @@
 	<xsd:complexType name="ElementStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
-				<xsd:attribute name="myWebElement" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

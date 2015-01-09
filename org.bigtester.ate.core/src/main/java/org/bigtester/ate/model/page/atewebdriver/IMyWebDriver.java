@@ -30,6 +30,8 @@ import org.openqa.selenium.WebDriver;
  */
 public interface IMyWebDriver {
 	
+	WebDriver createDriver();
+	
 	/**
 	 * Gets the webdriver.
 	 * 

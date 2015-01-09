@@ -51,7 +51,7 @@ public class TestProject {
 	private ApplicationContext appCtx;
 	
 	/** The global init xmlfiles. */
-	@Nullable
+	
 	private Resource globalInitXmlFile;
 	
 	/** The step think time. */
@@ -174,7 +174,6 @@ public class TestProject {
 	/**
 	 * @return the globalInitXmlfile
 	 */
-	@Nullable
 	public Resource getGlobalInitXmlFile() {
 		return globalInitXmlFile;
 	}

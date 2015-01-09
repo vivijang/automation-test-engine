@@ -34,6 +34,7 @@ import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.openqa.selenium.NoSuchWindowException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.BeanCreationException;
@@ -63,13 +64,15 @@ public class CaseRunner implements IRunTestCase {
 	/** The context. */
 	private ApplicationContext context;
 
+	/** The main driver. */
+	private WebDriver mainDriver;
+
 	/** The my tc. */
 	private TestCase myTestCase;
 
 	/** The current executing tc name. */
 	protected String currentExecutingTCName; // must not be null
 
-	
 	/** The page object data files. */
 	private List<Resource> pageObjectDataFiles = new ArrayList<Resource>();
 
@@ -194,6 +197,8 @@ public class CaseRunner implements IRunTestCase {
 		// ApplicationContext context;
 		try {
 			context = new FileSystemXmlApplicationContext(testname);
+			mainDriver = ((IMyWebDriver) GlobalUtils.findMyWebDriver(context))
+					.createDriver();
 			myTestCase = GlobalUtils.findTestCaseBean(context);
 			myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 			myTestCase.goSteps();
@@ -201,6 +206,8 @@ public class CaseRunner implements IRunTestCase {
 		} catch (FatalBeanException fbe) {
 			if (fbe.getCause() instanceof FileNotFoundException) {
 				context = new ClassPathXmlApplicationContext(testname);
+				mainDriver = ((IMyWebDriver) GlobalUtils
+						.findMyWebDriver(context)).createDriver();
 				myTestCase = GlobalUtils.findTestCaseBean(context);
 				myTestCase.setStepThinkTime(testParams.getStepThinkTime());
 				myTestCase.goSteps();
@@ -238,16 +245,25 @@ public class CaseRunner implements IRunTestCase {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		try {
-			Map<String, IMyWebDriver> myWebDrivers = context
-					.getBeansOfType(IMyWebDriver.class);
-			for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
-				myWebDriver2.getWebDriver().close();
+			if (null != mainDriver) {
+				mainDriver.quit();
 			}
-		} catch (UnreachableBrowserException | NoSuchWindowException e) {//NOPMD
-			//browser has been closed, no action needs to be done here.
+			if (null != context) {
+
+				Map<String, IMyWebDriver> myWebDrivers = context
+						.getBeansOfType(IMyWebDriver.class);
+				for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
+					myWebDriver2.getWebDriver().quit();
+				}
+			}
+		} catch (UnreachableBrowserException | NoSuchWindowException
+				| NullPointerException e) {// NOPMD
+			// browser has been closed, no action needs to be done here.
+		}
+		if (null != context) {
+			((ConfigurableApplicationContext) context).close();
 		}
 
-		((ConfigurableApplicationContext) context).close();
 	}
 
 	/**
@@ -263,6 +279,21 @@ public class CaseRunner implements IRunTestCase {
 	 */
 	public void setContext(ApplicationContext context) {
 		this.context = context;
+	}
+
+	/**
+	 * @return the mainDriver
+	 */
+	public WebDriver getMainDriver() {
+		return mainDriver;
+	}
+
+	/**
+	 * @param mainDriver
+	 *            the mainDriver to set
+	 */
+	public void setMainDriver(WebDriver mainDriver) {
+		this.mainDriver = mainDriver;
 	}
 
 }

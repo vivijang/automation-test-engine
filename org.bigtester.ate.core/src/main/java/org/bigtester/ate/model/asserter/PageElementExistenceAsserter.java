@@ -26,6 +26,7 @@ import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
+import org.bigtester.ate.constant.EnumElementFindType;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.ReportMessage;
@@ -68,14 +69,19 @@ public class PageElementExistenceAsserter extends
 			if (stepERValue.getValue().get(i).getTestDataContext()
 					.getContextFieldValue()
 					.equalsIgnoreCase(AssertType.PAGE_ELEMENT_EXISTENCE)) {
-				IATEPageFactory ipf = ATEPageFactory.getInstance();
-				MyWebElement mwe = ipf.getMyWebElement(stepERValue.getValue()
-						.get(i).getElementFindBy(),
-						stepERValue.getValue().get(i).getElementFindByValue());
-				super.getResultPage().getMyWebElementList().put(stepERValue.getValue()
-						.get(i).getIdColumn(), mwe);
-				interestingERDBIndexes.add(stepERValue.getValue().get(i)
-						.getIdColumn());
+				
+				EnumElementFindType findByType = stepERValue.getValue().get(i).getElementFindBy();
+				if (null == findByType) {
+					continue;
+				} else {
+					IATEPageFactory ipf = ATEPageFactory.getInstance();
+					MyWebElement mwe = ipf.getMyWebElement(findByType,
+							stepERValue.getValue().get(i).getElementFindByValue());
+					super.getResultPage().getMyWebElementList().put(stepERValue.getValue()
+							.get(i).getIdColumn(), mwe);
+					interestingERDBIndexes.add(stepERValue.getValue().get(i)
+							.getIdColumn());
+				}
 			}
 		}
 	}
@@ -158,11 +164,9 @@ public class PageElementExistenceAsserter extends
 							getStepERValue().getValue().get(index)
 									.getIdColumn(),
 							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					if (getStepERValue().getValue().get(index)
-							.getAssertPriority() != null
-							&& getStepERValue().getValue().get(index)
-									.getAssertPriority()
-									.equals(EnumAssertPriority.HIGH)) {
+					EnumAssertPriority failedPriority = getStepERValue().getValue().get(index)
+							.getAssertPriority(); 
+					if ( null != failedPriority && failedPriority.equals(EnumAssertPriority.HIGH)) {
 						execResult.setFlagFailCase(true);
 					}
 
@@ -176,11 +180,9 @@ public class PageElementExistenceAsserter extends
 							getStepERValue().getValue().get(index)
 									.getIdColumn(),
 							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					if (getStepERValue().getValue().get(index)
-							.getAssertPriority() != null
-							&& getStepERValue().getValue().get(index)
-									.getAssertPriority()
-									.equals(EnumAssertPriority.HIGH)) {
+					EnumAssertPriority failedPriority = getStepERValue().getValue().get(index)
+							.getAssertPriority();
+					if ( null != failedPriority && failedPriority.equals(EnumAssertPriority.HIGH)) {
 						execResult.setFlagFailCase(true);
 					}
 				}

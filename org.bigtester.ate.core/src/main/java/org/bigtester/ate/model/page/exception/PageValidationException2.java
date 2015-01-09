@@ -28,6 +28,7 @@ import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,16 +42,20 @@ public class PageValidationException2 extends AbstractATECaseExecE {
     private static final long serialVersionUID = -7144577815429959503L;
 	
 	/** The page property. */
+    @Nullable
 	private transient String pageProperty;
 	/** The element find. */
+    @Nullable
 	private transient IElementFind elementFind;
 	
 	/** The list asserters. */
+    @Nullable
 	private List<IExpectedResultAsserter> listAsserters;
 	
 	/**
 	 * @return the listAsserters
 	 */
+    @Nullable
 	public List<IExpectedResultAsserter> getListAsserters() {
 		return listAsserters;
 	}
@@ -71,6 +76,7 @@ public class PageValidationException2 extends AbstractATECaseExecE {
 	 *
 	 * @return the pageProperty
 	 */
+	@Nullable
 	public String getPageProperty() {
 		return pageProperty;
 	}
@@ -87,10 +93,9 @@ public class PageValidationException2 extends AbstractATECaseExecE {
 	 * @param currentTestCase the current test case
 	 */
 	public PageValidationException2(String message, String errorCode, String pageProperty, IMyWebDriver myWebDriver, TestCase currentTestCase){
-        super(message, errorCode);
+		super(message, errorCode, currentTestCase, myWebDriver);
         this.pageProperty = pageProperty;
-        setCurrentTestCase(currentTestCase);
-        setMyWebDriver(myWebDriver);
+        
     }
     
     
@@ -104,10 +109,9 @@ public class PageValidationException2 extends AbstractATECaseExecE {
      * @param currentTestCase the current test case
      */
     public PageValidationException2(String message, String errorCode, IElementFind eFind, IMyWebDriver myWebDriver, TestCase currentTestCase){
-        super(message, errorCode);
+        super(message, errorCode, currentTestCase, myWebDriver);
         elementFind = eFind;
-        setCurrentTestCase(currentTestCase);
-        setMyWebDriver(myWebDriver);
+        
     }
 
     /**
@@ -120,10 +124,9 @@ public class PageValidationException2 extends AbstractATECaseExecE {
      * @param currentTestCase the current test case
      */
     public PageValidationException2(String message, String errorCode, List<IExpectedResultAsserter> listAsserters, IMyWebDriver myWebDriver, TestCase currentTestCase){
-    	super(message, errorCode);
+    	super(message, errorCode, currentTestCase, myWebDriver);
         this.listAsserters = listAsserters;
-        setCurrentTestCase(currentTestCase);
-        setMyWebDriver(myWebDriver);
+        
     }
 
         
@@ -133,6 +136,7 @@ public class PageValidationException2 extends AbstractATECaseExecE {
 	 *
 	 * @return the elementFind
 	 */
+    @Nullable
 	public IElementFind getElementFind() {
 		return elementFind;
 	}

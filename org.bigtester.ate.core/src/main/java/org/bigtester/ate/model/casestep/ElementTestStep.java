@@ -31,7 +31,9 @@ import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.bigtester.ate.model.page.page.RegularPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
@@ -42,19 +44,22 @@ import org.openqa.selenium.TimeoutException;
  * @author Peidong Hu
  */
 public class ElementTestStep extends BaseTestStep implements ITestStep {
-	// TOTO add pageObject as another member.
+
 
 	/**
-	 * Instantiates a new test step.
-	 * 
-	 * @param myWe
-	 *            the my we
+	 * @param pageObject
+	 * @param myWebElement
 	 */
-	public ElementTestStep(final MyWebElement myWe) {
-		super();
-		setMyWebElement(myWe);
+	public ElementTestStep(IPageObject pageObject, MyWebElement myWebElement) {
+		super(pageObject, myWebElement);
 	}
 
+	/**
+	 * @param myWebElement
+	 */
+	public ElementTestStep( MyWebElement myWebElement) {
+		super( myWebElement);
+	}
 	/**
 	 * {@inheritDoc}
 	 * @throws PageValidationException 

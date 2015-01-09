@@ -133,7 +133,7 @@ public final class XsdElementConstants {
 	public static final String ATTR_BASEPAGEOBJECT_DATAFILE = "dataFile";
 		
 	/** The Constant ATTR_REGULARPAGE_PAGEOBJECT. */
-	public static final String ATTR_REGULARPAGE_PAGEOBJECT = "pageObject";
+	public static final String ATTR_BASETESTSTEP_PAGEOBJECT = "pageObject";
 	
 	/** The Constant ATTR_STEPTHINKTIME. */
 	public static final String ATTR_TESTPROJECT_STEPTHINKTIME = "stepThinkTime";

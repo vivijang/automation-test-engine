@@ -24,6 +24,8 @@ package org.bigtester.ate.model.casestep;
 import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.page.ILastpage;
+import org.bigtester.ate.model.page.page.MyWebElement;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,60 +33,60 @@ import org.bigtester.ate.model.page.page.ILastpage;
  * 
  * @author Peidong Hu
  */
-public class LastStep extends BaseTestStep implements ITestStep{
-	
-	
-
-
-
+public class LastStep extends BaseTestStep implements ITestStep {
 
 	/** The last page. */
+
 	private ILastpage lastPage;
 
-	
-
-
-
+	/**
+	 * @param pageObject
+	 * @param myWebElement
+	 */
+	public LastStep(ILastpage pageObject, @Nullable MyWebElement myWebElement) {
+		super(pageObject, myWebElement);
+		this.lastPage = pageObject;
+	}
+	/**
+	 * @param pageObject
+	 * @param myWebElement
+	 */
+	public LastStep(ILastpage pageObject) {
+		super(pageObject);
+		this.lastPage = pageObject;
+	}
 	/**
 	 * Gets the last page.
 	 *
 	 * @return the lastPage
 	 */
+
 	public ILastpage getLastPage() {
 		return lastPage;
 	}
 
-
-
-
-
 	/**
 	 * Sets the last page.
 	 *
-	 * @param lastPage the lastPage to set
+	 * @param lastPage
+	 *            the lastPage to set
 	 */
 	public void setLastPage(final ILastpage lastPage) {
 		this.lastPage = lastPage;
 	}
 
-
-
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.bigtester.ate.model.casestep.ITestStep#doStep()
 	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@StepLoggable
-	public void doStep(){
+	public void doStep() {
 		lastPage.closeLastpage();
 	}
-
-
-
-
 
 	/**
 	 * {@inheritDoc}

@@ -24,9 +24,11 @@ import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.casestep.LastStep;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 
@@ -50,7 +52,12 @@ public class LastStepBeanDefinitionParser extends
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(LastStep.class.getName());
-       
+        String pageObject = element
+				.getAttribute(XsdElementConstants.ATTR_BASETESTSTEP_PAGEOBJECT);
+		if (StringUtils.hasText(pageObject)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(pageObject));
+		}
 		
         boolean target = Boolean.parseBoolean(element.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
         bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);

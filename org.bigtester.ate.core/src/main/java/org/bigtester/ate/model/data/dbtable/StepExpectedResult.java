@@ -28,6 +28,7 @@ import javax.persistence.Table;
 
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumElementFindType;
+import org.eclipse.jdt.annotation.Nullable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -78,6 +79,7 @@ public class StepExpectedResult extends AbstractTestDataTable{
 	//@JoinColumn(name = "elementFindByType_idColumn", referencedColumnName = "idColumn")
 	@Enumerated(EnumType.STRING)
 	@Column
+	@Nullable
 	private EnumElementFindType ElementFindBy; //NOPMD
 	
 	/** The assert priority. */
@@ -85,6 +87,7 @@ public class StepExpectedResult extends AbstractTestDataTable{
 	@Setter
 	@Enumerated(EnumType.STRING)
 	@Column
+	@Nullable
 	private EnumAssertPriority assertPriority; //NOPMD
 	
 	

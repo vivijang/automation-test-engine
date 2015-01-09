@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.Cookie;
 import org.springframework.core.io.Resource;
 
@@ -42,6 +43,7 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	private String pageName;
 	
 	/** The data file. */
+	@Nullable
 	private Resource dataFile;
 	
 	/** The web element list. */
@@ -132,6 +134,7 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 *
 	 * @return the dataFile
 	 */
+	@Nullable
 	public Resource getDataFile() {
 		return dataFile;
 	}

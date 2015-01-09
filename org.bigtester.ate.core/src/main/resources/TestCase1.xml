@@ -28,7 +28,7 @@
 
 	<!-- homestep definition -->
 	<bean id="homestep" class="org.bigtester.ate.model.casestep.HomeStep">
-		<property name="homepg">
+		<property name="homePage">
 			<ref bean="myHomepage" />
 		</property>
 		<property name="targetStep">

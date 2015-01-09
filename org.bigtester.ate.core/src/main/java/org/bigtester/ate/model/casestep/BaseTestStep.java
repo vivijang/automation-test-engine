@@ -26,7 +26,9 @@ import java.util.List;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -39,6 +41,7 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/** The page object. */
+	@Nullable
 	private IPageObject pageObject;
 
 	/** The forced page validation. */
@@ -58,14 +61,46 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	private transient boolean elementStepFlag;
 	
 	/** The my web element. */
+	@Nullable
 	private MyWebElement myWebElement;
 	
 	/** The i expected result asserter. */
+	@Nullable
 	private List<IExpectedResultAsserter> expectedResultAsserter;
 	
 	/** The application context. */
+	@Nullable
 	private ApplicationContext applicationContext;
-		
+
+	/**
+	 * Instantiates a new base test step.
+	 *
+	 * @param pageObject the page object
+	 * @param myWebElement the my web element
+	 */
+	public BaseTestStep( IPageObject pageObject, MyWebElement myWebElement) {
+		this.pageObject = pageObject;
+		this.myWebElement = myWebElement;
+	}
+	/**
+	 * Instantiates a new base test step.
+	 *
+	 * @param pageObject the page object
+	 * @param myWebElement the my web element
+	 */
+	public BaseTestStep( MyWebElement myWebElement) {
+		this.myWebElement = myWebElement;
+	}
+	
+	/**
+	 * Instantiates a new base test step.
+	 *
+	 * @param pageObject the page object
+	 * @param myWebElement the my web element
+	 */
+	public BaseTestStep( IPageObject pageObject ) {
+		this.pageObject = pageObject;
+	}
 	/**
 	 * Gets the step name.
 	 * 
@@ -109,6 +144,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * 
 	 * @return the myWebElement
 	 */
+	@Nullable
 	public final MyWebElement getMyWebElement() {
 		return myWebElement;
 	}
@@ -148,6 +184,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * 
 	 * @return the pageObject
 	 */
+	@Nullable
 	public IPageObject getPageObject() {
 		return pageObject;
 	}
@@ -202,6 +239,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/**
 	 * @return the iExpectedResultAsserter
 	 */
+	@Nullable
 	public List<IExpectedResultAsserter> getExpectedResultAsserter() {
 		return expectedResultAsserter;
 	}
@@ -217,9 +255,13 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
+	public void setApplicationContext(@Nullable ApplicationContext applicationContext)
 			throws BeansException {
-		this.applicationContext = applicationContext;
+		if (null == applicationContext) {
+			throw new NoSuchBeanDefinitionException(ApplicationContext.class);
+		} else {
+			this.applicationContext = applicationContext;
+		}
 		
 	}
 	
@@ -228,7 +270,13 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 *
 	 * @return the application context
 	 */
-	public ApplicationContext getApplicationContext(){
-		return applicationContext;
+	public ApplicationContext getApplicationContext() throws IllegalStateException{
+		
+		final ApplicationContext applicationContext2 = applicationContext;
+		if (null == applicationContext2) {
+			throw new IllegalStateException("applicationContext is not correctly initialized in test step");
+		} else {
+			return applicationContext2;
+		}
 	}
 }

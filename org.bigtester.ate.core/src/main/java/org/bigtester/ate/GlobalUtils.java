@@ -28,10 +28,12 @@ import javax.sql.DataSource;
 
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.page.Homepage;
 import org.bigtester.ate.model.page.page.Lastpage;
 import org.bigtester.ate.model.page.page.RegularPage;
 import org.bigtester.ate.model.project.TestProject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -62,7 +64,13 @@ public final class GlobalUtils {
 		if (testcases.isEmpty()) {
 			throw new NoSuchBeanDefinitionException(TestCase.class);
 		} else {
-			return testcases.values().iterator().next();
+			@Nullable TestCase retVal = testcases.values().iterator().next();
+			if (null == retVal) {
+				throw new NoSuchBeanDefinitionException(TestCase.class);
+			}
+			else {
+				return retVal;
+			}
 		}
 	}
 
@@ -74,14 +82,19 @@ public final class GlobalUtils {
 	 * @return the test database initializer
 	 */
 	public static TestDatabaseInitializer findDBInitializer(
-			ApplicationContext appCtx) {
+			ApplicationContext appCtx) throws NoSuchBeanDefinitionException {
 		Map<String, TestDatabaseInitializer> dbInit = appCtx
 				.getBeansOfType(TestDatabaseInitializer.class);
 
 		if (dbInit.isEmpty()) {
-			throw new NoSuchBeanDefinitionException(TestCase.class);
+			throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
 		} else {
-			return dbInit.values().iterator().next();
+			TestDatabaseInitializer retVal = dbInit.values().iterator().next();
+			if (null == retVal) {
+				throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
+			} else {
+				return retVal;
+			}
 		}
 	}
 
@@ -92,13 +105,15 @@ public final class GlobalUtils {
 	 *            the bean factory
 	 * @return the test database initializer
 	 */
-	public static TestDatabaseInitializer findDBInitializer(BeanFactory beanFac) {
+	public static TestDatabaseInitializer findDBInitializer(BeanFactory beanFac) throws NoSuchBeanDefinitionException {
 
 		TestDatabaseInitializer dbInit = beanFac
 				.getBean(TestDatabaseInitializer.class);
-
-		return dbInit;
-
+		if (null == dbInit) {
+			throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
+		} else {
+			return dbInit;
+		}
 	}
 
 	/**
@@ -108,6 +123,7 @@ public final class GlobalUtils {
 	 *            the app ctx
 	 * @return the case data files
 	 */
+	@Nullable
 	public static List<Resource> getCaseDataFiles(ApplicationContext appCtx) {
 		Map<String, Homepage> homepages = appCtx.getBeansOfType(Homepage.class,
 				true, true);
@@ -146,13 +162,18 @@ public final class GlobalUtils {
 	 */
 	public static TestProject findTestProjectBean(ApplicationContext appCtx)
 			throws NoSuchBeanDefinitionException {
-		Map<String, TestProject> testcases = appCtx
+		Map<String, TestProject> testProjects = appCtx
 				.getBeansOfType(TestProject.class);
 
-		if (testcases.isEmpty()) {
+		if (testProjects.isEmpty()) {
 			throw new NoSuchBeanDefinitionException(TestProject.class);
 		} else {
-			return testcases.values().iterator().next();
+			TestProject testProject = testProjects.values().iterator().next();  
+			if (null == testProject) {
+				throw new NoSuchBeanDefinitionException(TestProject.class);
+			} else {
+				return testProject;
+			}
 		}
 
 	}
@@ -172,9 +193,41 @@ public final class GlobalUtils {
 				.getBeansOfType(DataSource.class);
 
 		if (testcases.isEmpty()) {
-			throw new NoSuchBeanDefinitionException(TestProject.class);
+			throw new NoSuchBeanDefinitionException(DataSource.class);
 		} else {
-			return testcases.values().iterator().next();
+			DataSource dataSource = testcases.values().iterator().next();
+			if (null == dataSource) {
+				throw new NoSuchBeanDefinitionException(DataSource.class);
+			} else {
+				return dataSource;
+			}
+		}
+
+	}
+	
+	/**
+	 * Find data source bean.
+	 *
+	 * @param appCtx
+	 *            the app ctx
+	 * @return the data source
+	 * @throws NoSuchBeanDefinitionException
+	 *             the no such bean definition exception
+	 */
+	public static IMyWebDriver findMyWebDriver(ApplicationContext appCtx)
+			throws NoSuchBeanDefinitionException {
+		Map<String, IMyWebDriver> drivers = appCtx
+				.getBeansOfType(IMyWebDriver.class);
+
+		if (drivers.isEmpty()) {
+			throw new NoSuchBeanDefinitionException(DataSource.class);
+		} else {
+			IMyWebDriver retDriver = drivers.values().iterator().next();
+			if (null == retDriver) {
+				throw new NoSuchBeanDefinitionException(DataSource.class);
+			} else {
+				return retDriver;
+			}
 		}
 
 	}
@@ -191,11 +244,17 @@ public final class GlobalUtils {
 	 */
 	public static DataSource findDataSourceBean(BeanFactory beanFac) {
 		DataSource dataSrc = beanFac.getBean(DataSource.class);
-
-		return dataSrc;
+		
+		if (null == dataSrc) {
+			throw new NoSuchBeanDefinitionException(DataSource.class);
+		} else {
+			return dataSrc;
+		}
 
 	}
 
+	//TODO use generic Type <T> to reduce the number of duplicated findNNNBean functions.
+	
 	private GlobalUtils() {
 	}
 

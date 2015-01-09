@@ -22,6 +22,7 @@ package org.bigtester.ate.model.page.atewebdriver;
 
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -44,7 +45,7 @@ public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriv
 		//TODO create multi browsers and remote web driver handler
 		super();
 		
-		setWebDriver(new FirefoxDriver());
+		//setWebDriver(new FirefoxDriver());
 		//TODO need to re-code to use null pattern object.
 		browserProfile = null;
 	}
@@ -57,7 +58,7 @@ public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriv
 	public MyFirefoxDriver(String profileName) {
 		super();
 		browserProfile = new BrowserProfile<FirefoxProfile>(FirefoxProfile.class, profileName);
-		setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
+		//setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
 	}
 	/**
 	 * {@inheritDoc}
@@ -68,12 +69,33 @@ public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriv
 		
 	}
 
+	
 	/**
 	 * @return the browserProfile
 	 */
 	@Nullable
 	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
 		return browserProfile;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public WebDriver createDriver() {
+		WebDriver retVal;
+		if ( null == getWebDriver()) {
+			if (browserProfile.getProfile() != null) {
+				retVal = new FirefoxDriver(browserProfile.getProfile());
+			} else {
+				retVal = new FirefoxDriver();
+			}
+			setWebDriver(retVal);
+			
+		} else {
+			retVal = getWebDriver();
+		}
+		return retVal;
 	}
 
 	

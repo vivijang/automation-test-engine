@@ -64,6 +64,7 @@ public class TestDatabaseInitializer {
 	transient private IDataSet[] datasets;
 
 	/** The single init xml file. */
+	@Nullable
 	private InputStream singleInitXmlFile;
 
 	/**
@@ -198,6 +199,7 @@ public class TestDatabaseInitializer {
 	/**
 	 * @return the singleInitXmlFile
 	 */
+	@Nullable
 	public InputStream getSingleInitXmlFile() {
 		return singleInitXmlFile;
 	}
@@ -207,7 +209,7 @@ public class TestDatabaseInitializer {
 	 *            the singleInitXmlFile to set
 	 * @throws IOException
 	 */
-	public void setSingleInitXmlFile(@org.eclipse.jdt.annotation.NonNull Resource singleInitXmlFile)
+	public void setSingleInitXmlFile(Resource singleInitXmlFile)
 			throws IOException {
 		this.singleInitXmlFile = singleInitXmlFile.getInputStream();
 	}

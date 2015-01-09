@@ -58,8 +58,8 @@ public class ProblemBrowserHandler extends AbstractProblemHandler implements
 	 */
 	@Override
 	public void handleProblem(Problem aProblem) {
-		//TODO add more browser tear down code for false termination of test case
-		myWebDriver.getWebDriver().close();
+		if (myWebDriver.getWebDriver() != null)
+			myWebDriver.getWebDriver().quit();
 		
 	}
 
