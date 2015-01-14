@@ -30,134 +30,199 @@ import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumElementFindType;
 import org.eclipse.jdt.annotation.Nullable;
 
-import lombok.Getter;
-import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class StepResult defines ....
+ * 
  * @author Peidong Hu
  *
  */
 @Entity
 @Table
-public class StepExpectedResult extends AbstractTestDataTable{
-	
+public class StepExpectedResult extends BaseTestDataTable {
+
 	/** The step er set id. */
+
 	
-	/**
-	 * Gets the step er set id.
-	 *
-	 * @return the step er set id
-	 */
-	@Getter
-	
-	/**
-	 * Sets the step er set id.
-	 *
-	 * @param stepERSetID the new step er set id
-	 */
-	@Setter
 	@Column
-	private String stepERSetID; //NOPMD
+	@Nullable
+	private String stepERSetID; // NOPMD
+
 	
 	/**
-	 * Gets the element find by.
-	 *
-	 * @return the element find by
+	 * @return the stepERSetID
 	 */
-	@Getter
-	
-	
+	public String getStepERSetID() {
+		final String retVal = stepERSetID;
+		if (null == retVal) {
+			throw new IllegalStateException("stepERSetID collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
 	/**
-	 * Sets the element find by.
-	 *
-	 * @param ElementFindBy the new element find by
+	 * @param stepERSetID the stepERSetID to set
 	 */
-	@Setter
-	//@ManyToOne
-	//@JoinColumn(name = "elementFindByType_idColumn", referencedColumnName = "idColumn")
+	public void setStepERSetID(String stepERSetID) {
+		this.stepERSetID = stepERSetID;
+	}
+
+	/**
+	 * @return the elementFindBy
+	 */
+	public EnumElementFindType getElementFindBy() {
+		final EnumElementFindType retVal = ElementFindBy;
+		if (null == retVal) {
+			throw new IllegalStateException("elementfindbytype collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param elementFindBy the elementFindBy to set
+	 */
+	public void setElementFindBy(EnumElementFindType elementFindBy) {
+		ElementFindBy = elementFindBy;
+	}
+
+	/**
+	 * @return the assertPriority
+	 */
+	public EnumAssertPriority getAssertPriority() {
+		final EnumAssertPriority retVal = assertPriority;
+		if (null == retVal) {
+			throw new IllegalStateException("assertpriority collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param assertPriority the assertPriority to set
+	 */
+	public void setAssertPriority(EnumAssertPriority assertPriority) {
+		this.assertPriority = assertPriority;
+	}
+
+	/**
+	 * @return the assertProperty
+	 */
+	public String getAssertProperty() {
+		final String retVal = AssertProperty;
+		if (null == retVal) {
+			throw new IllegalStateException("asertproperty collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param assertProperty the assertProperty to set
+	 */
+	public void setAssertProperty(String assertProperty) {
+		AssertProperty = assertProperty;
+	}
+
+	/**
+	 * @return the assertValue
+	 */
+	public String getAssertValue() {
+		final String retVal = AssertValue;
+		if (null == retVal) {
+			throw new IllegalStateException("assertvalue collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param assertValue the assertValue to set
+	 */
+	public void setAssertValue(String assertValue) {
+		AssertValue = assertValue;
+	}
+
+	/**
+	 * @return the pageName
+	 */
+	public String getPageName() {
+		final String retVal = pageName;
+		if (null == retVal) {
+			throw new IllegalStateException("pagename collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param pageName the pageName to set
+	 */
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+	// @ManyToOne
+	// @JoinColumn(name = "elementFindByType_idColumn", referencedColumnName =
+	// "idColumn")
 	@Enumerated(EnumType.STRING)
 	@Column
 	@Nullable
-	private EnumElementFindType ElementFindBy; //NOPMD
-	
+	private EnumElementFindType ElementFindBy; // NOPMD
+
 	/** The assert priority. */
-	@Getter
-	@Setter
+	
 	@Enumerated(EnumType.STRING)
 	@Column
 	@Nullable
-	private EnumAssertPriority assertPriority; //NOPMD
-	
-	
-	/**
-	 * Gets the element find by value.
-	 *
-	 * @return the element find by value
-	 */
-	@Getter
-	
-	/**
-	 * Sets the element find by value.
-	 *
-	 * @param ElementFindByValue the new element find by value
-	 */
-	@Setter
+	private EnumAssertPriority assertPriority; // NOPMD
+
 	@Column
 	/** The Element find by value. */
-	private String ElementFindByValue; //NOPMD
-	
+	@Nullable
+	private String ElementFindByValue; // NOPMD
+
 	/**
-	 * Sets the assert property.
-	 *
+	 * @return the elementFindByValue
 	 */
-	@Setter
-	
+	public String getElementFindByValue() {
+		final String retVal = ElementFindByValue;
+		if (null == retVal) {
+			throw new IllegalStateException("elementfindbyvalue collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
 	/**
-	 * Gets the assert property.
-	 *
-	 * @return the assert property
+	 * @param elementFindByValue
+	 *            the elementFindByValue to set
 	 */
-	@Getter
+	public void setElementFindByValue(String elementFindByValue) {
+		ElementFindByValue = elementFindByValue;
+	}
+
 	@Column
 	/** The Assert property. */
-	private String AssertProperty; //NOPMD
-	
-	/**
-	 * Sets the assert value.
-	 *
-	 * @param AssertValue the new assert value
-	 */
-	@Setter
-	
-	/**
-	 * Gets the assert value.
-	 *
-	 * @return the assert value
-	 */
-	@Getter
+	@Nullable
+	private String AssertProperty; // NOPMD
+
 	@Column
 	/** The Assert value. */
-	private String AssertValue; //NOPMD
-	
-	
-	/** The page name. */
-	
-	/**
-	 * Gets the page name.
-	 *
-	 * @return the page name
-	 */
-	@Getter
-	
-	/**
-	 * Sets the page name.
-	 *
-	 * @param pageName the new page name
-	 */
-	@Setter
+	@Nullable
+	private String AssertValue; // NOPMD
+
 	@Column
-	private String pageName; //NOPMD
+	@Nullable
+	private String pageName; // NOPMD
 
 }

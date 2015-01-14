@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
 
 // TODO: Auto-generated Javadoc
@@ -30,6 +31,11 @@ import org.openqa.selenium.WebDriver;
  */
 public interface IMyWebDriver {
 	
+	/**
+	 * Creates the driver.
+	 *
+	 * @return the web driver
+	 */
 	WebDriver createDriver();
 	
 	/**
@@ -37,5 +43,6 @@ public interface IMyWebDriver {
 	 * 
 	 * @return the webdriver
 	 */
+	@Nullable
 	WebDriver getWebDriver();
 }

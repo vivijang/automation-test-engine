@@ -49,10 +49,10 @@ public class PagePropertyCorrectnessAsserter extends
 	/**
 	 * @param pageObj
 	 */
-	public PagePropertyCorrectnessAsserter(final IPageObject pageObj) {
+	public PagePropertyCorrectnessAsserter(final IPageObject pageObj, StepExpectedResultValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		// TODO Auto-generated constructor stub
+		setStepERValue(stepERValue);
 	}
 
 	/**
@@ -95,7 +95,9 @@ public class PagePropertyCorrectnessAsserter extends
 		boolean retVal = true; // NOPMD
 
 		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
-
+		if (null == webDriver) {
+			throw new IllegalStateException("webDriver is not correctly populated.");
+		}
 		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
 			if (getStepERValue().getValue().get(i).getTestDataContext()
 					.getContextFieldValue()
@@ -183,7 +185,9 @@ public class PagePropertyCorrectnessAsserter extends
 		execResult.setStepExpectedResultValue(getStepERValue());
 
 		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
-
+		if (null == webDriver) {
+			throw new IllegalStateException("webDriver is not correctly populated.");
+		}
 		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
 			if (getStepERValue().getValue().get(i).getTestDataContext()
 					.getContextFieldValue()

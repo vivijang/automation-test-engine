@@ -30,7 +30,6 @@ import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.page.Homepage;
 import org.bigtester.ate.model.page.page.IHomepage;
 import org.bigtester.ate.model.page.page.MyWebElement;
 

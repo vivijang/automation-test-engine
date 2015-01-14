@@ -33,6 +33,7 @@ import org.bigtester.ate.model.page.page.Homepage;
 import org.bigtester.ate.model.page.page.Lastpage;
 import org.bigtester.ate.model.page.page.RegularPage;
 import org.dbunit.DatabaseUnitException;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -52,6 +53,7 @@ import org.springframework.core.io.Resource;
 public class CaseDataProcessor implements BeanFactoryPostProcessor {
 
 	/** The all page names. */
+	@Nullable
 	transient private String[] allPageNames;
 	
 	/** The page bean defs. */
@@ -61,6 +63,7 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 	final transient private List<Resource> caseDataFiles = new ArrayList<Resource>();
 	
 	/** The db init. */
+	@Nullable
 	transient private TestDatabaseInitializer dbInit;
 	
 	/**
@@ -68,8 +71,8 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 	 */
 	@Override
 	public void postProcessBeanFactory(
-			ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		// TODO Auto-generated method stub
+			@Nullable ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		if (beanFactory == null) throw new IllegalStateException("Spring Container initialization error");
 		String[] homePageNames = beanFactory.getBeanNamesForType(Homepage.class, true, false);
 		String[] lastPageNames = beanFactory.getBeanNamesForType(Lastpage.class, true, false);
 		String[] regularPageNames = beanFactory.getBeanNamesForType(RegularPage.class, true, false);
@@ -77,8 +80,9 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 		allPageNames = ArrayUtils.addAll(homePageNames, lastPageNames);
 		allPageNames = ArrayUtils.addAll(allPageNames, regularPageNames);
 		
-		for (int i=0; i<allPageNames.length; i++) {
-			pageBeanDefs.add(beanFactory.getBeanDefinition(allPageNames[i]));
+		
+		for (int i=0; i<getAllPageNames().length; i++) {
+			pageBeanDefs.add(beanFactory.getBeanDefinition(getAllPageNames()[i]));
 		}
 		
 		for (int j=0; j<pageBeanDefs.size(); j++) {
@@ -90,12 +94,12 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 		if (!caseDataFiles.isEmpty()) {
 			dbInit = GlobalUtils.findDBInitializer(beanFactory);
 			try {
-				dbInit.setInitXmlFile(caseDataFiles);
+				getDbInit().setInitXmlFiles(caseDataFiles);
 			} catch (IOException e) {
 				throw new BeanDefinitionValidationException("Page data file in page attribute can't be read!", e);
 			}
 			try {
-				dbInit.initialize(beanFactory);
+				getDbInit().initialize(beanFactory);
 			} catch (MalformedURLException | DatabaseUnitException
 					| SQLException e) {
 				throw new FatalBeanException("Case database creation error!", e);
@@ -108,9 +112,17 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 	 * @return the allPageNames
 	 */
 	public String[] getAllPageNames() {
-		String[] retVal = new String[allPageNames.length];
-		System.arraycopy(allPageNames, 0, retVal, 0, allPageNames.length);
-		return retVal;
+
+		final String[] allPageNames2 = allPageNames;
+		if (null == allPageNames2) {
+			throw new IllegalStateException(
+					"allPageNames field is not correctly populated");
+		} else {
+			String[] retVal = new String[allPageNames2.length];
+			System.arraycopy(allPageNames2, 0, retVal, 0, allPageNames2.length);
+			return retVal;
+		}
+
 	}
 
 	/**
@@ -127,7 +139,13 @@ public class CaseDataProcessor implements BeanFactoryPostProcessor {
 	 * @return the dbInit
 	 */
 	public TestDatabaseInitializer getDbInit() {
-		return dbInit;
+		final TestDatabaseInitializer dbInit2 = dbInit;
+		if (null == dbInit2 ) {
+			throw new IllegalStateException(
+					"dbinit field is not correctly populated");
+		} else {
+			return dbInit2;
+		}
 	}
 
 }

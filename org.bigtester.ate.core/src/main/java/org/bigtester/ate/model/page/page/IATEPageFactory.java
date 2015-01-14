@@ -21,7 +21,7 @@
 package org.bigtester.ate.model.page.page;
 
 import org.bigtester.ate.constant.EnumElementFindType;
-import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
 
 // TODO: Auto-generated Javadoc
@@ -37,7 +37,7 @@ public interface IATEPageFactory {
 	 *
 	 * @return the i page object
 	 */
-	IPageObject getIPageObject();
+	//IPageObject getIPageObject();
 	
 	
 	/**
@@ -45,7 +45,7 @@ public interface IATEPageFactory {
 	 *
 	 * @return the i element action
 	 */
-	IElementAction getIElementAction();
+	//IElementAction getIElementAction();
 
 	
 
@@ -64,5 +64,5 @@ public interface IATEPageFactory {
 	 * @return
 	 */
 	MyWebElement getMyWebElement(EnumElementFindType elementFindType,
-			String findByValue);
+			String findByValue, IMyWebDriver myWd);
 }

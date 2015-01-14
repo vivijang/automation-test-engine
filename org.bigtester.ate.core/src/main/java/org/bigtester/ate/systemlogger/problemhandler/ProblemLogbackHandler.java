@@ -32,6 +32,7 @@ import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
 import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -49,7 +50,7 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleProblem(Problem aProblem) {
+	public void handleProblem(@Nullable Problem aProblem) {
 
 		// TODO add code to handle the other problems
 		// problems are clasified as the following categories,
@@ -76,10 +77,18 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 				LogbackWriter.writeAppWarning(logMsg);
 			}
 		} else {
-			LogbackWriter.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS
-					+ LogbackTag.TAG_SEPERATOR
-					+ aProblem.getSource().toString()
-					+ aProblem.getMessages().toString());
+			if (null == aProblem)
+				LogbackWriter
+						.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS
+								+ LogbackTag.TAG_SEPERATOR
+								+ getClass().toString()
+								+ "aProblem parameter error.");
+			else
+				LogbackWriter
+						.writeAppInfo(ExceptionMessage.MSG_UNCAUGHT_APP_ERRORS
+								+ LogbackTag.TAG_SEPERATOR
+								+ aProblem.getSource().toString()
+								+ aProblem.getMessages().toString());
 		}
 	}
 
@@ -87,7 +96,7 @@ public class ProblemLogbackHandler extends AbstractProblemHandler implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void init(Properties properties) throws InitException {
+	public void init(@Nullable Properties properties) throws InitException {
 		// TODO Auto-generated method stub
 
 	}

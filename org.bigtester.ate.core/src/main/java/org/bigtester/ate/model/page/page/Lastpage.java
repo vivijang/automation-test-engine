@@ -20,6 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.openqa.selenium.WebDriver;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,13 +30,26 @@ package org.bigtester.ate.model.page.page;
  * 
  * @author Peidong Hu
  */
-public class Lastpage extends AbstractPageObject implements ILastpage{
+public class Lastpage extends BasePageObject implements ILastpage{
+
+	/**
+	 * @param myWd
+	 */
+	public Lastpage(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Close lastpage.
 	 */
 	public void closeLastpage() {
-		super.getMyWd().getWebDriver().close();
+		WebDriver webD = super.getMyWd().getWebDriver();
+		if (null == webD) {
+			throw new IllegalStateException("webdriver is not correctly populated.");
+		} else {
+			webD.close();
+		}
 	}
 
 	

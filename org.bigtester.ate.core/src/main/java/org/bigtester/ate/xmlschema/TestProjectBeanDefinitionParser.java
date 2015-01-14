@@ -22,8 +22,10 @@ package org.bigtester.ate.xmlschema;
 
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.TestProject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -47,8 +49,10 @@ public class TestProjectBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
+		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// this will never be null since the schema explicitly requires that a
 		// value be supplied
 		
@@ -63,8 +67,7 @@ public class TestProjectBeanDefinitionParser extends
 		String globalInitXml = element
 				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_GLOBALINITXMLFILE);
 		
-		factory.addPropertyValue(XsdElementConstants.ATTR_TESTPROJECT_GLOBALINITXMLFILE,
-				globalInitXml);
+		factory.addConstructorArgValue(globalInitXml);
 
 		List<Element> suiteListElements = (List<Element>) DomUtils
 				.getChildElementsByTagName(element,

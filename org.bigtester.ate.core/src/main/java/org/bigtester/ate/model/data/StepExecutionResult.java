@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bigtester.ate.constant.EnumAssertResult;
+import org.eclipse.jdt.annotation.Nullable;
 
 
 
@@ -36,6 +37,7 @@ import org.bigtester.ate.constant.EnumAssertResult;
 public class StepExecutionResult {
 	
 	/** The step expected result value. */
+	@Nullable
 	private StepExpectedResultValue stepExpectedResultValue;
 	
 	/** The actual result. */
@@ -54,7 +56,12 @@ public class StepExecutionResult {
 	 * @return the stepExpectedResultValue
 	 */
 	public StepExpectedResultValue getStepExpectedResultValue() {
-		return stepExpectedResultValue;
+		final StepExpectedResultValue stepExpectedResultValue2 = stepExpectedResultValue;
+		if (null == stepExpectedResultValue2 ) {
+			throw new IllegalStateException("stepExpectedresultvalue is not correct populated");
+		} else {
+			return stepExpectedResultValue2;
+		}
 	}
 
 	/**

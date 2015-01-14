@@ -21,8 +21,10 @@
 package org.bigtester.ate.xmlschema;
 
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.XmlTestCase;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.util.StringUtils;
@@ -42,18 +44,20 @@ public class XmlTestCaseBeanDefinitionParser extends
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<XmlTestCase> getBeanClass(Element element) {
+	protected Class<XmlTestCase> getBeanClass(@Nullable Element element) {
 	        return XmlTestCase.class; 
     }
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected void doParse(Element element, BeanDefinitionBuilder bean) {
+	protected void doParse(@Nullable Element element, @Nullable BeanDefinitionBuilder bean) {
         // this will never be null since the schema explicitly requires that a value be supplied
-        String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME);
+		if (bean ==null || element == null ) throw GlobalUtils.createNotInitializedException("element and bean");
+		
+		String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME);
         if (StringUtils.hasText(testCaseName))
-        	bean.addPropertyValue(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME, testCaseName);
+        	bean.addConstructorArgValue( testCaseName);
 //
 //        // this however is an optional property
 //        String lenient = element.getAttribute("list-class");

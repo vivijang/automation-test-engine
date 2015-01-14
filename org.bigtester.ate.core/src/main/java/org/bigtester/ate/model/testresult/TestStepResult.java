@@ -22,7 +22,9 @@ package org.bigtester.ate.model.testresult;
 
 import java.util.Date;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.casestep.BaseTestStep;
+import org.eclipse.jdt.annotation.Nullable;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
@@ -45,18 +47,32 @@ public class TestStepResult {
 	/** The Constant STEPRESULTLIST. */
 	public static final String STEPRESULTLIST = "StepResultList";
 	/** The monitor_i. */
+	@Nullable
 	private Monitor monitor;
 	/** The step name. */
+	
 	private String stepName;
 
 	/** The this step. */
 	private BaseTestStep thisStep;
 
 	/**
+	 * Instantiates a new test step result.
+	 *
+	 * @param stepName the step name
+	 * @param thisStep the this step
+	 */
+	public TestStepResult(String stepName, BaseTestStep thisStep) {
+		this.stepName = stepName;
+		this.thisStep = thisStep;
+	}
+	
+	/**
 	 * Gets the monitor.
 	 * 
 	 * @return the monitor
 	 */
+	@Nullable
 	public Monitor getMonitor() {
 		return monitor;
 	}
@@ -82,7 +98,12 @@ public class TestStepResult {
 	 */
 
 	public void stopMonitor() {
-		monitor.stop();
+		final Monitor monitor2 = monitor;
+		if (null == monitor2 ) {
+			throw GlobalUtils.createNotInitializedException("monitor");//NOPMD
+		} else {
+			monitor2.stop();
+		}
 	}
 
 	/**
@@ -91,7 +112,14 @@ public class TestStepResult {
 	 * @return Date
 	 */
 	public Date getLastAccess() {
-		return monitor.getLastAccess();
+		final Monitor monitor2 = monitor;
+		if (null == monitor2 ) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			Date date = monitor2.getLastAccess();
+			if (null == date) throw GlobalUtils.createInternalError("getLastAccess");
+			else return date;
+		}
 	}
 
 	/**
@@ -100,7 +128,12 @@ public class TestStepResult {
 	 * @return int
 	 */
 	public int getCallCount() {
-		return (int) monitor.getHits();
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return (int) retVal.getHits();
+		}
 	}
 
 	/**
@@ -109,7 +142,13 @@ public class TestStepResult {
 	 * @return double
 	 */
 	public double getAverageCallTime() {
-		return monitor.getAvg() / 1000;
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return retVal.getAvg() / 1000;
+		}
+	
 	}
 
 	/**
@@ -118,7 +157,13 @@ public class TestStepResult {
 	 * @return double
 	 */
 	public double getLastCallTime() {
-		return monitor.getLastValue() / 1000;
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return retVal.getLastValue() / 1000;
+		}
+		
 	}
 
 	/**
@@ -127,7 +172,13 @@ public class TestStepResult {
 	 * @return double
 	 */
 	public double getMaximumCallTime() {
-		return monitor.getMax() / 1000;
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return retVal.getMax() / 1000;
+		}
+	
 	}
 
 	/**
@@ -136,7 +187,13 @@ public class TestStepResult {
 	 * @return double
 	 */
 	public double getMinimumCallTime() {
-		return monitor.getMin() / 1000;
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return retVal.getMin() / 1000;
+		}
+		
 	}
 
 	/**
@@ -145,7 +202,13 @@ public class TestStepResult {
 	 * @return double
 	 */
 	public double getTotalCallTime() {
-		return monitor.getTotal() / 1000;
+		final Monitor retVal = monitor;
+		if (null == retVal) {
+			throw GlobalUtils.createNotInitializedException("monitor");
+		} else {
+			return retVal.getTotal() / 1000;
+		}
+		
 	}
 
 	/**

@@ -26,8 +26,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,36 +38,59 @@ import lombok.Setter;
  */
 @Entity
 @Table
-public class TestDataContext extends AbstractDBTable {
+public class TestDataContext extends BaseDBTable {
 	@Column(length = 50, nullable = false, unique = false)
-	/**
-	 * Gets the context field value.
-	 *
-	 * @return the context field value
-	 */
-	@Getter
-	/**
-	 * Sets the context field value.
-	 *
-	 * @param contextFieldValue the new context field value
-	 */
-	@Setter
+	@Nullable
 	private String contextFieldValue; //NOPMD
 
-	/**
-	 * Gets the context field name.
-	 * 
-	 * @return the context field name
-	 */
-	@Getter
-	/**
-	 * Sets the context field name.
-	 *
-	 * @param contextFieldName the new context field name
-	 */
-	@Setter
+	
 	@ManyToOne
 	@JoinColumn(name = "contextFieldName_idColumn", referencedColumnName = "idColumn")
+	@Nullable
 	private TestDataContextFieldName contextFieldName; //NOPMD
+
+
+	/**
+	 * @return the contextFieldValue
+	 */
+	public String getContextFieldValue() {
+		final String retVal = contextFieldValue;
+		if (null == retVal) {
+			throw new IllegalStateException("contextfieldvalue collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+
+	/**
+	 * @param contextFieldValue the contextFieldValue to set
+	 */
+	public void setContextFieldValue(String contextFieldValue) {
+		this.contextFieldValue = contextFieldValue;
+	}
+
+
+	/**
+	 * @return the contextFieldName
+	 */
+	public TestDataContextFieldName getContextFieldName() {
+		final TestDataContextFieldName retVal = contextFieldName;
+		if (null == retVal) {
+			throw new IllegalStateException("contextfieldname collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+
+	/**
+	 * @param contextFieldName the contextFieldName to set
+	 */
+	public void setContextFieldName(TestDataContextFieldName contextFieldName) {
+		this.contextFieldName = contextFieldName;
+	}
 
 }

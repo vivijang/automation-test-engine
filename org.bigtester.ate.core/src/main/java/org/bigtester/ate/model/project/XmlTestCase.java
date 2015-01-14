@@ -33,6 +33,14 @@ public class XmlTestCase {
 	private String testCaseName;
 
 	/**
+	 * Instantiates a new xml test case.
+	 *
+	 * @param testCaseName the test case name
+	 */
+	public XmlTestCase(String testCaseName) {
+		this.testCaseName = testCaseName;
+	}
+	/**
 	 * Gets the test case name.
 	 *
 	 * @return the testCaseName

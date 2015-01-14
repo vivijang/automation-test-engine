@@ -21,9 +21,10 @@
 package org.bigtester.ate.model.page.elementaction;
 
 
-import org.bigtester.ate.model.data.StepDataValue;
-import org.bigtester.ate.model.page.AbstractPageModelBase;
-import org.openqa.selenium.WebElement;
+import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.page.PageModelBase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.eclipse.jdt.annotation.Nullable;
 
 
 // TODO: Auto-generated Javadoc
@@ -32,23 +33,31 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public abstract class AbstractElementAction extends AbstractPageModelBase{
-	
-	
+public class BaseElementAction extends PageModelBase{
 	/** The data valued action flag. */
 	private transient boolean dataValuedActionFlag; 
 	
 	/** The data value. */
-	//private String dataValue;
+	@Nullable
+	private StepInputDataValue dataValue;
 	
-	private StepDataValue dataValue;
+	
+	/**
+	 * @param myWd
+	 */
+	public BaseElementAction(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
+
 	
 	/**
 	 * Gets the data value.
 	 * 
 	 * @return the data value
 	 */
-	public StepDataValue getDataValue() {
+	@Nullable
+	public StepInputDataValue getDataValue() {
 		return dataValue;
 	}
 
@@ -58,19 +67,13 @@ public abstract class AbstractElementAction extends AbstractPageModelBase{
 	 * @param dataValue
 	 *            the new data value
 	 */
-	public void setDataValue(final StepDataValue dataValue) {
+	public void setDataValue(final StepInputDataValue dataValue) {
 		this.dataValuedActionFlag = true;
 		this.dataValue = dataValue;
 	}
 
 	
-	/**
-	 * Do action.
-	 *
-	 * @param webElm the web elm
-	 */
-	public abstract void doAction(WebElement webElm);
-
+	
 	/**
 	 * Checks if is data value action flag.
 	 *

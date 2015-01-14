@@ -19,7 +19,7 @@
 	
 	<ate:homePage id="homepg" homeUrl="http://www.hellostop.com" parent="myAbstractPageObject"/>
 	
-	<ate:stepExpectedResultValue id="homeStepExpectedValue" dataValueID="1"/>
+	<ate:stepExpectedResultValue id="homeStepExpectedValue" dataValueID="1" parent="baseERValue"/>
 	
 	<ate:pagePropertyCorrectnessAsserter id="homePagePropertyAsserter">
 		<constructor-arg ref="homepg"/>

@@ -18,46 +18,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data.dbtable;
-import static javax.persistence.GenerationType.AUTO;
+package org.bigtester.ate.model.data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-import lombok.Getter;
-import lombok.Setter;
+import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractDBTable defines ....
+ * This class AbstractDataValue defines ....
  * @author Peidong Hu
  *
  */
-@MappedSuperclass
-public abstract class AbstractDBTable { //NOPMD
+public class BaseInputDataValue {//NOPMD
 	
-	
-	/** The id Column. */
-	@Id
-	@GeneratedValue(strategy = AUTO)
-	@Column
+	/** The element data dao. */
+	private ElementInputDataDaoImpl elementDataDao;//NOPMD
 	
 	/**
-	 * Gets the id Column.
+	 * Instantiates a new base data value.
 	 *
-	 * @return the id Column
+	 * @param elementDataDao the element data dao
 	 */
-	@Getter
+	public BaseInputDataValue (ElementInputDataDaoImpl elementDataDao) {
+		this.elementDataDao = elementDataDao;
+	}
 	
 	/**
-	 * Sets the id Column.
+	 * Gets the element data dao.
 	 *
-	 * @param cid the new id Column
+	 * @return the elementDataDao
 	 */
-	@Setter
-	private long idColumn; //NOPMD
+	public ElementInputDataDaoImpl getElementDataDao() {
+		return elementDataDao;
+	}
+
+	/**
+	 * Sets the element data dao.
+	 *
+	 * @param elementDataDao the elementDataDao to set
+	 */
+	public void setElementDataDao(final ElementInputDataDaoImpl elementDataDao) {
+		this.elementDataDao = elementDataDao;
+	}
 	
 	
-}
+}	

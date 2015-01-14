@@ -21,8 +21,10 @@
 package org.bigtester.ate.xmlschema;
 
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
@@ -45,13 +47,15 @@ public class FindByXpathBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
+		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// this will never be null since the schema explicitly requires that a value be supplied
-        String testSuiteName = element.getAttribute(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE);
+        String findbyValue = element.getAttribute(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE);
         BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementFindByXpath.class);
-        if (StringUtils.hasText(testSuiteName))
-        	factory.addPropertyValue(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE, testSuiteName);
+        if (StringUtils.hasText(findbyValue))
+        	factory.addConstructorArgValue(findbyValue);
         
         return factory.getBeanDefinition();
 	}

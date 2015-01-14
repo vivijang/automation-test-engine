@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.elementfind;
 import java.util.concurrent.TimeUnit;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,7 +44,22 @@ public abstract class AbstractElementFind {
 	private String findByValue;
 	
 	/** The wait. */
+	@Nullable
 	transient protected Wait<WebDriver> wait;
+
+	
+	/**
+	 * @return the wait
+	 */
+	public Wait<WebDriver> getWait() {
+		final Wait<WebDriver> retVal = wait;
+		if (null == retVal) {
+			throw new IllegalStateException("wait is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
 
 	
 	/**
@@ -54,6 +70,15 @@ public abstract class AbstractElementFind {
 	 * @return the web element
 	 */
 	public abstract WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
+	
+	/**
+	 * Instantiates a new abstract element find.
+	 *
+	 * @param findByValue the find by value
+	 */
+	public AbstractElementFind(String findByValue) {
+		this.findByValue = findByValue;
+	}
 	
 	/**
 	 * Gets the find by value.

@@ -53,6 +53,9 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_BASEPAGEMODEL. */
 	public static final String ELEMENT_BASEPAGEMODEL = "basePageModel";
 	
+	/** The Constant ATTR_BASEPAGEMODEL_MYWD. */
+	public static final String ATTR_BASEPAGEMODEL_MYWD = "myWebDriver";
+	
 	/** The Constant ELEMENT_BASETESTSTEP. */
 	public static final String ELEMENT_ELEMENTFINDBYID = "elementFindById";
 	
@@ -62,8 +65,11 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_CLICKACTION. */
 	public static final String ELEMENT_CLICKACTION = "clickAction";
 	
+	/** The Constant ELEMENT_BASEELEMENTACTION. */
+	public static final String ELEMENT_BASEELEMENTACTION = "baseElementAction";
+	
 	/** The Constant ELEMENT_STEPDATAVALUE. */
-	public static final String ELEMENT_STEPDATAVALUE = "stepDataValue";
+	public static final String ELEMENT_STEPINPUTDATAVALUE = "stepInputDataValue";
 	
 	/** The Constant ATTR_STEPDATAVALUE_DATAVALUEID. */
 	public static final String ATTR_STEPDATAVALUE_DATAVALUEID = "dataValueID";
@@ -83,6 +89,9 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_BASETESTSTEP. */
 	public static final String ELEMENT_BASETESTSTEP = "baseTestStep";
 	
+	/** The Constant ATTR_BASETESTSTEP_PAGEOBJECT. */
+	public static final String ATTR_BASETESTSTEP_PAGEOBJECT = "pageObject";
+	
 	/** The Constant ELEMENT_STEPEXPECTEDRESULTVALUE. */
 	public static final String ELEMENT_STEPEXPECTEDRESULTVALUE = "stepExpectedResultValue";
 	
@@ -92,11 +101,29 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_PAGEPROPERTYCORRECTNESS. */
 	public static final String ELEMENT_PAGEPROPERTYCORRECTNESS = "pagePropertyCorrectnessAsserter";
 	
+	/** The Constant ELEMENT_PAGEPROPERTYCORRECTNESS. */
+	public static final String ATTR_PAGEPROPERTYCORRECTNESS = "pagePropertyCorrectnessAsserter";
+	
+	/** The Constant ATTR_ABSTRACTEXPECTEDRESULTASSERTER_RESULTPAGE. */
+	public static final String ATTR_ABSTRACTEXPECTEDRESULTASSERTER_RESULTPAGE = "resultPage"; //NOPMD
+	
+	/** The Constant ATTR_ABSTRACTEXPECTEDRESULTASSERTER_STEPERVALUE. */
+	public static final String ATTR_ABSTRACTEXPECTEDRESULTASSERTER_STEPERVALUE = "stepERValue";//NOPMD
+	
 	/** The Constant ELEMENT_BASEERVALUE. */
 	public static final String ELEMENT_BASEERVALUE = "baseERValue";
 	
+	/** The Constant ELEMENT_BASEERVALUE_STEPERDAO. */
+	public static final String ELEMENT_BASEERVALUE_STEPERDAO = "stepERDao";
+	
 	/** The Constant ELEMENT_BASEDATAVALUE. */
-	public static final String ELEMENT_BASEDATAVALUE = "baseDataValue";
+	public static final String ELEMENT_BASEINPUTDATAVALUE = "baseInputDataValue";
+	
+	/** The Constant ATTR_BASEELEMENTACTION_DATAVALUE. */
+	public static final String ATTR_BASEELEMENTACTION_DATAVALUE = "dataValue";
+	
+	/** The Constant ATTR_BASEDATAVALUE_ELEMENTDATADAO. */
+	public static final String ATTR_BASEINPUTDATAVALUE_ELEMENTDATADAO = "elementDataDao"; //NOPMD
 	
 	/** The Constant ELEMENT_PAGEELEMENTEXISTENCE. */
 	public static final String ELEMENT_PAGEELEMENTEXISTENCE = "pageElementExistenceAsserter";
@@ -132,8 +159,9 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_BASEPAGEOBJECT_DATAFILE. */
 	public static final String ATTR_BASEPAGEOBJECT_DATAFILE = "dataFile";
 		
-	/** The Constant ATTR_REGULARPAGE_PAGEOBJECT. */
-	public static final String ATTR_BASETESTSTEP_PAGEOBJECT = "pageObject";
+	
+	/** The Constant ATTR_BASETESTSTEP_MYWEBELEMENT. */
+	public static final String ATTR_BASETESTSTEP_MYWEBELEMENT = "myWebElement";
 	
 	/** The Constant ATTR_STEPTHINKTIME. */
 	public static final String ATTR_TESTPROJECT_STEPTHINKTIME = "stepThinkTime";

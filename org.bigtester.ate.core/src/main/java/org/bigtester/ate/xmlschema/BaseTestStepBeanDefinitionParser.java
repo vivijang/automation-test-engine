@@ -20,12 +20,17 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
+import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.casestep.BaseTestStep;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 
@@ -43,14 +48,25 @@ public class BaseTestStepBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(BaseTestStep.class.getName());
-       
-		
+        String pageObject = element
+				.getAttribute(XsdElementConstants.ATTR_BASETESTSTEP_PAGEOBJECT);
+		if (StringUtils.hasText(pageObject)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(pageObject));
+		}
+		String myWebElement = element
+				.getAttribute(XsdElementConstants.ATTR_BASETESTSTEP_MYWEBELEMENT);
+		if (StringUtils.hasText(myWebElement)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(myWebElement));
+		}
 //        String text = element.getAttribute("text");
 //        bd.getPropertyValues().addPropertyValue("text", text);
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);

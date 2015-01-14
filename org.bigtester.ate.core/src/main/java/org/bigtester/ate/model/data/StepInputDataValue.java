@@ -20,69 +20,91 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 
-import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
-import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
 import org.bigtester.ate.model.data.exception.TestDataException;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class PropertyDataValue defines ....
+ * 
  * @author Peidong Hu
  *
  */
-public class StepExpectedResultValue extends BaseERValue{
-	
+public class StepInputDataValue extends BaseInputDataValue {
+
 	/**
-	 * @param stepERDao
+	 * @param elementDataDao
+	 * @throws TestDataException 
 	 */
-	public StepExpectedResultValue(StepExpectedResultDaoImpl stepERDao, String dataValueID) {
-		super(stepERDao);
+	public StepInputDataValue(ElementInputDataDaoImpl elementDataDao,
+			Long dataValueID) throws TestDataException {
+		super(elementDataDao);
 		this.dataValueID = dataValueID;
+		initDataValue (dataValueID);
 	}
+
 	/**
 	 * Gets the value.
 	 *
 	 * @return the value
 	 */
-	
-	private List<StepExpectedResult> value = new ArrayList<StepExpectedResult>(); //NOPMD
-	
-	
+	@Nullable
+	private String value; // NOPMD
+
 	/**
 	 * Gets the data value id.
 	 *
 	 * @return the data value id
 	 */
-	
-	private String dataValueID; //NOPMD
+
+	private Long dataValueID; // NOPMD
+
 	/**
 	 * @return the value
 	 */
-	public List<StepExpectedResult> getValue() {
-		return value;
+	public String getValue() {
+		final String value2 = value;
+		if (null == value2) {
+			throw new IllegalStateException(
+					"Input Data value is not correctly populated.");
+		} else {
+			return value2;
+		}
 	}
+
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
-	public void setValue(List<StepExpectedResult> value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
+
 	/**
 	 * @return the dataValueID
 	 */
-	public String getDataValueID() {
+	public Long getDataValueID() {
 		return dataValueID;
 	}
+
 	/**
-	 * @param dataValueID the dataValueID to set
-	 * @throws TestDataException 
+	 * @param dataValueID
+	 *            the dataValueID to set
+	 * @throws TestDataException
 	 */
-	public void setDataValueID(String sERSetID) throws TestDataException {
-		this.dataValueID = sERSetID;
-		value = getStepERDao().getERs(sERSetID);
+	public void setDataValueID(Long dataValueID) {
+		this.dataValueID = dataValueID;
 	}
 
+	/**
+	 * Inits the data value.
+	 *
+	 * @param dataValueID the data value id
+	 * @throws TestDataException the test data exception
+	 */
+	public void initDataValue(Long dataValueID) throws TestDataException {
+		value = getElementDataDao().getValue(dataValueID);
+	}
 }

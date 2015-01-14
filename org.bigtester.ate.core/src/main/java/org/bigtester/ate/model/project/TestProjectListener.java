@@ -34,6 +34,16 @@ public class TestProjectListener extends TestListenerAdapter {
 	private TestProject mytp;
 
 	/**
+	 * Instantiates a new test project listener.
+	 *
+	 * @param mytp the mytp
+	 */
+	public TestProjectListener( TestProject mytp) {
+		super();
+		this.mytp = mytp;
+	}
+	
+	/**
 	 * @return the mytp
 	 */
 	public TestProject getMytp() {

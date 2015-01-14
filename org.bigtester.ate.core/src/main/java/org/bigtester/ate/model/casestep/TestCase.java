@@ -26,6 +26,7 @@ import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.utils.ThinkTime;
+import org.eclipse.jdt.annotation.Nullable;
 
 
 // TODO: Auto-generated Javadoc
@@ -37,6 +38,7 @@ import org.bigtester.ate.model.utils.ThinkTime;
 public class TestCase {
 	
 	/** The current web driver. */
+	@Nullable
 	private IMyWebDriver currentWebDriver;
 	/** The test case name. */
 	private String testCaseName;
@@ -45,9 +47,23 @@ public class TestCase {
 	private int stepThinkTime;
 	
 	/** The current test step. */
+	@Nullable
 	private ITestStep currentTestStep;
+	
 	/** The test step list. */
+	@Nullable
 	private List<ITestStep> testStepList;
+	
+	/**
+	 * Instantiates a new test case.
+	 *
+	 * @param testCaseName the test case name
+	 */
+	public TestCase(String testCaseName) {
+		this.testCaseName = testCaseName;
+		
+	}
+	
 	/**
 	 * @return the stepThinkTime
 	 */
@@ -69,8 +85,13 @@ public class TestCase {
 	 * 
 	 * @return the testStepList
 	 */
-	public List<ITestStep> getTestStepList() {
-		return testStepList;
+	public List<ITestStep> getTestStepList() throws IllegalStateException {
+		final List<ITestStep> testStepList2 = testStepList;
+		if (null == testStepList2) {
+			throw new IllegalStateException("Test Step List was not successfully initialized by ApplicationContext");
+		} else {
+			return testStepList2;
+		}
 	}
 
 	/**
@@ -88,19 +109,26 @@ public class TestCase {
 	 * @throws StepExecutionException 
 	 * @throws PageValidationException 
 	 */
-	public void goSteps() throws StepExecutionException2, PageValidationException2 {
+	public void goSteps() throws StepExecutionException2, PageValidationException2, IllegalStateException {
 		
-		for (int i=0; i<testStepList.size(); i++) {
+		for (int i=0; i<getTestStepList().size(); i++) {
 			
-			currentTestStep = testStepList.get(i);
-			currentWebDriver = currentTestStep.getMyWebDriver();
-			
-			currentTestStep.doStep();//NOPMD
-			
-			if (stepThinkTime > 0) {
-				ThinkTime thinkTimer = new ThinkTime (stepThinkTime);
-				thinkTimer.setTimer();
+			ITestStep currentTestStepTmp = getTestStepList().get(i);
+			if (null == currentTestStepTmp) {
+				throw new IllegalStateException("Test Step List was not successfully initialized by ApplicationContext at list index" + i);
+			} else {
+				setCurrentTestStep(currentTestStepTmp);
 			}
+			
+				setCurrentWebDriver(getCurrentTestStep().getMyWebDriver());
+				
+				getCurrentTestStep().doStep();//NOPMD
+				
+				if (stepThinkTime > 0) {
+					ThinkTime thinkTimer = new ThinkTime (stepThinkTime);
+					thinkTimer.setTimer();
+				}
+			
 			
 		}
 	}
@@ -128,8 +156,13 @@ public class TestCase {
 	 *
 	 * @return the currentTestStep
 	 */
-	public ITestStep getCurrentTestStep() {
-		return currentTestStep;
+	public ITestStep getCurrentTestStep() throws IllegalStateException{
+		final ITestStep currentTestStep2 = currentTestStep;
+		if (null == currentTestStep2 ) {
+			throw new IllegalStateException("Current Test Step was not successfully initialized by ate");
+		} else {
+			return currentTestStep2;
+		}
 	}
 
 	/**
@@ -146,8 +179,13 @@ public class TestCase {
 	 *
 	 * @return the currentWebDriver
 	 */
-	public IMyWebDriver getCurrentWebDriver() {
-		return currentWebDriver;
+	public IMyWebDriver getCurrentWebDriver() throws IllegalStateException{
+		final IMyWebDriver currentWebDriver2 = currentWebDriver;
+		if (null == currentWebDriver2) {
+			throw new IllegalStateException("Current Test Step was not successfully initialized by ate");
+		} else {
+			return currentWebDriver2;
+		}
 	}
 
 	/**

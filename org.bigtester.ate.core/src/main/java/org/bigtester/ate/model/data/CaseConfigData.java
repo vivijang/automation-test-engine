@@ -23,6 +23,7 @@ package org.bigtester.ate.model.data;
 import java.util.List;
 
 import org.bigtester.ate.model.casestep.TestCase;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,17 +33,21 @@ import org.bigtester.ate.model.casestep.TestCase;
  * @author Peidong Hu
  *
  */
+
 public class CaseConfigData {
 	
 	/** The config sql. */
 	//TODO for v2.0
+	@Nullable
 	private List<String> configSQLs;
 	
 	/** The change file command. */
-	//TODO for v2.0	
+	//TODO for v2.0
+	@Nullable
 	private List<String> changeFileCommands;
 	
 	/** The config test cases. */
+	@Nullable
 	private List<TestCase> configTestCases;
 	
 	/**
@@ -50,6 +55,7 @@ public class CaseConfigData {
 	 *
 	 * @return the configTestCases
 	 */
+	@Nullable
 	public List<TestCase> getConfigTestCases() {
 		return configTestCases;
 	}
@@ -66,6 +72,7 @@ public class CaseConfigData {
 	/**
 	 * @return the configSQLs
 	 */
+	@Nullable
 	public List<String> getConfigSQLs() {
 		return configSQLs;
 	}
@@ -80,6 +87,7 @@ public class CaseConfigData {
 	/**
 	 * @return the changeFileCommands
 	 */
+	@Nullable
 	public List<String> getChangeFileCommands() {
 		return changeFileCommands;
 	}

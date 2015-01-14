@@ -22,6 +22,8 @@ package org.bigtester.ate.model.project;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestSuite defines ....
@@ -31,18 +33,33 @@ import java.util.List;
 public class TestSuite {
 
 	/** The test case list. */
+	@Nullable
 	private List<XmlTestCase> testCaseList;
 
 	/** The suite name. */
 	private String suiteName;
 
 	/**
+	 * Instantiates a new test suite.
+	 *
+	 * @param suiteName the suite name
+	 */
+	public TestSuite(String suiteName) {
+		this.suiteName = suiteName;
+	}
+	/**
 	 * Gets the test case list.
 	 * 
 	 * @return the testCaseList
 	 */
 	public List<XmlTestCase> getTestCaseList() {
-		return testCaseList;
+		final List<XmlTestCase> retVal = testCaseList;
+		if (null == retVal) {
+			throw new IllegalStateException("testCaseList is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**

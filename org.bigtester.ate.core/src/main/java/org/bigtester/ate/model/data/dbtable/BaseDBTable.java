@@ -18,44 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.atewebdriver;
+package org.bigtester.ate.model.data.dbtable;
+import static javax.persistence.GenerationType.AUTO;
 
-import org.openqa.selenium.WebDriver;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+import lombok.Getter;
+import lombok.Setter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class WebDriverBase defines ....
- * 
+ * This class AbstractDBTable defines ....
  * @author Peidong Hu
+ *
  */
-public abstract class AbstractWebDriverBase {
+@MappedSuperclass
+public class BaseDBTable { //NOPMD
 	
 	
-	/** The web driver. */
-	protected WebDriver webDriver;
-	
+	/** The id Column. */
+	@Id
+	@GeneratedValue(strategy = AUTO)
+	@Column
 	
 	/**
-	 * Gets the web driver.
+	 * Gets the id Column.
 	 *
-	 * @return the webDriver
+	 * @return the id Column
 	 */
-	public final WebDriver getWebDriver() {
-		return webDriver;
-	}
-
-	/**
-	 * Sets the web driver.
-	 *
-	 * @param webDriver the webDriver to set
-	 */
-	public final void setWebDriver(final WebDriver webDriver) {
-		this.webDriver = webDriver;
-	}
+	@Getter
 	
 	/**
-	 * Driver capacity.
-	 * @return 
+	 * Sets the id Column.
+	 *
+	 * @param cid the new id Column
 	 */
-	public abstract void driverCapacity();
+	@Setter
+	private long idColumn; //NOPMD
+	
+	
 }

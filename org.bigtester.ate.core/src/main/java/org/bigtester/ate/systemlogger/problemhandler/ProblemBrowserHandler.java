@@ -23,11 +23,12 @@ package org.bigtester.ate.systemlogger.problemhandler;
 import java.util.Properties;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-
 import org.bigtester.problomatic2.InitException;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.ProblemHandler;
 import org.bigtester.problomatic2.handlers.AbstractProblemHandler;
+import org.eclipse.jdt.annotation.Nullable;
+import org.openqa.selenium.WebDriver;
 
 
 
@@ -57,9 +58,10 @@ public class ProblemBrowserHandler extends AbstractProblemHandler implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleProblem(Problem aProblem) {
-		if (myWebDriver.getWebDriver() != null)
-			myWebDriver.getWebDriver().quit();
+	public void handleProblem(@Nullable Problem aProblem) {
+		WebDriver webD = myWebDriver.getWebDriver();
+		if ( null != webD)
+			webD.quit();
 		
 	}
 
@@ -67,7 +69,7 @@ public class ProblemBrowserHandler extends AbstractProblemHandler implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void init(Properties properties) throws InitException {
+	public void init(@Nullable Properties properties) throws InitException {
 		// TODO Auto-generated method stub
 
 	}

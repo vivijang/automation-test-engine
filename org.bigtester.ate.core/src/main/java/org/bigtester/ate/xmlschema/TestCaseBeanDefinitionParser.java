@@ -22,8 +22,10 @@ package org.bigtester.ate.xmlschema;
 
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.casestep.TestCase;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -49,18 +51,21 @@ public class TestCaseBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
+		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// this will never be null since the schema explicitly requires that a value be supplied
         String testCaseName = element.getAttribute(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME);
         BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(TestCase.class);
         if (StringUtils.hasText(testCaseName))
-        	factory.addPropertyValue(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME, testCaseName);
+        	factory.addConstructorArgValue(testCaseName);
         
         
 		List<Element> testStepElements = (List<Element>) DomUtils.getChildElements(element);
         
         if (testStepElements != null && !testStepElements.isEmpty()) {
+        	if (null == factory) throw GlobalUtils.createNotInitializedException("factory");
             parseTestStepComponents(testStepElements, factory,  parserContext);
         }
         

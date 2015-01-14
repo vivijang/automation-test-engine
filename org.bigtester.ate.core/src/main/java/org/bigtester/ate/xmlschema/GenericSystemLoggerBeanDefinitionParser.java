@@ -21,7 +21,9 @@
 package org.bigtester.ate.xmlschema;
 
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.systemlogger.GenericSystemLogger;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.w3c.dom.Element;
@@ -40,15 +42,17 @@ public class GenericSystemLoggerBeanDefinitionParser extends
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<GenericSystemLogger> getBeanClass(Element element) {
+	protected Class<GenericSystemLogger> getBeanClass(@Nullable Element element) {
 	        return GenericSystemLogger.class; 
     }
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected void doParse(Element element, BeanDefinitionBuilder bean) {
+	protected void doParse(@Nullable Element element, @Nullable BeanDefinitionBuilder bean) {
         // this will never be null since the schema explicitly requires that a value be supplied
+		if (bean ==null || element == null ) throw GlobalUtils.createNotInitializedException("element and bean");
+		  // this will never be null since the schema explicitly requires that a value be supplied
 //        String testCaseName = element.getAttribute("testCaseName");
 //        bean.addPropertyValue("testCaseName", testCaseName);
 //

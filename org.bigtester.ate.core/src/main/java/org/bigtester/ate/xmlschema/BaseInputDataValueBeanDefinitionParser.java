@@ -21,12 +21,15 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.StepDataValue;
+import org.bigtester.ate.model.data.BaseInputDataValue;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 
@@ -37,26 +40,28 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class StepDataValueBeanDefinitionParser extends
+public class BaseInputDataValueBeanDefinitionParser extends
 		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw new IllegalStateException("Incorrect xsd xml parsing.");
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
-        bDef.setBeanClassName(StepDataValue.class.getName());
-       
-        long dataValueId = Long.parseLong(element.getAttribute(XsdElementConstants.ATTR_STEPDATAVALUE_DATAVALUEID));
-        bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_STEPDATAVALUE_DATAVALUEID, dataValueId);
-        parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
+        bDef.setBeanClassName(BaseInputDataValue.class.getName());
+        String elementDataDao = element
+				.getAttribute(XsdElementConstants.ATTR_BASEINPUTDATAVALUE_ELEMENTDATADAO);
+		if (StringUtils.hasText(elementDataDao)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(elementDataDao));
+		}
+		parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
         return (AbstractBeanDefinition) bDef;
-        
+      
 	}
-	
-
 }

@@ -20,14 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.elementaction.ClickAction;
+import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,13 +45,29 @@ public class ClickActionBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
-		// this will never be null since the schema explicitly requires that a value be supplied
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ClickAction.class);
-        
-        return factory.getBeanDefinition();
+	protected @Nullable AbstractBeanDefinition parseInternal(
+			@Nullable Element element, @Nullable ParserContext parserContext) {
+
+		// Here we parse the Spring elements such as < property>
+		if (parserContext == null || element == null)
+			throw GlobalUtils
+					.createNotInitializedException("element and parserContext");
+		// Here we parse the Spring elements such as < property>
+		BeanDefinitionHolder holder = parserContext.getDelegate()
+				.parseBeanDefinitionElement(element);
+		BeanDefinition bDef = holder.getBeanDefinition();
+		bDef.setBeanClassName(ClickAction.class.getName());
+		
+
+		String parent = element
+				.getAttribute("parent");
+		if (StringUtils.hasText(parent)) {
+			bDef.setParentName(parent);
+		}
+		parserContext.getRegistry().registerBeanDefinition(
+				element.getAttribute("id"), bDef);
+		return (AbstractBeanDefinition) bDef;
+
 	}
-	
-	
+
 }

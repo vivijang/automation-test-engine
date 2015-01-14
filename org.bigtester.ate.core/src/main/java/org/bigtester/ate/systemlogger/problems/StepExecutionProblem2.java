@@ -103,7 +103,9 @@ public class StepExecutionProblem2 extends GenericATEProblem implements IATECase
 	 */
 	@Override
 	public String getProblemMessage() {
-		return this.getATECaseExecException().getMessage();
+		String tmpStr =  this.getATECaseExecException().getMessage();
+		if (null == tmpStr) return "exception error meesage is not populated."; //NOPMD
+		else return tmpStr;
 	}
 
 

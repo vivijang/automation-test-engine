@@ -18,38 +18,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page;
+package org.bigtester.ate.model.data.dbtable;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+import org.eclipse.jdt.annotation.Nullable;
 
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AbstractPageModelBase defines ....
- * 
+ * This class AbstractTestDataTable defines ....
  * @author Peidong Hu
+ *
  */
-public class AbstractPageModelBase {//NOPMD
-	
-	/** The i my wd. */
-	protected IMyWebDriver myWd;
+@MappedSuperclass
+public class BaseTestDataTable extends BaseDBTable{
+
+	@ManyToOne
+	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+	@Nullable
+	private TestDataContext testDataContext; //NOPMD
 
 	/**
-	 * Gets the my wd.
-	 *
-	 * @return the myWd
+	 * @return the testDataContext
 	 */
-	public  IMyWebDriver getMyWd() {
-		return myWd;
+	public TestDataContext getTestDataContext() {
+		final TestDataContext testDataContext2 = testDataContext;
+		if (null == testDataContext2 ) {
+			throw new IllegalStateException("test data context is not correctly populated in xml db file");
+		} else {
+			return testDataContext2;
+		}
 	}
 
 	/**
-	 * Sets the my wd.
-	 *
-	 * @param myWd the myWd to set
+	 * @param testDataContext the testDataContext to set
 	 */
-	public  void setMyWd(final IMyWebDriver myWd) {
-		this.myWd = myWd;
+	public void setTestDataContext(TestDataContext testDataContext) {
+		this.testDataContext = testDataContext;
 	}
-				
 }

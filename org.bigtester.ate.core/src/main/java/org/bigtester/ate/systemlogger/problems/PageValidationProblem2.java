@@ -81,7 +81,9 @@ public class PageValidationProblem2 extends GenericATEProblem implements IATECas
 	 */
 	@Override
 	public String getProblemMessage() {
-		return getATECaseExecException().getMessage();
+		String tmpStr = getATECaseExecException().getMessage();
+		if (null == tmpStr) return "exception message is not populated."; //NOPMD
+		else return tmpStr;
 	}
 
 	/**

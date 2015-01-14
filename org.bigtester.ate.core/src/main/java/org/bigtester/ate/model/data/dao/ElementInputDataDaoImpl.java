@@ -22,92 +22,68 @@ package org.bigtester.ate.model.data.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import lombok.Getter;
-import lombok.Setter;
-
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
 import org.bigtester.ate.model.data.exception.TestDataException;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class ElementInputDataDaoImpl defines ....
+ * 
  * @author Peidong Hu
  *
  */
 @Transactional
-public class ElementInputDataDaoImpl {
+public class ElementInputDataDaoImpl extends BaseDaoImpl {
+
 	
-	
-	/** The db em. */
-	@PersistenceContext
-    
-    /**
-     * Gets the db em.
-     *
-     * @return the db em
-     */
-    
-    /**
-     * Gets the db em.
-     *
-     * @return the db em
-     */
-    @Getter 
-    
-    /**
-     * Sets the db em.
-     *
-     * @param dbEM the new db em
-     */
-    
-    /**
-     * Sets the db em.
-     *
-     * @param dbEM the new db em
-     */
-    @Setter
-    
-    private EntityManager dbEM;//NOPMD
-     
-    /**
-     * Save.
-     *
-     * @param eid the eid
-     * @return the long
-     */
-    public Long save(ElementInputData eid) {
-        dbEM.persist(eid);
-        return eid.getId();
-    }
-     
-    /**
-     * Gets the all.
-     *
-     * @return the all
-     */
-    public List<ElementInputData> getAll() {
-        return dbEM.createQuery("SELECT p FROM ElementInputData p", ElementInputData.class).getResultList();
-    }
-    
-    /**
-     * Gets the value.
-     *
-     * @param inputDataID the input data id
-     * @return the value
-     */
-    public String getValue(Long inputDataID) throws TestDataException{
-    	
-    	ElementInputData eid = dbEM.find(ElementInputData.class, inputDataID);
-    	if (eid == null) {
-    		throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND, ExceptionErrorCode.TESTDATA_NOTFOUND);
-    	} else {
-    		return eid.getDataValue();
-    	}
-    }
+	/**
+	 * Save.
+	 *
+	 * @param eid
+	 *            the eid
+	 * @return the long
+	 */
+	public Long save(@Nullable ElementInputData eid) {
+		long retVal;
+		if (null == eid)
+			retVal = 0;
+		else {
+			getDbEM().persist(eid);
+			retVal = eid.getId();
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the all.
+	 *
+	 * @return the all
+	 */
+	public @Nullable List<ElementInputData> getAll() {
+		return getDbEM().createQuery("SELECT p FROM ElementInputData p",
+				ElementInputData.class).getResultList();
+	}
+
+	/**
+	 * Gets the value.
+	 *
+	 * @param inputDataID
+	 *            the input data id
+	 * @return the value
+	 */
+	public String getValue(Long inputDataID) throws TestDataException {
+
+		ElementInputData eid = getDbEM().find(ElementInputData.class,
+				inputDataID);
+		if (eid == null) {
+			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+					ExceptionErrorCode.TESTDATA_NOTFOUND);
+		} else {
+			return eid.getDataValue();
+		}
+	}
 }

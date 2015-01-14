@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.bigtester.ate.model.page.PageModelBase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.Cookie;
 import org.springframework.core.io.Resource;
@@ -37,9 +38,12 @@ import org.springframework.core.io.Resource;
  * @author Peidong Hu
  * 
  */
-public class AbstractPageObject extends AbstractPageModelBase {
+public class BasePageObject extends PageModelBase {
+
+	
 
 	/** The page name. */
+	@Nullable
 	private String pageName;
 	
 	/** The data file. */
@@ -47,21 +51,36 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	private Resource dataFile;
 	
 	/** The web element list. */
+	@Nullable
 	private Map<Long, MyWebElement> myWebElementList = new HashMap<Long, MyWebElement>();//NOPMD
 
 	/** The cookies. */
+	@Nullable
 	private List<Cookie> cookies = new ArrayList<Cookie>();
 	
 	/** The page title. */
+	@Nullable
 	private String pageTitle;
-	
+	/**
+	 * @param myWd
+	 */
+	public BasePageObject(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Gets the page title.
 	 *
 	 * @return the pageTitle
 	 */
 	public String getPageTitle() {
-		return pageTitle;
+		final String retVal = pageTitle;
+		if (null == retVal) {
+			throw new IllegalStateException("pageTitle is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -79,7 +98,13 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 * @return the cookies
 	 */
 	public List<Cookie> getCookies() {
-		return cookies;
+		final List<Cookie> retVal = cookies;
+		if (null == retVal) {
+			throw new IllegalStateException("cookies is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -107,7 +132,13 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 * @return the web element list
 	 */
 	public Map<Long, MyWebElement> getMyWebElementList() {
-		return myWebElementList;
+		final Map<Long, MyWebElement> retVal = myWebElementList;
+		if (null == retVal) {
+			throw new IllegalStateException("mywebelementlist is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	
@@ -117,7 +148,13 @@ public class AbstractPageObject extends AbstractPageModelBase {
 	 * @return the pageName
 	 */
 	public String getPageName() {
-		return pageName;
+		final String retVal = pageName;
+		if (null == retVal) {
+			throw new IllegalStateException("pageName is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**

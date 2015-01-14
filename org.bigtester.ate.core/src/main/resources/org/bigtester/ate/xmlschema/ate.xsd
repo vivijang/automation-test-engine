@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns="http://www.bigtester.org/schema/ate"
-	xmlns:tool="http://www.springframework.org/schema/tool"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	targetNamespace="http://www.bigtester.org/schema/ate" xmlns:tns="http://www.bigtester.org/schema/ate"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 
@@ -86,6 +86,25 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<xsd:complexType name="BaseElementActionType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				<xsd:attribute name="dataValue" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.StepInputDataValue" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
 	<xsd:complexType name="MyFireFoxDriverType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractWebDriverBaseType">
@@ -95,21 +114,35 @@
 	</xsd:complexType>
 
 
-	<xsd:complexType name="AbstractPageModelBaseType"
-		abstract="false">
+	<xsd:complexType name="PageModelBaseType" abstract="false">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
 				<!-- Here we re-use Spring elements and attributes -->
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				<xsd:attribute name="myWebDriver" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.atewebdriver.IMyWebDriver" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
+
 		</xsd:complexContent>
 	</xsd:complexType>
 
 	<xsd:complexType name="BasePageObjectType">
 		<xsd:complexContent>
-			<xsd:extension base="AbstractPageModelBaseType">
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
 				<xsd:attribute name="dataFile" type="xsd:string" />
+
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -157,29 +190,7 @@
 				<xsd:attribute name="targetStep" type="xsd:boolean"
 					use="required" />
 				<xsd:attribute name="stepName" type="xsd:string" use="required" />
-				<xsd:attribute name="stepDescription" type="xsd:string"
-					use="required" />
-				<xsd:attribute name="myWebElement" type="xsd:string"
-					>
-					<xsd:annotation>
-						<xsd:appinfo>
-							<tool:annotation kind="ref">
-								<tool:expected-type
-									type="org.bigtester.ate.model.page.page.MyWebElement" />
-							</tool:annotation>
-						</xsd:appinfo>
-					</xsd:annotation>
-				</xsd:attribute>
-				<xsd:attribute name="pageObject" type="xsd:string">
-					<xsd:annotation>
-						<xsd:appinfo>
-							<tool:annotation kind="ref">
-								<tool:expected-type
-									type="org.bigtester.ate.model.page.page.IPageObject" />
-							</tool:annotation>
-						</xsd:appinfo>
-					</xsd:annotation>
-				</xsd:attribute>
+				<xsd:attribute name="stepDescription" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -190,16 +201,37 @@
 				<!-- Here we re-use Spring elements and attributes -->
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="stepERDao" type="xsd:string" use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="BaseDataValueType">
+	<xsd:complexType name="BaseInputDataValueType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
 				<!-- Here we re-use Spring elements and attributes -->
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="elementDataDao" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -209,14 +241,38 @@
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="resultPage" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="stepERValue" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.StepExpectedResultValue" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
 
-	<xsd:complexType name="StepDataValueType">
+	<xsd:complexType name="StepInputDataValueType">
 		<xsd:complexContent>
-			<xsd:extension base="BaseDataValueType">
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
 				<xsd:attribute name="dataValueID" type="xsd:long" />
 			</xsd:extension>
 		</xsd:complexContent>
@@ -224,7 +280,9 @@
 
 	<xsd:complexType name="StepExpectedResultValueType">
 		<xsd:complexContent>
-			<xsd:extension base="BaseERValueType">
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
 				<xsd:attribute name="dataValueID" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
@@ -235,6 +293,28 @@
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="resultPage" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="stepERValue" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.StepExpectedResultValue" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -259,6 +339,8 @@
 	<xsd:complexType name="ClickActionType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -267,6 +349,8 @@
 	<xsd:complexType name="SendKeysActionType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
 				<xsd:attribute name="dataValue" type="xsd:string" use="required"></xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -274,9 +358,13 @@
 
 	<xsd:complexType name="MyWebElementType">
 		<xsd:complexContent>
-			<xsd:extension base="AbstractPageModelBaseType">
-				<!-- <xsd:attribute name="elementFind" type="xsd:string" use="required"/> -->
-				<!-- <xsd:attribute name="elementAction" type="xsd:string" use="required"/> -->
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				<xsd:attribute name="elementFind" type="xsd:string"
+					use="required" />
+				<xsd:attribute name="elementAction" type="xsd:string"
+					use="required" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -284,7 +372,27 @@
 	<xsd:complexType name="HomeStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
-
+				<xsd:attribute name="myWebElement" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.MyWebElement" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="pageObject" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IHomePage" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -292,6 +400,27 @@
 	<xsd:complexType name="ElementStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
+				<xsd:attribute name="myWebElement" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.MyWebElement" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="pageObject" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -299,6 +428,27 @@
 	<xsd:complexType name="LastStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
+				<xsd:attribute name="myWebElement" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.MyWebElement" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="pageObject" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -324,24 +474,26 @@
 
 	<xsd:element name="elementFindById" type="ElementFindByIdType" />
 	<xsd:element name="elementFindByXpath" type="ElementFindByXpathType" />
-	<xsd:element name="clickAction" type="ClickActionType" />
+	<xsd:element name="clickAction" type="ClickActionType">
+	</xsd:element>
 	<xsd:element name="sendKeysAction" type="SendKeysActionType" />
-	<xsd:element name="myWebElement" type="MyWebElementType" />
+	<xsd:element name="myWebElement" type="MyWebElementType" >
+	</xsd:element>
 	<xsd:element name="elementStep" type="ElementStepType" />
-
+	<xsd:element name="baseElementAction" type="BaseElementActionType" />
 
 	<xsd:element name="baseERValue" type="BaseERValueType" />
-	<xsd:element name="baseDataValue" type="BaseERValueType" />
+	<xsd:element name="baseInputDataValue" type="BaseInputDataValueType" />
 	<xsd:element name="pagePropertyCorrectnessAsserter" type="PagePropertyCorrectnessAsserterType" />
 	<xsd:element name="pageElementExistenceAsserter" type="PageElementExistenceAsserterType" />
 	<xsd:element name="stepExpectedResultValue" type="StepExpectedResultValueType" />
-	<xsd:element name="stepDataValue" type="StepDataValueType" />
+	<xsd:element name="stepInputDataValue" type="StepInputDataValueType" />
 
 	<xsd:element name="testCase" type="TestCaseType" />
 	<xsd:element name="lastStep" type="LastStepType" />
 	<xsd:element name="homeStep" type="HomeStepType" />
 	<xsd:element name="basePageObject" type="BasePageObjectType" />
-	<xsd:element name="basePageModel" type="AbstractPageModelBaseType" />
+	<xsd:element name="basePageModel" type="PageModelBaseType" />
 	<xsd:element name="fireFoxDriver" type="MyFireFoxDriverType" />
 	<xsd:element name="lastPage" type="LastpageType" />
 	<xsd:element name="homePage" type="HomepageType" />

@@ -54,6 +54,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	private String stepName = "";
 
 	/** The step description. */
+	@Nullable
 	private String stepDescription = "";
 	
 	/** The element step flag. */
@@ -62,7 +63,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	
 	/** The my web element. */
 	@Nullable
-	private MyWebElement myWebElement;
+	protected MyWebElement myWebElement;
 	
 	/** The i expected result asserter. */
 	@Nullable
@@ -78,7 +79,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * @param pageObject the page object
 	 * @param myWebElement the my web element
 	 */
-	public BaseTestStep( IPageObject pageObject, MyWebElement myWebElement) {
+	public BaseTestStep( IPageObject pageObject, @Nullable MyWebElement myWebElement) {
 		this.pageObject = pageObject;
 		this.myWebElement = myWebElement;
 	}
@@ -125,6 +126,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * 
 	 * @return the stepDescription
 	 */
+	@Nullable
 	public String getStepDescription() {
 		return stepDescription;
 	}
@@ -145,7 +147,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 * @return the myWebElement
 	 */
 	@Nullable
-	public final MyWebElement getMyWebElement() {
+	public MyWebElement getMyWebElement() {
 		return myWebElement;
 	}
 

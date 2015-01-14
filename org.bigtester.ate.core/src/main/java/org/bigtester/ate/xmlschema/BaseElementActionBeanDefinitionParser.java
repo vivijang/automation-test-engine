@@ -20,14 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-import org.bigtester.ate.model.data.AbstractDataValue;
+import org.bigtester.ate.model.page.elementaction.BaseElementAction;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
+import org.w3c.dom.Element;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,25 +38,26 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class BaseDataValueBeanDefinitionParser extends
+public class BaseElementActionBeanDefinitionParser extends
 		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
-        BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
-        BeanDefinition bDef = holder.getBeanDefinition();
-        bDef.setBeanClassName(AbstractDataValue.class.getName());
-       
-		
-//        String text = element.getAttribute("text");
-//        bd.getPropertyValues().addPropertyValue("text", text);
-        parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
-        return (AbstractBeanDefinition) bDef;
-      
+		if (parserContext == null || element == null)
+			throw new IllegalStateException("Incorrect xsd xml parsing.");
+		BeanDefinitionHolder holder = parserContext.getDelegate()
+				.parseBeanDefinitionElement(element);
+		BeanDefinition bDef = holder.getBeanDefinition();
+		bDef.setBeanClassName(BaseElementAction.class.getName());
+
+		parserContext.getRegistry().registerBeanDefinition(
+				element.getAttribute("id"), bDef);
+		return (AbstractBeanDefinition) bDef;
+
 	}
 }

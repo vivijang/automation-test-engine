@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.browser;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.springframework.util.StringUtils;
@@ -38,6 +39,7 @@ public class BrowserProfile<T> {
 	final private String profileName;
 	
 	/** The ff profile. */
+	@Nullable
 	final private T profile;
 	
 	/** The persistent class. */
@@ -132,6 +134,7 @@ public class BrowserProfile<T> {
 	 *
 	 * @return the profile
 	 */
+	@Nullable
 	public T getProfile() {
 		return profile;
 	}

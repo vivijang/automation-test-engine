@@ -63,6 +63,7 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_PAGEPROPERTYCORRECTNESS, new PagePropertyCorrectBeanDefinitionParser());
 		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_CLICKACTION, new ClickActionBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEELEMENTACTION, new BaseElementActionBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTFINDBYID, new FindByIdBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTSTEP, new ElementStepBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_MYWEBELEMENT, new MyWebElementBeanDefinitionParser());
@@ -70,8 +71,8 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_SENDKEYSACTION, new SendKeysActionBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_ELEMENTFINDBYXPATH, new FindByXpathBeanDefinitionParser());
 		
-		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_STEPDATAVALUE, new StepDataValueBeanDefinitionParser());
-		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEDATAVALUE, new BaseDataValueBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_STEPINPUTDATAVALUE, new StepInputDataValueBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEINPUTDATAVALUE, new BaseInputDataValueBeanDefinitionParser());
 		//registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASETESTSTEP, new BaseTestStepBeanDefinitionParser());
 	}
 

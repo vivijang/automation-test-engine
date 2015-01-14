@@ -53,10 +53,10 @@ public class PageElementExistenceAsserter extends
 	/**
 	 * @param pageObj
 	 */
-	public PageElementExistenceAsserter(final IPageObject pageObj) {
+	public PageElementExistenceAsserter(final IPageObject pageObj, StepExpectedResultValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		// TODO Auto-generated constructor stub
+		setStepERValue(stepERValue);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class PageElementExistenceAsserter extends
 				} else {
 					IATEPageFactory ipf = ATEPageFactory.getInstance();
 					MyWebElement mwe = ipf.getMyWebElement(findByType,
-							stepERValue.getValue().get(i).getElementFindByValue());
+							stepERValue.getValue().get(i).getElementFindByValue(), getResultPage().getMyWd());
 					super.getResultPage().getMyWebElementList().put(stepERValue.getValue()
 							.get(i).getIdColumn(), mwe);
 					interestingERDBIndexes.add(stepERValue.getValue().get(i)

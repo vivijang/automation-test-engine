@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.page.elementaction;
 
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.openqa.selenium.WebElement;
 
@@ -32,14 +33,22 @@ import java.awt.event.*;
  * @author Jun Yang
  *
  */
-public class SendReturnAction extends AbstractElementAction implements IElementAction {
+public class SendReturnAction extends BaseElementAction implements IElementAction {
 	
+	/**
+	 * @param myWd
+	 */
+	public SendReturnAction(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
     public void doAction(final WebElement webElm) {
         webElm.sendKeys(String.valueOf(KeyEvent.VK_ENTER));
-        LogbackWriter.writeAppInfo("action tracing: send return to browser: " + getDataValue().getValue());
+        LogbackWriter.writeAppInfo("action tracing: send return to browser.");
     }
 }

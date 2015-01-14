@@ -23,7 +23,11 @@ package org.bigtester.ate.reporter;
 import java.util.List;
 import java.util.Properties;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
+import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
@@ -91,12 +95,22 @@ public final class TestStepsXMLReporterUtils {
 		String stepReportMSG;
 		if (tsr.getThisStep().isElementStepFlag()) {
 			MyWebElement mwe = tsr.getThisStep().getMyWebElement();
-			if (mwe.getElementAction().isDataValuedActionFlag()) {
-				testData = mwe.getElementAction().getDataValue().getValue();
-				stepReportMSG = tsr.getThisStep().getStepDescription()
-						+ ReportMessage.MSG_SEPERATOR + testData;
+			if (null==mwe) throw GlobalUtils.createNotInitializedException("myWebElement in element step.");
+			IElementAction myEA = mwe.getElementAction();
+			if (null == myEA) {
+				throw GlobalUtils.createNotInitializedException("element action in element step.");
 			} else {
-				stepReportMSG = tsr.getThisStep().getStepDescription();
+				if (myEA.isDataValuedActionFlag()) {
+					StepInputDataValue dataV = myEA.getDataValue(); 
+					if (null == dataV) throw GlobalUtils.createNotInitializedException("dataValue in my element action");
+					else {
+						testData = dataV.getValue();
+						stepReportMSG = tsr.getThisStep().getStepDescription()
+							+ ReportMessage.MSG_SEPERATOR + testData;
+					}
+				} else {
+					stepReportMSG = tsr.getThisStep().getStepDescription();
+				}
 			}
 		} else {
 			stepReportMSG = tsr.getThisStep().getStepDescription();
@@ -104,12 +118,12 @@ public final class TestStepsXMLReporterUtils {
 		xmlBuffer.addCDATA(stepReportMSG);
 		xmlBuffer.pop();
 		xmlBuffer.push(ATEXMLReporterConfig.TAG_STEP_RESULT);
-		if (tsr.getThisStep().getExpectedResultAsserter() != null) {
+		List<IExpectedResultAsserter> asserters = tsr.getThisStep().getExpectedResultAsserter();
+		if (asserters != null) {
 			StringBuffer stepResultMSG = new StringBuffer("");
-			for (int i = 0; i < tsr.getThisStep().getExpectedResultAsserter()
+			for (int i = 0; i < asserters
 					.size(); i++) {
-				stepResultMSG.append(tsr.getThisStep()
-				.getExpectedResultAsserter().get(i).getAssertReportMSG());
+				stepResultMSG.append(asserters.get(i).getAssertReportMSG());
 				stepResultMSG.append('\n');
 //				StepExecutionResult ser = tsr.getThisStep()
 //						.getExpectedResultAsserter().get(i).getExecResult();

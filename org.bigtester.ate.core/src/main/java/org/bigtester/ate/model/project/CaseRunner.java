@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
+package org.bigtester.ate.model.project; //NOPMD
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
@@ -33,6 +33,7 @@ import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -52,6 +53,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.internal.Utils;
+import org.testng.xml.XmlTest;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -62,15 +64,19 @@ import org.testng.internal.Utils;
 public class CaseRunner implements IRunTestCase {
 
 	/** The context. */
+	@Nullable
 	private ApplicationContext context;
 
 	/** The main driver. */
+	@Nullable
 	private WebDriver mainDriver;
 
 	/** The my tc. */
+	@Nullable
 	private TestCase myTestCase;
 
 	/** The current executing tc name. */
+	@Nullable
 	protected String currentExecutingTCName; // must not be null
 
 	/** The page object data files. */
@@ -94,8 +100,10 @@ public class CaseRunner implements IRunTestCase {
 	/**
 	 * @return the currentExecutingTCName
 	 */
+	@Nullable
 	public String getCurrentExecutingTCName() {
 		return currentExecutingTCName;
+		
 	}
 
 	/**
@@ -110,7 +118,14 @@ public class CaseRunner implements IRunTestCase {
 	 * @return the myTestCase
 	 */
 	public TestCase getMyTestCase() {
-		return myTestCase;
+		final TestCase retVal = myTestCase;
+		if (null == retVal) {
+			throw new IllegalStateException(
+					"myTestCase is not correctly populated");
+
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -130,8 +145,15 @@ public class CaseRunner implements IRunTestCase {
 	 */
 	@DataProvider(name = "dp")
 	public Object[][] getTestData(ITestContext ctx) {
-		TestParameters params = new TestParameters(ctx.getCurrentXmlTest()
-				.getName(), ctx.getCurrentXmlTest().getName());
+		XmlTest xmlTest = ctx.getCurrentXmlTest();
+		if (null == xmlTest)
+			throw new IllegalStateException(
+					"xmltest is not correctly populated.");
+		String testCaseN = xmlTest.getName();
+		if (null == testCaseN)
+			throw new IllegalStateException(
+					"xml test case name is not correctly populated.");
+		TestParameters params = new TestParameters(testCaseN, testCaseN);
 		for (int index = 0; index < ((TestRunner) ctx).getTestListeners()
 				.size(); index++) {
 			if (((TestRunner) ctx).getTestListeners().get(index) instanceof TestProjectListener) {
@@ -148,7 +170,7 @@ public class CaseRunner implements IRunTestCase {
 		return new Object[][] { { params } };
 
 	}
-
+	
 	/**
 	 * Test data.
 	 * 
@@ -178,9 +200,9 @@ public class CaseRunner implements IRunTestCase {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Nullable
 	public String getTestName() {
-
-		return this.currentExecutingTCName;
+		return this.getCurrentExecutingTCName();
 	}
 
 	/**
@@ -199,18 +221,18 @@ public class CaseRunner implements IRunTestCase {
 			context = new FileSystemXmlApplicationContext(testname);
 			mainDriver = ((IMyWebDriver) GlobalUtils.findMyWebDriver(context))
 					.createDriver();
-			myTestCase = GlobalUtils.findTestCaseBean(context);
+			myTestCase = GlobalUtils.findTestCaseBean(getContext());
 			myTestCase.setStepThinkTime(testParams.getStepThinkTime());
-			myTestCase.goSteps();
+			getMyTestCase().goSteps();
 
 		} catch (FatalBeanException fbe) {
 			if (fbe.getCause() instanceof FileNotFoundException) {
 				context = new ClassPathXmlApplicationContext(testname);
 				mainDriver = ((IMyWebDriver) GlobalUtils
 						.findMyWebDriver(context)).createDriver();
-				myTestCase = GlobalUtils.findTestCaseBean(context);
+				myTestCase = GlobalUtils.findTestCaseBean(getContext());
 				myTestCase.setStepThinkTime(testParams.getStepThinkTime());
-				myTestCase.goSteps();
+				getMyTestCase().goSteps();
 
 			} else if (fbe instanceof BeanCreationException) { // NOPMD
 				ITestResult itr = Reporter.getCurrentTestResult();
@@ -230,8 +252,17 @@ public class CaseRunner implements IRunTestCase {
 				} else { // other test case bean creation errors. need to create
 					// another exception to handle it.
 					String[] fullST = Utils.stackTrace(fbe, false);
-					LogbackWriter.writeSysError(fullST[1]);
+					int TWO = 2; //NOPMD
+					if (fullST.length < TWO ) {
+						LogbackWriter
+								.writeSysError("java internal error in stack trace.");
+					} else {
+						String errLog = fullST[1];
+						if (null == errLog) LogbackWriter.writeSysError("java internal error in stack trace.");
+						else LogbackWriter.writeSysError(errLog);
+					}
 					throw fbe;
+
 				}
 			} else {
 				throw fbe;
@@ -253,11 +284,11 @@ public class CaseRunner implements IRunTestCase {
 				Map<String, IMyWebDriver> myWebDrivers = context
 						.getBeansOfType(IMyWebDriver.class);
 				for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
-					myWebDriver2.getWebDriver().quit();
+					WebDriver weD = myWebDriver2.getWebDriver();
+					if (null != weD) weD.quit();
 				}
 			}
-		} catch (UnreachableBrowserException | NoSuchWindowException
-				| NullPointerException e) {// NOPMD
+		} catch (UnreachableBrowserException | NoSuchWindowException e) { //NOPMD
 			// browser has been closed, no action needs to be done here.
 		}
 		if (null != context) {
@@ -270,7 +301,14 @@ public class CaseRunner implements IRunTestCase {
 	 * @return the context
 	 */
 	public ApplicationContext getContext() {
-		return context;
+		final ApplicationContext retVal = context;
+		if (null == retVal) {
+			throw new IllegalStateException(
+					"context is not correctly populated");
+
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -285,7 +323,14 @@ public class CaseRunner implements IRunTestCase {
 	 * @return the mainDriver
 	 */
 	public WebDriver getMainDriver() {
-		return mainDriver;
+		final WebDriver retVal = mainDriver;
+		if (null == retVal) {
+			throw new IllegalStateException(
+					"mainDriver is not correctly populated");
+
+		} else {
+			return retVal;
+		}
 	}
 
 	/**

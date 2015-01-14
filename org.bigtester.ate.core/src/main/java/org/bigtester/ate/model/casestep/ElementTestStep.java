@@ -33,7 +33,6 @@ import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
-import org.bigtester.ate.model.page.page.RegularPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
@@ -45,7 +44,20 @@ import org.openqa.selenium.TimeoutException;
  */
 public class ElementTestStep extends BaseTestStep implements ITestStep {
 
-
+	/**
+	 * Gets the my web element.
+	 * 
+	 * @return the myWebElement
+	 */
+	@Override
+	public final MyWebElement getMyWebElement() throws IllegalStateException{
+		final MyWebElement myWebElement2 = myWebElement;
+		if ( null == myWebElement2 ) {
+			throw new IllegalStateException("Element Test Step MyWebElement can't be null.");
+		} else {
+			return myWebElement2;
+		}
+	}
 	/**
 	 * @param pageObject
 	 * @param myWebElement
@@ -94,21 +106,22 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 			pve.initCause(et);
 			throw pve;
 		}
-		if (getExpectedResultAsserter() != null) {
+		List<IExpectedResultAsserter> asserterList = getExpectedResultAsserter();
+		if ( null != asserterList) {
 			boolean flagThrowE = false;
 			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();
-			for (int i=0; i < getExpectedResultAsserter().size(); i++) {
-				getExpectedResultAsserter().get(i).assertER2();
-				if (getExpectedResultAsserter().get(i).getExecResult().isFlagFailCase()) {
+			for (int i=0; i < asserterList.size(); i++) {
+				asserterList.get(i).assertER2();
+				if (asserterList.get(i).getExecResult().isFlagFailCase()) {
 					flagThrowE = true;
 				}
-				listAsserters.add(getExpectedResultAsserter().get(i));
+				listAsserters.add(asserterList.get(i));
 			}
 			if (flagThrowE && isTargetStep()) {
 				PageValidationException2 pve = new PageValidationException2(
 						ExceptionMessage.MSG_PAGE_VALIDATION_ERROR_HIGH,
 						ExceptionErrorCode.PAGEVALIDATION_HIGH,
-						listAsserters, getExpectedResultAsserter().get(0).getResultPage().getMyWd(),
+						listAsserters, asserterList.get(0).getResultPage().getMyWd(),
 						GlobalUtils.findTestCaseBean(getApplicationContext()));
 				throw pve;
 			}
@@ -121,7 +134,6 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	 */
 	@Override
 	public IMyWebDriver getMyWebDriver() {
-		// TODO Auto-generated method stub
-		return super.getMyWebElement().getMyWd();
+		return getMyWebElement().getMyWd();
 	}
 }

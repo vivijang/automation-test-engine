@@ -18,38 +18,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.page;
 
-import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractERValue defines ....
+ * The Class AbstractPageModelBase defines ....
+ * 
  * @author Peidong Hu
- *
  */
-public class AbstractERValue { //NOPMD
+public class PageModelBase {//NOPMD
 	
+	/** The i my wd. */
+	protected IMyWebDriver myWd;
+
 	/**
-	 * Gets the step er dao.
+	 * Gets the my wd.
 	 *
-	 * @return the step er dao
+	 * @return the myWd
 	 */
-	public StepExpectedResultDaoImpl getStepERDao() {
-		return stepERDao;
+	public  IMyWebDriver getMyWd() {
+		return myWd;
 	}
 
-	
 	/**
-	 * Sets the step er dao.
+	 * Sets the my wd.
 	 *
-	 * @param stepERDao the new step er dao
+	 * @param myWd the myWd to set
 	 */
-	public void setStepERDao(final StepExpectedResultDaoImpl stepERDao) {
-		this.stepERDao = stepERDao;
+	public  void setMyWd(final IMyWebDriver myWd) {
+		this.myWd = myWd;
 	}
 	
-	
-	/** The step er dao. */
-	private StepExpectedResultDaoImpl stepERDao;//NOPMD
+	/**
+	 * Instantiates a new page model base.
+	 *
+	 * @param myWd the my wd
+	 */
+	public PageModelBase(IMyWebDriver myWd) {
+		this.myWd = myWd;
+	}
 }

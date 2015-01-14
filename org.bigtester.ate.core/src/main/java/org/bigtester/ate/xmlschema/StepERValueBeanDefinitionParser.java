@@ -20,8 +20,10 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -44,15 +46,17 @@ public class StepERValueBeanDefinitionParser extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected AbstractBeanDefinition parseInternal(Element element,
-			ParserContext parserContext) {
+	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
+		// Here we parse the Spring elements such as < property>
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// Here we parse the Spring elements such as < property>
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(StepExpectedResultValue.class.getName());
        
         String dataValueId = element.getAttribute(XsdElementConstants.ATTR_STEPERVALUE_DATAVALUEID);
-        bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_STEPERVALUE_DATAVALUEID, dataValueId);
+        bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValueId);
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
         return (AbstractBeanDefinition) bDef;
         

@@ -253,6 +253,25 @@ public final class GlobalUtils {
 
 	}
 
+	/**
+	 * Throw not initialized exception.
+	 *
+	 * @param variableName the variable name
+	 */
+	public static IllegalStateException createNotInitializedException(String variableName) {
+		return new IllegalStateException(variableName + " not correctly populated.");
+	}
+	
+	/**
+	 * Creates the internal error.
+	 *
+	 * @param errorPlace the error place
+	 * @return the illegal state exception
+	 */
+	public static IllegalStateException createInternalError(String errorPlace) {
+		return new IllegalStateException("internal error at: " + errorPlace);
+	}
+	
 	//TODO use generic Type <T> to reduce the number of duplicated findNNNBean functions.
 	
 	private GlobalUtils() {

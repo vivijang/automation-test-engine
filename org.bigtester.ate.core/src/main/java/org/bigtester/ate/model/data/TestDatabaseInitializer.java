@@ -42,7 +42,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
 
 
 
@@ -58,9 +57,11 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 public class TestDatabaseInitializer {
 
 	/** The init xml file. */
-	final private List<InputStream> initXmlFile = new ArrayList<InputStream>();
+	@Nullable
+	final private List<InputStream> initXmlFiles = new ArrayList<InputStream>();
 
 	/** The datasets. */
+	@Nullable
 	transient private IDataSet[] datasets;
 
 	/** The single init xml file. */
@@ -72,8 +73,13 @@ public class TestDatabaseInitializer {
 	 *
 	 * @return the initXmlFile
 	 */
-	public List<InputStream> getInitXmlFile() {
-		return initXmlFile;
+	public List<InputStream> getInitXmlFiles() {
+		final List<InputStream> initXmlFiles2 = initXmlFiles;
+		if (null == initXmlFiles2 ) {
+			throw new IllegalStateException("initxml files are not correctly populated.");
+		} else {
+			return  initXmlFiles2;
+		}
 	}
 
 	/**
@@ -84,10 +90,10 @@ public class TestDatabaseInitializer {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public void setInitXmlFile(List<Resource> initXmlFile) throws IOException {
+	public void setInitXmlFiles(List<Resource> initXmlFile) throws IOException {
 		for (int i = 0; i < initXmlFile.size(); i++) {
 
-			this.initXmlFile.add(initXmlFile.get(i).getInputStream());
+			this.getInitXmlFiles().add(initXmlFile.get(i).getInputStream());
 
 		}
 	}
@@ -148,10 +154,10 @@ public class TestDatabaseInitializer {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
 
-		if (!initXmlFile.isEmpty()) {
-			datasets = new IDataSet[initXmlFile.size()];
-			for (int i = 0; i < initXmlFile.size(); i++) {
-				datasets[i] = builder.build(initXmlFile.get(i));
+		if (!getInitXmlFiles().isEmpty()) {
+			datasets = new IDataSet[getInitXmlFiles().size()];
+			for (int i = 0; i < getInitXmlFiles().size(); i++) {
+				datasets[i] = builder.build(getInitXmlFiles().get(i));
 			}
 			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
 					datasets)); // Import your data
@@ -183,10 +189,10 @@ public class TestDatabaseInitializer {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
 		builder.setColumnSensing(true);
 
-		if (!initXmlFile.isEmpty()) {
-			datasets = new IDataSet[initXmlFile.size()];
-			for (int i = 0; i < initXmlFile.size(); i++) {
-				datasets[i] = builder.build(initXmlFile.get(i));
+		if (!getInitXmlFiles().isEmpty()) {
+			datasets = new IDataSet[getInitXmlFiles().size()];
+			for (int i = 0; i < getInitXmlFiles().size(); i++) {
+				datasets[i] = builder.build(getInitXmlFiles().get(i));
 			}
 			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
 					datasets)); // Import your data

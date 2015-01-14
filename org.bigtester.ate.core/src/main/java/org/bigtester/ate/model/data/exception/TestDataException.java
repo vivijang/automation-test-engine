@@ -20,10 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.exception;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.bigtester.ate.model.AbstractATEException;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,50 +35,74 @@ public class TestDataException extends AbstractATEException {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2675548817712757408L;
 	
-	/**
-	 * Sets the message.
-	 *
-	 * @param message the new message
-	 */
-	@Setter
 	
-	/**
-	 * @override
-	 */
-	@Getter
+	/** The message. */
 	private String message; //NOPMD
 	
 	
-	/**
-	 * Gets the test step name.
-	 *
-	 * @return the test step name
-	 */
-	@Getter
 	
-		
-	/**
-	 * Sets the test step name.
-	 *
-	 * @param testStepName the new test step name
-	 */
-	@Setter
+	/** The test step name. */
+	@Nullable
 	private String testStepName; //NOPMD
 	
-	/**
-	 * Gets the test case name.
-	 *
-	 * @return the test case name
-	 */
-	@Getter
 	
-	/**
-	 * Sets the test case name.
-	 *
-	 * @param testCaseName the new test case name
-	 */
-	@Setter
+	/** The test case name. */
+	@Nullable
 	private String testCaseName; //NOPMD
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
+	 * @return the testStepName
+	 */
+	public String getTestStepName() {
+		final String retVal = testStepName;
+		if (null == retVal) {
+			throw new IllegalStateException("teststepName is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param testStepName the testStepName to set
+	 */
+	public void setTestStepName(@Nullable String testStepName) {
+		this.testStepName = testStepName;
+	}
+
+	/**
+	 * @return the testCaseName
+	 */
+	public String getTestCaseName() {
+		final String retVal = testCaseName;
+		if (null == retVal) {
+			throw new IllegalStateException("testcasename is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param testCaseName the testCaseName to set
+	 */
+	public void setTestCaseName(@Nullable String testCaseName) {
+		this.testCaseName = testCaseName;
+	}
 
 	/**
 	 * Instantiates a new step execution exception.

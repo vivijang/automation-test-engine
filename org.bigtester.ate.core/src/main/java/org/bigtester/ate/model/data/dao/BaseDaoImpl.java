@@ -18,37 +18,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.data.dao;
 
-import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.bigtester.ate.GlobalUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractDataValue defines ....
+ * This class AbstractDaoImpl defines ....
  * @author Peidong Hu
  *
  */
-public class AbstractDataValue {//NOPMD
-	
+public class BaseDaoImpl { //NOPMD
+	/** The db em. */
+	@PersistenceContext
+    @Nullable
+    private EntityManager dbEM;//NOPMD
+
 	/**
-	 * Gets the element data dao.
-	 *
-	 * @return the elementDataDao
+	 * @return the dbEM
 	 */
-	public ElementInputDataDaoImpl getElementDataDao() {
-		return elementDataDao;
+	public EntityManager getDbEM() {
+		final EntityManager retVal = dbEM;
+		if (retVal == null) {
+			throw GlobalUtils.createNotInitializedException("DBem");
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
-	 * Sets the element data dao.
-	 *
-	 * @param elementDataDao the elementDataDao to set
+	 * @param dbEM the dbEM to set
 	 */
-	public void setElementDataDao(final ElementInputDataDaoImpl elementDataDao) {
-		this.elementDataDao = elementDataDao;
+	public void setDbEM(EntityManager dbEM) {
+		this.dbEM = dbEM;
 	}
 	
-	/** The element data dao. */
-	private ElementInputDataDaoImpl elementDataDao;//NOPMD
-	
-}	
+}

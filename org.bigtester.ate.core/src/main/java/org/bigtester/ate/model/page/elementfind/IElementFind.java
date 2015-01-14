@@ -21,6 +21,7 @@
 package org.bigtester.ate.model.page.elementfind;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -38,7 +39,7 @@ public interface IElementFind {
 	 *            the find by value
 	 * @return the web element
 	 */
-	WebElement doFind(IMyWebDriver myWebDriver, String findByValue);
+	WebElement doFind(IMyWebDriver myWebDriver, String findByValue) throws NoSuchElementException;
 	
 	/**
 	 * Gets the find by value.

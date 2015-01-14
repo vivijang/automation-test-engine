@@ -20,11 +20,12 @@
  *******************************************************************************/
 package org.bigtester.ate.systemlogger;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.LogbackTag;
+import org.eclipse.jdt.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,76 +34,124 @@ import org.slf4j.LoggerFactory;
  * @author Peidong Hu
  */
 public final class LogbackWriter {
-	
+
 	/** The Constant MYLOGGER. */
+	@Nullable
 	private static final Logger MYLOGGER = LoggerFactory
 			.getLogger(LogbackWriter.class);
-	
+
 	/**
 	 * Write app error.
 	 *
-	 * @param msg the msg
+	 * @param msg
+	 *            the msg
 	 */
 	public static void writeAppError(String msg) {
-		if (MYLOGGER.isErrorEnabled()) {
-			MYLOGGER.error(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_ERROR + msg);
+
+		final Logger mylogger2 = MYLOGGER;
+		if (mylogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("MYLOGGER"); //NOPMD
 		} else {
-			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isErrorEnabled()");
+			if (mylogger2.isErrorEnabled()) {
+				mylogger2.error(LogbackTag.TAG_APP_LOG
+						+ LogbackTag.TAG_TEST_ERROR + msg);
+			} else {
+				throw new UnsupportedOperationException(
+						ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL
+								+ "MYLOGGER.isErrorEnabled()");
+			}
+			
 		}
+
 	}
-	
+
 	/**
 	 * Write app error.
 	 *
-	 * @param msg the msg
+	 * @param msg
+	 *            the msg
 	 */
 	public static void writeSysError(String msg) {
-		if (MYLOGGER.isErrorEnabled()) {
-			MYLOGGER.error(LogbackTag.TAG_SYS_LOG + LogbackTag.TAG_TEST_ERROR + msg);
+		final Logger mylogger2 = MYLOGGER;
+		if (mylogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("MYLOGGER");
 		} else {
-			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isErrorEnabled()");
+			if (mylogger2.isErrorEnabled()) {
+				mylogger2.error(LogbackTag.TAG_SYS_LOG + LogbackTag.TAG_TEST_ERROR
+						+ msg);
+			} else {
+				throw new UnsupportedOperationException(
+						ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL
+								+ "MYLOGGER.isErrorEnabled()");
+			}
 		}
 	}
-	
+
 	/**
 	 * Write app warning.
 	 *
-	 * @param msg the msg
+	 * @param msg
+	 *            the msg
 	 */
 	public static void writeAppWarning(String msg) {
-		if(MYLOGGER.isWarnEnabled()) {
-			MYLOGGER.warn(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_WARNING + msg);
+		final Logger mylogger2 = MYLOGGER;
+		if (mylogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("MYLOGGER");
 		} else {
-			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isWarnEnabled()");
+			if (mylogger2.isWarnEnabled()) {
+				mylogger2.warn(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_WARNING
+						+ msg);
+			} else {
+				throw new UnsupportedOperationException(
+						ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL
+								+ "MYLOGGER.isWarnEnabled()");
+			}
 		}
 	}
-	
+
 	/**
 	 * Write app info.
 	 *
-	 * @param msg the msg
+	 * @param msg
+	 *            the msg
 	 */
 	public static void writeAppInfo(String msg) {
-		if(MYLOGGER.isInfoEnabled()) {
-			MYLOGGER.info(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_INFO + msg); //NOPMD
+		final Logger mylogger2 = MYLOGGER;
+		if (mylogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("MYLOGGER");
 		} else {
-			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isInfoEnabled()");
+			if (mylogger2.isInfoEnabled()) {
+				mylogger2.info(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_TEST_INFO + msg); // NOPMD
+			} else {
+				throw new UnsupportedOperationException(
+						ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL
+								+ "MYLOGGER.isInfoEnabled()");
+			}
 		}
 	}
-	
+
 	/**
 	 * Write test info.
 	 *
-	 * @param msg the msg
+	 * @param msg
+	 *            the msg
 	 */
 	public static void writeUnitTestInfo(String msg) {
-		if(MYLOGGER.isInfoEnabled()) {
-			MYLOGGER.info(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_UNITTEST_INFO + msg); //NOPMD
+		final Logger mylogger2 = MYLOGGER;
+		if (mylogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("MYLOGGER");
 		} else {
-			throw new UnsupportedOperationException(ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL + "MYLOGGER.isInfoEnabled()");
+			
+			if (mylogger2.isInfoEnabled()) {
+				mylogger2.info(LogbackTag.TAG_APP_LOG + LogbackTag.TAG_UNITTEST_INFO + msg); // NOPMD
+			} else {
+				throw new UnsupportedOperationException(
+						ExceptionMessage.MSG_UNSUPPORTED_LOGBACK_LEVEL
+								+ "MYLOGGER.isInfoEnabled()");
+			}
 		}
 	}
-	
+
 	/**
 	 * Instantiates a new logback writer.
 	 */

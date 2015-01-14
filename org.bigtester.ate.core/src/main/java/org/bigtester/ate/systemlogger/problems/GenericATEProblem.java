@@ -26,42 +26,65 @@ import org.testng.internal.Utils;
 // TODO: Auto-generated Javadoc
 /**
  * This class GenericATEProblem defines ....
+ * 
  * @author Peidong Hu
  *
  */
 public class GenericATEProblem extends RawProblem {
 	/** The full stack trace. */
 	private final String fullStackTrace;
-	
+
 	/** The short stack trace. */
 	private final String shortStackTrace;
-	
+
 	/**
 	 * Instantiates a new generic ate problem.
 	 *
-	 * @param source the source
-	 * @param see the see
+	 * @param source
+	 *            the source
+	 * @param see
+	 *            the see
 	 */
 	public GenericATEProblem(Object source, Exception exception) {
-		super (source, exception);
+		super(source, exception);
 		String[] stackTraces = Utils.stackTrace(exception, false);
-		fullStackTrace = stackTraces[1];
-		shortStackTrace = stackTraces[0];
+		String tmp1 = stackTraces[1];
+		if (tmp1 == null)
+			fullStackTrace = "fullstacktrace Internal error.";
+
+		else
+			fullStackTrace = tmp1;
+		String tmp0 = stackTraces[0];
+		if (tmp0 == null)
+			shortStackTrace = "shortstacktrace Internal error.";
+		else
+			shortStackTrace = tmp0;
 	}
-	
+
 	/**
 	 * Instantiates a new generic ate problem.
 	 *
-	 * @param source the source
-	 * @param exception the exception
+	 * @param source
+	 *            the source
+	 * @param exception
+	 *            the exception
 	 */
 	public GenericATEProblem(Object source, Throwable exception) {
-		super (source, exception);
+		super(source, exception);
 		String[] stackTraces = Utils.stackTrace(exception, false);
-		fullStackTrace = stackTraces[1];
-		shortStackTrace = stackTraces[0];
+		String tmp1 = stackTraces[1];
+		if (tmp1 == null)
+			fullStackTrace = "fullstacktrace Internal error.";
+
+		else
+			fullStackTrace = tmp1;
+		String tmp0 = stackTraces[0];
+		if (tmp0 == null)
+			shortStackTrace = "shortstacktrace Internal error.";
+		else
+			shortStackTrace = tmp0;
 	}
-	
+
 	/**
 	 * Gets the short stack trace.
 	 *

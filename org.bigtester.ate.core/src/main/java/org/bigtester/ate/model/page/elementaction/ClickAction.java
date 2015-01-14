@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -28,8 +29,16 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public class ClickAction extends AbstractElementAction implements
+public class ClickAction extends BaseElementAction implements
 		IElementAction {
+
+	/**
+	 * @param myWd
+	 */
+	public ClickAction(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * {@inheritDoc}

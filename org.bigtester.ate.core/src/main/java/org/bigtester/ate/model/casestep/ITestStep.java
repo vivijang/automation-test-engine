@@ -21,11 +21,11 @@
 package org.bigtester.ate.model.casestep; //NOPMD
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -52,6 +52,7 @@ public interface ITestStep {
 	 *
 	 * @return the page object
 	 */
+	@Nullable
 	IPageObject getPageObject();
 	
 	/**
@@ -65,6 +66,7 @@ public interface ITestStep {
 	 * 
 	 * @return the stepName
 	 */
+	
 	String getStepName();
 	
 	/**
@@ -72,12 +74,14 @@ public interface ITestStep {
 	 *
 	 * @return the my web element
 	 */
+	@Nullable
 	MyWebElement getMyWebElement();
 	/**
 	 * Gets the step description.
 	 * 
 	 * @return the stepDescription
 	 */
+	@Nullable
 	String getStepDescription();
 	
 	

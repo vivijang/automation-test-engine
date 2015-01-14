@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 
 // TODO: Auto-generated Javadoc
@@ -41,6 +42,7 @@ public class TestParameters
     private int stepThinkTime;
     
     /** The global app ctx. */
+    @Nullable
     private ApplicationContext globalAppCtx;
     /**
 	 * @return the stepThinkTime
@@ -125,7 +127,12 @@ public class TestParameters
 	 * @return the globalAppCtx
 	 */
 	public ApplicationContext getGlobalAppCtx() {
-		return globalAppCtx;
+		final ApplicationContext globalAppCtx2 = globalAppCtx;
+		if (null == globalAppCtx2 ) {
+			throw new IllegalStateException("global application context is not correctly populated.");
+		} else {
+			return globalAppCtx2;
+		}
 	}
 
 	/**

@@ -22,6 +22,7 @@ package org.bigtester.ate.model.data.dao;
 
 import java.util.List;
 
+
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
@@ -33,9 +34,10 @@ import org.bigtester.ate.model.data.exception.TestDataException;
  * @author Peidong Hu
  *
  */
-public class StepExpectedResultDaoImpl extends AbstractDaoImpl{
+public class StepExpectedResultDaoImpl extends BaseDaoImpl{
 	 
-    /**
+   
+	/**
      * Gets the step expected results list.
      *
      * @param sERSetID the s er set id

@@ -32,7 +32,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  * 
  * @author Peidong Hu
  */
-public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriver{
+public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	
 	/** The browser profile. */
 	@Nullable
@@ -60,22 +60,20 @@ public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriv
 		browserProfile = new BrowserProfile<FirefoxProfile>(FirefoxProfile.class, profileName);
 		//setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
 	}
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void driverCapacity() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	
 	/**
 	 * @return the browserProfile
 	 */
-	@Nullable
+	
 	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
-		return browserProfile;
+		final BrowserProfile<FirefoxProfile> retVal = browserProfile;
+		if (null == retVal) {
+			throw new IllegalStateException("browserProfile is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -83,21 +81,17 @@ public class MyFirefoxDriver extends AbstractWebDriverBase implements IMyWebDriv
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal;
-		if ( null == getWebDriver()) {
-			if (browserProfile.getProfile() != null) {
-				retVal = new FirefoxDriver(browserProfile.getProfile());
-			} else {
+		WebDriver retVal = getWebDriver();
+		if ( null == retVal) {
+			if (null == getBrowserProfile().getProfile()) {
 				retVal = new FirefoxDriver();
+			} else {
+				retVal = new FirefoxDriver(getBrowserProfile().getProfile());
 			}
 			setWebDriver(retVal);
 			
-		} else {
-			retVal = getWebDriver();
 		}
 		return retVal;
 	}
-
-	
 	
 }

@@ -35,138 +35,187 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 // TODO: Auto-generated Javadoc
 /**
  * This class ElementInputData defines ....
+ * 
  * @author Peidong Hu
  *
  */
 @Entity
 @Table
-
-
 /**
  * {@inheritDoc}
  */
-@Data
+// @Data
 @SuppressWarnings(value = { "PMD" })
 public class ElementInputData {
-	
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = AUTO)
 	@Column
-    private Long id;
-	
-	
-	
-	/**
-	 * Gets the data name.
-	 *
-	 * @return the data name
-	 */
-	@Getter
-	
-	
-	/**
-	 * Sets the data name.
-	 *
-	 * @param dataName the new data name
-	 */
-	@Setter
+	@Nullable
+	private Long id;
+
 	@Column(length = 50, nullable = false, unique = false)
+	@Nullable
 	private String dataName;
 	/** The key in data. */
-	
-	
-	
-	/**
-	 * Gets the data value.
-	 *
-	 * @return the data value
-	 */
-	@Getter
-	
-	
-	/**
-	 * Sets the data value.
-	 *
-	 * @param dataValue the new data value
-	 */
-	@Setter
+
 	@Column(length = 50, nullable = false, unique = true)
+	@Nullable
 	private String dataValue;
-	
-	
-	
-	
+
 	/**
-	 * Gets the test data context.
-	 *
-	 * @return the test data context
+	 * @return the id
 	 */
-	@Getter
-	
-	
-	
+	public Long getId() {
+		final Long id2 = id;
+		if (null == id2 ) {
+			throw new IllegalStateException("id collumn is not correctly populated");
+		} else {
+			return id2;
+		}
+	}
+
 	/**
-	 * Sets the test data context.
-	 *
-	 * @param testDataContext the new test data context
+	 * @param id the id to set
 	 */
-	@Setter
-	@ManyToOne
-	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
-	private TestDataContext testDataContext; //NOPMD
-	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	/**
-	 * Sets the sunny parent data.
-	 *
-	 * @param sunnyParentData the new sunny parent data
+	 * @return the dataName
 	 */
-	@Setter
-	
+	public String getDataName() {
+		final String dataName2 = dataName;
+		if (null == dataName2) {
+			throw new IllegalStateException("dataName collumn is not correctly populated");
+			
+		} else {
+			return dataName2;
+		}
+	}
+
 	/**
-	 * Gets the sunny parent data.
-	 *
-	 * @return the sunny parent data
+	 * @param dataName the dataName to set
 	 */
-	@Getter
-	@ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="sunnyParentData_id", referencedColumnName = "id")
-    private ElementInputData sunnyParentData;
-	
+	public void setDataName(String dataName) {
+		this.dataName = dataName;
+	}
+
 	/**
-	 * Sets the subordinates.
-	 *
-	 * @param subordinates the new subordinates
+	 * @return the dataValue
 	 */
-	@Setter
-	
+	public String getDataValue() {
+		final String dataValue2 = dataValue;
+		if (null == dataValue2) {
+			throw new IllegalStateException("datavalue collumn is not correctly populated");
+			
+		} else {
+			return dataValue2;
+		}
+	}
+
 	/**
-	 * Gets the subordinates.
-	 *
+	 * @param dataValue the dataValue to set
+	 */
+	public void setDataValue(String dataValue) {
+		this.dataValue = dataValue;
+	}
+
+	/**
+	 * @return the testDataContext
+	 */
+	public TestDataContext getTestDataContext() {
+		final TestDataContext retVal = testDataContext;
+		if (null == retVal) {
+			throw new IllegalStateException("test data context collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param testDataContext the testDataContext to set
+	 */
+	public void setTestDataContext(TestDataContext testDataContext) {
+		this.testDataContext = testDataContext;
+	}
+
+	/**
+	 * @return the sunnyParentData
+	 */
+	public ElementInputData getSunnyParentData() {
+		final ElementInputData retVal = sunnyParentData;
+		if (null == retVal) {
+			throw new IllegalStateException("sunny parent data collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param sunnyParentData the sunnyParentData to set
+	 */
+	public void setSunnyParentData(ElementInputData sunnyParentData) {
+		this.sunnyParentData = sunnyParentData;
+	}
+
+	/**
 	 * @return the subordinates
 	 */
-	@Getter
-    @OneToMany(mappedBy="sunnyParentData")
-    private Set<ElementInputData> subordinates = new HashSet<ElementInputData>();
-	
+	public Set<ElementInputData> getSubordinates() {
+		final Set<ElementInputData> retVal = subordinates;
+		if (null == retVal) {
+			throw new IllegalStateException("subordinates collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param subordinates the subordinates to set
+	 */
+	public void setSubordinates(Set<ElementInputData> subordinates) {
+		this.subordinates = subordinates;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+	@Nullable
+	private TestDataContext testDataContext; // NOPMD
+
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "sunnyParentData_id", referencedColumnName = "id")
+	@Nullable
+	private ElementInputData sunnyParentData;
+
+	@OneToMany(mappedBy = "sunnyParentData")
+	@Nullable
+	private Set<ElementInputData> subordinates = new HashSet<ElementInputData>();
+
 	/**
 	 * Instantiates a new element input data.
 	 *
-	 * @param dataName the data name
-	 * @param dataValue the data value
+	 * @param dataName
+	 *            the data name
+	 * @param dataValue
+	 *            the data value
 	 */
 	public ElementInputData(String dataName, String dataValue) {
 		this.dataName = dataName;
 		this.dataValue = dataValue;
 	}
-	
+
 	/**
 	 * Instantiates a new element input data.
 	 */

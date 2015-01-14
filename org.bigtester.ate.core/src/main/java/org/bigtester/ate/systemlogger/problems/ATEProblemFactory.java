@@ -24,6 +24,7 @@ import org.bigtester.ate.model.AbstractATEException;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.problomatic2.Problem;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,6 +40,7 @@ public final class ATEProblemFactory implements IATEProblemFactory {
 	//private IElementFind iElementFind;
 	//private IElementAction iElementAction;
 	/** The instance. */
+	@Nullable
 	private static IATEProblemFactory instance;
 
 	private ATEProblemFactory() {
@@ -51,10 +53,15 @@ public final class ATEProblemFactory implements IATEProblemFactory {
 	 */
 	public static synchronized IATEProblemFactory getInstance() { //NOPMD
 
-		if (null == instance) {
+		 
+		IATEProblemFactory instance2 = instance;
+		if (instance2 == null) {
 			instance = new ATEProblemFactory();
+			instance2 = instance;
+			return instance2; //NOPMD
+		} else {
+			return instance2;
 		}
-		return instance;
 
 	}
 

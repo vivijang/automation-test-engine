@@ -20,41 +20,45 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
-import org.bigtester.ate.model.data.exception.TestDataException;
-
-import lombok.Getter;
+import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class PropertyDataValue defines ....
+ * This class BaseERValue defines ....
  * @author Peidong Hu
  *
  */
-public class StepDataValue extends AbstractDataValue{
+public class BaseERValue { //NOPMD
+
+	/** The step er dao. */
+	private StepExpectedResultDaoImpl stepERDao;//NOPMD
 	
 	/**
-	 * Gets the value.
+	 * Instantiates a new base er value.
 	 *
-	 * @return the value
+	 * @param stepERDao the step er dao
 	 */
-	@Getter
-	private String value; //NOPMD
-	
-	
+	public BaseERValue(StepExpectedResultDaoImpl stepERDao) {
+		this.stepERDao = stepERDao;
+	}
 	/**
-	 * Gets the data value id.
+	 * Gets the step er dao.
 	 *
-	 * @return the data value id
+	 * @return the step er dao
 	 */
-	@Getter
-	private Long dataValueID; //NOPMD
-	/**
-	 * @param dataValueID the dataValueID to set
-	 * @throws TestDataException 
-	 */
-	public void setDataValueID(Long dataValueID) throws TestDataException {
-		this.dataValueID = dataValueID;
-		value = getElementDataDao().getValue(dataValueID);
+	public StepExpectedResultDaoImpl getStepERDao() {
+		return stepERDao;
 	}
 
+	
+	/**
+	 * Sets the step er dao.
+	 *
+	 * @param stepERDao the new step er dao
+	 */
+	public void setStepERDao(final StepExpectedResultDaoImpl stepERDao) {
+		this.stepERDao = stepERDao;
+	}
+	
+	
 }

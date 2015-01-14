@@ -26,6 +26,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.AbstractATECaseExecE;
 import org.bigtester.ate.model.AbstractATEException;
@@ -37,6 +38,7 @@ import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
 import org.bigtester.ate.systemlogger.problems.IATEProblemFactory;
 import org.bigtester.problomatic2.Problem;
 import org.bigtester.problomatic2.Problomatic;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -50,37 +52,54 @@ import org.springframework.context.ApplicationContextAware;
  * 
  */
 @Aspect
-public class GenericTestCaseLogger implements ApplicationContextAware{
-	
+public class GenericTestCaseLogger implements ApplicationContextAware {
+
 	/** The app context. */
+	@Nullable
 	private transient ApplicationContext appContext;
+
+	/**
+	 * @return the appContext
+	 */
+	public ApplicationContext getAppContext() {
+		final ApplicationContext appContext2 = appContext;
+		if (null == appContext2) {
+			throw GlobalUtils.createNotInitializedException("appContext");
+		} else {
+			return appContext2;
+		}
+	}
+
 	/**
 	 * Select all method as pointcuts.
 	 */
 	@Pointcut("within(org.bigtester.ate..*)")
-	private void selectAll() { //NOPMD
+	private void selectAll() { // NOPMD
 	}
 
 	private boolean isAlreadyCasePointCut(Throwable error) {
-		boolean retVal = false; //NOPMD
-		for (int i =0; i <error.getSuppressed().length; i++) {
-			if (error.getSuppressed()[i].getMessage().equalsIgnoreCase(ExceptionMessage.MSG_ALREADY_CASEPOINTCUT)) {
-				retVal = true; //NOPMD
+		boolean retVal = false; // NOPMD
+		for (int i = 0; i < error.getSuppressed().length; i++) {
+			if (error.getSuppressed()[i].getMessage().equalsIgnoreCase(
+					ExceptionMessage.MSG_ALREADY_CASEPOINTCUT)) {
+				retVal = true; // NOPMD
 			}
 		}
 		return retVal;
 	}
-	
+
 	/**
 	 * Sets the already case point cut.
 	 *
-	 * @param error the new already case point cut
+	 * @param error
+	 *            the new already case point cut
 	 */
 	private void setAlreadyCasePointCut(Throwable error) {
-		Throwable flagT = new Exception(ExceptionMessage.MSG_ALREADY_CASEPOINTCUT);
+		Throwable flagT = new Exception(
+				ExceptionMessage.MSG_ALREADY_CASEPOINTCUT);
 		error.addSuppressed(flagT);
 	}
-	
+
 	/**
 	 * After throwing advice.
 	 * 
@@ -100,52 +119,64 @@ public class GenericTestCaseLogger implements ApplicationContextAware{
 		if (isAlreadyCasePointCut(error)) {
 			return;
 		}
-		
-		ProblemLogbackHandler plbh = new ProblemLogbackHandler();
 
 		IMyWebDriver myWebDriver;
 		Problem prb;
 		ProblemBrowserHandler pbh;
-		
+
 		setAlreadyCasePointCut(error);
-		
+
 		if (error instanceof AbstractATEException
 				&& error instanceof AbstractATECaseExecE) {
-			IATEProblemFactory ipf = ATEProblemFactory.getInstance();
-			prb = ipf.getATEProblem(joinPoint.getTarget(),
-					(AbstractATECaseExecE) error);
+
+			Object obj = joinPoint.getTarget();
+			if (obj == null)
+				throw GlobalUtils.createInternalError("GenericTestCaseLogger");
+			{
+				IATEProblemFactory ipf = ATEProblemFactory.getInstance();
+				prb = ipf.getATEProblem(obj, (AbstractATECaseExecE) error);
+				
+			}
 
 			myWebDriver = ((AbstractATECaseExecE) error).getMyWebDriver();
 			pbh = new ProblemBrowserHandler(myWebDriver);
 			Problomatic.addProblemHandlerForProblem(prb, pbh);
 		} else {
-			prb = new GenericATEProblem(joinPoint.getTarget(),
-					error);
+			Object obj = joinPoint.getTarget();
+			if (obj == null)
+				throw GlobalUtils.createInternalError("GenericTestCaseLogger");
+			prb = new GenericATEProblem(obj, error); // NOPMD
 			try {
-				Map<String, IMyWebDriver> myWebDrivers = appContext.getBeansOfType(IMyWebDriver.class);
-				for(IMyWebDriver myWebDriver2: myWebDrivers.values()){
-					//myWebDriver2.getWebDriver().getCurrentUrl();
-					pbh = new ProblemBrowserHandler(myWebDriver2);
-					Problomatic.addProblemHandlerForProblem(prb, pbh);
+				Map<String, IMyWebDriver> myWebDrivers = getAppContext()
+						.getBeansOfType(IMyWebDriver.class);
+				for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
+					if (null == myWebDriver2)
+						throw GlobalUtils
+								.createInternalError("application context my web driver");
+					else {
+						pbh = new ProblemBrowserHandler(myWebDriver2);
+						Problomatic.addProblemHandlerForProblem(prb, pbh);
+					}
 				}
-			} catch (Exception ext) { //NOPMD
-				//if webdriver can't be successfully accessed, do nothing
+			} catch (Exception ext) { // NOPMD
+				// if webdriver can't be successfully accessed, do nothing
 			}
 		}
-		
+		ProblemLogbackHandler plbh = new ProblemLogbackHandler();
+
 		Problomatic.addProblemHandlerForProblem(prb, plbh);
 		Problomatic.handleProblem(prb);
-		
+
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setApplicationContext(ApplicationContext arg0)
+	public void setApplicationContext(@Nullable ApplicationContext arg0)
 			throws BeansException {
 		this.appContext = arg0;
-		
+
 	}
 
 }

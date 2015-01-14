@@ -20,8 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.dbtable;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,21 +32,33 @@ import lombok.Setter;
  */
 //@Entity
 ///@Table
-public class ElementFindByType extends AbstractDBTable {
+public class ElementFindByType extends BaseDBTable {
 
-	/**
-	 * Sets the find type.
-	 * 
-	 * @param FindType
-	 *            the new find type
-	 */
-	@Setter
+	/** The Find type. */
+	@Nullable
+	private String FindType; //NOPMD
+
 	/**
 	 * Gets the find type.
 	 *
-	 * @return the find type
+	 * @return the findType
 	 */
-	@Getter
-	//@Column(length = 50, nullable = false, unique = true)
-	private String FindType; //NOPMD
+	public String getFindType() {
+		final String findType2 = FindType;
+		if (null == findType2 ) {
+			throw new IllegalStateException("FindType is not correctly populated in DB xml file.");
+		} else {
+			return findType2;
+		}
+	}
+
+	/**
+	 * Sets the find type.
+	 *
+	 * @param findType the findType to set
+	 */
+	public void setFindType(String findType) {
+		
+		FindType = findType;
+	}
 }

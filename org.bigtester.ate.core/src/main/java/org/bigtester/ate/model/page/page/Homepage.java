@@ -20,6 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.openqa.selenium.WebDriver;
+
 
 
 
@@ -29,11 +32,19 @@ package org.bigtester.ate.model.page.page;
  * 
  * @author Peidong Hu
  */
-public class Homepage extends AbstractPageObject implements IHomepage{
+public class Homepage extends BasePageObject implements IHomepage{
+
+	
 
 	/** The home url. */
 	private String homeUrl;
-
+	/**
+	 * @param myWd
+	 */
+	public Homepage(IMyWebDriver myWd, String homeUrl) {
+		super(myWd);
+		this.homeUrl = homeUrl;
+	}
 	/**
 	 * Sets the home url.
 	 * 
@@ -57,7 +68,12 @@ public class Homepage extends AbstractPageObject implements IHomepage{
 	 * Start homepage.
 	 */
 	public void startHomepage() {
-		super.getMyWd().getWebDriver().get(homeUrl);
+		WebDriver webD = super.getMyWd().getWebDriver();
+		if (null == webD) {
+			throw new IllegalStateException("webdriver is not correctly populated.");
+		} else {
+			webD.get(homeUrl);
+		}
 	}
 
 	

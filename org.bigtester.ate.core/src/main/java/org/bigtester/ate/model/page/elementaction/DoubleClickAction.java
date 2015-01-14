@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -29,9 +30,17 @@ import org.openqa.selenium.interactions.Actions;
  * @author Jun Yang
  *
  */
-public class DoubleClickAction extends AbstractElementAction implements IElementAction {
+public class DoubleClickAction extends BaseElementAction implements IElementAction {
 
     /**
+	 * @param myWd
+	 */
+	public DoubleClickAction(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * {@inheritDoc}
      */
     @Override

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,27 +46,46 @@ import org.testng.xml.XmlTest;
 public class TestProject {
 
 	/** The suite list. */
+	@Nullable
 	private List<TestSuite> suiteList;
 
 	/** The app ctx. */
+	@Nullable
 	private ApplicationContext appCtx;
 	
 	/** The global init xmlfiles. */
-	
 	private Resource globalInitXmlFile;
 	
 	/** The step think time. */
 	private int stepThinkTime;
 	
 	/** The test project listener. */
+	@Nullable
 	private TestProjectListener testProjectListener;
+	
+	/**
+	 * Instantiates a new test project.
+	 *
+	 * @param globalInitXmlFile the global init xml file
+	 * @param testProjectListener the test project listener
+	 */
+	public TestProject(Resource globalInitXmlFile) {
+		this.globalInitXmlFile = globalInitXmlFile;
+	}
+	
 	/**
 	 * Gets the suite list.
 	 * 
 	 * @return the suiteList
 	 */
 	public List<TestSuite> getSuiteList() {
-		return suiteList;
+		final List<TestSuite> retVal = suiteList;
+		if (null == retVal) {
+			throw new IllegalStateException("suiteList is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
@@ -83,8 +103,7 @@ public class TestProject {
 	 */
 	public void runSuites() {
 
-		final TestProjectListener tla = new TestProjectListener();
-		tla.setMytp(this);
+		final TestProjectListener tla = new TestProjectListener(this);
 		final TestNG testng = new TestNG();
 		testng.addListener(tla);
 		
@@ -94,7 +113,7 @@ public class TestProject {
 		
 		final List<XmlSuite> suites = new ArrayList<XmlSuite>();
 
-		for (TestSuite tempSuite : suiteList) {
+		for (TestSuite tempSuite : getSuiteList()) {
 
 			XmlSuite suite = new XmlSuite();
 			suite.setName(tempSuite.getSuiteName());
@@ -113,10 +132,15 @@ public class TestProject {
 				test.setXmlClasses(classes);
 			}
 			suites.add(suite);
-			LogbackWriter.writeAppInfo(suite.toXml());
+			String appLogInfo = suite.toXml();
+			if (appLogInfo == null) {
+				LogbackWriter.writeSysError("internal error: xmlsuite error.");
+			} else {
+				LogbackWriter.writeAppInfo(appLogInfo);
+			}
 		}
 		if (suites.isEmpty()) {
-			// TODO
+			throw new IllegalStateException("xmlsuites are not populated.");
 		} else {
 			testng.setXmlSuites(suites);
 
@@ -147,7 +171,13 @@ public class TestProject {
 	 * @return the testProjectListener
 	 */
 	public TestProjectListener getTestProjectListener() {
-		return testProjectListener;
+		
+		final TestProjectListener testProjectListener2 = testProjectListener;
+		if (testProjectListener2 == null) {
+			throw GlobalUtils.createNotInitializedException("testProjectListener");
+		} else {
+			return testProjectListener2;
+		}
 	}
 
 	/**
@@ -161,7 +191,13 @@ public class TestProject {
 	 * @return the appCtx
 	 */
 	public ApplicationContext getAppCtx() {
-		return appCtx;
+		final ApplicationContext retVal = appCtx;
+		if (null == retVal) {
+			throw new IllegalStateException("application context is not correctly initialized.");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**

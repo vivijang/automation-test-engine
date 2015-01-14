@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -29,8 +30,16 @@ import org.openqa.selenium.interactions.Actions;
  * 
  * @author Peidong Hu
  */
-public class CursorMoveAction extends AbstractElementAction implements
+public class CursorMoveAction extends BaseElementAction implements
 		IElementAction {
+
+	/**
+	 * @param myWd
+	 */
+	public CursorMoveAction(IMyWebDriver myWd) {
+		super(myWd);
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * {@inheritDoc}

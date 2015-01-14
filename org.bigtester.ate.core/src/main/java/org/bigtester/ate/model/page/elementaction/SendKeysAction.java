@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.openqa.selenium.WebElement;
 
@@ -29,17 +31,29 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public class SendKeysAction extends AbstractElementAction implements
+public class SendKeysAction extends BaseElementAction implements
 		IElementAction {
+
+	/**
+	 * @param myWd
+	 */
+	public SendKeysAction(IMyWebDriver myWd, StepInputDataValue dataValue) {
+		super(myWd);
+		setDataValue(dataValue);
+	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void doAction(final WebElement webElm) {
-		// TODO Auto-generated method stub
-		webElm.sendKeys(getDataValue().getValue());
-		LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + getDataValue().getValue());
+		StepInputDataValue inputData = getDataValue();
+		if (null == inputData) {
+			throw new IllegalStateException("inputDatavalue is not correctly populated.");
+		} else {
+			webElm.sendKeys(inputData.getValue());
+			LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + inputData.getValue());
+		}
 
 	}
 

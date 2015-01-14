@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 
 
 
@@ -29,7 +31,14 @@ package org.bigtester.ate.model.page.page;
  * 
  * @author Peidong Hu
  */
-public class RegularPage extends AbstractPageObject implements IPageObject{
+public class RegularPage extends BasePageObject implements IPageObject{
+
+	/**
+	 * @param myWd
+	 */
+	public RegularPage(IMyWebDriver myWd) {
+		super(myWd);
+	}
 
 	
 	

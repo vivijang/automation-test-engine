@@ -18,40 +18,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data.dbtable;
+package org.bigtester.ate.model.page.atewebdriver;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-
-import lombok.Getter;
-import lombok.Setter;
+import org.eclipse.jdt.annotation.Nullable;
+import org.openqa.selenium.WebDriver;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class AbstractTestDataTable defines ....
+ * The Class WebDriverBase defines ....
+ * 
  * @author Peidong Hu
- *
  */
-@MappedSuperclass
-public class AbstractTestDataTable extends AbstractDBTable{
+public class WebDriverBase {
+
+	/** The web driver. */
+	@Nullable
+	protected WebDriver webDriver;
 
 	/**
-	 * Gets the test data context.
+	 * Gets the web driver.
 	 *
-	 * @return the test data context
+	 * @return the webDriver
 	 */
-	@Getter
-	
-	
-	
+	@Nullable
+	public final WebDriver getWebDriver() {
+		return webDriver;
+	}
+
 	/**
-	 * Sets the test data context.
+	 * Sets the web driver.
 	 *
-	 * @param testDataContext the new test data context
+	 * @param webDriver
+	 *            the webDriver to set
 	 */
-	@Setter
-	@ManyToOne
-	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
-	private TestDataContext testDataContext; //NOPMD
+	public final void setWebDriver(final WebDriver webDriver) {
+		this.webDriver = webDriver;
+	}
+
 }

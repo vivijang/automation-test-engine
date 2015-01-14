@@ -20,9 +20,11 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
-import org.bigtester.ate.model.page.AbstractPageModelBase;
+import org.bigtester.ate.model.page.PageModelBase;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,9 +32,10 @@ import org.bigtester.ate.model.page.elementfind.IElementFind;
  * 
  * @author Peidong Hu
  */
-public class MyWebElement extends AbstractPageModelBase{
+public class MyWebElement extends PageModelBase {
 
 	/** The i elm action. */
+	@Nullable
 	private IElementAction elementAction;
 
 	/** The i elm find. */
@@ -46,29 +49,28 @@ public class MyWebElement extends AbstractPageModelBase{
 	 * @param iElmAction
 	 *            the ea
 	 */
-	public MyWebElement(final IElementFind iElmFind,
-			final IElementAction iElmAction) {
-		super();
+	public MyWebElement(final IElementFind iElmFind, 
+			@Nullable final IElementAction iElmAction, IMyWebDriver myWd) {
+		super(myWd);
 		this.elementAction = iElmAction;
 		this.elementFind = iElmFind;
 	}
 
-	
 	/**
 	 * @return the elementAction
 	 */
+	@Nullable
 	public IElementAction getElementAction() {
 		return elementAction;
 	}
 
-
 	/**
-	 * @param elementAction the elementAction to set
+	 * @param elementAction
+	 *            the elementAction to set
 	 */
 	public void setElementAction(final IElementAction elementAction) {
 		this.elementAction = elementAction;
 	}
-
 
 	/**
 	 * @return the elementFind
@@ -77,20 +79,28 @@ public class MyWebElement extends AbstractPageModelBase{
 		return elementFind;
 	}
 
-
 	/**
-	 * @param elementFind the elementFind to set
+	 * @param elementFind
+	 *            the elementFind to set
 	 */
 	public void setElementFind(final IElementFind elementFind) {
 		this.elementFind = elementFind;
 	}
 
-
 	/**
 	 * Do action.
 	 */
 	public void doAction() {
-		elementAction.doAction(elementFind.doFind(getMyWd(), elementFind.getFindByValue()));
+
+		final IElementAction elementAction2 = elementAction;
+		if (null == elementAction2) {
+			throw new IllegalStateException(
+					"elementaction is not correctly populated.");
+		} else {
+			elementAction2.doAction(elementFind.doFind(getMyWd(),
+					elementFind.getFindByValue()));
+		}
+
 	}
 
 }

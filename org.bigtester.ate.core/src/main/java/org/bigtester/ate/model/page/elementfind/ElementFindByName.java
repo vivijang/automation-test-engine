@@ -21,7 +21,9 @@
 package org.bigtester.ate.model.page.elementfind;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -35,24 +37,14 @@ import com.google.common.base.Function;
  */
 public class ElementFindByName extends AbstractElementFind implements IElementFind {
 	
-	/** The find by value. */
-	private String findByValue;
-	
-	
 	/**
-	 * {@inheritDoc}
+	 * @param findByValue
 	 */
-	public String getFindByValue() {
-		return findByValue;
+	public ElementFindByName(String findByValue) {
+		super(findByValue);
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setFindByValue(final String findByValue) {
-		this.findByValue = findByValue;
-	}
+
 	
 	
 	/**
@@ -60,13 +52,31 @@ public class ElementFindByName extends AbstractElementFind implements IElementFi
 	 */
 	@Override
 	public WebElement doFind(IMyWebDriver myWebDriver, final String findByValue) {
-		//return myWebDriver.getWebDriver().findElement(By.name(findByValue));
-		createWait(myWebDriver.getWebDriver());
-		return wait.until(new Function<WebDriver, WebElement>() {
-	        public WebElement apply(WebDriver driver) { //NOPMD
-	            return driver.findElement(By.name(findByValue));
-	        }
-	    });
+		WebDriver webD = myWebDriver.getWebDriver();
+		if (null == webD) {
+			throw new IllegalStateException(
+					"web driver is not correctly populated.");
+		} else {
+			createWait(webD);
+
+			WebElement retValWE = getWait().until( //NOPMD
+					new Function<WebDriver, WebElement>() {
+						public @Nullable WebElement apply( //NOPMD
+								@Nullable WebDriver driver) {
+							if (null == driver) {
+								throw new IllegalStateException(
+										"webdriver is not correctly populated.");
+							} else {
+								return driver.findElement(By.name(findByValue));
+							}
+						}
+					});
+			if (null == retValWE) {
+				throw new NoSuchElementException(findByValue);
+			} else {
+				return retValWE;
+			}
+		}
 	}
 
 

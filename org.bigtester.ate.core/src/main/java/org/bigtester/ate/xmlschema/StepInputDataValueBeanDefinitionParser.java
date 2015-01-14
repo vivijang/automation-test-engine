@@ -20,13 +20,14 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.page.elementfind.ElementFindById;
+import org.bigtester.ate.model.data.StepInputDataValue;
 import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
@@ -40,25 +41,33 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class FindByIdBeanDefinitionParser extends
+public class StepInputDataValueBeanDefinitionParser extends
 		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
+	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
 			@Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
 		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
-		// this will never be null since the schema explicitly requires that a value be supplied
-        String findbyValue = element.getAttribute(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE);
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementFindById.class);
-        if (StringUtils.hasText(findbyValue))
-        	factory.addConstructorArgValue(findbyValue);
+		// Here we parse the Spring elements such as < property>
+        BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
+        BeanDefinition bDef = holder.getBeanDefinition();
+        bDef.setBeanClassName(StepInputDataValue.class.getName());
+        String elementDataDao = element
+				.getAttribute(XsdElementConstants.ATTR_BASEINPUTDATAVALUE_ELEMENTDATADAO);
+		if (StringUtils.hasText(elementDataDao)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(elementDataDao));
+		}
+        long dataValueId = Long.parseLong(element.getAttribute(XsdElementConstants.ATTR_STEPDATAVALUE_DATAVALUEID));
+        bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValueId);
+        parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
+        return (AbstractBeanDefinition) bDef;
         
-        return factory.getBeanDefinition();
 	}
 	
-	
+
 }

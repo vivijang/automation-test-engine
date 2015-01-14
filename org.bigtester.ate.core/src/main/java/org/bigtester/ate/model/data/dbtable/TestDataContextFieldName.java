@@ -24,8 +24,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,21 +36,30 @@ import lombok.Setter;
  */
 @Entity
 @Table
-public class TestDataContextFieldName extends AbstractDBTable {
+public class TestDataContextFieldName extends BaseDBTable {
 
 	/** The context field name. */
 	@Column(length = 50, nullable = false, unique = true)
-	/**
-	 * Gets the context field name.
-	 *
-	 * @return the context field name
-	 */
-	@Getter
-	/**
-	 * Sets the context field name.
-	 *
-	 * @param contextFieldName the new context field name
-	 */
-	@Setter
+	@Nullable
 	private String contextFieldName; //NOPMD
+
+	/**
+	 * @return the contextFieldName
+	 */
+	public String getContextFieldName() {
+		final String retVal = contextFieldName;
+		if (null == retVal) {
+			throw new IllegalStateException("contextfieldname collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
+	}
+
+	/**
+	 * @param contextFieldName the contextFieldName to set
+	 */
+	public void setContextFieldName(String contextFieldName) {
+		this.contextFieldName = contextFieldName;
+	}
 }

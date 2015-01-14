@@ -21,12 +21,13 @@
 package org.bigtester.ate.model.page.page;
 
 import org.bigtester.ate.constant.EnumElementFindType;
-import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.ElementFindById;
 import org.bigtester.ate.model.page.elementfind.ElementFindByLinkText;
 import org.bigtester.ate.model.page.elementfind.ElementFindByName;
 import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,11 +38,12 @@ import org.bigtester.ate.model.page.elementfind.IElementFind;
  */
 public final class ATEPageFactory implements IATEPageFactory {
 
-	//private IPageObject iPageOject;
-	//private MyWebElement myWebElement;
-	//private IElementFind iElementFind;
-	//private IElementAction iElementAction;
+	// private IPageObject iPageOject;
+	// private MyWebElement myWebElement;
+	// private IElementFind iElementFind;
+	// private IElementAction iElementAction;
 	/** The instance. */
+	@Nullable
 	private static IATEPageFactory instance;
 
 	private ATEPageFactory() {
@@ -53,31 +55,24 @@ public final class ATEPageFactory implements IATEPageFactory {
 	 * @return single instance of ATEPageFactory
 	 */
 	public static synchronized IATEPageFactory getInstance() { //NOPMD
-
-		if (null == instance) {
+		IATEPageFactory retVal = instance;
+		if (null == retVal) {
 			instance = new ATEPageFactory();
-		}
-		return instance;
-
+			retVal = instance;
+		} 
+		return retVal;
 	}
 
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IPageObject getIPageObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public MyWebElement getMyWebElement(
-			EnumElementFindType elementFindType, String findByValue) {
+	public MyWebElement getMyWebElement(EnumElementFindType elementFindType,
+			String findByValue, IMyWebDriver myWd) {
 		synchronized (this) {
-			return new MyWebElement(getIElementFind(elementFindType, findByValue), null);
+			return new MyWebElement(getIElementFind(elementFindType,
+					findByValue), null, myWd);
 		}
 	}
 
@@ -85,35 +80,36 @@ public final class ATEPageFactory implements IATEPageFactory {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IElementFind getIElementFind(
-			EnumElementFindType elementFindType, String findByValue) {
-		//TODO add more findby type
+	public IElementFind getIElementFind(EnumElementFindType elementFindType,
+			String findByValue) {
+		// TODO add more findby type
 		synchronized (this) {
 			IElementFind retVal;
 			switch (elementFindType) {
 			case ID:
-				ElementFindById efbID = new ElementFindById();
-				efbID.setFindByValue(findByValue);
+				ElementFindById efbID = new ElementFindById(findByValue);
 				retVal = (IElementFind) efbID;
 				break;
 			case XPATH:
-				ElementFindByXpath efbXpath = new ElementFindByXpath();
-				efbXpath.setFindByValue(findByValue);
+				ElementFindByXpath efbXpath = new ElementFindByXpath(
+						findByValue);
+
 				retVal = (IElementFind) efbXpath;
 				break;
 			case NAME:
-				ElementFindByName efbName = new ElementFindByName();
-				efbName.setFindByValue(findByValue);
+				ElementFindByName efbName = new ElementFindByName(findByValue);
+
 				retVal = (IElementFind) efbName;
 				break;
 			case LINKTEXT:
-				ElementFindByLinkText efbLinkText = new ElementFindByLinkText();
-				efbLinkText.setFindByValue(findByValue);
+				ElementFindByLinkText efbLinkText = new ElementFindByLinkText(
+						findByValue);
+
 				retVal = (IElementFind) efbLinkText;
 				break;
 			default:
-				ElementFindById efbIDd = new ElementFindById();
-				efbIDd.setFindByValue(findByValue);
+				ElementFindById efbIDd = new ElementFindById(findByValue);
+
 				retVal = (IElementFind) efbIDd;
 				break;
 			}
@@ -124,10 +120,10 @@ public final class ATEPageFactory implements IATEPageFactory {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public IElementAction getIElementAction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public IElementAction getIElementAction() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

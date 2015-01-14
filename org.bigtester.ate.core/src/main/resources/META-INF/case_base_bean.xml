@@ -7,10 +7,11 @@
 		http://www.bigtester.org/schema/ate http://www.bigtester.org/schema/ate/ate.xsd">
 
 	
-	<import resource="db-services.xml" />
+	
 	<import resource="classpath:META-INF/db-services.xml" />
-	<ate:fireFoxDriver id="MyWebDriver2" profileName="dentisteasy"/>
+	
 	<bean class="org.bigtester.ate.model.data.CaseDataProcessor" />
 	<ate:TestDatabaseInitializer id="dbInitializer"/>
+	
 	
 </beans>
