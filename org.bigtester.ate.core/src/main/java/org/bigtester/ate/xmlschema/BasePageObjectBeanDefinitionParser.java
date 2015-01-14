@@ -21,6 +21,7 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.page.page.BasePageObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -28,7 +29,6 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 
@@ -53,11 +53,9 @@ public class BasePageObjectBeanDefinitionParser extends
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(BasePageObject.class.getName());
-        String parent = element
-				.getAttribute("parent");
-		if (StringUtils.hasText(parent)) {
-			bDef.setParentName(parent);
-		}
+        
+        bDef.setParentName(XsdElementConstants.ELEMENT_ID_MYBASEPAGEMODEL);
+		
 		
 //        String text = element.getAttribute("text");
 //        bd.getPropertyValues().addPropertyValue("text", text);

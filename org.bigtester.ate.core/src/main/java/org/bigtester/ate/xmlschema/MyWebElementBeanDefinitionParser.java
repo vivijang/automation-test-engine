@@ -69,11 +69,11 @@ public class MyWebElementBeanDefinitionParser extends
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
 					new RuntimeBeanReference(elementAction));
 		}
-		String parent = element
-				.getAttribute("parent");
-		if (StringUtils.hasText(parent)) {
-			bDef.setParentName(parent);
-		}
+//		String parent = element
+//				.getAttribute("parent");
+//		if (StringUtils.hasText(parent)) {
+		bDef.setParentName("myBasePageModel");
+//		}
        
 //        String text = element.getAttribute("text");
 //        bd.getPropertyValues().addPropertyValue("text", text);

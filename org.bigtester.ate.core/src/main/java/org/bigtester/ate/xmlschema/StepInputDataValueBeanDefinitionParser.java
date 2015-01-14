@@ -64,6 +64,9 @@ public class StepInputDataValueBeanDefinitionParser extends
 		}
         long dataValueId = Long.parseLong(element.getAttribute(XsdElementConstants.ATTR_STEPDATAVALUE_DATAVALUEID));
         bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValueId);
+        
+        bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEINPUTDATAVALUE);
+        
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
         return (AbstractBeanDefinition) bDef;
         

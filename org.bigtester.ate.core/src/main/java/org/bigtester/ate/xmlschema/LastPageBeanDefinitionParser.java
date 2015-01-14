@@ -21,6 +21,7 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.page.page.Lastpage;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -53,7 +54,7 @@ public class LastPageBeanDefinitionParser extends
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(Lastpage.class.getName());
-        
+        bDef.setParentName(XsdElementConstants.ELEMENT_ID_MYBASEPAGEOBJECT);
         String idstring = element.getAttribute("id");
         
         parserContext.getRegistry().registerBeanDefinition(idstring, bDef);

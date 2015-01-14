@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:ate="http://www.bigtester.org/schema/ate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.bigtester.org/schema/ate http://www.bigtester.org/schema/ate/ate.xsd">
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/page_base_bean.xml" />
+	<import resource="classpath:META-INF/case_base_bean.xml" />
+	<import resource="../pageObjects/publicHomePage.xml" />
+	<import resource="../pageObjects/publicPracticeProfile.xml" />
+	<import resource="../pageObjects/lastPage.xml" />
+
+
+	<ate:testCase id="ClinicCBooking" testCaseName="Booking at Clinic C">
+		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
+			stepDescription="open my public home page" targetStep="false" pageObject="publicHomePage">
+		</ate:homeStep>
+		<ate:elementStep id="clickServiceSelector"
+			stepDescription="Click service Selector" stepName="clickServiceSelector"
+			targetStep="true" myWebElement="Service_Selector">
+		</ate:elementStep>
+		<ate:elementStep id="clickService_Consultation"
+			stepDescription="Service_Consultation" stepName="Service_Consultation"
+			targetStep="true" myWebElement="Service_Consultation">
+		</ate:elementStep>
+		<ate:elementStep id="typeInLocation_Input"
+			stepDescription="type in Location_Input" stepName="Location_Input"
+			targetStep="true" myWebElement="Location_Input">
+		</ate:elementStep>
+		
+		<ate:elementStep id="clickFirstLocation"
+			stepDescription="click first location" stepName="clickfirstLocation"
+			targetStep="true" myWebElement="LocationList">
+		</ate:elementStep>
+		
+		<ate:elementStep id="clickDate_Selector"
+			stepDescription="click Date_Selector" stepName="Date_Selector"
+			targetStep="true" myWebElement="Date_Selector">
+
+		</ate:elementStep>
+		<ate:elementStep id="clickNext_Week_Selection"
+			stepDescription="click Next_Week_Selection" stepName="Next_Week_Selection"
+			targetStep="true" myWebElement="Next_Week_Selection">
+		</ate:elementStep>
+		<ate:elementStep id="clickClinic_C" stepDescription="click Clinic_C"
+			stepName="Clinic_C" targetStep="true" myWebElement="Clinic_C">
+		</ate:elementStep>
+		<ate:elementStep id="clickBook_Button"
+			stepDescription="click Book_Button" stepName="Book_Button"
+			targetStep="true" myWebElement="Book_Button" pageObject="publicPracticeProfileClinicC">
+			
+			<property name="expectedResultAsserter">
+				<list>
+					<ref bean="publicPracticeProfileClinicCElementExistenceAsserter" />
+				</list>
+			</property>
+		</ate:elementStep>
+		<ate:lastStep id="mylaststep" stepName="mylaststep"
+			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
+			
+		</ate:lastStep>
+	</ate:testCase>
+
+
+</beans>

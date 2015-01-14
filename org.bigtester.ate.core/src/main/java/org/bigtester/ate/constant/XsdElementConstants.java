@@ -28,6 +28,21 @@ package org.bigtester.ate.constant;
  */
 public final class XsdElementConstants {
 	
+	/** The Constant ELEMENT_ID_MYBASEPAGEMODEL. */
+	public static final String ELEMENT_ID_MYBASEPAGEMODEL = "myBasePageModel";
+	
+	/** The Constant ELEMENT_ID_MYBASEPAGEOBJECT. */
+	public static final String ELEMENT_ID_MYBASEPAGEOBJECT = "myBasePageObject";
+	
+	/** The Constant ELEMENT_ID_BASEELEMENTACTION. */
+	public static final String ELEMENT_ID_BASEELEMENTACTION = "baseElementAction";
+	
+	/** The Constant ELEMENT_ID_BASEINPUTDATAVALUE. */
+	public static final String ELEMENT_ID_BASEINPUTDATAVALUE = "baseInputDataValue";
+	
+	/** The Constant ELEMENT_ID_baseERValue. */
+	public static final String ELEMENT_ID_BASEERVALUE = "baseERValue";
+	
 	
 	/** The Constant ELEMENT_TESTPROJECT. */
 	public static final String ELEMENT_TESTPROJECT = "TestProject";
@@ -216,3 +231,4 @@ public final class XsdElementConstants {
 	}
 	
 }
+

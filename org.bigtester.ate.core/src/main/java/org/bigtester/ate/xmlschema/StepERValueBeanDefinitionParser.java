@@ -55,6 +55,8 @@ public class StepERValueBeanDefinitionParser extends
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(StepExpectedResultValue.class.getName());
        
+        bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEERVALUE);
+        
         String dataValueId = element.getAttribute(XsdElementConstants.ATTR_STEPERVALUE_DATAVALUEID);
         bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValueId);
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);

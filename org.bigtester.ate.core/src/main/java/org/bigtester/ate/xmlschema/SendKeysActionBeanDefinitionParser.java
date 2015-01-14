@@ -67,11 +67,8 @@ public class SendKeysActionBeanDefinitionParser extends
 					bDef.getConstructorArgumentValues().addGenericArgumentValue( new RuntimeBeanReference(data));
 				}
 
-				String parent = element
-						.getAttribute("parent");
-				if (StringUtils.hasText(parent)) {
-					bDef.setParentName(parent);
-				}
+				bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEELEMENTACTION);
+				
 				parserContext.getRegistry().registerBeanDefinition(
 						element.getAttribute("id"), bDef);
 				return (AbstractBeanDefinition) bDef;

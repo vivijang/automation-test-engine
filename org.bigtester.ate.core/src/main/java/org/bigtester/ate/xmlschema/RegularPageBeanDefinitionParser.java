@@ -58,6 +58,8 @@ public class RegularPageBeanDefinitionParser extends
         String dataFile = element.getAttribute(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE);
         bDef.getPropertyValues().addPropertyValue(XsdElementConstants.ATTR_BASEPAGEOBJECT_DATAFILE, dataFile);
         
+        bDef.setParentName(XsdElementConstants.ELEMENT_ID_MYBASEPAGEOBJECT);
+        
         String idstring = element.getAttribute("id");
         
         parserContext.getRegistry().registerBeanDefinition(idstring, bDef);
