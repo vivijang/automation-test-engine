@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
-import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,34 +30,42 @@ import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
  */
 public class BaseInputDataValue {//NOPMD
 	
-	/** The element data dao. */
-	private ElementInputDataDaoImpl elementDataDao;//NOPMD
-	
 	/**
-	 * Instantiates a new base data value.
+	 * Gets the value.
 	 *
-	 * @param elementDataDao the element data dao
+	 * @return the value
 	 */
-	public BaseInputDataValue (ElementInputDataDaoImpl elementDataDao) {
-		this.elementDataDao = elementDataDao;
+	@Nullable
+	private String strDataValue; // NOPMD
+
+	/**
+	 * Instantiates a new base input data value.
+	 *
+	 * @param strDataValue the str data value
+	 */
+	public BaseInputDataValue(String strDataValue) {
+		this.strDataValue = strDataValue;
 	}
 	
 	/**
-	 * Gets the element data dao.
-	 *
-	 * @return the elementDataDao
+	 * @return the value
 	 */
-	public ElementInputDataDaoImpl getElementDataDao() {
-		return elementDataDao;
+	public String getStrDataValue() {
+		final String value2 = strDataValue;
+		if (null == value2) {
+			throw new IllegalStateException(
+					"Input Data value is not correctly populated.");
+		} else {
+			return value2;
+		}
 	}
 
 	/**
-	 * Sets the element data dao.
-	 *
-	 * @param elementDataDao the elementDataDao to set
+	 * @param value
+	 *            the value to set
 	 */
-	public void setElementDataDao(final ElementInputDataDaoImpl elementDataDao) {
-		this.elementDataDao = elementDataDao;
+	public void setStrDataValue(String value) {
+		this.strDataValue = value;
 	}
 	
 	

@@ -18,45 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementaction;
-
-import org.bigtester.ate.model.data.IStepInputData;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.openqa.selenium.WebElement;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SendKeysAction defines ....
- * 
+ * This class EnumElementFindType defines ....
  * @author Peidong Hu
+ *
  */
-public class SendKeysAction extends BaseElementAction implements
-		IElementAction {
-
-	/**
-	 * @param myWd
-	 */
-	public SendKeysAction(IMyWebDriver myWd, IStepInputData dataValue) {
-		super(myWd);
-		setDataValue(dataValue);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		IStepInputData inputData = getDataValue();
-		if (null == inputData) {
-			throw new IllegalStateException("inputDatavalue is not correctly populated.");
-		} else {
-			webElm.sendKeys(inputData.getStrDataValue());
-			LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + inputData.getStrDataValue());
-		}
-
-	}
-
-	
-
+public enum EnumRunTimeDataType {
+	TEXT, NUMBER, DATE
 }

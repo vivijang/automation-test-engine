@@ -20,7 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
-import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.data.IStepInputData;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebElement;
 
@@ -46,7 +46,7 @@ public interface IElementAction {
 	 * @return the data value
 	 */
 	@Nullable
-	StepInputDataValue getDataValue();
+	IStepInputData getDataValue();
 	
 	/**
 	 * Checks if is data valued action flag.

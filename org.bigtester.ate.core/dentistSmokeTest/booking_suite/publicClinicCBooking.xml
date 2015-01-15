@@ -18,6 +18,7 @@
 
 
 	<ate:testCase id="ClinicCBooking" testCaseName="Booking at Clinic C">
+		<ate:runTimeDataHolder id="bookingSmsCode" dataType="Text"/> 
 		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
 			stepDescription="open my public home page" targetStep="false" pageObject="publicHomePage">
 		</ate:homeStep>
@@ -63,7 +64,6 @@
 		</ate:elementStep>
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
-			
 		</ate:lastStep>
 	</ate:testCase>
 

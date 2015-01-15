@@ -32,4 +32,5 @@ public interface ILastpage extends IPageObject {
 	 * Close lastpage.
 	 */
 	void closeLastpage();
+	
 }

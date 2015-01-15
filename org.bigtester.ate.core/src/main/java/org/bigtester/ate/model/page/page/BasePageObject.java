@@ -25,11 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.Cookie;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,8 +42,6 @@ import org.springframework.core.io.Resource;
  * 
  */
 public class BasePageObject extends PageModelBase {
-
-	
 
 	/** The page name. */
 	@Nullable
@@ -61,6 +62,7 @@ public class BasePageObject extends PageModelBase {
 	/** The page title. */
 	@Nullable
 	private String pageTitle;
+	
 	/**
 	 * @param myWd
 	 */
@@ -184,5 +186,18 @@ public class BasePageObject extends PageModelBase {
 	public void setDataFile(Resource dataFile) {
 		this.dataFile = dataFile;
 	}
-
+	/**
+	 * @return the pageHtmlSource
+	 * We don't use member to store page source,
+	 * This function will make sure that the pageSource is always reflecting the current status of the page source.
+	 */
+	public String getPageHtmlSource() {
+		String retVal = getMyWd().getWebDriver().getPageSource();
+		if (null == retVal || !StringUtils.hasText(retVal)) {
+			throw GlobalUtils.createInternalError("Web Driver internal error.!");
+		}
+		return retVal;
+		
+	}
+	
 }

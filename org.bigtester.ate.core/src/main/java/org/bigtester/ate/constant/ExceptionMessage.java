@@ -35,8 +35,10 @@ public final class ExceptionMessage {
 	public static final String MSG_WEBELEMENT_NOTFOUND = "Web Element not Found.";
 	
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
-	public static final String MSG_TESTDATA_NOTFOUND = "Test Data not Found.";
+	public static final String MSG_TESTDATA_NOTFOUND = "Test Data in DB not Found.";
 	
+	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
+	public static final String MSG_RUNTIMEDATA_NOTFOUND = "Runtime Data not Found.";
 	
 	/** The Constant MSG_NONCORRECT_PAGEPROPERTY. */
 	public static final String MSG_NONCORRECT_PAGEPROPERTY = "Page PROPERTY is wrong.";

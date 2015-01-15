@@ -20,7 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+
 
 
 
@@ -41,6 +43,4 @@ public class RegularPage extends BasePageObject implements IPageObject{
 	}
 
 	
-	
-
 }

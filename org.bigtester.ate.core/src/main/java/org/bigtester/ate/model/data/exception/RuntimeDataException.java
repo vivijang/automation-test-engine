@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,45 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementaction;
-
-import org.bigtester.ate.model.data.IStepInputData;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.openqa.selenium.WebElement;
+package org.bigtester.ate.model.data.exception;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SendKeysAction defines ....
- * 
+ * This class RuntimeDataException defines ....
  * @author Peidong Hu
+ *
  */
-public class SendKeysAction extends BaseElementAction implements
-		IElementAction {
+public class RuntimeDataException extends TestDataException {
 
 	/**
-	 * @param myWd
+	 * 
 	 */
-	public SendKeysAction(IMyWebDriver myWd, IStepInputData dataValue) {
-		super(myWd);
-		setDataValue(dataValue);
-	}
+	private static final long serialVersionUID = -7062627112068817356L;
 
 	/**
-	 * {@inheritDoc}
+	 * @param message
+	 * @param errorCode
 	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		IStepInputData inputData = getDataValue();
-		if (null == inputData) {
-			throw new IllegalStateException("inputDatavalue is not correctly populated.");
-		} else {
-			webElm.sendKeys(inputData.getStrDataValue());
-			LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + inputData.getStrDataValue());
-		}
-
+	public RuntimeDataException(String message, String errorCode) {
+		super(message, errorCode);
 	}
-
-	
 
 }

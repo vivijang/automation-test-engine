@@ -26,7 +26,7 @@ import java.util.Properties;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ReportMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
-import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
@@ -101,10 +101,10 @@ public final class TestStepsXMLReporterUtils {
 				throw GlobalUtils.createNotInitializedException("element action in element step.");
 			} else {
 				if (myEA.isDataValuedActionFlag()) {
-					StepInputDataValue dataV = myEA.getDataValue(); 
+					IStepInputData dataV = myEA.getDataValue(); 
 					if (null == dataV) throw GlobalUtils.createNotInitializedException("dataValue in my element action");
 					else {
-						testData = dataV.getValue();
+						testData = dataV.getStrDataValue();
 						stepReportMSG = tsr.getThisStep().getStepDescription()
 							+ ReportMessage.MSG_SEPERATOR + testData;
 					}

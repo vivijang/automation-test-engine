@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,45 +18,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementaction;
-
-import org.bigtester.ate.model.data.IStepInputData;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.openqa.selenium.WebElement;
+package org.bigtester.ate.model.data;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SendKeysAction defines ....
- * 
+ * This class IStepInputData defines ....
  * @author Peidong Hu
+ *
  */
-public class SendKeysAction extends BaseElementAction implements
-		IElementAction {
-
-	/**
-	 * @param myWd
-	 */
-	public SendKeysAction(IMyWebDriver myWd, IStepInputData dataValue) {
-		super(myWd);
-		setDataValue(dataValue);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		IStepInputData inputData = getDataValue();
-		if (null == inputData) {
-			throw new IllegalStateException("inputDatavalue is not correctly populated.");
-		} else {
-			webElm.sendKeys(inputData.getStrDataValue());
-			LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + inputData.getStrDataValue());
-		}
-
-	}
-
+public interface IStepInputData {
 	
-
+	/**
+	 * Gets the str data value.
+	 *
+	 * @return the str data value
+	 */
+	String getStrDataValue();
 }

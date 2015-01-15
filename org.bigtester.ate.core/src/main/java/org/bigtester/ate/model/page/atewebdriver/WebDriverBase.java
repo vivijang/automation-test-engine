@@ -41,7 +41,7 @@ public class WebDriverBase {
 	 * @return the webDriver
 	 */
 	@Nullable
-	public final WebDriver getWebDriver() {
+	public WebDriver getWebDriver() {
 		return webDriver;
 	}
 

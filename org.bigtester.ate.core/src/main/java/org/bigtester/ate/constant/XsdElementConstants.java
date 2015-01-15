@@ -128,11 +128,23 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_BASEERVALUE. */
 	public static final String ELEMENT_BASEERVALUE = "baseERValue";
 	
+	/** The Constant ELEMENT_RUNTIMEDATAHOLDER. */
+	public static final String ELEMENT_RUNTIMEDATAHOLDER = "runTimeDataHolder";
+	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATATYPE. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_DATATYPE = "dataType";
+	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_DATAVALUE = "dataValue";
+	
 	/** The Constant ELEMENT_BASEERVALUE_STEPERDAO. */
 	public static final String ELEMENT_BASEERVALUE_STEPERDAO = "stepERDao";
 	
 	/** The Constant ELEMENT_BASEDATAVALUE. */
 	public static final String ELEMENT_BASEINPUTDATAVALUE = "baseInputDataValue";
+	
+	/** The Constant ELEMENT_INPUTDATAVALUEPARENT. */
+	public static final String ELEMENT_INPUTDATAVALUEPARENT = "stepInputDataValueParent";
 	
 	/** The Constant ATTR_BASEELEMENTACTION_DATAVALUE. */
 	public static final String ATTR_BASEELEMENTACTION_DATAVALUE = "dataValue";

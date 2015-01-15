@@ -75,13 +75,23 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 			return retVal;
 		}
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public WebDriver getWebDriver() {
+		WebDriver retVal = super.getWebDriver();
+		if (null == retVal) {
+			retVal = createDriver();
+		} 
+		return retVal;
+	}
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = getWebDriver();
+		WebDriver retVal = super.getWebDriver();
 		if ( null == retVal) {
 			if (null == getBrowserProfile().getProfile()) {
 				retVal = new FirefoxDriver();

@@ -24,15 +24,15 @@
 		</ate:homeStep>
 		<ate:elementStep id="publicLogin_clickLoginLink"
 			stepDescription="Click login link to log in" stepName="clickLoginLink"
-			targetStep="true" myWebElement="publicLoginLinkWE">
+			targetStep="true" myWebElement="publicLoginLinkWE" pageObject="publicLoginPage">
 		</ate:elementStep>
 		<ate:elementStep id="publicLogin_typeUsername"
 			stepDescription="type in public user name" stepName="typeUsername"
-			targetStep="true" myWebElement="loginUserNameWE" >
+			targetStep="true" myWebElement="loginUserNameWE" pageObject="publicLoginPage">
 		</ate:elementStep>
 		<ate:elementStep id="publicLogin_typePassword"
 			stepDescription="type in public user password" stepName="typePassword"
-			targetStep="true" myWebElement="loginPasswordWE">
+			targetStep="true" myWebElement="loginPasswordWE" pageObject="publicLoginPage">
 		</ate:elementStep>
 		<ate:elementStep id="publicLogin_clickLoginButton"
 			stepDescription="click Login button to log in" stepName="clickLoginButton"

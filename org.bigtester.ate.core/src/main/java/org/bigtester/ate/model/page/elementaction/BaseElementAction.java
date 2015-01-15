@@ -21,7 +21,7 @@
 package org.bigtester.ate.model.page.elementaction;
 
 
-import org.bigtester.ate.model.data.StepInputDataValue;
+import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.eclipse.jdt.annotation.Nullable;
@@ -39,7 +39,7 @@ public class BaseElementAction extends PageModelBase{
 	
 	/** The data value. */
 	@Nullable
-	private StepInputDataValue dataValue;
+	private IStepInputData dataValue;
 	
 	
 	/**
@@ -57,7 +57,7 @@ public class BaseElementAction extends PageModelBase{
 	 * @return the data value
 	 */
 	@Nullable
-	public StepInputDataValue getDataValue() {
+	public IStepInputData getDataValue() {
 		return dataValue;
 	}
 
@@ -67,7 +67,7 @@ public class BaseElementAction extends PageModelBase{
 	 * @param dataValue
 	 *            the new data value
 	 */
-	public void setDataValue(final StepInputDataValue dataValue) {
+	public void setDataValue(final IStepInputData dataValue) {
 		this.dataValuedActionFlag = true;
 		this.dataValue = dataValue;
 	}

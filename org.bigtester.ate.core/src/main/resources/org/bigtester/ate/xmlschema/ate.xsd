@@ -221,17 +221,7 @@
 				<!-- Here we re-use Spring elements and attributes -->
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
-				<xsd:attribute name="elementDataDao" type="xsd:string"
-					use="required">
-					<xsd:annotation>
-						<xsd:appinfo>
-							<tool:annotation kind="ref">
-								<tool:expected-type
-									type="org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl" />
-							</tool:annotation>
-						</xsd:appinfo>
-					</xsd:annotation>
-				</xsd:attribute>
+				<xsd:attribute name="strDataValue" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -267,6 +257,26 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<xsd:complexType name="InputDataValueParentType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="elementDataDao" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 
 	<xsd:complexType name="StepInputDataValueType">
 		<xsd:complexContent>
@@ -351,7 +361,35 @@
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
-				<xsd:attribute name="dataValue" type="xsd:string" use="required"></xsd:attribute>
+				<xsd:attribute name="dataValue" type="xsd:string" use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.data.IStepInputData" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="RunTimeDataHolderType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				<xsd:attribute name="dataValue" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="dataType" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Text" />
+							<xsd:enumeration value="Number" />
+							<xsd:enumeration value="Date" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
@@ -455,6 +493,8 @@
 
 	<xsd:group name="testStepGroup">
 		<xsd:sequence>
+			<xsd:element ref="runTimeDataHolder" minOccurs="0"
+				maxOccurs="unbounded" />
 			<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
 			<xsd:element ref="elementStep" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
@@ -477,7 +517,7 @@
 	<xsd:element name="clickAction" type="ClickActionType">
 	</xsd:element>
 	<xsd:element name="sendKeysAction" type="SendKeysActionType" />
-	<xsd:element name="myWebElement" type="MyWebElementType" >
+	<xsd:element name="myWebElement" type="MyWebElementType">
 	</xsd:element>
 	<xsd:element name="elementStep" type="ElementStepType" />
 	<xsd:element name="baseElementAction" type="BaseElementActionType" />
@@ -488,6 +528,7 @@
 	<xsd:element name="pageElementExistenceAsserter" type="PageElementExistenceAsserterType" />
 	<xsd:element name="stepExpectedResultValue" type="StepExpectedResultValueType" />
 	<xsd:element name="stepInputDataValue" type="StepInputDataValueType" />
+	<xsd:element name="stepInputDataValueParent" type="InputDataValueParentType" />
 
 	<xsd:element name="testCase" type="TestCaseType" />
 	<xsd:element name="lastStep" type="LastStepType" />
@@ -499,6 +540,6 @@
 	<xsd:element name="homePage" type="HomepageType" />
 	<xsd:element name="regularPage" type="RegularPageType" />
 
-
+	<xsd:element name="runTimeDataHolder" type="RunTimeDataHolderType" />
 
 </xsd:schema>

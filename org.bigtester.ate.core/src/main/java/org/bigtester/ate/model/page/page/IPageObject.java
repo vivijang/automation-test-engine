@@ -75,4 +75,11 @@ public interface IPageObject {
 	 * @param pageTitle the new page title
 	 */
 	void setPageTitle(String pageTitle);
+	
+	/**
+	 * Gets the html page source.
+	 *
+	 * @return the html page source
+	 */
+	String getPageHtmlSource();
 }

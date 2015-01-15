@@ -27,22 +27,24 @@ package org.bigtester.ate.constant;
  *
  */
 public final class ExceptionErrorCode {
-	
+	/** The Constant UNKNOWN_ERROR. */
+	public static final String UNKNOWN_ERROR = "0000";
 	
 	/** The Constant WEBELEMENT_NOTFOUND. */
 	public static final String WEBELEMENT_NOTFOUND = "0001";
 	
+	/** The Constant TESTDATA_NOTFOUND. */
+	public static final String TESTDATA_NOTFOUND = "0002";
+	
 	/** The Constant PAGEPROPERTY_INCORRECT. */
 	public static final String PAGEPROPERTY_INCORRECT = "0003";
-	
-	/** The Constant WEBELEMENT_NOTFOUND. */
-	public static final String TESTDATA_NOTFOUND = "0002";
 	
 	/** The Constant PAGEVALIDATION_HIGH. */
 	public static final String PAGEVALIDATION_HIGH = "0004";
 	
-	/** The Constant UNKNOWN_ERROR. */
-	public static final String UNKNOWN_ERROR = "0000";
+	/** The Constant RUNTIMEDATA_NOTFOUND. */
+	public static final String RUNTIMEDATA_NOTFOUND = "0005";
+	
 	
 	/**
 	 * Instantiates a new exception error code.

@@ -23,35 +23,29 @@ package org.bigtester.ate.model.data;
 import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 
 import org.bigtester.ate.model.data.exception.TestDataException;
-import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class PropertyDataValue defines ....
+ * This class StepInputDataValue retrieve inputdata from db.
  * 
  * @author Peidong Hu
  *
  */
-public class StepInputDataValue extends BaseInputDataValue {
+public class StepInputDataValue extends BaseInputDataValue implements IStepInputData{
 
+	/** The element data dao. */
+	private ElementInputDataDaoImpl elementDataDao;//NOPMD
 	/**
 	 * @param elementDataDao
 	 * @throws TestDataException 
 	 */
 	public StepInputDataValue(ElementInputDataDaoImpl elementDataDao,
 			Long dataValueID) throws TestDataException {
-		super(elementDataDao);
+		super("");
+		this.elementDataDao = elementDataDao;
 		this.dataValueID = dataValueID;
 		initDataValue (dataValueID);
 	}
-
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	@Nullable
-	private String value; // NOPMD
 
 	/**
 	 * Gets the data value id.
@@ -60,27 +54,6 @@ public class StepInputDataValue extends BaseInputDataValue {
 	 */
 
 	private Long dataValueID; // NOPMD
-
-	/**
-	 * @return the value
-	 */
-	public String getValue() {
-		final String value2 = value;
-		if (null == value2) {
-			throw new IllegalStateException(
-					"Input Data value is not correctly populated.");
-		} else {
-			return value2;
-		}
-	}
-
-	/**
-	 * @param value
-	 *            the value to set
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
 
 	/**
 	 * @return the dataValueID
@@ -97,7 +70,23 @@ public class StepInputDataValue extends BaseInputDataValue {
 	public void setDataValueID(Long dataValueID) {
 		this.dataValueID = dataValueID;
 	}
+	/**
+	 * Gets the element data dao.
+	 *
+	 * @return the elementDataDao
+	 */
+	public ElementInputDataDaoImpl getElementDataDao() {
+		return elementDataDao;
+	}
 
+	/**
+	 * Sets the element data dao.
+	 *
+	 * @param elementDataDao the elementDataDao to set
+	 */
+	public void setElementDataDao(final ElementInputDataDaoImpl elementDataDao) {
+		this.elementDataDao = elementDataDao;
+	}
 	/**
 	 * Inits the data value.
 	 *
@@ -105,6 +94,6 @@ public class StepInputDataValue extends BaseInputDataValue {
 	 * @throws TestDataException the test data exception
 	 */
 	public void initDataValue(Long dataValueID) throws TestDataException {
-		value = getElementDataDao().getValue(dataValueID);
+		setStrDataValue(getElementDataDao().getValue(dataValueID));
 	}
 }
