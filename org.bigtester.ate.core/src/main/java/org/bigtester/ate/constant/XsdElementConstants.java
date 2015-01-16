@@ -137,6 +137,12 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATAVALUE = "dataValue";
 	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_LEFTBOUNDRY. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_LEFTBOUNDRY = "pageHtmlLeftBoundry";
+	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY = "pageHtmlRightBoundry";
+	
 	/** The Constant ELEMENT_BASEERVALUE_STEPERDAO. */
 	public static final String ELEMENT_BASEERVALUE_STEPERDAO = "stepERDao";
 	

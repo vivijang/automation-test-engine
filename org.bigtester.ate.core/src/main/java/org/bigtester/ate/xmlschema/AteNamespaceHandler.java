@@ -42,7 +42,6 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTPROJECT, new TestProjectBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTSUITE, new TestSuiteBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_XMLTESTCASE, new XmlTestCaseBeanDefinitionParser());
-		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTSTEPRESULT, new TestStepResultBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_GENERICSYSTEMLOGGER, new GenericSystemLoggerBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTDATABASEINITIALIZER, new TestDatabaseInitializerBeanDefinitionParser());
 		//testcase elements
@@ -74,6 +73,8 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_STEPINPUTDATAVALUE, new StepInputDataValueBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEINPUTDATAVALUE, new BaseInputDataValueBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_INPUTDATAVALUEPARENT, new InputDataValueParentBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_RUNTIMEDATAHOLDER, new RunTimeDataHolderBeanDefinitionParser());
 		
 		//registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASETESTSTEP, new BaseTestStepBeanDefinitionParser());
 	}

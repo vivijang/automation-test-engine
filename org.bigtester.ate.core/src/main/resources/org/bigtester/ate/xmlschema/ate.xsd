@@ -44,14 +44,6 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="TestStepResult">
-		<xsd:complexType>
-			<xsd:complexContent>
-				<xsd:extension base="beans:identifiedType">
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
 	<xsd:element name="GenericSystemLogger">
 		<xsd:complexType>
 			<xsd:complexContent>
@@ -381,6 +373,8 @@
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
 				<xsd:attribute name="dataValue" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="pageHtmlLeftBoundry" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="pageHtmlRightBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="dataType" use="required">
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">

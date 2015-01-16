@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumRunTimeDataType;
 import org.bigtester.ate.constant.XsdElementConstants;
+import org.bigtester.ate.model.data.RunTimeDataHolder;
 import org.bigtester.ate.model.page.elementaction.ClickAction;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -59,9 +60,9 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 				.parseBeanDefinitionElement(element);
 		BeanDefinition bDef = holder.getBeanDefinition();
 		//TODO change class name
-		bDef.setBeanClassName(ClickAction.class.getName());
+		bDef.setBeanClassName(RunTimeDataHolder.class.getName());
 		
-		String dataType = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATATYPE);
+		String dataType = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATATYPE).toUpperCase();
 		if (null != dataType && StringUtils.hasText(dataType)) {
 			EnumRunTimeDataType enumDataType = EnumRunTimeDataType.valueOf(dataType);
 	        bDef.getConstructorArgumentValues().addGenericArgumentValue(enumDataType);
@@ -72,7 +73,17 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValue);
 		}
 		
-		bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEELEMENTACTION);
+		String leftBoundry = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_LEFTBOUNDRY);
+		if (StringUtils.hasText(leftBoundry)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(leftBoundry);
+		}
+		
+		String rightBoundry = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY);
+		if (StringUtils.hasText(rightBoundry)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(rightBoundry);
+		}
+		
+		//bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEELEMENTACTION);
 		
 		parserContext.getRegistry().registerBeanDefinition(
 				element.getAttribute("id"), bDef);

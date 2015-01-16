@@ -47,7 +47,8 @@
 		dataValue="location_value" />
 		
 	<ate:stepInputDataValue id="location_value" dataValueID="5"/>
-
+	<ate:runTimeDataHolder id="bookingSmsCode" dataValue="test" dataType="Text"/>
+	 
 	<ate:myWebElement id="Date_Selector" elementFind="Date_Selector_EF" elementAction="Date_Selector_EA">
 	</ate:myWebElement>
 	<ate:elementFindById id="Date_Selector_EF"
