@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep; //NOPMD
 
+import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
@@ -93,10 +94,11 @@ public interface ITestStep {
 	boolean isElementStepFlag();
 	/**
 	 * Do step.
+	 * @throws RuntimeDataException 
 	 *
 	 * @throws StepExecutionException the step execution exception
 	 * @throws PageValidationException 
 	 */
 
-	void doStep () throws StepExecutionException2, PageValidationException2;
+	void doStep () throws StepExecutionException2, PageValidationException2, RuntimeDataException;
 }

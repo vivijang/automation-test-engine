@@ -21,6 +21,11 @@
 		
 		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
 			stepDescription="open my public home page" targetStep="false" pageObject="publicHomePage">
+			<property name="dataHolders">
+				<list>
+					<ref bean="bookingSmsCode1" />
+				</list>
+			</property>
 		</ate:homeStep>
 		<ate:elementStep id="clickServiceSelector"
 			stepDescription="Click service Selector" stepName="clickServiceSelector"

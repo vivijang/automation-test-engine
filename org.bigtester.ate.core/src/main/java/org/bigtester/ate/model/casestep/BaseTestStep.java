@@ -21,9 +21,12 @@
 package org.bigtester.ate.model.casestep;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
+import org.bigtester.ate.model.data.IPageSourceParser;
+import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.eclipse.jdt.annotation.Nullable;
@@ -68,6 +71,9 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/** The i expected result asserter. */
 	@Nullable
 	private List<IExpectedResultAsserter> expectedResultAsserter;
+	
+	/** The data holders. */
+	private List<IPageSourceParser> dataHolders = new ArrayList<IPageSourceParser>();
 	
 	/** The application context. */
 	@Nullable
@@ -279,6 +285,30 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 			throw new IllegalStateException("applicationContext is not correctly initialized in test step");
 		} else {
 			return applicationContext2;
+		}
+	}
+	/**
+	 * @return the dataHolders
+	 */
+	public List<IPageSourceParser> getDataHolders() {
+		return dataHolders;
+		
+	}
+	/**
+	 * @param dataHolders the dataHolders to set
+	 */
+	public void setDataHolders(List<IPageSourceParser> dataHolders) {
+		this.dataHolders = dataHolders;
+	}
+	
+	/**
+	 * Parses the data holder.
+	 *
+	 * @throws RuntimeDataException the runtime data exception
+	 */
+	protected void parseDataHolder() throws RuntimeDataException {
+		for (int i=0; i<getDataHolders().size(); i++) {
+			getDataHolders().get(i).parseLeftRightBoundryData();
 		}
 	}
 }

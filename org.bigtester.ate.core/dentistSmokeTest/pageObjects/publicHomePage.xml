@@ -84,5 +84,6 @@
 	<ate:stepExpectedResultValue id="publicHomePageValidationValue"
 		dataValueID="publicHomePageVID" />
 
+	<ate:runTimeDataHolder id="bookingSmsCode1" dataType="Text" pageHtmlLeftBoundry="Pick the dentist that best fits " pageHtmlRightBoundry="your needs and book y" page="publicHomePage"/>
 
 </beans>

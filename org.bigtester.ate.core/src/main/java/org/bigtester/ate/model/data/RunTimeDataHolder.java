@@ -35,7 +35,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @author Peidong Hu
  *
  */
-public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputData{
+public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputData, IPageSourceParser{
 
 	/** The page that has been used to parse the data. */
 	@Nullable
@@ -148,16 +148,18 @@ public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputD
 	}
 	
 	/**
-	 * Parses the value.
+	 * {@inheritDoc}
 	 * @throws RuntimeDataException 
 	 */
-	public void parseValue() throws RuntimeDataException
-	{
+	@Override
+	public void parseLeftRightBoundryData() throws RuntimeDataException {
+		
 		String str = getPage().getPageHtmlSource();
 		String value = str.substring(str.indexOf(getPageHtmlLeftBoundry()) + 1, str.indexOf(getPageHtmlRightBoundry()));
 		if (null == value) {
 			throw new RuntimeDataException(ExceptionMessage.MSG_RUNTIMEDATA_NOTFOUND, ExceptionErrorCode.RUNTIMEDATA_NOTFOUND);
 		}
 		setStrDataValue( value );
+		
 	}
 }

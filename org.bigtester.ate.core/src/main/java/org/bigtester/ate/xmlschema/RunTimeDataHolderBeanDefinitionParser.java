@@ -25,10 +25,10 @@ import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumRunTimeDataType;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.data.RunTimeDataHolder;
-import org.bigtester.ate.model.page.elementaction.ClickAction;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -81,6 +81,11 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 		String rightBoundry = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY);
 		if (StringUtils.hasText(rightBoundry)) {
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(rightBoundry);
+		}
+		
+		String page = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_PAGE);
+		if (StringUtils.hasText(page)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(new RuntimeBeanReference(page));
 		}
 		
 		//bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEELEMENTACTION);

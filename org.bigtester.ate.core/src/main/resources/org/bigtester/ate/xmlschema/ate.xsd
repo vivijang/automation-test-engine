@@ -375,6 +375,16 @@
 				<xsd:attribute name="dataValue" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="pageHtmlLeftBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="pageHtmlRightBoundry" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="page" type="xsd:string">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type
+									type="org.bigtester.ate.model.page.page.IPageObject" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
 				<xsd:attribute name="dataType" use="required">
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">

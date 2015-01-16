@@ -28,6 +28,7 @@ import org.bigtester.ate.annotation.StepLoggable;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
+import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
@@ -74,10 +75,11 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	}
 	/**
 	 * {@inheritDoc}
+	 * @throws RuntimeDataException 
 	 * @throws PageValidationException 
 	 */
 	@StepLoggable
-	public void doStep() throws StepExecutionException2, PageValidationException2 {
+	public void doStep() throws StepExecutionException2, PageValidationException2, RuntimeDataException {
 		try {
 			getMyWebElement().doAction();
 //			if (getExpectedResultAsserter() != null) {
@@ -85,6 +87,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 //					getExpectedResultAsserter().get(i).assertER();
 //				}
 //			}
+			super.parseDataHolder();
 		} catch (NoSuchElementException e) {
 			StepExecutionException2 pve = new StepExecutionException2(
 					ExceptionMessage.MSG_WEBELEMENT_NOTFOUND
@@ -106,6 +109,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 			pve.initCause(et);
 			throw pve;
 		}
+		
 		List<IExpectedResultAsserter> asserterList = getExpectedResultAsserter();
 		if ( null != asserterList) {
 			boolean flagThrowE = false;
