@@ -31,3 +31,5 @@ NOTE5) How to improve code quality of handling Null Pointer Exception
 	c) use @NonNullByDefault annotation in package-info.java
 	d) use @Nullable annotation on any argument, return value or field which could be Nullable during runtime.
 	e) Eclipse will automatically find possible NPE in IDE compiler. 
+	
+NOTE6) Install STS(Spring Tool Suite for Eclipse Luna) through Eclipse marketplace	
