@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:ate="http://www.bigtester.org/schema/ate"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-	http://www.springframework.org/schema/aop 
-	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-	http://www.bigtester.org/schema/ate http://www.bigtester.org/schema/ate/ate.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:ate="http://www.bigtester.org/schema/ate"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	                       http://www.springframework.org/schema/aop 
+	                       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	                       http://www.bigtester.org/schema/ate 
+	                       http://www.bigtester.org/schema/ate/ate.xsd">
+	                       
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
 
 	<import resource="classpath:META-INF/db-services.xml" />
 	
 	<ate:GenericSystemLogger id="systemlogger"/>
-<!-- 	<ate:TestStepResult id="TestStepResult"/> -->
 	<ate:TestDatabaseInitializer id="dbInitializer"/>
-
 	
 	<ate:TestProject id="testproject" stepThinkTime="2" globalInitXmlFile="dentistSmokeTest/data.xml">
 		<ate:TestSuite id="frontend_login_suite" suiteName="frontend_login_suite">
 			<ate:XmlTestCase id="homepageValidation" testCaseName="dentistSmokeTest/frontend_login_suite/publicHomePageValidation.xml"/>
-			<ate:XmlTestCase id="publicLoginSuccess" testCaseName="dentistSmokeTest/frontend_login_suite/publicLoginSuccess.xml"/> 
-			<ate:XmlTestCase id="publicLoginWrongPassword" testCaseName="dentistSmokeTest/frontend_login_suite/publicWrongPasswordLogin.xml"/>
+  			<ate:XmlTestCase id="publicLoginSuccess" testCaseName="dentistSmokeTest/frontend_login_suite/publicLoginSuccess.xml"/>   
+			<ate:XmlTestCase id="publicLoginWrongPassword" testCaseName="dentistSmokeTest/frontend_login_suite/publicWrongPasswordLogin.xml"/> 
 			
 		</ate:TestSuite>
 		<ate:TestSuite id="booking_suite" suiteName="booking_suite">
-			<ate:XmlTestCase id="bookingClinicC" testCaseName="dentistSmokeTest/booking_suite/publicClinicCBooking.xml"/>
-		</ate:TestSuite>
+		    <ate:XmlTestCase id="bookingClinicC" testCaseName="dentistSmokeTest/booking_suite/publicClinicCBooking.xml"/> 
+ 
+		</ate:TestSuite>   
+  
 	</ate:TestProject>
 </beans>
