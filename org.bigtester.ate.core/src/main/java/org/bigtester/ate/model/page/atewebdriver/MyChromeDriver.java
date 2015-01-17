@@ -20,11 +20,14 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -47,7 +50,6 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 		//TODO create Chrome browsers and remote web driver handler
 		super();
 		browserProfile = null;
-		System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver.exe");
 	}
 
 	/**
@@ -77,10 +79,25 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
+		OSinfo osinfo = null;
+
+        EPlatform platform = osinfo.getOSname();
+		switch (platform)
+		{
+			case Windows:	
+				System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver-win.exe");
+				break;
+			case Linux:	
+				System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver-linux32");
+				break;
+			default:
+				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
+		}        
 		WebDriver retVal = super.getWebDriver();
 		retVal = new ChromeDriver();
 		setWebDriver(retVal);
 		return retVal;
+		
 		/*
 		if ( null == retVal) {
 			if (null == getBrowserProfile().getProfile()) {
