@@ -30,9 +30,9 @@ import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,23 +46,23 @@ public class BasePageObject extends PageModelBase {
 	/** The page name. */
 	@Nullable
 	private String pageName;
-	
+
 	/** The data file. */
 	@Nullable
 	private Resource dataFile;
-	
+
 	/** The web element list. */
 	@Nullable
-	private Map<Long, MyWebElement> myWebElementList = new HashMap<Long, MyWebElement>();//NOPMD
+	private Map<Long, MyWebElement> myWebElementList = new HashMap<Long, MyWebElement>();// NOPMD
 
 	/** The cookies. */
 	@Nullable
 	private List<Cookie> cookies = new ArrayList<Cookie>();
-	
+
 	/** The page title. */
 	@Nullable
 	private String pageTitle;
-	
+
 	/**
 	 * @param myWd
 	 */
@@ -70,6 +70,7 @@ public class BasePageObject extends PageModelBase {
 		super(myWd);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Gets the page title.
 	 *
@@ -78,8 +79,9 @@ public class BasePageObject extends PageModelBase {
 	public String getPageTitle() {
 		final String retVal = pageTitle;
 		if (null == retVal) {
-			throw new IllegalStateException("pageTitle is not correctly populated");
-			
+			throw new IllegalStateException(
+					"pageTitle is not correctly populated");
+
 		} else {
 			return retVal;
 		}
@@ -88,7 +90,8 @@ public class BasePageObject extends PageModelBase {
 	/**
 	 * Sets the page title.
 	 *
-	 * @param pageTitle the pageTitle to set
+	 * @param pageTitle
+	 *            the pageTitle to set
 	 */
 	public void setPageTitle(String pageTitle) {
 		this.pageTitle = pageTitle;
@@ -102,8 +105,9 @@ public class BasePageObject extends PageModelBase {
 	public List<Cookie> getCookies() {
 		final List<Cookie> retVal = cookies;
 		if (null == retVal) {
-			throw new IllegalStateException("cookies is not correctly populated");
-			
+			throw new IllegalStateException(
+					"cookies is not correctly populated");
+
 		} else {
 			return retVal;
 		}
@@ -112,7 +116,8 @@ public class BasePageObject extends PageModelBase {
 	/**
 	 * Sets the cookies.
 	 *
-	 * @param cookies the cookies to set
+	 * @param cookies
+	 *            the cookies to set
 	 */
 	public void setCookies(List<Cookie> cookies) {
 		this.cookies = cookies;
@@ -136,14 +141,14 @@ public class BasePageObject extends PageModelBase {
 	public Map<Long, MyWebElement> getMyWebElementList() {
 		final Map<Long, MyWebElement> retVal = myWebElementList;
 		if (null == retVal) {
-			throw new IllegalStateException("mywebelementlist is not correctly populated");
-			
+			throw new IllegalStateException(
+					"mywebelementlist is not correctly populated");
+
 		} else {
 			return retVal;
 		}
 	}
 
-	
 	/**
 	 * Gets the page name.
 	 *
@@ -152,8 +157,9 @@ public class BasePageObject extends PageModelBase {
 	public String getPageName() {
 		final String retVal = pageName;
 		if (null == retVal) {
-			throw new IllegalStateException("pageName is not correctly populated");
-			
+			throw new IllegalStateException(
+					"pageName is not correctly populated");
+
 		} else {
 			return retVal;
 		}
@@ -162,7 +168,8 @@ public class BasePageObject extends PageModelBase {
 	/**
 	 * Sets the page name.
 	 *
-	 * @param pageName            the pageName to set
+	 * @param pageName
+	 *            the pageName to set
 	 */
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
@@ -181,23 +188,32 @@ public class BasePageObject extends PageModelBase {
 	/**
 	 * Sets the data file.
 	 *
-	 * @param dataFile the dataFile to set
+	 * @param dataFile
+	 *            the dataFile to set
 	 */
 	public void setDataFile(Resource dataFile) {
 		this.dataFile = dataFile;
 	}
+
 	/**
-	 * @return the pageHtmlSource
-	 * We don't use member to store page source,
-	 * This function will make sure that the pageSource is always reflecting the current status of the page source.
+	 * @return the pageHtmlSource We don't use member to store page source, This
+	 *         function will make sure that the pageSource is always reflecting
+	 *         the current status of the page source.
 	 */
 	public String getPageHtmlSource() {
-		String retVal = getMyWd().getWebDriver().getPageSource();
-		if (null == retVal || !StringUtils.hasText(retVal)) {
-			throw GlobalUtils.createInternalError("Web Driver internal error.!");
+		WebDriver webD = getMyWd().getWebDriver();
+		if (null == webD) {
+			throw GlobalUtils.createNotInitializedException("web driver");
 		}
-		return retVal;
-		
+		else {
+			String retVal = webD.getPageSource();
+			if (null == retVal || !StringUtils.hasText(retVal)) {
+				throw GlobalUtils
+						.createInternalError("Web Driver internal error.!");
+			}
+			return retVal;
+		}
+
 	}
-	
+
 }
