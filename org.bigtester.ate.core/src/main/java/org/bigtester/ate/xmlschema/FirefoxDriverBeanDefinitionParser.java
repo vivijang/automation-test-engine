@@ -37,7 +37,7 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class FireFoxDriverBeanDefinitionParser extends
+public class FirefoxDriverBeanDefinitionParser extends
 		AbstractSingleBeanDefinitionParser {
 
 	/**
