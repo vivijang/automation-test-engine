@@ -47,7 +47,7 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 		//TODO create Chrome browsers and remote web driver handler
 		super();
 		browserProfile = null;
-		System.setProperty("webdriver.chrome.driver", "d:/develop/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver.exe");
 	}
 
 	/**

@@ -45,7 +45,7 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 		//TODO create Opera browsers and remote web driver handler
 		super();
 		browserProfile = null;
-		System.setProperty("webdriver.chrome.driver", "d:/develop/operadriver.exe");
+		System.setProperty("webdriver.chrome.driver", "browserdriver/operadriver.exe");
 	}
 
 	/**

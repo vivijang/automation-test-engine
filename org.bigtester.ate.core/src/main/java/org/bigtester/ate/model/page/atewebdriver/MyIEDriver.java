@@ -39,7 +39,7 @@ public class MyIEDriver extends WebDriverBase implements IMyWebDriver{
 	public MyIEDriver() {
 		//TODO create multi browsers and remote web driver handler
 		super();
-		System.setProperty("webdriver.ie.driver", "d:/develop/IEDriverServer32.exe");
+		System.setProperty("webdriver.ie.driver", "browserdriver/IEDriverServer32.exe");
 //		System.setProperty("webdriver.ie.driver.loglevel", "ERROR");
 //		System.setProperty("webdriver.ie.driver.logfile", "d:/develop/IEDriver64.log");
 //		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
