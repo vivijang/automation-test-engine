@@ -20,54 +20,42 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MyFirefoxDriver defines ....
+ * The Class MyChromeDriver defines ....
  * 
- * @author Peidong Hu
+ * @author Jun Yang
  */
-public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
+public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 	
 	/** The browser profile. */
 	@Nullable
-	final private BrowserProfile<FirefoxProfile> browserProfile;
+	final private BrowserProfile<ChromeOptions> browserProfile;
 	
 	/**
-	 * Instantiates a new my firefox driver.
+	 * Instantiates a new my Chrome driver.
 	 */
-	public MyFirefoxDriver() {
-		//TODO create multi browsers and remote web driver handler
+	public MyChromeDriver() {
+		//TODO create Chrome browsers and remote web driver handler
 		super();
-		
-		//setWebDriver(new FirefoxDriver());
-		//TODO need to re-code to use null pattern object.
 		browserProfile = null;
+		System.setProperty("webdriver.chrome.driver", "d:/develop/chromedriver.exe");
 	}
 
-	/**
-	 * Instantiates a new my firefox driver.
-	 *
-	 * @param profileName the profile name
-	 */
-	public MyFirefoxDriver(String profileName) {
-		super();
-		browserProfile = new BrowserProfile<FirefoxProfile>(FirefoxProfile.class, profileName);
-		//setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
-	}
-	
-	
 	/**
 	 * @return the browserProfile
 	 */
 	
-	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
-		final BrowserProfile<FirefoxProfile> retVal = browserProfile;
+	public @Nullable BrowserProfile<ChromeOptions> getBrowserProfile() {
+		final BrowserProfile<ChromeOptions> retVal = browserProfile;
 		if (null == retVal) {
 			throw new IllegalStateException("browserProfile is not correctly populated");
 			
@@ -75,7 +63,7 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 			return retVal;
 		}
 	}
-	
+		
 	/**
 	 * {@inheritDoc}
 	 */
@@ -90,16 +78,21 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	@Override
 	public WebDriver createDriver() {
 		WebDriver retVal = super.getWebDriver();
+		retVal = new ChromeDriver();
+		setWebDriver(retVal);
+		return retVal;
+		/*
 		if ( null == retVal) {
 			if (null == getBrowserProfile().getProfile()) {
-				retVal = new FirefoxDriver();
+				retVal = new ChromeDriver();
 			} else {
-				retVal = new FirefoxDriver(getBrowserProfile().getProfile());
+				retVal = new ChromeDriver(getBrowserProfile().getProfile());
 			}
 			setWebDriver(retVal);
 			
 		}
 		return retVal;
+		*/
 	}
 	
 }

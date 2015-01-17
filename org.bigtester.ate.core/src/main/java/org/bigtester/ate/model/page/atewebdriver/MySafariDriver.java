@@ -21,44 +21,42 @@
 package org.bigtester.ate.model.page.atewebdriver;
 
 import org.bigtester.ate.browser.BrowserProfile;
-import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.safari.SafariDriver;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MyFirefoxDriver defines ....
+ * The Class MysafariDriver defines ....
  * 
- * @author Peidong Hu
+ * @author Jun Yang
  */
-public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
-	
+public class MySafariDriver extends WebDriverBase implements IMyWebDriver{
+
 	/** The browser profile. */
 	@Nullable
-	final private BrowserProfile<FirefoxProfile> browserProfile;
+	final private BrowserProfile<SafariOptions> browserProfile;
 	
 	/**
-	 * Instantiates a new my firefox driver.
+	 * Instantiates a new my safari driver.
 	 */
-	public MyFirefoxDriver() {
-		//TODO create multi browsers and remote web driver handler
+	public MySafariDriver() {
+		//TODO create Safari browsers and remote web driver handler
 		super();
-		
-		//setWebDriver(new FirefoxDriver());
-		//TODO need to re-code to use null pattern object.
 		browserProfile = null;
 	}
 
 	/**
-	 * Instantiates a new my firefox driver.
+	 * Instantiates a new my Safari driver.
 	 *
 	 * @param profileName the profile name
 	 */
-	public MyFirefoxDriver(String profileName) {
+	public MySafariDriver(String profileName) {
 		super();
-		browserProfile = new BrowserProfile<FirefoxProfile>(FirefoxProfile.class, profileName);
-		//setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
+		browserProfile = new BrowserProfile<SafariOptions>(SafariOptions.class, profileName);
+		//setWebDriver(new SafariDriver(browserProfile.getProfile()));
 	}
 	
 	
@@ -66,8 +64,8 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	 * @return the browserProfile
 	 */
 	
-	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
-		final BrowserProfile<FirefoxProfile> retVal = browserProfile;
+	public BrowserProfile<SafariOptions> getBrowserProfile() {
+		final BrowserProfile<SafariOptions> retVal = browserProfile;
 		if (null == retVal) {
 			throw new IllegalStateException("browserProfile is not correctly populated");
 			
@@ -75,7 +73,7 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 			return retVal;
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -90,16 +88,22 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	@Override
 	public WebDriver createDriver() {
 		WebDriver retVal = super.getWebDriver();
+		retVal = new ChromeDriver();
+		setWebDriver(retVal);
+		return retVal;
+		/*
 		if ( null == retVal) {
 			if (null == getBrowserProfile().getProfile()) {
-				retVal = new FirefoxDriver();
+				retVal = new SafariDriver();
 			} else {
-				retVal = new FirefoxDriver(getBrowserProfile().getProfile());
+				retVal = new SafariDriver(getBrowserProfile().getProfile());
 			}
 			setWebDriver(retVal);
 			
 		}
 		return retVal;
+		*/
 	}
+	
 	
 }

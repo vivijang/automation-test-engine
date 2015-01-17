@@ -20,62 +20,32 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
-import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MyFirefoxDriver defines ....
+ * The Class MyIEDriver defines ....
  * 
- * @author Peidong Hu
+ * @author Jun Yang
  */
-public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
-	
-	/** The browser profile. */
-	@Nullable
-	final private BrowserProfile<FirefoxProfile> browserProfile;
+public class MyIEDriver extends WebDriverBase implements IMyWebDriver{
 	
 	/**
-	 * Instantiates a new my firefox driver.
+	 * Instantiates a new my IE driver.
 	 */
-	public MyFirefoxDriver() {
+	public MyIEDriver() {
 		//TODO create multi browsers and remote web driver handler
 		super();
-		
-		//setWebDriver(new FirefoxDriver());
-		//TODO need to re-code to use null pattern object.
-		browserProfile = null;
+		System.setProperty("webdriver.ie.driver", "d:/develop/IEDriverServer32.exe");
+//		System.setProperty("webdriver.ie.driver.loglevel", "ERROR");
+//		System.setProperty("webdriver.ie.driver.logfile", "d:/develop/IEDriver64.log");
+//		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+//      ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	}
 
-	/**
-	 * Instantiates a new my firefox driver.
-	 *
-	 * @param profileName the profile name
-	 */
-	public MyFirefoxDriver(String profileName) {
-		super();
-		browserProfile = new BrowserProfile<FirefoxProfile>(FirefoxProfile.class, profileName);
-		//setWebDriver(new FirefoxDriver(browserProfile.getProfile()));
-	}
-	
-	
-	/**
-	 * @return the browserProfile
-	 */
-	
-	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
-		final BrowserProfile<FirefoxProfile> retVal = browserProfile;
-		if (null == retVal) {
-			throw new IllegalStateException("browserProfile is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -90,15 +60,8 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	@Override
 	public WebDriver createDriver() {
 		WebDriver retVal = super.getWebDriver();
-		if ( null == retVal) {
-			if (null == getBrowserProfile().getProfile()) {
-				retVal = new FirefoxDriver();
-			} else {
-				retVal = new FirefoxDriver(getBrowserProfile().getProfile());
-			}
-			setWebDriver(retVal);
-			
-		}
+		retVal = new InternetExplorerDriver();
+		setWebDriver(retVal);
 		return retVal;
 	}
 	

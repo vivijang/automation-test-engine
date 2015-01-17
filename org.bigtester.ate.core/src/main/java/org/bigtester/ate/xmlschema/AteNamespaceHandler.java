@@ -46,7 +46,13 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_GENERICSYSTEMLOGGER, new GenericSystemLoggerBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_TESTDATABASEINITIALIZER, new TestDatabaseInitializerBeanDefinitionParser());
 		//testcase elements
-		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_FIREFOXDRIVER, new FireFoxDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_FIREFOXDRIVER, new FirefoxDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_CHROMEDRIVER, new ChromeDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_IEDRIVER, new IEDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_SAFARIDRIVER, new SafariDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_OPERADRIVER, new OperaDriverBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HTMLUNITDRIVER, new HtmlUnitDriverBeanDefinitionParser());
+		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HOMEPAGE, new HomepageBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_LASTPAGE, new LastPageBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_REGULARPAGE, new RegularPageBeanDefinitionParser());

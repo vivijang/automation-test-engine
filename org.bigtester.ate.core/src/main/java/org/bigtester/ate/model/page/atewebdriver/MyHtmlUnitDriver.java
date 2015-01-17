@@ -22,26 +22,42 @@ package org.bigtester.ate.model.page.atewebdriver;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IMyWebDriver defines ....
+ * The Class MyHtmlUnitDriver defines ....
  * 
- * @author Peidong Hu
+ * @author Jun Yang
  */
-public interface IMyWebDriver {
+public class MyHtmlUnitDriver extends WebDriverBase implements IMyWebDriver{
+	
 	
 	/**
-	 * Creates the driver.
-	 *
-	 * @return the web driver
+	 * Instantiates a new my HtmlUnit driver.
 	 */
-	WebDriver createDriver();
+	public MyHtmlUnitDriver() {
+		//TODO create HtmlUnit browsers and remote web driver handler
+		super();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public @Nullable WebDriver getWebDriver() {
+		return super.getWebDriver();
+	}
 	
 	/**
-	 * Gets the webdriver.
-	 * 
-	 * @return the webdriver
+	 * {@inheritDoc}
 	 */
-	@Nullable WebDriver getWebDriver();
+	@Override
+	public WebDriver createDriver() {
+		WebDriver retVal = super.getWebDriver();
+		retVal = new HtmlUnitDriver();
+		setWebDriver(retVal);
+		return retVal;
+	}
+	
 }
