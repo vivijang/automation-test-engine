@@ -33,3 +33,5 @@ NOTE5) How to improve code quality of handling Null Pointer Exception
 	e) Eclipse will automatically find possible NPE in IDE compiler. 
 	
 NOTE6) Install STS(Spring Tool Suite for Eclipse Luna) through Eclipse marketplace	
+
+NOTE7) Run HtmlUnit browser, add 'htmlunit-2.15-OSGi.jar' in java build path. This jar is in directory 'browserdriver'
