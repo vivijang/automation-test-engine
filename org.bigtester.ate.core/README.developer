@@ -39,4 +39,5 @@ NOTE7) Run HtmlUnit browser, add 'htmlunit-2.15-OSGi.jar' in java build path. Th
 NOTE8) Run Firefox, create a profile file
        1) run Firefox in command line: firefox -p
        2) create a profile file with the name: dentisteasy
+       3) save the profile, quit Firefox
 
