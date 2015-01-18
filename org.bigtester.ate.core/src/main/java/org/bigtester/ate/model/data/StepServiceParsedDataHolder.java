@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,46 +18,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.utils;
+package org.bigtester.ate.model.data;
 
-import org.bigtester.ate.constant.ThinkTimeConstants;
+import org.bigtester.ate.constant.EnumRunTimeDataType;
+import org.bigtester.ate.model.data.exception.RuntimeDataException;
+import org.bigtester.ate.model.page.page.IPageObject;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ThinkTime defines ....
+ * This class StepServiceParsedDataHolder defines ....
  * @author Peidong Hu
  *
  */
-public class ThinkTime {
-	
-	/** The think time in seconds */
-	transient int thinkTime; //NOPMD
-	
+public class StepServiceParsedDataHolder extends PageParsedDataHolder  implements IStepInputData, IDataParser{
+
 	/**
-	 * Instantiates a new think time.
+	 * @param dataType
+	 * @param pageHtmlLeftBoundry
+	 * @param pageHtmlRightBoundry
+	 * @param page
+	 * @param springBeanID
 	 */
-	public ThinkTime() {
-		thinkTime = ThinkTimeConstants.DEFAULT_THINK_TIME;
+	public StepServiceParsedDataHolder(EnumRunTimeDataType dataType,
+			String pageHtmlLeftBoundry, String pageHtmlRightBoundry,
+			IPageObject page, String springBeanID) {
+		super(dataType, pageHtmlLeftBoundry, pageHtmlRightBoundry, page,
+				springBeanID);
 	}
 	
 	/**
-	 * Instantiates a new think time.
-	 *
-	 * @param thinkTime the think time in seconds
+	 * {@inheritDoc}
 	 */
-	public ThinkTime(int thinkTime) {
-		this.thinkTime = thinkTime;
-	}
-	
-	/**
-	 * Sets the timer.
-	 */
-	public void setTimer() {
-		
-		try {
-		    Thread.sleep(thinkTime * 1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
+	@Override
+	public void parseData() throws RuntimeDataException {
+		//TODO
 	}
 }

@@ -65,5 +65,6 @@
 		findByValue="//button[@type='submit']" />
 	<ate:clickAction id="loginButtonEA"  />
 
+	<ate:runTimeDataHolder id="wrongCode1" dataHolderType="PageSourceParsed" dataType="Text" pageHtmlLeftBoundry="Oops" pageHtmlRightBoundry="ong password" page="publicLoginPage"/>
 
 </beans>

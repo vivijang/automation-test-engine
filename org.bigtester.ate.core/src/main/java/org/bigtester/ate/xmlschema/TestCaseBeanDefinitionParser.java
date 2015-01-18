@@ -36,7 +36,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * This class SimpleDateFormatBeanDefinitionParser defines ....
@@ -44,49 +43,64 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestCaseBeanDefinitionParser extends
-		AbstractBeanDefinitionParser {
+public class TestCaseBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
-			@Nullable ParserContext parserContext) {
+	protected @Nullable AbstractBeanDefinition parseInternal(
+			@Nullable Element element, @Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
-		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
-		// this will never be null since the schema explicitly requires that a value be supplied
-        String testCaseName = element.getAttribute(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME);
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(TestCase.class);
-        if (StringUtils.hasText(testCaseName))
-        	factory.addConstructorArgValue(testCaseName);
-        
-        
-		List<Element> testStepElements = (List<Element>) DomUtils.getChildElements(element);
-        
-        if (testStepElements != null && !testStepElements.isEmpty()) {
-        	if (null == factory) throw GlobalUtils.createNotInitializedException("factory");
-            parseTestStepComponents(testStepElements, factory,  parserContext);
-        }
-        
-        return factory.getBeanDefinition();
+		if (parserContext == null || element == null)
+			throw GlobalUtils
+					.createNotInitializedException("element and parserContext");
+		// this will never be null since the schema explicitly requires that a
+		// value be supplied
+		String testCaseName = element
+				.getAttribute(XsdElementConstants.ATTR_TESTCASE_TESTCASENAME);
+		BeanDefinitionBuilder factory = BeanDefinitionBuilder
+				.rootBeanDefinition(TestCase.class);
+		if (StringUtils.hasText(testCaseName))
+			factory.addConstructorArgValue(testCaseName);
+
+		List<Element> testStepElements = (List<Element>) DomUtils
+				.getChildElements(element);
+
+		if (testStepElements != null && !testStepElements.isEmpty()) {
+			if (null == factory)
+				throw GlobalUtils.createNotInitializedException("factory");
+			parseTestStepComponents(testStepElements, factory, parserContext);
+		}
+
+		return factory.getBeanDefinition();
 	}
-	
-	private static void parseTestStepComponents(List<Element> childElements, BeanDefinitionBuilder factory, ParserContext parserContext) {
-        ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(childElements.size());
-        for (Element element : childElements) {
-        	if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_HOMESTEP) {
-        		HomeStepBeanDefinitionParser homeStep = new HomeStepBeanDefinitionParser();
-        		children.add(homeStep.parse(element, parserContext));
-        	} else if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_ELEMENTSTEP) {
-        		ElementStepBeanDefinitionParser elementStep = new ElementStepBeanDefinitionParser();
-        		children.add(elementStep.parse(element, parserContext));
-        	} else if (element.getTagName() == "ate:" + XsdElementConstants.ELEMENT_LASTSTEP) {
-        		LastStepBeanDefinitionParser lastStep = new LastStepBeanDefinitionParser();
-        		children.add(lastStep.parse(element, parserContext));
-        	}
-        }
-        factory.addPropertyValue(XsdElementConstants.PROP_TESTCASE_TESTSTEPLIST, children);
-    }
+
+	private static void parseTestStepComponents(List<Element> childElements,
+			BeanDefinitionBuilder factory, ParserContext parserContext) {
+		ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(
+				childElements.size());
+		for (Element element : childElements) {
+			if (element.getTagName() == "ate:"
+					+ XsdElementConstants.ELEMENT_HOMESTEP) {
+				HomeStepBeanDefinitionParser homeStep = new HomeStepBeanDefinitionParser();
+				children.add(homeStep.parse(element, parserContext));
+			} else if (element.getTagName() == "ate:"
+					+ XsdElementConstants.ELEMENT_ELEMENTSTEP) {
+				ElementStepBeanDefinitionParser elementStep = new ElementStepBeanDefinitionParser();
+				children.add(elementStep.parse(element, parserContext));
+			} else if (element.getTagName() == "ate:"
+					+ XsdElementConstants.ELEMENT_LASTSTEP) {
+				LastStepBeanDefinitionParser lastStep = new LastStepBeanDefinitionParser();
+				children.add(lastStep.parse(element, parserContext));
+			} else if (element.getTagName() == "ate:"
+					+ XsdElementConstants.ELEMENT_CASETYPESERVICE) {
+				CaseTypeServiceBeanDefinitionParser caseService = new CaseTypeServiceBeanDefinitionParser();
+				children.add(caseService.parse(element, parserContext));
+			}
+		}
+		factory.addPropertyValue(
+				XsdElementConstants.PROP_TESTCASE_TESTSTEPLIST, children);
+	}
 
 }

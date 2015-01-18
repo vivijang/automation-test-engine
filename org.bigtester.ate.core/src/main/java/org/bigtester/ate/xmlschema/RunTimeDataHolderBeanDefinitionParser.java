@@ -23,8 +23,14 @@ package org.bigtester.ate.xmlschema;
 import org.springframework.util.StringUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumRunTimeDataType;
+import org.bigtester.ate.constant.RumtimeDataHolderType;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.RunTimeDataHolder;
+import org.bigtester.ate.model.asserter.PageElementExistenceAsserter;
+import org.bigtester.ate.model.data.AbstractRunTimeDataHolder;
+import org.bigtester.ate.model.data.CaseServiceParsedDataHolder;
+import org.bigtester.ate.model.data.ManualAssignedValueDataHolder;
+import org.bigtester.ate.model.data.PageParsedDataHolder;
+import org.bigtester.ate.model.data.StepServiceParsedDataHolder;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -56,40 +62,84 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 			throw GlobalUtils
 					.createNotInitializedException("element and parserContext");
 		// Here we parse the Spring elements such as < property>
+
+		String dataHolderType = element.getAttribute(
+				XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE)
+				.toUpperCase();
+		if (null == dataHolderType || !StringUtils.hasText(dataHolderType)) {
+			throw GlobalUtils
+					.createNotInitializedException("dataHolderType attribute in xml test case");
+		}
+		RumtimeDataHolderType enumDataHolderType = RumtimeDataHolderType
+				.valueOf(dataHolderType);
 		BeanDefinitionHolder holder = parserContext.getDelegate()
 				.parseBeanDefinitionElement(element);
 		BeanDefinition bDef = holder.getBeanDefinition();
-		//TODO change class name
-		bDef.setBeanClassName(RunTimeDataHolder.class.getName());
-		
-		String dataType = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATATYPE).toUpperCase();
+		switch (enumDataHolderType) {
+		case PAGESOURCEPARSED:
+			bDef.setBeanClassName(PageParsedDataHolder.class.getName());
+			break;
+		case MANUALASSIGNED:
+			bDef.setBeanClassName(ManualAssignedValueDataHolder.class.getName());
+			break;
+		case CASESERVICEPARSED:
+			bDef.setBeanClassName(CaseServiceParsedDataHolder.class.getName());
+			break;
+		case STEPSERVICEPARSED:
+			bDef.setBeanClassName(StepServiceParsedDataHolder.class.getName());
+			break;
+		default:
+			break;
+
+		}
+		String dataType = element.getAttribute(
+				XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATATYPE)
+				.toUpperCase();
 		if (null != dataType && StringUtils.hasText(dataType)) {
-			EnumRunTimeDataType enumDataType = EnumRunTimeDataType.valueOf(dataType);
-	        bDef.getConstructorArgumentValues().addGenericArgumentValue(enumDataType);
+			EnumRunTimeDataType enumDataType = EnumRunTimeDataType
+					.valueOf(dataType);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					enumDataType);
 		}
-		
-		String dataValue = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATAVALUE);
+
+		String dataValue = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_DATAVALUE);
 		if (StringUtils.hasText(dataValue)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValue);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					dataValue);
 		}
-		
-		String leftBoundry = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_LEFTBOUNDRY);
+
+		String leftBoundry = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_LEFTBOUNDRY);
 		if (StringUtils.hasText(leftBoundry)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(leftBoundry);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					leftBoundry);
 		}
-		
-		String rightBoundry = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY);
+
+		String rightBoundry = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_RIGHTBOUNDRY);
 		if (StringUtils.hasText(rightBoundry)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(rightBoundry);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					rightBoundry);
 		}
-		
-		String page = element.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_PAGE);
+
+		String page = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_PAGE);
 		if (StringUtils.hasText(page)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(new RuntimeBeanReference(page));
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(page));
 		}
-		
-		//bDef.setParentName(XsdElementConstants.ELEMENT_ID_BASEELEMENTACTION);
-		
+
+		String beanID = element.getAttribute("id");
+		bDef.getConstructorArgumentValues().addGenericArgumentValue(beanID);
+
+		String mappedBeanID = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID);
+		if (StringUtils.hasText(mappedBeanID)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					mappedBeanID);
+		}
+
 		parserContext.getRegistry().registerBeanDefinition(
 				element.getAttribute("id"), bDef);
 		return (AbstractBeanDefinition) bDef;

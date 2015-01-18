@@ -28,6 +28,7 @@ import java.util.Map;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.utils.ThinkTime;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.Cookie;
 import org.springframework.core.io.Resource;
@@ -192,6 +193,9 @@ public class BasePageObject extends PageModelBase {
 	 * This function will make sure that the pageSource is always reflecting the current status of the page source.
 	 */
 	public String getPageHtmlSource() {
+		//TODO to make sure that the events on page all finished before get source.
+		ThinkTime newTT = new ThinkTime(10);
+		newTT.setTimer();
 		String retVal = getMyWd().getWebDriver().getPageSource();
 		if (null == retVal || !StringUtils.hasText(retVal)) {
 			throw GlobalUtils.createInternalError("Web Driver internal error.!");

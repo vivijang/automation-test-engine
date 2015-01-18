@@ -134,6 +134,12 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATATYPE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATATYPE = "dataType";
 	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE = "dataHolderType";
+	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID = "subCaseMappedDataHolderID";
+	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATAVALUE = "dataValue";
 	
@@ -173,6 +179,9 @@ public final class XsdElementConstants {
 	
 	/** The Constant ELEMENT_TESTCASE. */
 	public static final String ELEMENT_TESTCASE = "testCase";
+	
+	/** The Constant ELEMENT_CASETYPESERVICE. */
+	public static final String ELEMENT_CASETYPESERVICE = "caseTypeService";
 	
 	/** The Constant ELEMENT_FIREFOXDRIVER. */
 	public static final String ELEMENT_FIREFOXDRIVER = "fireFoxDriver";
@@ -244,6 +253,12 @@ public final class XsdElementConstants {
 	
 	/** The Constant ATTR_TESTCASE_TESTCASENAME. */
 	public static final String ATTR_TESTCASE_TESTCASENAME = "testCaseName";
+	
+	/** The Constant ATTR_TESTCASE_TESTCASEFILENAME. */
+	public static final String ATTR_TESTCASE_TESTCASEFILENAME = "testCaseFileName";
+	
+	/** The Constant ATTR_TESTCASE_PARENTTESTCASE. */
+	public static final String ATTR_TESTCASE_PARENTTESTCASE = "parentTestCase";
 	
 	/**
 	 * Instantiates a new xsd element constants.

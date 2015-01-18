@@ -372,9 +372,20 @@
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+				<xsd:attribute name="dataHolderType" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="ManualAssigned" />
+							<xsd:enumeration value="PageSourceParsed" />
+							<xsd:enumeration value="CaseServiceParsed" />
+							<xsd:enumeration value="StepServiceParsed" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
 				<xsd:attribute name="dataValue" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="pageHtmlLeftBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="pageHtmlRightBoundry" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="subCaseMappedDataHolderID" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="page" type="xsd:string">
 					<xsd:annotation>
 						<xsd:appinfo>
@@ -495,26 +506,52 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:group name="testStepGroup">
-		<xsd:sequence>
-			<xsd:element ref="runTimeDataHolder" minOccurs="0"
-				maxOccurs="unbounded" />
-			<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
-			<xsd:element ref="elementStep" minOccurs="0" maxOccurs="unbounded" />
-			<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
-		</xsd:sequence>
-	</xsd:group>
+
 
 	<xsd:complexType name="TestCaseType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
 				<!-- Here we re-use Spring elements and attributes -->
-				<xsd:group ref="testStepGroup" />
+				
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element ref="caseTypeService" minOccurs="0"
+						maxOccurs="unbounded" />
+					<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
+					<xsd:element ref="elementStep" minOccurs="0" maxOccurs="unbounded" />
+					<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:choice>
+				
 				<xsd:attribute name="testCaseName" type="xsd:string"
 					use="required" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+
+	<xsd:complexType name="CaseTypeServiceType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<!-- Here we re-use Spring elements and attributes -->
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes" />
+				<xsd:attribute name="testCaseName" type="xsd:string"
+					use="required" />
+				<xsd:attribute name="testCaseFileName" type="xsd:string"
+					use="required" />
+				<xsd:attribute name="parentTestCase" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation kind="ref">
+								<tool:expected-type type="org.bigtester.ate.model.casestep.TestCase" />
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
 
 	<xsd:element name="elementFindById" type="ElementFindByIdType" />
 	<xsd:element name="elementFindByXpath" type="ElementFindByXpathType" />
@@ -544,6 +581,7 @@
 	<xsd:element name="homePage" type="HomepageType" />
 	<xsd:element name="regularPage" type="RegularPageType" />
 
+	<xsd:element name="caseTypeService" type="CaseTypeServiceType" />
 	<xsd:element name="runTimeDataHolder" type="RunTimeDataHolderType" />
 
 </xsd:schema>

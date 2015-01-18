@@ -20,9 +20,11 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -82,7 +84,7 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	public WebDriver getWebDriver() {
 		WebDriver retVal = super.getWebDriver();
 		if (null == retVal) {
-			retVal = createDriver();
+			throw GlobalUtils.createNotInitializedException("web driver");
 		} 
 		return retVal;
 	}
@@ -96,7 +98,9 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 			if (null == getBrowserProfile().getProfile()) {
 				retVal = new FirefoxDriver();
 			} else {
-				retVal = new FirefoxDriver(getBrowserProfile().getProfile());
+				FirefoxBinary binary=new FirefoxBinary();
+				binary.addCommandLineOptions("-no-remote");
+				retVal = new FirefoxDriver(binary, getBrowserProfile().getProfile());
 			}
 			setWebDriver(retVal);
 			

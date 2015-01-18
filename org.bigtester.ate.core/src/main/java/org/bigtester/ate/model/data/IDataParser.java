@@ -28,10 +28,17 @@ import org.bigtester.ate.model.data.exception.RuntimeDataException;
  * @author Peidong Hu
  *
  */
-public interface IPageSourceParser {
+public interface IDataParser {
 	
 	/**
 	 * Parses the left right boundry data.
 	 */
-	void parseLeftRightBoundryData() throws RuntimeDataException ;
+	void parseData() throws RuntimeDataException ;
+	
+	/**
+	 * Gets the spring bean id.
+	 *
+	 * @return the spring bean id
+	 */
+	String getSpringBeanID();
 }

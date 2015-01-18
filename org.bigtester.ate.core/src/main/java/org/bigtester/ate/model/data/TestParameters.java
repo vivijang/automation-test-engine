@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 
@@ -44,6 +46,13 @@ public class TestParameters
     /** The global app ctx. */
     @Nullable
     private ApplicationContext globalAppCtx;
+    
+    /** The parent app ctx. */
+    @Nullable
+    private ApplicationContext parentAppCtx;
+    
+    @Nullable
+    private List<AbstractRunTimeDataHolder> parentTestCaseDataHolders;
     /**
 	 * @return the stepThinkTime
 	 */
@@ -140,5 +149,36 @@ public class TestParameters
 	 */
 	public void setGlobalAppCtx(ApplicationContext globalAppCtx) {
 		this.globalAppCtx = globalAppCtx;
+	}
+
+	/**
+	 * @return the parentAppCtx
+	 */
+	@Nullable
+	public ApplicationContext getParentAppCtx() {
+		return parentAppCtx;
+	}
+
+	/**
+	 * @param parentAppCtx the parentAppCtx to set
+	 */
+	public void setParentAppCtx(ApplicationContext parentAppCtx) {
+		this.parentAppCtx = parentAppCtx;
+	}
+
+	/**
+	 * @return the parentTestCaseDataHolders
+	 */
+	@Nullable
+	public List<AbstractRunTimeDataHolder> getParentTestCaseDataHolders() {
+		return parentTestCaseDataHolders;
+	}
+
+	/**
+	 * @param parentTestCaseDataHolders the parentTestCaseDataHolders to set
+	 */
+	public void setParentTestCaseDataHolders(
+			List<AbstractRunTimeDataHolder> parentTestCaseDataHolders) {
+		this.parentTestCaseDataHolders = parentTestCaseDataHolders;
 	}
 }

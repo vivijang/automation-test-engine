@@ -20,6 +20,10 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep; //NOPMD
 
+import java.util.List;
+
+import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
+import org.bigtester.ate.model.data.IDataParser;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
@@ -85,7 +89,19 @@ public interface ITestStep {
 	@Nullable
 	String getStepDescription();
 	
+	/**
+	 * Gets the expected result asserter.
+	 *
+	 * @return the expected result asserter
+	 */
+	List<IExpectedResultAsserter> getExpectedResultAsserter();
 	
+	/**
+	 * Gets the data holders.
+	 *
+	 * @return the data holders
+	 */
+	List<IDataParser> getDataHolders();
 	/**
 	 * Checks if is element step.
 	 *

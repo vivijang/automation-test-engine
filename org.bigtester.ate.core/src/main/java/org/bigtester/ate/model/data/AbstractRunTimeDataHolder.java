@@ -35,9 +35,12 @@ import org.eclipse.jdt.annotation.Nullable;
  * @author Peidong Hu
  *
  */
-public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputData, IPageSourceParser{
+public abstract class AbstractRunTimeDataHolder extends BaseInputDataValue{
 
 	/** The page that has been used to parse the data. */
+	final private String springBeanID;
+	
+	/** The page. */
 	@Nullable
 	private IPageObject page;
 	
@@ -68,14 +71,15 @@ public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputD
 	 *            the data type
 	 * @param pageHtmlRightBoundry
 	 */
-	public RunTimeDataHolder(EnumRunTimeDataType dataType,
+	public AbstractRunTimeDataHolder(EnumRunTimeDataType dataType,
 			String pageHtmlLeftBoundry, String pageHtmlRightBoundry,
-			IPageObject page) {
+			IPageObject page, String springBeanID) {
 		super("");
 		this.dataType = dataType;
 		this.pageHtmlLeftBoundry = pageHtmlLeftBoundry;
 		this.pageHtmlRightBoundry = pageHtmlRightBoundry;
 		this.page = page;
+		this.springBeanID = springBeanID;
 	}
 
 	/**
@@ -85,10 +89,27 @@ public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputD
 	 *            the data type
 	 * @param strDataValue
 	 *            the str data value
+	 * @param springBeanID 
 	 */
-	public RunTimeDataHolder(EnumRunTimeDataType dataType, String strDataValue) {
+	public AbstractRunTimeDataHolder(EnumRunTimeDataType dataType, String strDataValue, String springBeanID) {
 		super(strDataValue);
 		this.dataType = dataType;
+		this.springBeanID = springBeanID;
+	}
+	
+	/**
+	 * Instantiates a new run time data holder.
+	 *
+	 * @param dataType
+	 *            the data type
+	 * @param strDataValue
+	 *            the str data value
+	 * @param springBeanID 
+	 */
+	public AbstractRunTimeDataHolder(EnumRunTimeDataType dataType, String springBeanID) {
+		super("");
+		this.dataType = dataType;
+		this.springBeanID = springBeanID;
 	}
 
 	/**
@@ -147,11 +168,12 @@ public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputD
 		this.pageHtmlRightBoundry = pageHtmlRightBoundry;
 	}
 	
+	
 	/**
-	 * {@inheritDoc}
-	 * @throws RuntimeDataException 
+	 * Parses the left right boundry data.
+	 *
+	 * @throws RuntimeDataException the runtime data exception
 	 */
-	@Override
 	public void parseLeftRightBoundryData() throws RuntimeDataException {
 		
 		String str = getPage().getPageHtmlSource();
@@ -162,4 +184,13 @@ public class RunTimeDataHolder extends BaseInputDataValue implements IStepInputD
 		setStrDataValue( value );
 		
 	}
+
+	/**
+	 * @return the springBeanID
+	 */
+	public String getSpringBeanID() {
+		return springBeanID;
+	}
+
+	
 }

@@ -219,10 +219,11 @@ public class CaseRunner implements IRunTestCase {
 		// ApplicationContext context;
 		try {
 			context = new FileSystemXmlApplicationContext(testname);
-			mainDriver = ((IMyWebDriver) GlobalUtils.findMyWebDriver(context))
-					.createDriver();
+			IMyWebDriver myWebD = (IMyWebDriver) GlobalUtils.findMyWebDriver(context);
+			mainDriver = myWebD.createDriver();
 			myTestCase = GlobalUtils.findTestCaseBean(getContext());
-			myTestCase.setStepThinkTime(testParams.getStepThinkTime());
+			getMyTestCase().setStepThinkTime(testParams.getStepThinkTime());
+			getMyTestCase().setCurrentWebDriver(myWebD);
 			getMyTestCase().goSteps();
 
 		} catch (FatalBeanException fbe) {

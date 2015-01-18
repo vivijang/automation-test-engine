@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,46 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.utils;
-
-import org.bigtester.ate.constant.ThinkTimeConstants;
+package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ThinkTime defines ....
+ * This class RumtimeDataHolderType defines ....
  * @author Peidong Hu
  *
  */
-public class ThinkTime {
-	
-	/** The think time in seconds */
-	transient int thinkTime; //NOPMD
-	
-	/**
-	 * Instantiates a new think time.
-	 */
-	public ThinkTime() {
-		thinkTime = ThinkTimeConstants.DEFAULT_THINK_TIME;
-	}
-	
-	/**
-	 * Instantiates a new think time.
-	 *
-	 * @param thinkTime the think time in seconds
-	 */
-	public ThinkTime(int thinkTime) {
-		this.thinkTime = thinkTime;
-	}
-	
-	/**
-	 * Sets the timer.
-	 */
-	public void setTimer() {
-		
-		try {
-		    Thread.sleep(thinkTime * 1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
-	}
+public enum RumtimeDataHolderType {
+	MANUALASSIGNED, PAGESOURCEPARSED, CASESERVICEPARSED, STEPSERVICEPARSED
 }

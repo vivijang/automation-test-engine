@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,46 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.utils;
-
-import org.bigtester.ate.constant.ThinkTimeConstants;
+package org.bigtester.ate.model.data;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ThinkTime defines ....
+ * This class ICaseServiceParsedDataParser defines ....
  * @author Peidong Hu
  *
  */
-public class ThinkTime {
-	
-	/** The think time in seconds */
-	transient int thinkTime; //NOPMD
+public interface ICaseServiceParsedDataParser extends IDataParser {
 	
 	/**
-	 * Instantiates a new think time.
-	 */
-	public ThinkTime() {
-		thinkTime = ThinkTimeConstants.DEFAULT_THINK_TIME;
-	}
-	
-	/**
-	 * Instantiates a new think time.
+	 * Sets the str data value which is retrieved from the test case.
 	 *
-	 * @param thinkTime the think time in seconds
+	 * @param strDataValue the new str data value
 	 */
-	public ThinkTime(int thinkTime) {
-		this.thinkTime = thinkTime;
-	}
+	void setStrDataValue(String strDataValue);
 	
 	/**
-	 * Sets the timer.
+	 * Gets the sub case mapped data holder id.
+	 *
+	 * @return the sub case mapped data holder id
 	 */
-	public void setTimer() {
-		
-		try {
-		    Thread.sleep(thinkTime * 1000);                 //1000 milliseconds is one second.
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
-	}
+	String getSubCaseMappedDataHolderID();
 }

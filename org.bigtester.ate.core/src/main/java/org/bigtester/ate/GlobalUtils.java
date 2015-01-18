@@ -27,6 +27,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.bigtester.ate.model.casestep.TestCase;
+import org.bigtester.ate.model.data.AbstractRunTimeDataHolder;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.page.Homepage;
@@ -64,7 +65,7 @@ public final class GlobalUtils {
 		if (testcases.isEmpty()) {
 			throw new NoSuchBeanDefinitionException(TestCase.class);
 		} else {
-			@Nullable TestCase retVal = testcases.values().iterator().next();
+			TestCase retVal = testcases.values().iterator().next();
 			if (null == retVal) {
 				throw new NoSuchBeanDefinitionException(TestCase.class);
 			}
@@ -72,6 +73,19 @@ public final class GlobalUtils {
 				return retVal;
 			}
 		}
+	}
+	
+	/**
+	 * Find run time data holder beans.
+	 *
+	 * @param appCtx the app ctx
+	 * @return the map
+	 * @throws NoSuchBeanDefinitionException the no such bean definition exception
+	 */
+	public static @Nullable Map<String, AbstractRunTimeDataHolder> findRunTimeDataHolderBeans(ApplicationContext appCtx)
+			throws NoSuchBeanDefinitionException {
+		return appCtx.getBeansOfType(AbstractRunTimeDataHolder.class);
+		
 	}
 
 	/**

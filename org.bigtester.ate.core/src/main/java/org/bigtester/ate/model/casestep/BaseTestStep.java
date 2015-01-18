@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
-import org.bigtester.ate.model.data.IPageSourceParser;
+import org.bigtester.ate.model.data.IDataParser;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
@@ -69,11 +69,10 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	protected MyWebElement myWebElement;
 	
 	/** The i expected result asserter. */
-	@Nullable
-	private List<IExpectedResultAsserter> expectedResultAsserter;
+	private List<IExpectedResultAsserter> expectedResultAsserter = new ArrayList<IExpectedResultAsserter>();
 	
 	/** The data holders. */
-	private List<IPageSourceParser> dataHolders = new ArrayList<IPageSourceParser>();
+	private List<IDataParser> dataHolders = new ArrayList<IDataParser>();
 	
 	/** The application context. */
 	@Nullable
@@ -247,7 +246,6 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/**
 	 * @return the iExpectedResultAsserter
 	 */
-	@Nullable
 	public List<IExpectedResultAsserter> getExpectedResultAsserter() {
 		return expectedResultAsserter;
 	}
@@ -290,14 +288,14 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/**
 	 * @return the dataHolders
 	 */
-	public List<IPageSourceParser> getDataHolders() {
+	public List<IDataParser> getDataHolders() {
 		return dataHolders;
 		
 	}
 	/**
 	 * @param dataHolders the dataHolders to set
 	 */
-	public void setDataHolders(List<IPageSourceParser> dataHolders) {
+	public void setDataHolders(List<IDataParser> dataHolders) {
 		this.dataHolders = dataHolders;
 	}
 	
@@ -308,7 +306,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 */
 	protected void parseDataHolder() throws RuntimeDataException {
 		for (int i=0; i<getDataHolders().size(); i++) {
-			getDataHolders().get(i).parseLeftRightBoundryData();
+			getDataHolders().get(i).parseData();
 		}
 	}
 }

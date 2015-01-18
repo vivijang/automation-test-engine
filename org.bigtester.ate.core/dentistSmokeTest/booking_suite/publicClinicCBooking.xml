@@ -18,19 +18,24 @@
 
 
 	<ate:testCase id="ClinicCBooking" testCaseName="Booking at Clinic C">
-		
+
 		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
-			stepDescription="open my public home page" targetStep="false" pageObject="publicHomePage">
-			<property name="dataHolders">
-				<list>
-					<ref bean="bookingSmsCode1" />
-				</list>
-			</property>
+			stepDescription="open my public home page" targetStep="false"
+			pageObject="publicHomePage">
 		</ate:homeStep>
 		<ate:elementStep id="clickServiceSelector"
 			stepDescription="Click service Selector" stepName="clickServiceSelector"
 			targetStep="true" myWebElement="Service_Selector">
 		</ate:elementStep>
+		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode"
+			testCaseFileName="dentistSmokeTest/frontend_login_suite/publicWrongPasswordLogin.xml"
+			parentTestCase="ClinicCBooking">
+			<property name="dataHolders">
+				<list>
+					<ref bean="bookingSmsCodeInputValue" />
+				</list>
+			</property>
+		</ate:caseTypeService>
 		<ate:elementStep id="clickService_Consultation"
 			stepDescription="Service_Consultation" stepName="Service_Consultation"
 			targetStep="true" myWebElement="Service_Consultation">
@@ -39,12 +44,12 @@
 			stepDescription="type in Location_Input" stepName="Location_Input"
 			targetStep="true" myWebElement="Location_Input">
 		</ate:elementStep>
-		
+
 		<ate:elementStep id="clickFirstLocation"
 			stepDescription="click first location" stepName="clickfirstLocation"
 			targetStep="true" myWebElement="LocationList">
 		</ate:elementStep>
-		
+
 		<ate:elementStep id="clickDate_Selector"
 			stepDescription="click Date_Selector" stepName="Date_Selector"
 			targetStep="true" myWebElement="Date_Selector">
@@ -60,7 +65,7 @@
 		<ate:elementStep id="clickBook_Button"
 			stepDescription="click Book_Button" stepName="Book_Button"
 			targetStep="true" myWebElement="Book_Button" pageObject="publicPracticeProfileClinicC">
-			
+
 			<property name="expectedResultAsserter">
 				<list>
 					<ref bean="publicPracticeProfileClinicCElementExistenceAsserter" />
@@ -68,7 +73,8 @@
 			</property>
 		</ate:elementStep>
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
-			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
+			stepDescription="last step close browser" targetStep="false"
+			pageObject="myLastPage">
 		</ate:lastStep>
 	</ate:testCase>
 
