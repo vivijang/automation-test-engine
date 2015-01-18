@@ -81,12 +81,8 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public WebDriver getWebDriver() {
-		WebDriver retVal = super.getWebDriver();
-		if (null == retVal) {
-			throw GlobalUtils.createNotInitializedException("web driver");
-		} 
-		return retVal;
+	public @Nullable WebDriver getWebDriver() {
+		return super.getWebDriver();
 	}
 	/**
 	 * {@inheritDoc}

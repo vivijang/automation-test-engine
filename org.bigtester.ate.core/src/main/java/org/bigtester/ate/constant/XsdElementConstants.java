@@ -184,7 +184,23 @@ public final class XsdElementConstants {
 	public static final String ELEMENT_CASETYPESERVICE = "caseTypeService";
 	
 	/** The Constant ELEMENT_FIREFOXDRIVER. */
-	public static final String ELEMENT_FIREFOXDRIVER = "fireFoxDriver";
+	public static final String ELEMENT_FIREFOXDRIVER = "firefoxDriver";
+	
+	/** The Constant ELEMENT_CHROMEDRIVER. */
+	public static final String ELEMENT_CHROMEDRIVER = "chromeDriver";
+	
+	/** The Constant ELEMENT_IEDRIVER. */
+	public static final String ELEMENT_IEDRIVER = "IEDriver";
+	
+	/** The Constant ELEMENT_SAFARIDRIVER. */
+	public static final String ELEMENT_SAFARIDRIVER = "safariDriver";
+	
+	/** The Constant ELEMENT_OPERADRIVER. */
+	public static final String ELEMENT_OPERADRIVER = "operaDriver";
+	
+	/** The Constant ELEMENT_HTMLUNITDRIVER. */
+	public static final String ELEMENT_HTMLUNITDRIVER = "htmlUnitDriver";
+	
 	
 	/** The Constant ELEMENT_LASTPAGE. */
 	public static final String ELEMENT_LASTPAGE = "lastPage";

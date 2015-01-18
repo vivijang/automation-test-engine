@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns="http://www.bigtester.org/schema/ate"
-	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	targetNamespace="http://www.bigtester.org/schema/ate" xmlns:tns="http://www.bigtester.org/schema/ate"
-	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	        xmlns:tool="http://www.springframework.org/schema/tool" 
+	        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	        xmlns:beans="http://www.springframework.org/schema/beans"
+	        targetNamespace="http://www.bigtester.org/schema/ate" 
+	        xmlns:tns="http://www.bigtester.org/schema/ate"
+	        elementFormDefault="qualified" 
+	        attributeFormDefault="unqualified">
 
 	<xsd:import namespace="http://www.springframework.org/schema/beans" />
 
 	<xsd:element name="TestProject">
 		<xsd:complexType>
 			<xsd:complexContent>
-				<xsd:extension base="beans:identifiedType">
+                <xsd:extension base="beans:identifiedType">			
 					<xsd:choice minOccurs="1" maxOccurs="unbounded">
 						<xsd:element ref="TestSuite" />
 					</xsd:choice>
@@ -97,7 +100,7 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="MyFireFoxDriverType">
+	<xsd:complexType name="MyFirefoxDriverType">
 		<xsd:complexContent>
 			<xsd:extension base="AbstractWebDriverBaseType">
 				<xsd:attribute name="profileName" type="xsd:string" />
@@ -105,7 +108,46 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+<xsd:complexType name="MyChromeDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+<!-- 			<xsd:attribute name="profileName" type="xsd:string"/>  -->
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 
+    <xsd:complexType name="MyIEDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+<!-- 			<xsd:attribute name="profileName" type="xsd:string"/>  -->
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+    <xsd:complexType name="MySafariDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+<!-- 			<xsd:attribute name="profileName" type="xsd:string"/>  -->
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	 <xsd:complexType name="MyOperaDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+<!-- 			<xsd:attribute name="profileName" type="xsd:string"/>  -->			
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	 <xsd:complexType name="MyHtmlUnitDriverType">
+		<xsd:complexContent>
+			<xsd:extension base="AbstractWebDriverBaseType">
+<!-- 			<xsd:attribute name="profileName" type="xsd:string"/>  -->			
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
 	<xsd:complexType name="PageModelBaseType" abstract="false">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
@@ -576,7 +618,14 @@
 	<xsd:element name="homeStep" type="HomeStepType" />
 	<xsd:element name="basePageObject" type="BasePageObjectType" />
 	<xsd:element name="basePageModel" type="PageModelBaseType" />
-	<xsd:element name="fireFoxDriver" type="MyFireFoxDriverType" />
+	
+	<xsd:element name="firefoxDriver" type="MyFirefoxDriverType" />
+	<xsd:element name="chromeDriver" type="MyChromeDriverType" />
+	<xsd:element name="IEDriver" type="MyIEDriverType" />
+	<xsd:element name="safariDriver" type="MySafariDriverType" />
+	<xsd:element name="operaDriver" type="MyOperaDriverType" />
+	<xsd:element name="htmlUnitDriver" type="MyHtmlUnitDriverType" />
+	
 	<xsd:element name="lastPage" type="LastpageType" />
 	<xsd:element name="homePage" type="HomepageType" />
 	<xsd:element name="regularPage" type="RegularPageType" />
