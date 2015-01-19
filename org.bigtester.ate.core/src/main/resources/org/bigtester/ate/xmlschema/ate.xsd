@@ -428,6 +428,7 @@
 				<xsd:attribute name="pageHtmlLeftBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="pageHtmlRightBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="subCaseMappedDataHolderID" type="xsd:string"></xsd:attribute>
+				<xsd:attribute name="indexOfSameTypeDataOnPage" type="xsd:int"></xsd:attribute>
 				<xsd:attribute name="page" type="xsd:string">
 					<xsd:annotation>
 						<xsd:appinfo>

@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumRunTimeDataType;
 import org.bigtester.ate.constant.ExceptionErrorCode;
@@ -174,14 +175,22 @@ public abstract class AbstractRunTimeDataHolder extends BaseInputDataValue{
 	 *
 	 * @throws RuntimeDataException the runtime data exception
 	 */
-	public void parseLeftRightBoundryData() throws RuntimeDataException {
+	protected void parseLeftRightBoundryData(int index) throws RuntimeDataException {
 		
 		String str = getPage().getPageHtmlSource();
-		String value = str.substring(str.indexOf(getPageHtmlLeftBoundry()) + 1, str.indexOf(getPageHtmlRightBoundry()));
-		if (null == value) {
+		String[] values = StringUtils.substringsBetween(str, getPageHtmlLeftBoundry(), getPageHtmlRightBoundry());
+		if (null == values ) {
 			throw new RuntimeDataException(ExceptionMessage.MSG_RUNTIMEDATA_NOTFOUND, ExceptionErrorCode.RUNTIMEDATA_NOTFOUND);
 		}
-		setStrDataValue( value );
+		if (values.length < index+1 || -1 == index) {
+			index = values.length -1; 
+		}
+		String setVal = values[index];
+		if (null == setVal) {
+			throw GlobalUtils.createInternalError("parseLeftRightBoundryData");
+		} else {
+			setStrDataValue( setVal );
+		}
 		
 	}
 

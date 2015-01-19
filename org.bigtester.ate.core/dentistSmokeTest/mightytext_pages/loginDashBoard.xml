@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ate="http://www.bigtester.org/schema/ate" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.bigtester.org/schema/ate 
+                           http://www.bigtester.org/schema/ate/ate.xsd">
+	                       
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy/>
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/page_base_bean.xml" />
+	
+	<ate:regularPage id="loginDashBoard" 
+		dataFile="dentistSmokeTest/mightytext_pages/loginDashBoard.data.xml"/>
+		
+	<ate:myWebElement id="MessagesClickWE" elementFind="MessagesEF"
+		elementAction="MessagesClickEA" />
+
+	<ate:elementFindByXpath id="MessagesEF"
+		findByValue="//div[@id='messagesView']" />
+	<ate:clickAction id="MessagesClickEA" />
+
+	<ate:myWebElement id="phone5147000092ClickWE"
+		elementFind="phone5147000092_EF" elementAction="phone5147000092Click_EA" />
+
+	<ate:elementFindByXpath id="phone5147000092_EF"
+		findByValue="//a[@id='7000092_thread']" />
+	<ate:clickAction id="phone5147000092Click_EA" />
+
+	<ate:myWebElement id="typeSmsCode"   elementFind="TextResponse_EF" elementAction="TextResponseEA"/>
+	<ate:elementFindByXpath id="TextResponse_EF"
+		findByValue="//div[@id='7000092_textResponse']" />
+	<ate:sendKeysAction id="TextResponseEA"
+		dataValue="bookingSmsCode"  />
+
+	<ate:runTimeDataHolder id="bookingSmsCode"
+		dataHolderType="PageSourceParsed" dataType="Text" pageHtmlLeftBoundry="here is your code : "
+		pageHtmlRightBoundry="&lt;/span&gt;" page="HomePage"  indexOfSameTypeDataOnPage="-1"/>
+	
+</beans>

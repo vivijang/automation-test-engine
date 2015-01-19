@@ -54,12 +54,13 @@
 	<ate:elementFindById id="Location_Input_EF"
 		findByValue="new_location_input" />
 	<ate:sendKeysAction id="Location_Input_EA"
-		dataValue="bookingSmsCodeInputValue" />
+		dataValue="location_value" />
 
 	<ate:stepInputDataValue id="location_value"
 		dataValueID="5" />
-	<ate:runTimeDataHolder id="bookingSmsCode" dataHolderType="ManualAssigned"
-		dataValue="test" dataType="Text" />
+		
+<!-- 	<ate:runTimeDataHolder id="bookingSmsCode" dataHolderType="ManualAssigned" -->
+<!-- 		dataValue="test" dataType="Text" /> -->
 
 	<ate:myWebElement id="Date_Selector" elementFind="Date_Selector_EF"
 		elementAction="Date_Selector_EA">
@@ -102,6 +103,5 @@
 	<ate:stepExpectedResultValue id="publicHomePageValidationValue"
 		dataValueID="publicHomePageVID" />
 
-	<ate:runTimeDataHolder id="bookingSmsCodeInputValue"
-		dataType="Text" subCaseMappedDataHolderID="wrongCode1" dataHolderType="CaseServiceParsed"/>
+	
 </beans>

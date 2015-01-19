@@ -140,6 +140,10 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID = "subCaseMappedDataHolderID";
 	
+	/** The Constant ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE. */
+	public static final String ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE = "indexOfSameTypeDataOnPage";
+	
+	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATAVALUE = "dataValue";
 	

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+<!-- public login english page -->
+<STEPEXPECTEDRESULT  ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(.,'Congratulations')]" ASSERTPRIORITY="HIGH"	PAGENAME="publicSmsAuthentication"	STEPERSETID="publicBookingConfirm"	TESTDATACONTEXT_IDCOLUMN="5"	/>
+
+
+</dataset>

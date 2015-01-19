@@ -18,6 +18,8 @@
 	<import resource="classpath:META-INF/case_base_bean.xml" />
 	<import resource="../pageObjects/publicHomePage.xml" />
 	<import resource="../pageObjects/publicPracticeProfile.xml" />
+	<import resource="../pageObjects/publicSmsAuthentication.xml" />
+	<import resource="../pageObjects/publicLoginPage.xml" />
 	<import resource="../pageObjects/lastPage.xml" />
 
 <!-- 
@@ -40,15 +42,7 @@
 			stepDescription="Click service Selector" stepName="clickServiceSelector"
 			targetStep="true" myWebElement="Service_Selector">
 		</ate:elementStep>
-		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode"
-			testCaseFileName="dentistSmokeTest/frontend_login_suite/publicWrongPasswordLogin.xml"
-			parentTestCase="ClinicCBooking">
-			<property name="dataHolders">
-				<list>
-					<ref bean="bookingSmsCodeInputValue" />
-				</list>
-			</property>
-		</ate:caseTypeService>
+		
 		<ate:elementStep id="clickService_Consultation"
 			stepDescription="Service_Consultation" stepName="Service_Consultation"
 			targetStep="true" myWebElement="Service_Consultation">
@@ -85,6 +79,32 @@
 				</list>
 			</property>
 		</ate:elementStep>
+		<ate:elementStep id="clickAvailableBooking"
+			stepDescription="cclickAvailableBookingWE" stepName="clickAvailableBooking"
+			targetStep="true" myWebElement="clickAvailableBookingWE" pageObject="publicPracticeProfileClinicC">
+		</ate:elementStep>
+		<ate:elementStep id="publicLogin_typeUsername"
+			stepDescription="type in public user name" stepName="typeUsername"
+			targetStep="true" myWebElement="loginUserNameWE" >
+		</ate:elementStep>
+		<ate:elementStep id="publicLogin_typePassword"
+			stepDescription="type in public user password" stepName="typePassword"
+			targetStep="true" myWebElement="loginPasswordWE" >
+		</ate:elementStep>
+		<ate:elementStep id="typeInBookingComments"
+			stepDescription="typeInBookingComments" stepName="typeInBookingComments"
+			targetStep="true" myWebElement="typeInBookingCommentsWE">
+		</ate:elementStep>
+		
+<!-- 		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode" -->
+<!-- 			testCaseFileName="dentistSmokeTest/mightytext_suite/getSmsCode.xml" -->
+<!-- 			parentTestCase="ClinicCBooking"> -->
+<!-- 			<property name="dataHolders"> -->
+<!-- 				<list> -->
+<!-- 					<ref bean="bookingSmsCodeInputValue" /> -->
+<!-- 				</list> -->
+<!-- 			</property> -->
+<!-- 		</ate:caseTypeService> -->
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false"
 			pageObject="myLastPage">

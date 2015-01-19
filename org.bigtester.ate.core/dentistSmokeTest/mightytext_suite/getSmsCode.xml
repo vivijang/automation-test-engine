@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ate="http://www.bigtester.org/schema/ate" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.bigtester.org/schema/ate 
+                           http://www.bigtester.org/schema/ate/ate.xsd">
+	                       
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/case_base_bean.xml" />
+	<import resource="../mightytext_pages/publicHomePage.xml" />
+	<import resource="../mightytext_pages/loginDashBoard.xml" />
+	<import resource="../mightytext_pages/lastPage.xml" />
+	
+	<ate:firefoxDriver  id="MyWebDriver2" profileName="dentisteasy"/>
+	
+	<ate:testCase id="testcase" testCaseName="getDentistBookingSmsCode">
+		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
+			stepDescription="open my public home page" targetStep="false" pageObject="HomePage"/>
+		
+		<ate:elementStep id="publicLogin_clickLoginLink"
+			stepDescription="Click login link to log in with gmail already logged in status" stepName="clickLoginLink"
+			targetStep="false" myWebElement="LoginLinkClickWE" pageObject="HomePage"/>
+		
+		<ate:elementStep id="click_messages_button"
+			stepDescription="click messages button" stepName="clickMessagesButton"
+			targetStep="false" myWebElement="MessagesClickWE" pageObject="loginDashBoard"/>
+		
+		<ate:elementStep id="click_phone_5147000092"
+			stepDescription="clickon phone 514 7000092" stepName="clickPhone5147000092"
+			targetStep="false" myWebElement="phone5147000092ClickWE" pageObject="loginDashBoard">
+			<property name="dataHolders">
+				<list>
+					<ref bean="bookingSmsCode" />
+				</list>
+			</property>
+		</ate:elementStep>
+		<ate:elementStep id="typeInSmsCode"
+			stepDescription="typeInSmsCode" stepName="typeInSmsCode"
+			targetStep="false" myWebElement="typeSmsCode" pageObject="loginDashBoard"/>
+			
+		<ate:lastStep id="mylaststep" stepName="mylaststep"
+			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
+		</ate:lastStep>
+	</ate:testCase>
+
+</beans>

@@ -139,7 +139,15 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
 					mappedBeanID);
 		}
-
+		
+		String indexOfSameTypeDataOnPage = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE);
+		if (StringUtils.hasText(indexOfSameTypeDataOnPage)) {
+			int index = Integer.parseInt(indexOfSameTypeDataOnPage);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					index);
+		}
+		
 		parserContext.getRegistry().registerBeanDefinition(
 				element.getAttribute("id"), bDef);
 		return (AbstractBeanDefinition) bDef;

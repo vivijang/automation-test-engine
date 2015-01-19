@@ -31,7 +31,9 @@ import org.bigtester.ate.model.page.page.IPageObject;
  *
  */
 public class PageParsedDataHolder extends AbstractRunTimeDataHolder implements IStepInputData, IDataParser{
-
+	
+	/** The index of same type of data on page. */
+	final private int indexOfSameTypeOfDataOnPage;
 	/**
 	 * @param dataType
 	 * @param pageHtmlLeftBoundry
@@ -44,6 +46,25 @@ public class PageParsedDataHolder extends AbstractRunTimeDataHolder implements I
 			IPageObject page, String springBeanID) {
 		super(dataType, pageHtmlLeftBoundry, pageHtmlRightBoundry, page,
 				springBeanID);
+		this.indexOfSameTypeOfDataOnPage = 0;
+	}
+	
+	/**
+	 * Instantiates a new page parsed data holder.
+	 *
+	 * @param dataType the data type
+	 * @param pageHtmlLeftBoundry the page html left boundry
+	 * @param pageHtmlRightBoundry the page html right boundry
+	 * @param page the page
+	 * @param springBeanID the spring bean id
+	 * @param indexOfSameTypeOfDataOnPage the index of same type of data on page
+	 */
+	public PageParsedDataHolder(EnumRunTimeDataType dataType,
+			String pageHtmlLeftBoundry, String pageHtmlRightBoundry,
+			IPageObject page, String springBeanID, int indexOfSameTypeOfDataOnPage) {
+		super(dataType, pageHtmlLeftBoundry, pageHtmlRightBoundry, page,
+				springBeanID);
+		this.indexOfSameTypeOfDataOnPage = indexOfSameTypeOfDataOnPage;
 	}
 
 	/**
@@ -51,8 +72,18 @@ public class PageParsedDataHolder extends AbstractRunTimeDataHolder implements I
 	 */
 	@Override
 	public void parseData() throws RuntimeDataException {
-		parseLeftRightBoundryData();
+		
+			parseLeftRightBoundryData(indexOfSameTypeOfDataOnPage);
+		
 	}
 
+	/**
+	 * @return the indexOfSameTypeOfDataOnPage
+	 */
+	public int getIndexOfSameTypeOfDataOnPage() {
+		return indexOfSameTypeOfDataOnPage;
+	}
+
+	
 
 }
