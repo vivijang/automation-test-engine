@@ -80,6 +80,18 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_CLICKACTION. */
 	public static final String ELEMENT_CLICKACTION = "clickAction";
 	
+	/** The Constant ELEMENT_MOUSEMOVETOACTION. */
+	public static final String ELEMENT_MOUSEMOVETOACTION = "mouseMoveToAction";
+	/** The Constant ELEMENT_BROWSERWINDOWSWITCH. */
+	public static final String ELEMENT_BROWSERWINDOWSWITCH = "browserWindowSwitch";
+	
+	/** The Constant ELEMENT_BROWSERWINDOWFINDBYTITLE. */
+	public static final String ELEMENT_BROWSERWINDOWFINDBYTITLE = "browserWindowFindByTitle";
+	
+	/** The Constant ATTR_BROWSERWINDOWFINDBYTITLE_TITLE. */
+	public static final String ATTR_BROWSERWINDOWFINDBYTITLE_TITLE = "title";
+	
+	
 	/** The Constant ELEMENT_BASEELEMENTACTION. */
 	public static final String ELEMENT_BASEELEMENTACTION = "baseElementAction";
 	

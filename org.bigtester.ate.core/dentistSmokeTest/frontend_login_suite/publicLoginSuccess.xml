@@ -36,7 +36,7 @@
 		</ate:homeStep>
 		<ate:elementStep id="publicLogin_clickLoginLink"
 			stepDescription="Click login link to log in" stepName="clickLoginLink"
-			targetStep="true" myWebElement="publicLoginLinkWE" pageObject="publicLoginPage">
+			targetStep="true" myWebElement="publicAccountLinkWE" pageObject="publicLoginPage">
 		</ate:elementStep>
 		<ate:elementStep id="publicLogin_typeUsername"
 			stepDescription="type in public user name" stepName="typeUsername"

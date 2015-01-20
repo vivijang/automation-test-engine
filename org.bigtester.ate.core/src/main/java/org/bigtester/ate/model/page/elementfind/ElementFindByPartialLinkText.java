@@ -35,7 +35,7 @@ import com.google.common.base.Function;
  * @author Grace Hu
  *
  */
-public class ElementFindByPartialLinkText extends AbstractElementFind implements IElementFind {
+public class ElementFindByPartialLinkText extends AbstractElementFind implements IElementFind, ITestObjectFinderImpl {
 	/**
 	 * @param findByValue
 	 */

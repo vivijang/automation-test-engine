@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.page;
 import org.bigtester.ate.constant.EnumElementFindType;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.bigtester.ate.model.page.elementfind.ITestObjectFinderImpl;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -54,7 +55,7 @@ public interface IATEPageFactory {
 	 * @param findByValue
 	 * @return
 	 */
-	IElementFind getIElementFind(EnumElementFindType elementFindType,
+	ITestObjectFinderImpl getIElementFind(EnumElementFindType elementFindType,
 			String findByValue);
 
 

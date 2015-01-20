@@ -30,7 +30,7 @@ import org.openqa.selenium.interactions.Actions;
  * @author Jun Yang
  *
  */
-public class DoubleClickAction extends BaseElementAction implements IElementAction {
+public class DoubleClickAction extends BaseElementAction implements IElementAction, ITestObjectActionImpl  {
 
     /**
 	 * @param myWd
