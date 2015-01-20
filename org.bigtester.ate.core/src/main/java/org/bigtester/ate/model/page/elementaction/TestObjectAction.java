@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -20,36 +20,44 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClickAction defines ....
+ * This class TestObjectFind defines ....
  * 
  * @author Peidong Hu
+ *
  */
-public class CursorMoveAction extends BaseElementAction implements
-		IElementAction, ITestObjectActionImpl  {
+public final class TestObjectAction {
+
+	/** The implementation of test object finder. */
+	private final ITestObjectActionImpl impl;
 
 	/**
-	 * @param myWd
+	 * 
 	 */
-	public CursorMoveAction(IMyWebDriver myWd) {
-		super(myWd);
-		// TODO Auto-generated constructor stub
+	public TestObjectAction(ITestObjectActionImpl impl) {
+		this.impl = impl;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @return the impl
 	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		Actions act = new Actions(getMyWd().getWebDriver());
-		act.moveToElement(webElm).build().perform();
+	public ITestObjectActionImpl getImpl() {
+		return impl;
 	}
 
-	
+	/**
+	 * Gets the capability.
+	 *
+	 * @param <T> the generic type
+	 * @param type the type
+	 * @return the capability
+	 */
+	@Nullable
+	public <T> T getCapability(Class<T> type) {
+		return impl.getCapability(type);
+	}
 
 }

@@ -20,11 +20,19 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.page;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.elementaction.ITestObjectAction;
+import org.bigtester.ate.model.page.elementaction.ITestObjectActionImpl;
+import org.bigtester.ate.model.page.elementaction.TestObjectAction;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.bigtester.ate.model.page.elementfind.ITestObjectFinder;
+import org.bigtester.ate.model.page.elementfind.ITestObjectFinderImpl;
+import org.bigtester.ate.model.page.elementfind.TestObjectFinder;
 import org.eclipse.jdt.annotation.Nullable;
+import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,14 +40,14 @@ import org.eclipse.jdt.annotation.Nullable;
  * 
  * @author Peidong Hu
  */
-public class MyWebElement extends PageModelBase {
+public class MyWebElement<T> extends PageModelBase {
 
+	/** The test object finder. */
+	final private ITestObjectFinder<T> testObjectFinder;
+	
 	/** The i elm action. */
 	@Nullable
-	private IElementAction elementAction;
-
-	/** The i elm find. */
-	private IElementFind elementFind;
+	final private ITestObjectAction<T> testObjectAction;
 
 	/**
 	 * Instantiates a new my web element.
@@ -49,58 +57,56 @@ public class MyWebElement extends PageModelBase {
 	 * @param iElmAction
 	 *            the ea
 	 */
-	public MyWebElement(final IElementFind iElmFind, 
-			@Nullable final IElementAction iElmAction, IMyWebDriver myWd) {
+	public MyWebElement(final ITestObjectFinderImpl iElmFind,
+			@Nullable final ITestObjectActionImpl iElmAction, IMyWebDriver myWd) {
 		super(myWd);
-		this.elementAction = iElmAction;
-		this.elementFind = iElmFind;
+		if (null == iElmAction) {
+			testObjectAction = null; //NOPMD
+		} else {
+			ITestObjectAction<T> testObjectActionTmp = new TestObjectAction(iElmAction).getCapability(ITestObjectAction.class); 
+			if (null == testObjectActionTmp) {
+				throw GlobalUtils
+						.createNotInitializedException("test object finder");
+			} else {
+				testObjectAction = testObjectActionTmp;
+			}
+		} 
+		ITestObjectFinder<T> testObjectFinderTmp = new TestObjectFinder(iElmFind).getCapability(ITestObjectFinder.class); 
+		if (null == testObjectFinderTmp) {
+			throw GlobalUtils.createNotInitializedException("test object finder");
+		} else {
+			testObjectFinder = testObjectFinderTmp;
+		}
 	}
 
 	/**
 	 * @return the elementAction
 	 */
 	@Nullable
-	public IElementAction getElementAction() {
-		return elementAction;
+	public ITestObjectAction<T> getTestObjectAction() {
+		return testObjectAction;
 	}
 
-	/**
-	 * @param elementAction
-	 *            the elementAction to set
-	 */
-	public void setElementAction(final IElementAction elementAction) {
-		this.elementAction = elementAction;
-	}
-
-	/**
-	 * @return the elementFind
-	 */
-	public IElementFind getElementFind() {
-		return elementFind;
-	}
-
-	/**
-	 * @param elementFind
-	 *            the elementFind to set
-	 */
-	public void setElementFind(final IElementFind elementFind) {
-		this.elementFind = elementFind;
-	}
-
+	
 	/**
 	 * Do action.
 	 */
 	public void doAction() {
 
-		final IElementAction elementAction2 = elementAction;
-		if (null == elementAction2) {
-			throw new IllegalStateException(
-					"elementaction is not correctly populated.");
+		final ITestObjectAction<T> testObjectAction2 = testObjectAction;
+		if (testObjectAction2 == null) {
+			throw GlobalUtils.createNotInitializedException("test object action.");
 		} else {
-			elementAction2.doAction(elementFind.doFind(getMyWd(),
-					elementFind.getFindByValue()));
+			testObjectAction2.doAction(testObjectFinder.doFind(getMyWd()));
 		}
 
 	}
 
+		
+	/**
+	 * @return the testObjectFinder
+	 */
+	public ITestObjectFinder<T> getTestObjectFinder() {
+		return testObjectFinder;
+	}
 }

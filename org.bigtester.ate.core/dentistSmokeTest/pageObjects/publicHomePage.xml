@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:ate="http://www.bigtester.org/schema/ate" 
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:ate="http://www.bigtester.org/schema/ate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
                            http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                            http://www.bigtester.org/schema/ate 
                            http://www.bigtester.org/schema/ate/ate.xsd">
-	                       
+
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
 
@@ -20,10 +19,20 @@
 		dataFile="dentistSmokeTest/pageObjects/publicHomePage.data.xml" />
 
 	<ate:myWebElement id="publicLoginLinkWE" elementFind="loginLinkEF"
-		elementAction="loginLinkEA" />
+		elementAction="loginLinkEA">
+	</ate:myWebElement>
 	<ate:elementFindByXpath id="loginLinkEF"
-		findByValue="//a[@href='/public/login']" />
+		findByValue="//a[@id='account']" />
+	
 	<ate:clickAction id="loginLinkEA" />
+	
+	<ate:myWebElement id="publicAccountLinkWE" elementFind="accountLinkEF"
+		elementAction="AccountLinkEA">
+	</ate:myWebElement>
+	<ate:elementFindByXpath id="accountLinkEF"
+		findByValue="//a[@id='account']" />
+	
+	<ate:clickAction id="AccountLinkEA" />
 
 	<ate:myWebElement id="Clinic_C" elementFind="Clinic_C_EF"
 		elementAction="Clinic_C_EA">
@@ -34,12 +43,12 @@
 	<ate:clickAction id="Clinic_C_EA" />
 
 	<ate:myWebElement id="Service_Selector" elementFind="Service_Selector_EF"
-		elementAction="Service_Selector_EA">
-
-	</ate:myWebElement>
+		elementAction="Service_Selector_EA"/>
 	<ate:elementFindByXpath id="Service_Selector_EF"
 		findByValue="//button[@data-id='srv_select']" />
 	<ate:clickAction id="Service_Selector_EA" />
+
+	
 
 	<ate:myWebElement id="Service_Consultation"
 		elementFind="Service_Consultation_EF" elementAction="Service_Consultation_EA">
@@ -58,9 +67,9 @@
 
 	<ate:stepInputDataValue id="location_value"
 		dataValueID="5" />
-		
-<!-- 	<ate:runTimeDataHolder id="bookingSmsCode" dataHolderType="ManualAssigned" -->
-<!-- 		dataValue="test" dataType="Text" /> -->
+
+	<!-- <ate:runTimeDataHolder id="bookingSmsCode" dataHolderType="ManualAssigned" -->
+	<!-- dataValue="test" dataType="Text" /> -->
 
 	<ate:myWebElement id="Date_Selector" elementFind="Date_Selector_EF"
 		elementAction="Date_Selector_EA">
@@ -103,5 +112,5 @@
 	<ate:stepExpectedResultValue id="publicHomePageValidationValue"
 		dataValueID="publicHomePageVID" />
 
-	
+
 </beans>

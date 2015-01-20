@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,38 +18,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementaction;
-
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+package org.bigtester.ate.model.page.elementfind;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClickAction defines ....
- * 
+ * This class ITestWindowFinder defines ....
+ * parameter String is the test window handle
  * @author Peidong Hu
+ *
  */
-public class CursorMoveAction extends BaseElementAction implements
-		IElementAction, ITestObjectActionImpl  {
-
-	/**
-	 * @param myWd
-	 */
-	public CursorMoveAction(IMyWebDriver myWd) {
-		super(myWd);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		Actions act = new Actions(getMyWd().getWebDriver());
-		act.moveToElement(webElm).build().perform();
-	}
-
-	
+public interface ITestWindowFinder extends ITestObjectFinder<String>{
 
 }

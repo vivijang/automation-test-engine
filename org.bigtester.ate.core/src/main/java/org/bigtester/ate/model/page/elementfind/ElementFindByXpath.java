@@ -35,7 +35,7 @@ import com.google.common.base.Function;
  * @author Grace Hu
  *
  */
-public class ElementFindByXpath extends AbstractElementFind implements IElementFind {
+public class ElementFindByXpath extends AbstractElementFind implements IElementFind, ITestObjectFinderImpl {
 	/**
 	 * @param findByValue
 	 */

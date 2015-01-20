@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.exception;
 
-
 import java.util.List;
 
 import org.bigtester.ate.model.AbstractATECaseExecE;
@@ -33,43 +32,41 @@ import org.eclipse.jdt.annotation.Nullable;
 // TODO: Auto-generated Javadoc
 /**
  * This class PageValidationException defines ....
+ * 
  * @author Peidong Hu
  *
  */
 public class PageValidationException2 extends AbstractATECaseExecE {
-	
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -7144577815429959503L;
-	
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -7144577815429959503L;
+
 	/** The page property. */
-    @Nullable
+	@Nullable
 	private transient String pageProperty;
 	/** The element find. */
-    @Nullable
+	@Nullable
 	private transient IElementFind elementFind;
-	
+
 	/** The list asserters. */
-    @Nullable
+	@Nullable
 	private List<IExpectedResultAsserter> listAsserters;
-	
+
 	/**
 	 * @return the listAsserters
 	 */
-    @Nullable
+	@Nullable
 	public List<IExpectedResultAsserter> getListAsserters() {
 		return listAsserters;
 	}
 
-
-
 	/**
-	 * @param listAsserters the listAsserters to set
+	 * @param listAsserters
+	 *            the listAsserters to set
 	 */
 	public void setListAsserters(List<IExpectedResultAsserter> listAsserters) {
 		this.listAsserters = listAsserters;
 	}
-
-
 
 	/**
 	 * Gets the page property.
@@ -81,66 +78,82 @@ public class PageValidationException2 extends AbstractATECaseExecE {
 		return pageProperty;
 	}
 
-
-	
 	/**
 	 * Instantiates a new page validation exception2.
 	 *
-	 * @param message the message
-	 * @param errorCode the error code
-	 * @param pageProperty the page property
-	 * @param myWebDriver the my web driver
-	 * @param currentTestCase the current test case
+	 * @param message
+	 *            the message
+	 * @param errorCode
+	 *            the error code
+	 * @param pageProperty
+	 *            the page property
+	 * @param myWebDriver
+	 *            the my web driver
+	 * @param currentTestCase
+	 *            the current test case
 	 */
-	public PageValidationException2(String message, String errorCode, String pageProperty, IMyWebDriver myWebDriver, TestCase currentTestCase){
+	public PageValidationException2(String message, String errorCode,
+			String pageProperty, IMyWebDriver myWebDriver,
+			TestCase currentTestCase) {
 		super(message, errorCode, currentTestCase, myWebDriver);
-        this.pageProperty = pageProperty;
-        
-    }
-    
-    
-    /**
-     * Instantiates a new page validation exception2.
-     *
-     * @param message the message
-     * @param errorCode the error code
-     * @param eFind the e find
-     * @param myWebDriver the my web driver
-     * @param currentTestCase the current test case
-     */
-    public PageValidationException2(String message, String errorCode, IElementFind eFind, IMyWebDriver myWebDriver, TestCase currentTestCase){
-        super(message, errorCode, currentTestCase, myWebDriver);
-        elementFind = eFind;
-        
-    }
+		this.pageProperty = pageProperty;
 
-    /**
-     * Instantiates a new page validation exception2.
-     *
-     * @param message the message
-     * @param errorCode the error code
-     * @param listAsserters the list asserters
-     * @param myWebDriver the my web driver
-     * @param currentTestCase the current test case
-     */
-    public PageValidationException2(String message, String errorCode, List<IExpectedResultAsserter> listAsserters, IMyWebDriver myWebDriver, TestCase currentTestCase){
-    	super(message, errorCode, currentTestCase, myWebDriver);
-        this.listAsserters = listAsserters;
-        
-    }
+	}
 
-        
+	/**
+	 * Instantiates a new page validation exception2.
+	 *
+	 * @param message
+	 *            the message
+	 * @param errorCode
+	 *            the error code
+	 * @param eFind
+	 *            the e find
+	 * @param myWebDriver
+	 *            the my web driver
+	 * @param currentTestCase
+	 *            the current test case
+	 */
+	public PageValidationException2(String message, String errorCode,
+			IElementFind eFind, IMyWebDriver myWebDriver,
+			TestCase currentTestCase) {
+		super(message, errorCode, currentTestCase, myWebDriver);
+		elementFind = eFind;
+
+	}
+
+	/**
+	 * Instantiates a new page validation exception2.
+	 *
+	 * @param message
+	 *            the message
+	 * @param errorCode
+	 *            the error code
+	 * @param listAsserters
+	 *            the list asserters
+	 * @param myWebDriver
+	 *            the my web driver
+	 * @param currentTestCase
+	 *            the current test case
+	 */
+	public PageValidationException2(String message, String errorCode,
+			List<IExpectedResultAsserter> listAsserters,
+			IMyWebDriver myWebDriver, TestCase currentTestCase) {
+		super(message, errorCode, currentTestCase, myWebDriver);
+		this.listAsserters = listAsserters;
+
+	}
+
+	
 
 	/**
 	 * Gets the element find.
 	 *
 	 * @return the elementFind
 	 */
-    @Nullable
+	@Nullable
 	public IElementFind getElementFind() {
 		return elementFind;
 	}
 
-	
-	
 }

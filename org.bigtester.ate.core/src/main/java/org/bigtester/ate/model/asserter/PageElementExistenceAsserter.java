@@ -32,6 +32,7 @@ import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.ReportMessage;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
+import org.bigtester.ate.model.page.elementfind.IElementFind;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
@@ -101,9 +102,9 @@ public class PageElementExistenceAsserter extends
 			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
 				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
 				try {
-					webelement.getElementFind().doFind(
+					((IElementFind)webelement.getTestObjectFinder()).doFind(
 							getResultPage().getMyWd(),
-							webelement.getElementFind().getFindByValue());
+							((IElementFind)webelement.getTestObjectFinder()).getFindByValue());
 				} catch (NoSuchElementException e) {
 					execResult.getActualResult().getResultSet()
 							.put(interestingERDBIndexes.get(index), NOTEXIST);
@@ -114,7 +115,7 @@ public class PageElementExistenceAsserter extends
 					PageValidationException2 pve = new PageValidationException2(
 							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
 							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-							webelement.getElementFind(), getResultPage()
+							(IElementFind) webelement.getTestObjectFinder(), getResultPage()
 									.getMyWd(),
 							GlobalUtils
 									.findTestCaseBean(getApplicationContext()));
@@ -146,9 +147,9 @@ public class PageElementExistenceAsserter extends
 			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
 				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
 				try {
-					webelement.getElementFind().doFind(
+					((IElementFind)webelement.getTestObjectFinder()).doFind(
 							getResultPage().getMyWd(),
-							webelement.getElementFind().getFindByValue());
+							((IElementFind)webelement.getTestObjectFinder()).getFindByValue());
 					execResult.getActualResult().getResultSet()
 							.put(interestingERDBIndexes.get(index), EXIST);
 					execResult.getComparedResult().put(

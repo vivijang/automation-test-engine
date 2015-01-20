@@ -30,7 +30,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public interface IElementAction {
+public interface IElementAction extends ITestObjectAction<WebElement>{
 	
 	/**
 	 * Do action.

@@ -35,7 +35,7 @@ import com.google.common.base.Function;
  * @author Grace Hu
  */
 public class ElementFindByClassName extends AbstractElementFind implements
-		IElementFind {
+		IElementFind, ITestObjectFinderImpl {
 
 	/**
 	 * @param findByValue
@@ -79,5 +79,5 @@ public class ElementFindByClassName extends AbstractElementFind implements
 			}
 		}
 	}
-
+	
 }

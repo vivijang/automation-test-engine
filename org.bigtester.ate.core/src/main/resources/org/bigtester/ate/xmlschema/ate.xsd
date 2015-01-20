@@ -370,6 +370,15 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	<xsd:complexType name="BrowserWindowFindByTitleType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="title" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
 
 	<xsd:complexType name="ElementFindByXpathType">
 		<xsd:complexContent>
@@ -381,6 +390,15 @@
 
 
 	<xsd:complexType name="ClickActionType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:group ref="beans:beanElements" />
+				<xsd:attributeGroup ref="beans:beanAttributes"></xsd:attributeGroup>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TestWindowsSwitchActionType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
@@ -598,8 +616,9 @@
 
 	<xsd:element name="elementFindById" type="ElementFindByIdType" />
 	<xsd:element name="elementFindByXpath" type="ElementFindByXpathType" />
-	<xsd:element name="clickAction" type="ClickActionType">
-	</xsd:element>
+	<xsd:element name="clickAction" type="ClickActionType"/>
+	<xsd:element name="browserWindowSwitch" type="TestWindowsSwitchActionType"/>
+	<xsd:element name="browserWindowFindByTitle" type="BrowserWindowFindByTitleType" />
 	<xsd:element name="sendKeysAction" type="SendKeysActionType" />
 	<xsd:element name="myWebElement" type="MyWebElementType">
 	</xsd:element>

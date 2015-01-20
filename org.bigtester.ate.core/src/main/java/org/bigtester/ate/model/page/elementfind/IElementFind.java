@@ -30,7 +30,7 @@ import org.openqa.selenium.WebElement;
  * 
  * @author Peidong Hu
  */
-public interface IElementFind {
+public interface IElementFind extends ITestObjectFinder<WebElement>{
 	
 	/**
 	 * Do find of the element.

@@ -33,7 +33,7 @@ import java.awt.event.*;
  * @author Jun Yang
  *
  */
-public class SendReturnAction extends BaseElementAction implements IElementAction {
+public class SendReturnAction extends BaseElementAction implements IElementAction, ITestObjectActionImpl  {
 	
 	/**
 	 * @param myWd

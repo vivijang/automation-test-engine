@@ -38,7 +38,7 @@ import org.openqa.selenium.support.ui.Wait;
  * 
  * @author Peidong Hu
  */
-public abstract class AbstractElementFind {
+public abstract class AbstractElementFind extends AbstractTestObjectFinderImpl{
 	
 	/** The find by value. */
 	private String findByValue;
@@ -77,6 +77,7 @@ public abstract class AbstractElementFind {
 	 * @param findByValue the find by value
 	 */
 	public AbstractElementFind(String findByValue) {
+		super();
 		this.findByValue = findByValue;
 	}
 	
@@ -123,5 +124,29 @@ public abstract class AbstractElementFind {
 	            .pollingEvery(5, TimeUnit.SECONDS)
 	            .ignoring(NoSuchElementException.class);
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public @Nullable <T> T getCapability(Class<T> type) {
+		if (this instanceof IElementFind) {
+			return (T) this;
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Do find.
+	 *
+	 * @param myWebDriver the my web driver
+	 * @return the web element
+	 * @throws NoSuchElementException the no such element exception
+	 */
+	public WebElement doFind(IMyWebDriver myWebDriver) throws NoSuchElementException {
+
+		return doFind(myWebDriver, findByValue);
+	}
+
 
 }
