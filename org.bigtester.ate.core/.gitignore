@@ -2,9 +2,7 @@
 /test-output/
 /reports/
 /.eclipse-pmd
-/.pmd
 /doc/
-/.classpath
 /newlogFileName.log
 /logs/
 /data/
