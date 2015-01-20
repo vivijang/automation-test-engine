@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -20,36 +20,24 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClickAction defines ....
- * 
+ * This class abstractTestObjectFinderImpl defines ....
  * @author Peidong Hu
+ *
  */
-public class CursorMoveAction extends BaseElementAction implements
-		IElementAction, ITestObjectActionImpl  {
+public abstract class AbstractTestObjectActionImpl {
 
 	/**
-	 * @param myWd
+	 * Gets the capability.
+	 *
+	 * @param <T> the generic type
+	 * @param type the type
+	 * @return the capability
 	 */
-	public CursorMoveAction(IMyWebDriver myWd) {
-		super(myWd);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void doAction(final WebElement webElm) {
-		Actions act = new Actions(getMyWd().getWebDriver());
-		act.moveToElement(webElm).build().perform();
-	}
-
-	
+	@Nullable
+	public abstract <T> T getCapability (Class<T> type);
 
 }

@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.elementaction;
 import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.systemlogger.LogbackWriter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 // TODO: Auto-generated Javadoc
@@ -32,7 +33,7 @@ import org.openqa.selenium.WebElement;
  * @author Peidong Hu
  */
 public class SendKeysAction extends BaseElementAction implements
-		IElementAction {
+		IElementAction, ITestObjectActionImpl  {
 
 	/**
 	 * @param myWd
@@ -51,7 +52,13 @@ public class SendKeysAction extends BaseElementAction implements
 		if (null == inputData) {
 			throw new IllegalStateException("inputDatavalue is not correctly populated.");
 		} else {
-			webElm.sendKeys(inputData.getStrDataValue());
+			if (inputData.getStrDataValue().equals("[TAB]")) {
+				webElm.sendKeys(Keys.TAB);
+			} else if (inputData.getStrDataValue().equals("[ENTER]")) {
+				webElm.sendKeys(Keys.ENTER);
+			} else {
+				webElm.sendKeys(inputData.getStrDataValue());
+			}
 			LogbackWriter.writeAppInfo("action tracing: send keys to browser: " + inputData.getStrDataValue());
 		}
 

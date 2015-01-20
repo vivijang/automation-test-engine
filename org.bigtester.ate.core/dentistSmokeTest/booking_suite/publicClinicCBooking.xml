@@ -14,11 +14,11 @@
 	<aop:aspectj-autoproxy />
 
 	<import resource="classpath:META-INF/logger-reporter.xml" />
-	<import resource="classpath:META-INF/page_base_bean.xml" />
+<!-- 	<import resource="classpath:META-INF/page_base_bean.xml" /> -->
 	<import resource="classpath:META-INF/case_base_bean.xml" />
 	<import resource="../pageObjects/publicHomePage.xml" />
 	<import resource="../pageObjects/publicPracticeProfile.xml" />
-	<import resource="../pageObjects/publicSmsAuthentication.xml" />
+	<import resource="../pageObjects/publicBookingPage.xml" />
 	<import resource="../pageObjects/publicLoginPage.xml" />
 	<import resource="../pageObjects/lastPage.xml" />
 
@@ -43,10 +43,12 @@
 			targetStep="true" myWebElement="Service_Selector">
 		</ate:elementStep>
 		
+		
 		<ate:elementStep id="clickService_Consultation"
 			stepDescription="Service_Consultation" stepName="Service_Consultation"
 			targetStep="true" myWebElement="Service_Consultation">
 		</ate:elementStep>
+<!-- 		<ate:elementStep id="tabTest" stepName="tabTest" myWebElement="Service_SelectorTabKey" targetStep="true"/> -->
 		<ate:elementStep id="typeInLocation_Input"
 			stepDescription="type in Location_Input" stepName="Location_Input"
 			targetStep="true" myWebElement="Location_Input">
@@ -83,6 +85,12 @@
 			stepDescription="cclickAvailableBookingWE" stepName="clickAvailableBooking"
 			targetStep="true" myWebElement="clickAvailableBookingWE" pageObject="publicPracticeProfileClinicC">
 		</ate:elementStep>
+		
+		<ate:elementStep id="switchToBookingWindow"
+			stepDescription="switchToBookingWindow" stepName="switchToBookingWindow"
+			targetStep="false" myWebElement="switchToBookingWindowWE">
+		</ate:elementStep>
+		
 		<ate:elementStep id="publicLogin_typeUsername"
 			stepDescription="type in public user name" stepName="typeUsername"
 			targetStep="true" myWebElement="loginUserNameWE" >
@@ -96,15 +104,59 @@
 			targetStep="true" myWebElement="typeInBookingCommentsWE">
 		</ate:elementStep>
 		
-<!-- 		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode" -->
-<!-- 			testCaseFileName="dentistSmokeTest/mightytext_suite/getSmsCode.xml" -->
-<!-- 			parentTestCase="ClinicCBooking"> -->
-<!-- 			<property name="dataHolders"> -->
+		<ate:elementStep id="loginContinueBooking"
+			stepDescription="loginContinueBooking" stepName="loginContinueBooking"
+			targetStep="true" myWebElement="clickContinueWE">
+		</ate:elementStep>
+		
+		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode"
+			testCaseFileName="dentistSmokeTest/mightytext_suite/getSmsCode.xml"
+			parentTestCase="ClinicCBooking">
+			<property name="dataHolders">
+				<list>
+					<ref bean="bookingSmsCodeInputValue" />
+				</list>
+			</property>
+		</ate:caseTypeService>
+		
+		<ate:elementStep id="clickSmsCodeInput"
+			stepDescription="clickSmsCodeInput" stepName="clickSmsCodeInput"
+			targetStep="true" myWebElement="clickSmsCodeInputWE">
+		</ate:elementStep>
+		<ate:elementStep id="filloutSmsCode"
+			stepDescription="filloutSmsCode" stepName="filloutSmsCode"
+			targetStep="true" myWebElement="typeInSmsCodeWE">
+		</ate:elementStep>
+<!-- 		<ate:elementStep id="smsCodeTabKey" -->
+<!-- 			stepDescription="smsCodeTabKey" stepName="smsCodeTabKey" -->
+<!-- 			targetStep="true" myWebElement="tabKeySmsCodeInput"> -->
+<!-- 		</ate:elementStep> -->
+		
+<!-- 		<ate:elementStep id="clickVerifyEnterKey" -->
+<!-- 			stepDescription="clickVerifyEnterKey" stepName="clickVerifyEnterKey" -->
+<!-- 			targetStep="true" myWebElement="smsCodeVerifyEnterKeyWE"> -->
+<!-- 			<property name="expectedResultAsserter"> -->
 <!-- 				<list> -->
-<!-- 					<ref bean="bookingSmsCodeInputValue" /> -->
+<!-- 					<ref bean="publicBookingConfirmElementExistenceAsserter" /> -->
 <!-- 				</list> -->
 <!-- 			</property> -->
-<!-- 		</ate:caseTypeService> -->
+<!-- 		</ate:elementStep> -->
+
+		<ate:elementStep id="moveCursortoVerifySms"
+			stepDescription="moveCursortoVerifySms" stepName="moveCursortoVerifySms"
+			targetStep="true" myWebElement="moveMouseToVerifyButton" pageObject="publicSmsAuthentication">
+		
+		</ate:elementStep>
+		<ate:elementStep id="clickVerifySms"
+			stepDescription="clickVerifySms" stepName="clickVerifySms"
+			targetStep="true" myWebElement="clickVerifyWE" pageObject="publicSmsAuthentication">
+			<property name="expectedResultAsserter">
+				<list>
+					<ref bean="publicBookingConfirmElementExistenceAsserter" />
+				</list>
+			</property>
+		</ate:elementStep>
+		
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false"
 			pageObject="myLastPage">

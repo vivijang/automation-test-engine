@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -30,7 +31,7 @@ import org.openqa.selenium.WebElement;
  * @author Peidong Hu
  */
 public class ClickAction extends BaseElementAction implements
-		IElementAction {
+		IElementAction, ITestObjectActionImpl {
 
 	/**
 	 * @param myWd
@@ -45,7 +46,11 @@ public class ClickAction extends BaseElementAction implements
 	 */
 	@Override
 	public void doAction(final WebElement webElm) {
-		webElm.click();
+		if (webElm.isDisplayed()) {
+			webElm.click();
+		} else {
+			throw GlobalUtils.createNotInitializedException("web element display status wrong");
+		}
 	}
 
 	

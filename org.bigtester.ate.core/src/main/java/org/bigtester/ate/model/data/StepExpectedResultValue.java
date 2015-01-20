@@ -37,10 +37,12 @@ public class StepExpectedResultValue extends BaseERValue{
 	
 	/**
 	 * @param stepERDao
+	 * @throws TestDataException 
 	 */
-	public StepExpectedResultValue(StepExpectedResultDaoImpl stepERDao, String dataValueID) {
+	public StepExpectedResultValue(StepExpectedResultDaoImpl stepERDao, String dataValueID) throws TestDataException {
 		super(stepERDao);
 		this.dataValueID = dataValueID;
+		this.value = getStepERDao().getERs(dataValueID);
 	}
 	/**
 	 * Gets the value.
@@ -80,9 +82,9 @@ public class StepExpectedResultValue extends BaseERValue{
 	 * @param dataValueID the dataValueID to set
 	 * @throws TestDataException 
 	 */
-	public void setDataValueID(String sERSetID) throws TestDataException {
+	public void setDataValueID(String sERSetID) {
 		this.dataValueID = sERSetID;
-		value = getStepERDao().getERs(sERSetID);
+		
 	}
 
 }

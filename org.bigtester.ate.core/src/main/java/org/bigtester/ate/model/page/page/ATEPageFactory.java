@@ -27,6 +27,7 @@ import org.bigtester.ate.model.page.elementfind.ElementFindByLinkText;
 import org.bigtester.ate.model.page.elementfind.ElementFindByName;
 import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.bigtester.ate.model.page.elementfind.ITestObjectFinderImpl;
 import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
@@ -80,37 +81,37 @@ public final class ATEPageFactory implements IATEPageFactory {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IElementFind getIElementFind(EnumElementFindType elementFindType,
+	public ITestObjectFinderImpl getIElementFind(EnumElementFindType elementFindType,
 			String findByValue) {
 		// TODO add more findby type
 		synchronized (this) {
-			IElementFind retVal;
+			ITestObjectFinderImpl retVal;
 			switch (elementFindType) {
 			case ID:
 				ElementFindById efbID = new ElementFindById(findByValue);
-				retVal = (IElementFind) efbID;
+				retVal = (ITestObjectFinderImpl) efbID;
 				break;
 			case XPATH:
 				ElementFindByXpath efbXpath = new ElementFindByXpath(
 						findByValue);
 
-				retVal = (IElementFind) efbXpath;
+				retVal = (ITestObjectFinderImpl) efbXpath;
 				break;
 			case NAME:
 				ElementFindByName efbName = new ElementFindByName(findByValue);
 
-				retVal = (IElementFind) efbName;
+				retVal = (ITestObjectFinderImpl) efbName;
 				break;
 			case LINKTEXT:
 				ElementFindByLinkText efbLinkText = new ElementFindByLinkText(
 						findByValue);
 
-				retVal = (IElementFind) efbLinkText;
+				retVal = (ITestObjectFinderImpl) efbLinkText;
 				break;
 			default:
 				ElementFindById efbIDd = new ElementFindById(findByValue);
 
-				retVal = (IElementFind) efbIDd;
+				retVal = (ITestObjectFinderImpl) efbIDd;
 				break;
 			}
 			return retVal;

@@ -20,9 +20,11 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementaction;
 
+import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.eclipse.jdt.annotation.Nullable;
+import org.openqa.selenium.WebDriver;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,24 +32,41 @@ import org.openqa.selenium.interactions.Actions;
  * 
  * @author Peidong Hu
  */
-public class CursorMoveAction extends BaseElementAction implements
-		IElementAction, ITestObjectActionImpl  {
+public class TestWindowsSwitchAction extends PageModelBase implements
+		ITestWindowSwitchAction, ITestObjectActionImpl {
 
 	/**
 	 * @param myWd
 	 */
-	public CursorMoveAction(IMyWebDriver myWd) {
+	public TestWindowsSwitchAction(IMyWebDriver myWd) {
 		super(myWd);
-		// TODO Auto-generated constructor stub
 	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public @Nullable <T> T getCapability(Class<T> type) {
+		if (this instanceof ITestWindowSwitchAction) {
+			return (T) this;
+		} else {
+			return null;
+		}
+	}
+
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void doAction(final WebElement webElm) {
-		Actions act = new Actions(getMyWd().getWebDriver());
-		act.moveToElement(webElm).build().perform();
+	public void doAction(String winHandle) {
+		WebDriver webD = super.getMyWd().getWebDriver();
+		if (null == webD) {
+			throw GlobalUtils.createNotInitializedException("web driver");
+		} else {
+			webD.switchTo().window(winHandle);
+		}
+		
 	}
 
 	

@@ -16,7 +16,7 @@
 	<import resource="classpath:META-INF/page_base_bean.xml" />
 
 	<ate:regularPage id="publicSmsAuthentication"
-		dataFile="dentistSmokeTest/pageObjects/publicSmsAuthentication.data.xml" />
+		dataFile="dentistSmokeTest/pageObjects/publicBookingPage.data.xml" />
 
 	<ate:myWebElement id="typeInBookingCommentsWE" elementFind="bookingCommentsEF"
 		elementAction="typeInCommentsEA">
@@ -26,6 +26,19 @@
 	<ate:sendKeysAction id="typeInCommentsEA" dataValue="bookingCommentsValue" />
 	<ate:runTimeDataHolder id="bookingCommentsValue" dataHolderType="ManualAssigned"
 		dataValue="test booking comments" dataType="Text" />
+	
+	
+	<ate:myWebElement id="clickContinueWE" elementFind="continueButtonEF"
+		elementAction="clickContinueEA">
+	</ate:myWebElement>
+	<ate:elementFindByXpath id="continueButtonEF"
+		findByValue="//a[@onclick='javascript:Submit();']" />
+	<ate:clickAction id="clickContinueEA"/>
+	
+	<ate:myWebElement id="clickSmsCodeInputWE" elementFind="smsCodeEF"
+		elementAction="clickSmsInputEA">
+	</ate:myWebElement>
+	<ate:clickAction id="clickSmsInputEA"/>
 
 	<ate:myWebElement id="typeInSmsCodeWE" elementFind="smsCodeEF"
 		elementAction="typeInSmsEA">
@@ -37,14 +50,32 @@
 		dataType="Text" subCaseMappedDataHolderID="bookingSmsCode"
 		dataHolderType="CaseServiceParsed" />
 
+	<ate:myWebElement id="tabKeySmsCodeInput" elementFind="smsCodeEF"
+		elementAction="tabKeySmsCodeInputTab_EA"/>
+	<ate:sendKeysAction id="tabKeySmsCodeInputTab_EA" dataValue="tab"/>
+	<ate:runTimeDataHolder id="tab" dataType="Text" dataValue="[TAB]" dataHolderType="ManualAssigned"/>
+	
+	<ate:myWebElement id="smsCodeVerifyEnterKeyWE" elementFind="verifyButtonEF"
+		elementAction="verifyButtonEnterEA"/>
+	<ate:sendKeysAction id="verifyButtonEnterEA" dataValue="enter"/>
+	<ate:runTimeDataHolder id="enter" dataType="Text" dataValue="[ENTER]" dataHolderType="ManualAssigned"/>
+
+
+	<ate:myWebElement id="moveMouseToVerifyButton" elementFind="verifyButtonEF"
+		elementAction="moveMouseToEA" />
+		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->
+	<ate:mouseMoveToAction id="moveMouseToEA" />
+	
 	<ate:myWebElement id="clickVerifyWE" elementFind="verifyButtonEF"
 		elementAction="clickVerifyEA" />
+		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->
 	<ate:elementFindByXpath id="verifyButtonEF"
 		findByValue="//a[@onclick='checkSmsCode()']" />
 	<ate:clickAction id="clickVerifyEA" />
 	
+	
 	<ate:pageElementExistenceAsserter
-		id="publicPracticeProfileClinicCElementExistenceAsserter" resultPage="publicSmsAuthentication"
+		id="publicBookingConfirmElementExistenceAsserter" resultPage="publicSmsAuthentication"
 		stepERValue="publicBookingConfirm" />
 		<ate:stepExpectedResultValue id="publicBookingConfirm"
 		dataValueID="publicBookingConfirm" />

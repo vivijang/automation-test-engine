@@ -24,6 +24,13 @@
 	<ate:elementFindByXpath id="randomAvailableEF"
 		findByValue="//a[@class='fc-day-grid-event fc-event fc-start fc-end']" />
 	<ate:clickAction id="clickAvailEA"/>
+	
+	<ate:myWebElement id="switchToBookingWindowWE" elementFind="windowTitleEF"
+		elementAction="windowSwitch">
+	</ate:myWebElement>
+	<ate:browserWindowFindByTitle id="windowTitleEF"
+		title="Booking" />
+	<ate:browserWindowSwitch id="windowSwitch"/>
 
 	<ate:pagePropertyCorrectnessAsserter
 		id="publicPracticeProfilePropertyAsserter" resultPage="publicPracticeProfileClinicC"

@@ -28,8 +28,10 @@ import org.bigtester.ate.constant.ReportMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.elementaction.ITestObjectAction;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
+import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 import org.testng.reporters.XMLStringBuffer;
 
@@ -94,9 +96,9 @@ public final class TestStepsXMLReporterUtils {
 		String testData;
 		String stepReportMSG;
 		if (tsr.getThisStep().isElementStepFlag()) {
-			MyWebElement mwe = tsr.getThisStep().getMyWebElement();
+			MyWebElement<WebElement> mwe = tsr.getThisStep().getMyWebElement();
 			if (null==mwe) throw GlobalUtils.createNotInitializedException("myWebElement in element step.");
-			IElementAction myEA = mwe.getElementAction();
+			IElementAction myEA = (IElementAction) mwe.getTestObjectAction();
 			if (null == myEA) {
 				throw GlobalUtils.createNotInitializedException("element action in element step.");
 			} else {

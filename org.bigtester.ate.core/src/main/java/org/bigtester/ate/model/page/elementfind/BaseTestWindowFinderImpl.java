@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,38 +18,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.page.elementaction;
+package org.bigtester.ate.model.page.elementfind;
 
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ClickAction defines ....
- * 
+ * This class BaseTestWindowFinderImpl defines ....
  * @author Peidong Hu
+ *
  */
-public class CursorMoveAction extends BaseElementAction implements
-		IElementAction, ITestObjectActionImpl  {
-
-	/**
-	 * @param myWd
-	 */
-	public CursorMoveAction(IMyWebDriver myWd) {
-		super(myWd);
-		// TODO Auto-generated constructor stub
-	}
+public class BaseTestWindowFinderImpl extends AbstractTestObjectFinderImpl {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void doAction(final WebElement webElm) {
-		Actions act = new Actions(getMyWd().getWebDriver());
-		act.moveToElement(webElm).build().perform();
+	@Nullable
+	public <T> T getCapability(Class<T> type) {
+		if (this instanceof ITestWindowFinder) {
+			return (T) this;
+		} else {
+			return null;
+		}
 	}
-
-	
 
 }
