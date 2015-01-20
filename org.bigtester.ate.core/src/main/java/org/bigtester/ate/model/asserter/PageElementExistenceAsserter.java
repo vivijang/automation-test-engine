@@ -139,7 +139,7 @@ public class PageElementExistenceAsserter extends
 	@Override
 	public void assertER2() {
 		execResult.setStepExpectedResultValue(getStepERValue());
-
+		
 		Map<Long, MyWebElement> myWebElementList = getResultPage()
 				.getMyWebElementList();
 		if (!myWebElementList.isEmpty()) {

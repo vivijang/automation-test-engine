@@ -60,6 +60,12 @@
 	<ate:sendKeysAction id="verifyButtonEnterEA" dataValue="enter"/>
 	<ate:runTimeDataHolder id="enter" dataType="Text" dataValue="[ENTER]" dataHolderType="ManualAssigned"/>
 
+
+	<ate:myWebElement id="moveMouseToVerifyButton" elementFind="verifyButtonEF"
+		elementAction="moveMouseToEA" />
+		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->
+	<ate:mouseMoveToAction id="moveMouseToEA" />
+	
 	<ate:myWebElement id="clickVerifyWE" elementFind="verifyButtonEF"
 		elementAction="clickVerifyEA" />
 		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->

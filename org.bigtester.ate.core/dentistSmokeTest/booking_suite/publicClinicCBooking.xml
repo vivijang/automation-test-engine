@@ -141,6 +141,12 @@
 <!-- 				</list> -->
 <!-- 			</property> -->
 <!-- 		</ate:elementStep> -->
+
+		<ate:elementStep id="moveCursortoVerifySms"
+			stepDescription="moveCursortoVerifySms" stepName="moveCursortoVerifySms"
+			targetStep="true" myWebElement="moveMouseToVerifyButton" pageObject="publicSmsAuthentication">
+		
+		</ate:elementStep>
 		<ate:elementStep id="clickVerifySms"
 			stepDescription="clickVerifySms" stepName="clickVerifySms"
 			targetStep="true" myWebElement="clickVerifyWE" pageObject="publicSmsAuthentication">

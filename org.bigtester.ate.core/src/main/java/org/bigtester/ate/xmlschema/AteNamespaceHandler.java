@@ -70,6 +70,9 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_PAGEPROPERTYCORRECTNESS, new PagePropertyCorrectBeanDefinitionParser());
 		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_CLICKACTION, new ClickActionBeanDefinitionParser());
+		
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_MOUSEMOVETOACTION, new CursorMoveActionBeanDefinitionParser());
+		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BROWSERWINDOWSWITCH, new WindowSwitchActionBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BROWSERWINDOWFINDBYTITLE, new WindowFindByTitleBeanDefinitionParser());
 		
