@@ -37,7 +37,7 @@ public class BaseTestWindowFinderImpl extends AbstractTestObjectFinderImpl {
 	@Nullable
 	public <T> T getCapability(Class<T> type) {
 		if (this instanceof ITestWindowFinder) {
-			return (T) this;
+			return (T) this; //NOPMD
 		} else {
 			return null;
 		}

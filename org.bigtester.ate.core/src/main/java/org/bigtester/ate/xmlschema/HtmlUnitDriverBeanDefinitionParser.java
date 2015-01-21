@@ -24,7 +24,6 @@ package org.bigtester.ate.xmlschema;
 import org.apache.commons.lang3.StringUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.page.atewebdriver.MyHtmlUnitDriver;
-import org.bigtester.ate.model.page.atewebdriver.MyIEDriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;

@@ -48,7 +48,7 @@ public class TestWindowsSwitchAction extends PageModelBase implements
 	 */
 	public @Nullable <T> T getCapability(Class<T> type) {
 		if (this instanceof ITestWindowSwitchAction) {
-			return (T) this;
+			return (T) this; //NOPMD
 		} else {
 			return null;
 		}

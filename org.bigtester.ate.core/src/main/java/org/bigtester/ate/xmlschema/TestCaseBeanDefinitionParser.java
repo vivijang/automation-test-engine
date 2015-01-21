@@ -81,7 +81,7 @@ public class TestCaseBeanDefinitionParser extends AbstractBeanDefinitionParser {
 		ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(
 				childElements.size());
 		for (Element element : childElements) {
-			if (element.getTagName() == "ate:"
+			if (element.getTagName() == "ate:" //NOPMD
 					+ XsdElementConstants.ELEMENT_HOMESTEP) {
 				HomeStepBeanDefinitionParser homeStep = new HomeStepBeanDefinitionParser();
 				children.add(homeStep.parse(element, parserContext));

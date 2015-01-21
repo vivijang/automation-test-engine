@@ -22,7 +22,6 @@ package org.bigtester.ate.model.page.page;
 
 import org.bigtester.ate.constant.EnumElementFindType;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.elementfind.IElementFind;
 import org.bigtester.ate.model.page.elementfind.ITestObjectFinderImpl;
 
 // TODO: Auto-generated Javadoc

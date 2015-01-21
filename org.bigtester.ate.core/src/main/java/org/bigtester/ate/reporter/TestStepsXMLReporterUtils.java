@@ -28,7 +28,6 @@ import org.bigtester.ate.constant.ReportMessage;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.elementaction.IElementAction;
-import org.bigtester.ate.model.page.elementaction.ITestObjectAction;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.openqa.selenium.WebElement;

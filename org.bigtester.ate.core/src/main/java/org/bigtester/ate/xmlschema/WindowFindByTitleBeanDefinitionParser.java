@@ -23,7 +23,6 @@ package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.page.elementfind.ElementFindById;
 import org.bigtester.ate.model.page.elementfind.TestWindowFindByTitle;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;

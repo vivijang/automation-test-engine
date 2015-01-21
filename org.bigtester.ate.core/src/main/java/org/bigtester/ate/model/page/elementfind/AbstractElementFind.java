@@ -130,7 +130,7 @@ public abstract class AbstractElementFind extends AbstractTestObjectFinderImpl{
 	@Override
 	public @Nullable <T> T getCapability(Class<T> type) {
 		if (this instanceof IElementFind) {
-			return (T) this;
+			return (T) this; //NOPMD
 		} else {
 			return null;
 		}

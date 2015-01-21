@@ -26,7 +26,6 @@ import org.bigtester.ate.model.page.elementfind.ElementFindById;
 import org.bigtester.ate.model.page.elementfind.ElementFindByLinkText;
 import org.bigtester.ate.model.page.elementfind.ElementFindByName;
 import org.bigtester.ate.model.page.elementfind.ElementFindByXpath;
-import org.bigtester.ate.model.page.elementfind.IElementFind;
 import org.bigtester.ate.model.page.elementfind.ITestObjectFinderImpl;
 import org.eclipse.jdt.annotation.Nullable;
 

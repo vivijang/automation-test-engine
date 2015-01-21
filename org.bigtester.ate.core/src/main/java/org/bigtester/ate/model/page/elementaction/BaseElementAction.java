@@ -24,7 +24,6 @@ package org.bigtester.ate.model.page.elementaction;
 import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.page.PageModelBase;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.model.page.elementfind.IElementFind;
 import org.eclipse.jdt.annotation.Nullable;
 
 
@@ -89,7 +88,7 @@ public class BaseElementAction extends PageModelBase{
 	 */
 	public @Nullable <T> T getCapability(Class<T> type) {
 		if (this instanceof IElementAction) {
-			return (T) this;
+			return (T) this; //NOPMD
 		} else {
 			return null;
 		}

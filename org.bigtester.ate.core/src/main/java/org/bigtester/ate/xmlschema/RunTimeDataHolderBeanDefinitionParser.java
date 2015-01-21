@@ -25,8 +25,6 @@ import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumRunTimeDataType;
 import org.bigtester.ate.constant.RumtimeDataHolderType;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.asserter.PageElementExistenceAsserter;
-import org.bigtester.ate.model.data.AbstractRunTimeDataHolder;
 import org.bigtester.ate.model.data.CaseServiceParsedDataHolder;
 import org.bigtester.ate.model.data.ManualAssignedValueDataHolder;
 import org.bigtester.ate.model.data.PageParsedDataHolder;

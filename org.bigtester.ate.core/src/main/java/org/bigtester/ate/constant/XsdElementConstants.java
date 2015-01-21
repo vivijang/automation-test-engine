@@ -89,7 +89,7 @@ public final class XsdElementConstants {
 	public static final String ELEMENT_BROWSERWINDOWFINDBYTITLE = "browserWindowFindByTitle";
 	
 	/** The Constant ATTR_BROWSERWINDOWFINDBYTITLE_TITLE. */
-	public static final String ATTR_BROWSERWINDOWFINDBYTITLE_TITLE = "title";
+	public static final String ATTR_BROWSERWINDOWFINDBYTITLE_TITLE = "title"; //NOPMD
 	
 	
 	/** The Constant ELEMENT_BASEELEMENTACTION. */

@@ -53,6 +53,6 @@ public enum EPlatform {
     public String toString(){  
         return description;  
     }  
-      
+    //use short cut key Ctrl+Alt+j to add comments for solving this type of pmd warning  
     private String description;  
 }  

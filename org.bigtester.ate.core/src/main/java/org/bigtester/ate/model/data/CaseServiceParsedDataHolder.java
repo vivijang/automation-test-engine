@@ -49,7 +49,7 @@ public class CaseServiceParsedDataHolder extends AbstractRunTimeDataHolder  impl
 	 * Case service data will be transferred from sub test case. No page parsing work to do.
 	 */
 	@Override
-	public void parseData() throws RuntimeDataException {
+	public void parseData() throws RuntimeDataException {//NOPMD
 		
 		
 	}

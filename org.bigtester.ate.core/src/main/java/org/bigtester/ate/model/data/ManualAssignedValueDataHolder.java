@@ -21,7 +21,6 @@
 package org.bigtester.ate.model.data;
 
 import org.bigtester.ate.constant.EnumRunTimeDataType;
-import org.bigtester.ate.model.page.page.IPageObject;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,6 +38,5 @@ public class ManualAssignedValueDataHolder extends AbstractRunTimeDataHolder  im
 	public ManualAssignedValueDataHolder(EnumRunTimeDataType dataType,
 			String strDataValue, String springBeanID) {
 		super(dataType, strDataValue, springBeanID);
-		// TODO Auto-generated constructor stub
 	}
 }

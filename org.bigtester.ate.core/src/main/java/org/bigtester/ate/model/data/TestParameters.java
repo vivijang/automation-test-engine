@@ -51,6 +51,7 @@ public class TestParameters
     @Nullable
     private ApplicationContext parentAppCtx;
     
+    /** The parent test case data holders. */
     @Nullable
     private List<AbstractRunTimeDataHolder> parentTestCaseDataHolders;
     /**
