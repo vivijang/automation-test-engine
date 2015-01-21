@@ -26,6 +26,39 @@
 
 	<ate:stepExpectedResultValue id="publicLoginDashBoardValidationValue" dataValueID="loginDashboardVID"   />
 
+	<ate:myWebElement id="clickAppointmentTab" elementFind="appointmentTabEF" elementAction="appointmentClickEA"/>
+	<ate:elementFindByXpath id="appointmentTabEF" findByValue="//a[@href='#tab_1']" />
+	<ate:clickAction id="appointmentClickEA"  />
+	
+	<ate:myWebElement id="clickFirstCancelButton" elementFind="firstCancelButtonEF" elementAction="firstCancelClickEA"/>
+	<ate:elementFindByXpath id="firstCancelButtonEF" findByValue="//a[@ng-if='!isDone(appointment.data.start)']" />
+	<ate:clickAction id="firstCancelClickEA"  />
+	
+	<ate:myWebElement id="clickCancelValidateButton" elementFind="cancelValidateButtonEF" elementAction="cancelValidateButtonClickEA"/>
+	<ate:elementFindByXpath id="cancelValidateButtonEF" findByValue="//button[@ng-click='cancelApt()']" />
+	<ate:clickAction id="cancelValidateButtonClickEA"  />
+	
+	<ate:myWebElement id="cursorMoveToFirstCancelButton" elementFind="firstCancelButtonEF" elementAction="mouseMoveToCancelEA"/>
+	<ate:mouseMoveToAction id="mouseMoveToCancelEA"  />
+
+	<ate:myWebElement id="clickFirstReviewButtonWE" elementFind="firstReviewButtonEF" elementAction="clickFirstReviewButtonClickEA"/>
+	<ate:elementFindByXpath id="firstReviewButtonEF" findByValue="//a[@ng-if='isDone(appointment.data.start)']" />
+	<ate:clickAction id="clickFirstReviewButtonClickEA"  />
+	
+	<ate:myWebElement id="cursorMoveToFirstReviewButtonWE" elementFind="firstReviewButtonEF" elementAction="mouseMoveToReviewButtonEA"/>
+	<ate:mouseMoveToAction id="mouseMoveToReviewButtonEA"  />
+
+	<ate:myWebElement id="filloutReviewCommentsWE" elementFind="reviewCommentsTextareaEF" elementAction="typeInReviewCommentsEA"/>
+	<ate:elementFindByXpath id="reviewCommentsTextareaEF" findByValue="//textarea[@ng-model='appointment.data.comment.body']" />
+	<ate:sendKeysAction id="typeInReviewCommentsEA" dataValue="reviewCommentsText" />
+	
+	<ate:runTimeDataHolder id="reviewCommentsText" dataType="Text" dataValue="test review comments" dataHolderType="ManualAssigned"/>
+
+	<ate:myWebElement id="submitReviewCommentsWE" elementFind="submitCommentsTextareaEF" elementAction="submitReviewCommentsEA"/>
+	<ate:elementFindByXpath id="submitCommentsTextareaEF" findByValue="//button[@ng-click='submit()']" />
+	<ate:clickAction id="submitReviewCommentsEA" />
+	
+
 <!-- LogoutLInk myWebElement definition -->
 	<ate:myWebElement id="logoutPatientWE" elementFind="logoutPatientEF" elementAction="logoutPatientEA"/>
 	<ate:elementFindByXpath id="logoutPatientEF" findByValue="//a[@href='/logoutPatient']" />

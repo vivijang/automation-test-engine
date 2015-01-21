@@ -27,7 +27,8 @@
 			
 <!-- 		</ate:TestSuite> -->
 		<ate:TestSuite id="booking_suite" suiteName="booking_suite">
-			<ate:XmlTestCase id="bookingClinicC" testCaseName="dentistSmokeTest/booking_suite/publicClinicCBooking.xml"/>
+<!-- 			<ate:XmlTestCase id="bookingClinicC" testCaseName="dentistSmokeTest/booking_suite/publicClinicCBooking.xml"/> -->
+			<ate:XmlTestCase id="reviewBooking" testCaseName="dentistSmokeTest/booking_suite/reviewBooking.xml"/>
 		</ate:TestSuite>
 	</ate:TestProject>
 </beans>

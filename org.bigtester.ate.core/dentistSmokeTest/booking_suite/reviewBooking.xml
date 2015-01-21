@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ate="http://www.bigtester.org/schema/ate" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.bigtester.org/schema/ate 
+                           http://www.bigtester.org/schema/ate/ate.xsd">
+	                       
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/case_base_bean.xml" />
+	<import resource="../pageObjects/publicHomePage.xml" />
+	<import resource="../pageObjects/publicLoginPage.xml" />
+	<import resource="../pageObjects/publicLoginDashBoard.xml" />
+	<import resource="../pageObjects/lastPage.xml" />
+<!-- 
+	<ate:firefoxDriver  id="MyWebDriver2" profileName="dentisteasy"/>  
+	<ate:chromeDriver   id="MyWebDriver2" />
+	<ate:IEDriver       id="MyWebDriver2" />
+	<ate:safariDriver   id="MyWebDriver2" />
+	<ate:operaDriver    id="MyWebDriver2" />
+	<ate:htmlUnitDriver id="MyWebDriver2" />
+      -->
+	<ate:firefoxDriver  id="MyWebDriver2" profileName="dentisteasy"/>
+	
+	<ate:testCase id="testcase" testCaseName="Validate public login and logout">
+		<ate:homeStep id="openPublicHomePage" stepName="openPublicHomePage"
+			stepDescription="open my public home page" targetStep="false" pageObject="publicHomePage">
+			
+		</ate:homeStep>
+		<ate:elementStep id="publicLogin_clickLoginLink"
+			stepDescription="Click login link to log in" stepName="clickLoginLink"
+			targetStep="true" myWebElement="publicAccountLinkWE" pageObject="publicLoginPage">
+		</ate:elementStep>
+		<ate:elementStep id="publicLogin_typeUsername"
+			stepDescription="type in public user name" stepName="typeUsername"
+			targetStep="true" myWebElement="loginUserNameWE" pageObject="publicLoginPage">
+		</ate:elementStep>
+		<ate:elementStep id="publicLogin_typePassword"
+			stepDescription="type in public user password" stepName="typePassword"
+			targetStep="true" myWebElement="loginPasswordWE" pageObject="publicLoginPage">
+		</ate:elementStep>
+		<ate:elementStep id="publicLogin_clickLoginButton"
+			stepDescription="click Login button to log in" stepName="clickLoginButton"
+			targetStep="true" myWebElement="clickLoginButtonWE" pageObject="publicLoginDashBoard">
+			<property name="expectedResultAsserter">
+				<list>
+					<ref bean="publicLoginDashBoardPropertyAsserter" />
+					<ref bean="publicLoginDashBoardElementExistenceAsserter" />
+				</list>
+			</property>
+		</ate:elementStep>
+		<ate:elementStep id="publicClickAppointment"
+			stepDescription="click on my appointment tab" stepName="publicClickAppointment"
+			targetStep="true" myWebElement="clickAppointmentTab">
+		</ate:elementStep>
+		<ate:elementStep id="publicMouseMoveToReviewButton"
+			stepDescription="publicMouseMoveToReviewButton" stepName="publicMouseMoveToReviewButton"
+			targetStep="false" myWebElement="cursorMoveToFirstReviewButtonWE">
+		</ate:elementStep>
+		<ate:elementStep id="publicClickFirstReviewButton"
+			stepDescription="publicClickFirstReviewButton" stepName="publicClickFirstReviewButton"
+			targetStep="true" myWebElement="clickFirstReviewButtonWE">
+		</ate:elementStep>
+		
+		<ate:elementStep id="publicFilloutReviewComments"
+			stepDescription="publicFilloutReviewComments" stepName="publicFilloutReviewComments"
+			targetStep="true" myWebElement="filloutReviewCommentsWE">
+		</ate:elementStep>
+		
+		<ate:elementStep id="publicClickSubmitComments"
+			stepDescription="publicClickSubmitComments" stepName="publicClickSubmitComments"
+			targetStep="true" myWebElement="submitReviewCommentsWE">
+		</ate:elementStep>
+		
+		<ate:elementStep id="publicLogin_clickLogoutLink"
+			stepDescription="logout patient" stepName="logoutPatient"
+			targetStep="false" myWebElement="logoutPatientWE">
+		</ate:elementStep>
+		<ate:lastStep id="mylaststep" stepName="mylaststep"
+			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
+		</ate:lastStep>
+	</ate:testCase>
+
+</beans>
