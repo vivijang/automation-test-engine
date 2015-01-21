@@ -69,6 +69,13 @@ public class ElementStepBeanDefinitionParser extends
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
 					new RuntimeBeanReference(myWE));
 		}
+		String ead = element
+				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_ELEMENTACTIONDEF);
+		if (StringUtils.hasText(ead)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(ead));
+		}
+		
 		
 		boolean target = Boolean.parseBoolean(element
 				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));

@@ -108,6 +108,9 @@ public final class XsdElementConstants {
 	public static final String ATTR_SENDKEYSACTION_DATAVALUE = "dataValue";
 	
 	/** The Constant ELEMENT_MYWEBELEMENT. */
+	public static final String ELEMENT_ELEMENTACTIONDEF = "elementActionDef";
+	
+	/** The Constant ELEMENT_MYWEBELEMENT. */
 	public static final String ELEMENT_MYWEBELEMENT = "myWebElement";
 	
 	/** The Constant ELEMENT_ELEMENTSTEP. */
@@ -147,13 +150,13 @@ public final class XsdElementConstants {
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATATYPE = "dataType";
 	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE. */
-	public static final String ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE = "dataHolderType";
+	public static final String ATTR_RUNTIMEDATAHOLDER_DATAHOLDERTYPE = "dataHolderType"; //NOPMD
 	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID. */
-	public static final String ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID = "subCaseMappedDataHolderID";
+	public static final String ATTR_RUNTIMEDATAHOLDER_SUBCASEMAPPEDDATAHOLDERID = "subCaseMappedDataHolderID"; //NOPMD
 	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE. */
-	public static final String ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE = "indexOfSameTypeDataOnPage";
+	public static final String ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE = "indexOfSameTypeDataOnPage"; //NOPMD
 	
 	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
@@ -271,14 +274,23 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_ELEMENTSTEP_MYWEBELEMENT. */
 	public static final String ATTR_ELEMENTSTEP_MYWEBELEMENT = "myWebElement";
 	
+	/** The Constant ATTR_ELEMENTSTEP_ELEMENTACTIONDEF. */
+	public static final String ATTR_ELEMENTSTEP_ELEMENTACTIONDEF = "elementActionDef";
+	
 	/** The Constant ATTR_ELEMENTFINDBYID_FINDBYVALUE. */
 	public static final String ATTR_ELEMENTFINDBYID_FINDBYVALUE = "findByValue";
 	
 	/** The Constant ATTR_MYWEBELEMENT_ELEMENTFIND. */
 	public static final String ATTR_MYWEBELEMENT_ELEMENTFIND = "elementFind";
 	
+	/** The Constant ATTR_ELEMENTACTIONDEF_ELEMENTFIND. */
+	public static final String ATTR_ELEMENTACTIONDEF_ELEMENTFIND = "elementFind";
+	
 	/** The Constant ATTR_MYWEBELEMENT_ELEMENTACTION. */
 	public static final String ATTR_MYWEBELEMENT_ELEMENTACTION = "elementAction";
+
+	/** The Constant ATTR_ELEMENTACTIONDEF_ELEMENTACTION. */
+	public static final String ATTR_ELEMENTACTIONDEF_ELEMENTACTION = "elementAction"; //NOPMD
 	
 	/** The Constant ATTR_XMLTESTCASE_TESTCASENAME. */
 	public static final String ATTR_XMLTESTCASE_TESTCASENAME = "testCaseName";

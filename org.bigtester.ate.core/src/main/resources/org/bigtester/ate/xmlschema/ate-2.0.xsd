@@ -481,7 +481,7 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="MyWebElementType">
+	<xsd:complexType name="ElementActionDefType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
@@ -497,7 +497,7 @@
 	<xsd:complexType name="HomeStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
-				<xsd:attribute name="myWebElement" type="xsd:string">
+				<xsd:attribute name="elementActionDef" type="xsd:string">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<tool:annotation kind="ref">
@@ -525,7 +525,7 @@
 	<xsd:complexType name="ElementStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
-				<xsd:attribute name="myWebElement" type="xsd:string"
+				<xsd:attribute name="elementActionDef" type="xsd:string"
 					use="required">
 					<xsd:annotation>
 						<xsd:appinfo>
@@ -553,7 +553,7 @@
 	<xsd:complexType name="LastStepType">
 		<xsd:complexContent>
 			<xsd:extension base="BaseTestStepType">
-				<xsd:attribute name="myWebElement" type="xsd:string">
+				<xsd:attribute name="elementActionDef" type="xsd:string">
 					<xsd:annotation>
 						<xsd:appinfo>
 							<tool:annotation kind="ref">
@@ -632,7 +632,7 @@
 	<xsd:element name="browserWindowSwitch" type="TestWindowsSwitchActionType"/>
 	<xsd:element name="browserWindowFindByTitle" type="BrowserWindowFindByTitleType" />
 	<xsd:element name="sendKeysAction" type="SendKeysActionType" />
-	<xsd:element name="myWebElement" type="MyWebElementType">
+	<xsd:element name="elementActionDef" type="ElementActionDefType">
 	</xsd:element>
 	<xsd:element name="elementStep" type="ElementStepType" />
 	<xsd:element name="baseElementAction" type="BaseElementActionType" />

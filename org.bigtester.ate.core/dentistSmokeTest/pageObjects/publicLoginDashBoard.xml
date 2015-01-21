@@ -17,7 +17,7 @@
 	<import resource="classpath:META-INF/page_base_bean.xml" />
 	
 	<ate:regularPage id="publicLoginDashBoard" 
-		parent="myBasePageObject" dataFile="dentistSmokeTest/pageObjects/publicLoginDashBoard.data.xml"/>
+		dataFile="dentistSmokeTest/pageObjects/publicLoginDashBoard.data.xml"/>
 		
 	<ate:pagePropertyCorrectnessAsserter
 		id="publicLoginDashBoardPropertyAsserter" resultPage="publicLoginDashBoard" stepERValue="publicLoginDashBoardValidationValue"/>
@@ -25,7 +25,7 @@
 	<ate:pageElementExistenceAsserter id="publicLoginDashBoardElementExistenceAsserter" resultPage="publicLoginDashBoard" stepERValue="publicLoginDashBoardValidationValue" />
 
 	<ate:stepExpectedResultValue id="publicLoginDashBoardValidationValue" dataValueID="loginDashboardVID"   />
-
+<!-- appontment operations -->
 	<ate:myWebElement id="clickAppointmentTab" elementFind="appointmentTabEF" elementAction="appointmentClickEA"/>
 	<ate:elementFindByXpath id="appointmentTabEF" findByValue="//a[@href='#tab_1']" />
 	<ate:clickAction id="appointmentClickEA"  />
@@ -58,7 +58,7 @@
 	<ate:elementFindByXpath id="submitCommentsTextareaEF" findByValue="//button[@ng-click='submit()']" />
 	<ate:clickAction id="submitReviewCommentsEA" />
 	
-
+	
 <!-- LogoutLInk myWebElement definition -->
 	<ate:myWebElement id="logoutPatientWE" elementFind="logoutPatientEF" elementAction="logoutPatientEA"/>
 	<ate:elementFindByXpath id="logoutPatientEF" findByValue="//a[@href='/logoutPatient']" />
