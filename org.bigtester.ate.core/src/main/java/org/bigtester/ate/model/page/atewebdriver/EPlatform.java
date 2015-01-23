@@ -27,32 +27,80 @@ package org.bigtester.ate.model.page.atewebdriver;
  *
  */
 public enum EPlatform {  
+    
+    /** The Any. */
     Any("any"),  
+    
+    /** The Linux. */
     Linux("Linux"),  
+    
+    /** The Mac_ os. */
     Mac_OS("Mac OS"),  
+    
+    /** The Mac_ o s_ x. */
     Mac_OS_X("Mac OS X"),  
+    
+    /** The Windows. */
     Windows("Windows"),  
+    
+    /** The O s2. */
     OS2("OS/2"),  
+    
+    /** The Solaris. */
     Solaris("Solaris"),  
+    
+    /** The Sun os. */
     SunOS("SunOS"),  
+    
+    /** The MP ei x. */
     MPEiX("MPE/iX"),  
+    
+    /** The hp ux. */
     HP_UX("HP-UX"),  
+    
+    /** The aix. */
     AIX("AIX"),  
+    
+    /** The O s390. */
     OS390("OS/390"),  
+    
+    /** The Free bsd. */
     FreeBSD("FreeBSD"),  
+    
+    /** The Irix. */
     Irix("Irix"),  
+    
+    /** The Digital_ unix. */
     Digital_Unix("Digital Unix"),  
+    
+    /** The Net ware_411. */
     NetWare_411("NetWare"),  
+    
+    /** The OS f1. */
     OSF1("OSF1"),  
+    
+    /** The Open vms. */
     OpenVMS("OpenVMS"),  
+    
+    /** The Others. */
     Others("Others");  
       
+    /**
+     * Instantiates a new e platform.
+     *
+     * @param desc the desc
+     */
     private EPlatform(String desc){  
         this.description = desc;  
     }  
+    
+    /* (non-Javadoc)
+     * @see java.lang.Enum#toString()
+     */
     public String toString(){  
         return description;  
-    }  
-    //use short cut key Ctrl+Alt+j to add comments for solving this type of pmd warning  
+    }
+    
+    /** The description. */
     private String description;  
 }  

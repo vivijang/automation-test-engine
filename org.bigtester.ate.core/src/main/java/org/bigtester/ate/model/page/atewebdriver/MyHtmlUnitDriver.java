@@ -32,15 +32,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class MyHtmlUnitDriver extends WebDriverBase implements IMyWebDriver{
 	
-	
-	/**
-	 * Instantiates a new my HtmlUnit driver.
-	 */
-	public MyHtmlUnitDriver() {
-		//TODO create HtmlUnit browsers and remote web driver handler
-		super();
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -54,8 +45,7 @@ public class MyHtmlUnitDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = super.getWebDriver();
-		retVal = new HtmlUnitDriver();
+		WebDriver retVal = new HtmlUnitDriver();
 		setWebDriver(retVal);
 		return retVal;
 	}

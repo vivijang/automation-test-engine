@@ -29,19 +29,33 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  */
     
-public class OSinfo {
+public final class OSinfo {
+	
+	/** The os. */
 	@Nullable
-    private static String OS = "";  
-    private static OSinfo _instance = new OSinfo();;  
+    private static String osName = "";  
+    
+    /** The _instance. */
+    private static OSinfo instance = new OSinfo();;  
+    
+    /** The platform. */
     private EPlatform platform ;
     
+    /**
+     * Instantiates a new osinfo.
+     */
     private OSinfo(){
-        OS = System.getProperty("os.name").toLowerCase();
+        osName = System.getProperty("os.name").toLowerCase();
     	platform = EPlatform.Others;
     }  
       
+    /**
+     * Checks if is linux.
+     *
+     * @return true, if is linux
+     */
     public static boolean isLinux(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("linux")>=0;
 		} else {
@@ -50,8 +64,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is mac os.
+     *
+     * @return true, if is mac os
+     */
     public static boolean isMacOS(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")<0;
 		} else {
@@ -60,8 +79,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is mac osx.
+     *
+     * @return true, if is mac osx
+     */
     public static boolean isMacOSX(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")>0;
 		} else {
@@ -70,8 +94,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is windows.
+     *
+     * @return true, if is windows
+     */
     public static boolean isWindows(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("windows")>=0;
 		} else {
@@ -80,8 +109,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is os2.
+     *
+     * @return true, if is os2
+     */
     public static boolean isOS2(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("os/2")>=0;
 		} else {
@@ -90,8 +124,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is solaris.
+     *
+     * @return true, if is solaris
+     */
     public static boolean isSolaris(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("solaris")>=0;
 		} else {
@@ -100,8 +139,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is sun os.
+     *
+     * @return true, if is sun os
+     */
     public static boolean isSunOS(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("sunos")>=0;
 		} else {
@@ -110,8 +154,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is MP eix.
+     *
+     * @return true, if is MP eix
+     */
     public static boolean isMPEiX(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("mpe/ix")>=0;
 		} else {
@@ -120,8 +169,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is hpux.
+     *
+     * @return true, if is hpux
+     */
     public static boolean isHPUX(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("hp-ux")>=0;
 		} else {
@@ -130,8 +184,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is aix.
+     *
+     * @return true, if is aix
+     */
     public static boolean isAix(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("aix")>=0;
 		} else {
@@ -140,8 +199,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is o s390.
+     *
+     * @return true, if is o s390
+     */
     public static boolean isOS390(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("os/390")>=0;
 		} else {
@@ -150,8 +214,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is free bsd.
+     *
+     * @return true, if is free bsd
+     */
     public static boolean isFreeBSD(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("freebsd")>=0;
 		} else {
@@ -160,8 +229,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is irix.
+     *
+     * @return true, if is irix
+     */
     public static boolean isIrix(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("irix")>=0;
 		} else {
@@ -170,8 +244,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is digital unix.
+     *
+     * @return true, if is digital unix
+     */
     public static boolean isDigitalUnix(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("digital")>=0 && os2.indexOf("unix")>0;
 		} else {
@@ -180,8 +259,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is netware.
+     *
+     * @return true, if is netware
+     */
     public static boolean isNetWare(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("netware")>=0;
 		} else {
@@ -190,8 +274,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is OS f1.
+     *
+     * @return true, if is OS f1
+     */
     public static boolean isOSF1(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("osf1")>=0;
 		} else {
@@ -200,8 +289,13 @@ public class OSinfo {
 		}  
     }  
       
+    /**
+     * Checks if is open vms.
+     *
+     * @return true, if is open vms
+     */
     public static boolean isOpenVMS(){  
-        final String os2 = OS;
+        final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("openvms")>=0;
 		} else {
@@ -210,49 +304,51 @@ public class OSinfo {
 		}  
     }  
       
-    /** 
-     * Get the name of operating system 
+    /**
+     *  
+     * Get the name of operating system .
+     *
      * @return  the name of operating system
      */  
     public static EPlatform getOSname(){  
         if(isAix()){  
-            _instance.platform = EPlatform.AIX;  
+            instance.platform = EPlatform.AIX;  
         }else if (isDigitalUnix()) {  
-            _instance.platform = EPlatform.Digital_Unix;  
+            instance.platform = EPlatform.Digital_Unix;  
         }else if (isFreeBSD()) {  
-            _instance.platform = EPlatform.FreeBSD;  
+            instance.platform = EPlatform.FreeBSD;  
         }else if (isHPUX()) {  
-            _instance.platform = EPlatform.HP_UX;  
+            instance.platform = EPlatform.HP_UX;  
         }else if (isIrix()) {  
-            _instance.platform = EPlatform.Irix;  
+            instance.platform = EPlatform.Irix;  
         }else if (isLinux()) {  
-            _instance.platform = EPlatform.Linux;  
+            instance.platform = EPlatform.Linux;  
         }else if (isMacOS()) {  
-            _instance.platform = EPlatform.Mac_OS;  
+            instance.platform = EPlatform.Mac_OS;  
         }else if (isMacOSX()) {  
-            _instance.platform = EPlatform.Mac_OS_X;  
+            instance.platform = EPlatform.Mac_OS_X;  
         }else if (isMPEiX()) {  
-            _instance.platform = EPlatform.MPEiX;  
+            instance.platform = EPlatform.MPEiX;  
         }else if (isNetWare()) {  
-            _instance.platform = EPlatform.NetWare_411;  
+            instance.platform = EPlatform.NetWare_411;  
         }else if (isOpenVMS()) {  
-            _instance.platform = EPlatform.OpenVMS;  
+            instance.platform = EPlatform.OpenVMS;  
         }else if (isOS2()) {  
-            _instance.platform = EPlatform.OS2;  
+            instance.platform = EPlatform.OS2;  
         }else if (isOS390()) {  
-            _instance.platform = EPlatform.OS390;  
+            instance.platform = EPlatform.OS390;  
         }else if (isOSF1()) {  
-            _instance.platform = EPlatform.OSF1;  
+            instance.platform = EPlatform.OSF1;  
         }else if (isSolaris()) {  
-            _instance.platform = EPlatform.Solaris;  
+            instance.platform = EPlatform.Solaris;  
         }else if (isSunOS()) {  
-            _instance.platform = EPlatform.SunOS;  
+            instance.platform = EPlatform.SunOS;  
         }else if (isWindows()) {  
-            _instance.platform = EPlatform.Windows;  
+            instance.platform = EPlatform.Windows;  
         }else{  
-            _instance.platform = EPlatform.Others;  
+            instance.platform = EPlatform.Others;  
         }  
-        return _instance.platform;  
+        return instance.platform;  
     }  
 }  
 

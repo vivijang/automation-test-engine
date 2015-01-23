@@ -20,13 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
-import java.util.Properties;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
@@ -79,9 +75,8 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		OSinfo osinfo = null;
 
-        EPlatform platform = osinfo.getOSname();
+		EPlatform platform = OSinfo.getOSname();
 		switch (platform)
 		{
 			case Windows:	
@@ -93,8 +88,7 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 			default:
 				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
 		}        
-		WebDriver retVal = super.getWebDriver();
-		retVal = new ChromeDriver();
+		WebDriver retVal = new ChromeDriver();
 		setWebDriver(retVal);
 		return retVal;
 		

@@ -24,7 +24,6 @@ import org.bigtester.ate.browser.BrowserProfile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.openqa.selenium.safari.SafariDriver;
 import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
@@ -87,8 +86,7 @@ public class MySafariDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = super.getWebDriver();
-		retVal = new ChromeDriver();
+		WebDriver retVal = new ChromeDriver();
 		setWebDriver(retVal);
 		return retVal;
 		/*

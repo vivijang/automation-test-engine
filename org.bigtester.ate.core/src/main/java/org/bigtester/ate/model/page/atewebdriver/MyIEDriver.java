@@ -23,7 +23,6 @@ package org.bigtester.ate.model.page.atewebdriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -59,8 +58,7 @@ public class MyIEDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = super.getWebDriver();
-		retVal = new InternetExplorerDriver();
+		WebDriver retVal = new InternetExplorerDriver();
 		setWebDriver(retVal);
 		return retVal;
 	}

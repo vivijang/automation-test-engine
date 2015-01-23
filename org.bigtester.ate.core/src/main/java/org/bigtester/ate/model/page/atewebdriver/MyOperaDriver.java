@@ -75,8 +75,7 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = super.getWebDriver();
-		retVal = new ChromeDriver();
+		WebDriver retVal = new ChromeDriver();
 		setWebDriver(retVal);
 		return retVal;
 		/*
