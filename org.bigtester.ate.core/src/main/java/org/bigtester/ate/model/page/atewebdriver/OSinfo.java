@@ -33,7 +33,7 @@ public final class OSinfo {
 	
 	/** The os. */
 	@Nullable
-    private static String osName = "";  
+    private String osName;  
     
     /** The _instance. */
     private static OSinfo instance = new OSinfo();;  
@@ -42,9 +42,37 @@ public final class OSinfo {
     private EPlatform platform ;
     
     /**
+	 * @return the osName
+	 */
+	public @Nullable String getOsName() {
+		return System.getProperty("os.name").toLowerCase();
+	}
+
+	/**
+	 * @param osName the osName to set
+	 */
+	public void setOsName(String osName) {
+		this.osName = osName;
+	}
+
+	/**
+	 * @return the platform
+	 */
+	public EPlatform getPlatform() {
+		return platform;
+	}
+
+	/**
+	 * @param platform the platform to set
+	 */
+	public void setPlatform(EPlatform platform) {
+		this.platform = platform;
+	}
+
+	/**
      * Instantiates a new osinfo.
      */
-    private OSinfo(){
+    public OSinfo(){
         osName = System.getProperty("os.name").toLowerCase();
     	platform = EPlatform.Others;
     }  
@@ -54,15 +82,13 @@ public final class OSinfo {
      *
      * @return true, if is linux
      */
-    public static boolean isLinux(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("linux")>=0;
-		} 
-		else {
+    public boolean isLinux(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS Linux name is not correct");
+		} 
+		else return os2.indexOf("linux")>=0;
     }  
       
     /**
@@ -70,14 +96,12 @@ public final class OSinfo {
      *
      * @return true, if is mac os
      */
-    public static boolean isMacOS(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")<0;
-		} else {
+    public boolean isMacOS(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS Mac name is not correct");
+		} else return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf('x')<0;
     }  
       
     /**
@@ -85,14 +109,12 @@ public final class OSinfo {
      *
      * @return true, if is mac osx
      */
-    public static boolean isMacOSX(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")>0;
-		} else {
+    public boolean isMacOSX(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS MacOSX name is not correct");
+		} else return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf('x')>0;
     }  
       
     /**
@@ -100,14 +122,12 @@ public final class OSinfo {
      *
      * @return true, if is windows
      */
-    public static boolean isWindows(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("windows")>=0;
-		} else {
+    public boolean isWindows(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS Windows name is not correct");
+		} else return os2.indexOf("windows")>=0;
     }  
       
     /**
@@ -115,14 +135,12 @@ public final class OSinfo {
      *
      * @return true, if is os2
      */
-    public static boolean isOS2(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("os/2")>=0;
-		} else {
+    public boolean isOS2(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS OS2 name is not correct");
+		} else return os2.indexOf("os/2")>=0;
     }  
       
     /**
@@ -130,14 +148,12 @@ public final class OSinfo {
      *
      * @return true, if is solaris
      */
-    public static boolean isSolaris(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("solaris")>=0;
-		} else {
+    public boolean isSolaris(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS Soliris name is not correct");
+		} else return os2.indexOf("solaris")>=0;
     }  
       
     /**
@@ -145,14 +161,12 @@ public final class OSinfo {
      *
      * @return true, if is sun os
      */
-    public static boolean isSunOS(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("sunos")>=0;
-		} else {
+    public boolean isSunOS(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS SunOS name is not correct");
+		} else return os2.indexOf("sunos")>=0;
     }  
       
     /**
@@ -160,14 +174,12 @@ public final class OSinfo {
      *
      * @return true, if is MP eix
      */
-    public static boolean isMPEiX(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("mpe/ix")>=0;
-		} else {
+    public boolean isMPEiX(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS MPEiX name is not correct");
+		} else return os2.indexOf("mpe/ix")>=0;
     }  
       
     /**
@@ -175,14 +187,12 @@ public final class OSinfo {
      *
      * @return true, if is hpux
      */
-    public static boolean isHPUX(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("hp-ux")>=0;
-		} else {
+    public boolean isHPUX(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS HPUX name is not correct");
+		} else return os2.indexOf("hp-ux")>=0;
     }  
       
     /**
@@ -190,14 +200,12 @@ public final class OSinfo {
      *
      * @return true, if is aix
      */
-    public static boolean isAix(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("aix")>=0;
-		} else {
+    public boolean isAix(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS AIX name is not correct");
+		} else return os2.indexOf("aix")>=0;
     }  
       
     /**
@@ -205,14 +213,12 @@ public final class OSinfo {
      *
      * @return true, if is o s390
      */
-    public static boolean isOS390(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("os/390")>=0;
-		} else {
+    public boolean isOS390(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS OS390 name is not correct");
+		} else return os2.indexOf("os/390")>=0;
     }  
       
     /**
@@ -220,14 +226,12 @@ public final class OSinfo {
      *
      * @return true, if is free bsd
      */
-    public static boolean isFreeBSD(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("freebsd")>=0;
-		} else {
+    public boolean isFreeBSD(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS FreeBSD name is not correct");
+		} else return os2.indexOf("freebsd")>=0;
     }  
       
     /**
@@ -235,14 +239,12 @@ public final class OSinfo {
      *
      * @return true, if is irix
      */
-    public static boolean isIrix(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("irix")>=0;
-		} else {
+    public boolean isIrix(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS Irix name is not correct");			
+		} else return os2.indexOf("irix")>=0;
     }  
       
     /**
@@ -250,14 +252,12 @@ public final class OSinfo {
      *
      * @return true, if is digital unix
      */
-    public static boolean isDigitalUnix(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("digital")>=0 && os2.indexOf("unix")>0;
-		} else {
+    public boolean isDigitalUnix(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS DigittalUnix name is not correct");
+		} else return os2.indexOf("digital")>=0 && os2.indexOf("unix")>0;
     }  
       
     /**
@@ -265,14 +265,12 @@ public final class OSinfo {
      *
      * @return true, if is netware
      */
-    public static boolean isNetWare(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("netware")>=0;
-		} else {
+    public boolean isNetWare(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS NetWare name is not correct");
+		} else return os2.indexOf("netware")>=0;
     }  
       
     /**
@@ -280,14 +278,12 @@ public final class OSinfo {
      *
      * @return true, if is OS f1
      */
-    public static boolean isOSF1(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("osf1")>=0;
-		} else {
+    public boolean isOSF1(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS OSF1 name is not correct");
+		} else return os2.indexOf("osf1")>=0;
     }  
       
     /**
@@ -295,14 +291,12 @@ public final class OSinfo {
      *
      * @return true, if is open vms
      */
-    public static boolean isOpenVMS(){  
-        final String os2 = osName;
-		if (os2 != null) {
-			return os2.indexOf("openvms")>=0;
-		} else {
+    public boolean isOpenVMS(){  
+        String os2 = osName;
+		if (os2 == null) {
 			// TODO handle null value
-			throw new IllegalStateException("OS name is not correct");
-		}  
+			throw new IllegalStateException("OS OpenVMS name is not correct");
+		} else return os2.indexOf("openvms")>=0;
     }  
       
     /**
@@ -311,7 +305,7 @@ public final class OSinfo {
      *
      * @return  the name of operating system
      */  
-    public static EPlatform getOSname(){  
+    public EPlatform getOSname(){  
         if(isAix()){  
             instance.platform = EPlatform.AIX;  
         }else if (isDigitalUnix()) {  

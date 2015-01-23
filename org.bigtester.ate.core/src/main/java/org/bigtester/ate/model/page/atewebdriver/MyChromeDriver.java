@@ -75,8 +75,8 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-
-		EPlatform platform = OSinfo.getOSname();
+		OSinfo osinfo = new OSinfo(); 
+		EPlatform platform = osinfo.getOSname();
 		switch (platform)
 		{
 			case Windows:	
