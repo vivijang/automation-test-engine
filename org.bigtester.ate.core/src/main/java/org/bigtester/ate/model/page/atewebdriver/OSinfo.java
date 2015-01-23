@@ -58,9 +58,10 @@ public final class OSinfo {
         final String os2 = osName;
 		if (os2 != null) {
 			return os2.indexOf("linux")>=0;
-		} else {
+		} 
+		else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -75,7 +76,7 @@ public final class OSinfo {
 			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")<0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -90,7 +91,7 @@ public final class OSinfo {
 			return os2.indexOf("mac")>=0 && os2.indexOf("os")>0 && os2.indexOf("x")>0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -105,7 +106,7 @@ public final class OSinfo {
 			return os2.indexOf("windows")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -120,7 +121,7 @@ public final class OSinfo {
 			return os2.indexOf("os/2")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -135,7 +136,7 @@ public final class OSinfo {
 			return os2.indexOf("solaris")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -150,7 +151,7 @@ public final class OSinfo {
 			return os2.indexOf("sunos")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -165,7 +166,7 @@ public final class OSinfo {
 			return os2.indexOf("mpe/ix")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -180,7 +181,7 @@ public final class OSinfo {
 			return os2.indexOf("hp-ux")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -195,7 +196,7 @@ public final class OSinfo {
 			return os2.indexOf("aix")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -210,7 +211,7 @@ public final class OSinfo {
 			return os2.indexOf("os/390")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -225,7 +226,7 @@ public final class OSinfo {
 			return os2.indexOf("freebsd")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -240,7 +241,7 @@ public final class OSinfo {
 			return os2.indexOf("irix")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -255,7 +256,7 @@ public final class OSinfo {
 			return os2.indexOf("digital")>=0 && os2.indexOf("unix")>0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -270,7 +271,7 @@ public final class OSinfo {
 			return os2.indexOf("netware")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -285,7 +286,7 @@ public final class OSinfo {
 			return os2.indexOf("osf1")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       
@@ -300,7 +301,7 @@ public final class OSinfo {
 			return os2.indexOf("openvms")>=0;
 		} else {
 			// TODO handle null value
-			return false;
+			throw new IllegalStateException("OS name is not correct");
 		}  
     }  
       

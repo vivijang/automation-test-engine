@@ -91,16 +91,23 @@ public enum EPlatform {
      * @param desc the desc
      */
     private EPlatform(String desc){  
-        this.description = desc;  
+        description = desc;  
     }  
     
-    /* (non-Javadoc)
-     * @see java.lang.Enum#toString()
-     */
-    public String toString(){  
-        return description;  
-    }
-    
-    /** The description. */
+    /**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/** The description. */
     private String description;  
 }  
