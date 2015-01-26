@@ -23,6 +23,7 @@ package org.bigtester.ate.model.project;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.eclipse.jdt.annotation.Nullable;
 import org.testng.ITest;
 
 // TODO: Auto-generated Javadoc
@@ -39,4 +40,19 @@ public interface IRunTestCase extends ITest {
 	 * @throws Throwable 
 	 */
 	void runTest(TestParameters testParams) throws StepExecutionException2, TestDataException, Throwable;
+	
+	/**
+	 * Sets the current executing tc name.
+	 *
+	 * @param cetc the new current executing tc name
+	 */
+	void setCurrentExecutingTCName(String cetc);
+	
+	/**
+	 * Gets the current executing tc name.
+	 *
+	 * @return the current executing tc name
+	 */
+	@Nullable
+	String getCurrentExecutingTCName();
 }

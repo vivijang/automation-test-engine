@@ -53,7 +53,7 @@ import org.testng.TestRunner;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;//NOPMD, can't be deleted since this file will be used as a template to create runners
+import org.testng.annotations.Test;
 import org.testng.internal.Utils;
 import org.testng.xml.XmlTest;
 

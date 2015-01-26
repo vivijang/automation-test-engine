@@ -20,16 +20,16 @@
 
 	
 	<ate:TestProject id="testproject" stepThinkTime="6" globalInitXmlFile="dentistSmokeTest/data.xml">
-<!-- 		<ate:TestSuite id="frontend_login_suite" suiteName="frontend_login_suite"> -->
-<!-- 			<ate:XmlTestCase id="homepageValidation" testCaseName="dentistSmokeTest/frontend_login_suite/publicHomePageValidation.xml"/> -->
+		<ate:TestSuite id="frontend_login_suite" suiteName="frontend_login_suite">
+			<ate:XmlTestCase id="homepageValidation" testCaseName="dentistSmokeTest/frontend_login_suite/publicHomePageValidation.xml"/>
 <!--   			<ate:XmlTestCase id="publicLoginSuccess" testCaseName="dentistSmokeTest/frontend_login_suite/publicLoginSuccess.xml"/>    -->
 <!-- 			<ate:XmlTestCase id="publicLoginWrongPassword" testCaseName="dentistSmokeTest/frontend_login_suite/publicWrongPasswordLogin.xml"/>  -->
 			
-<!-- 		</ate:TestSuite> -->
-		<ate:TestSuite id="booking_suite" suiteName="booking_suite">
+		</ate:TestSuite>
+<!-- 		<ate:TestSuite id="booking_suite" suiteName="booking_suite"> -->
 <!-- 			<ate:XmlTestCase id="bookingClinicC" testCaseName="dentistSmokeTest/booking_suite/publicClinicCBooking.xml"/> -->
 <!-- 			<ate:XmlTestCase id="reviewBooking" testCaseName="dentistSmokeTest/booking_suite/reviewBooking.xml"/> -->
-			<ate:XmlTestCase id="updatePersonalInformation" testCaseName="dentistSmokeTest/booking_suite/updatePersonalInformation.xml"/>
-		</ate:TestSuite>
+<!-- 			<ate:XmlTestCase id="updatePersonalInformation" testCaseName="dentistSmokeTest/booking_suite/updatePersonalInformation.xml"/> -->
+<!-- 		</ate:TestSuite> -->
 	</ate:TestProject>
 </beans>

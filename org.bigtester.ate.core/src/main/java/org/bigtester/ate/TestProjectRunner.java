@@ -54,8 +54,9 @@ public final class TestProjectRunner {
 	 * @throws SQLException 
 	 * @throws DatabaseUnitException 
 	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(final String... args) throws DatabaseUnitException, SQLException, IOException {
+	public static void main(final String... args) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException {
 		if (args.length > 0) {
 			runTest(args[0]);
 		} else {
@@ -65,8 +66,9 @@ public final class TestProjectRunner {
 	
 	/**
 	 * Run test.
+	 * @throws ClassNotFoundException 
 	 */
-	private static void runTest(ApplicationContext context) {
+	private static void runTest(ApplicationContext context) throws ClassNotFoundException {
 		TestProject testProj = GlobalUtils.findTestProjectBean(context);
 		testProj.runSuites();
 		
@@ -79,8 +81,9 @@ public final class TestProjectRunner {
 	 * @throws DatabaseUnitException the database unit exception
 	 * @throws SQLException the SQL exception
 	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void runTest(@Nullable final String testProjectXml) throws DatabaseUnitException, SQLException, IOException  {
+	public static void runTest(@Nullable final String testProjectXml) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException  {
 		ApplicationContext context;
 		if (StringUtils.isEmpty(testProjectXml)) {
 			context = new ClassPathXmlApplicationContext(
