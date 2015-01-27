@@ -20,6 +20,11 @@
  *******************************************************************************/
 package org.bigtester.ate.model.project;
 
+import java.util.List;
+
+import org.bigtester.ate.GlobalUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestCase defines ....
@@ -31,6 +36,10 @@ public class XmlTestCase {
 	
 	/** The test case name. */
 	private String testCaseName;
+	
+	/** The depend on test cases. */
+	@Nullable
+	private List<CaseDependency> dependOnTestCases;
 
 	/**
 	 * Instantiates a new xml test case.
@@ -56,6 +65,23 @@ public class XmlTestCase {
 	 */
 	public void setTestCaseName(final String testCaseName) {
 		this.testCaseName = testCaseName;
+	}
+	/**
+	 * @return the dependOnTestCases
+	 */
+	public List<CaseDependency> getDependOnTestCases() {
+		final List<CaseDependency> dependOnTestCases2 = dependOnTestCases;
+		if (dependOnTestCases2 == null) {
+			throw GlobalUtils.createNotInitializedException("dependOnTestCases");
+		} else {
+			return dependOnTestCases2;
+		}
+	}
+	/**
+	 * @param dependOnTestCases the dependOnTestCases to set
+	 */
+	public void setDependOnTestCases(List<CaseDependency> dependOnTestCases) {
+		this.dependOnTestCases = dependOnTestCases;
 	}
 
 	

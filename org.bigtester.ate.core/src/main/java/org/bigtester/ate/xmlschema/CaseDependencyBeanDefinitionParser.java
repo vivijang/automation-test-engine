@@ -23,8 +23,11 @@ package org.bigtester.ate.xmlschema;
 import java.util.List;
 
 import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.EnumCaseDependencyType;
+import org.bigtester.ate.constant.RumtimeDataHolderType;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.project.TestProject;
+import org.bigtester.ate.model.project.CaseDependency;
+import org.bigtester.ate.model.project.TestSuite;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -32,6 +35,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.util.StringUtils;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
@@ -42,54 +46,49 @@ import org.w3c.dom.Element;
  * @author Peidong Hu
  *
  */
-public class TestProjectBeanDefinitionParser extends
+public class CaseDependencyBeanDefinitionParser extends
 		AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
-			@Nullable ParserContext parserContext) {
+	protected @Nullable AbstractBeanDefinition parseInternal(
+			@Nullable Element element, @Nullable ParserContext parserContext) {
 		// Here we parse the Spring elements such as < property>
-		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
+		if (parserContext == null || element == null)
+			throw GlobalUtils
+					.createNotInitializedException("element and parserContext");
 		// this will never be null since the schema explicitly requires that a
 		// value be supplied
-		
+		String dependOnTestCaseID = element
+				.getAttribute(XsdElementConstants.ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID);
 		BeanDefinitionBuilder factory = BeanDefinitionBuilder
-				.rootBeanDefinition(TestProject.class);
-		
-		int stepThinkTime = Integer.parseInt(element
-				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME));
-		factory.addPropertyValue(XsdElementConstants.ATTR_TESTPROJECT_STEPTHINKTIME,
-				stepThinkTime);
-		
-		String globalInitXml = element
-				.getAttribute(XsdElementConstants.ATTR_TESTPROJECT_GLOBALINITXMLFILE);
-		
-		factory.addConstructorArgValue(globalInitXml);
+				.rootBeanDefinition(CaseDependency.class);
+		if (StringUtils.hasText(dependOnTestCaseID))
+			factory.addConstructorArgValue(dependOnTestCaseID);
 
-		List<Element> suiteListElements = (List<Element>) DomUtils
-				.getChildElementsByTagName(element,
-						XsdElementConstants.ELEMENT_TESTSUITE);
-
-		if (suiteListElements != null && !suiteListElements.isEmpty()) {
-			parseSuiteComponents(suiteListElements, factory, parserContext);
+		String dependencyType = element
+				.getAttribute(XsdElementConstants.ATTR_CASEDEPENDENCY_DEPENDENCYTYPE);
+		if (StringUtils.hasText(dependencyType)) {
+			String dependencyType2 = dependencyType.toUpperCase(); //NOPMD
+			if (null == dependencyType2) {
+				throw GlobalUtils.createInternalError("java string operation internal error!");
+			} else {
+				factory.addConstructorArgValue(EnumCaseDependencyType
+						.valueOf(dependencyType2));
+			}
 		}
 
 		return factory.getBeanDefinition();
 	}
 
-	private static void parseSuiteComponents(List<Element> childElements,
-			BeanDefinitionBuilder factory, ParserContext parserContext) {
-		ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(
-				childElements.size());
-		for (Element element : childElements) {
-			TestSuiteBeanDefinitionParser xmltestsuite = new TestSuiteBeanDefinitionParser();
-			children.add(xmltestsuite.parse(element, parserContext));
-
-		}
-		factory.addPropertyValue(XsdElementConstants.PROP_TESTPROJECT_SUITELIST, children);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected boolean shouldGenerateId() {
+		return true;
 	}
 
 }

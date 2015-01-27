@@ -53,6 +53,18 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_XMLTESTCASE. */
 	public static final String ELEMENT_XMLTESTCASE = "XmlTestCase";
 	
+	/** The Constant ELEMENT_CASEDEPENDENCIES. */
+	public static final String ELEMENT_CASEDEPENDENCIES = "CaseDependencies";
+	
+	/** The Constant ELEMENT_CASEDEPENDENCY. */
+	public static final String ELEMENT_CASEDEPENDENCY = "CaseDependency";
+	
+	/** The Constant ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID. */
+	public static final String ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID = "dependOnTestCaseID";
+	
+	/** The Constant ATTR_CASEDEPENDENCY_DEPENDENCYTYPE. */
+	public static final String ATTR_CASEDEPENDENCY_DEPENDENCYTYPE = "dependencyType";
+	
 	/** The Constant ELEMENT_TESTSTEPRESULT. */
 	public static final String ELEMENT_TESTSTEPRESULT = "TestStepResult";
 	
@@ -303,6 +315,9 @@ public final class XsdElementConstants {
 	
 	/** The Constant ATTR_TESTCASE_PARENTTESTCASE. */
 	public static final String ATTR_TESTCASE_PARENTTESTCASE = "parentTestCase";
+	
+	/** The Constant PROP_XMLTESTCASE_DEPENDONTESTCASES. */
+	public static final String PROP_XMLTESTCASE_DEPENDONTESTCASES = "dependOnTestCases";
 	
 	/**
 	 * Instantiates a new xsd element constants.

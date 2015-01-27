@@ -41,12 +41,42 @@
 		<xsd:complexType>
 			<xsd:complexContent>
 				<xsd:extension base="beans:identifiedType">
+					<xsd:choice minOccurs="0" maxOccurs="1">
+						<xsd:element ref="CaseDependencies" />
+					</xsd:choice>
 					<xsd:attribute name="testCaseName" type="xsd:string" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-
+	<xsd:element name="CaseDependencies">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded">
+						<xsd:element ref="CaseDependency" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="CaseDependency">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="dependOnTestCaseID" type="xsd:string" use="required" />
+					<xsd:attribute name="dependencyType" use="required" >
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="TestCaseStepDependency" />
+							<xsd:enumeration value="TestCaseDataDependency" />
+						</xsd:restriction>
+					</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
 	<xsd:element name="GenericSystemLogger">
 		<xsd:complexType>
 			<xsd:complexContent>
