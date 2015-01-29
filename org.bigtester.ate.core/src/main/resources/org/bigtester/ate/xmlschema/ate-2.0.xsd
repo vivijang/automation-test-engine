@@ -44,7 +44,7 @@
 					<xsd:choice minOccurs="0" maxOccurs="1">
 						<xsd:element ref="CaseDependencies" />
 					</xsd:choice>
-					<xsd:attribute name="testCaseName" type="xsd:string" />
+					<xsd:attribute name="testCaseFilePathName" type="xsd:string" />
 				</xsd:extension>
 			</xsd:complexContent>
 		</xsd:complexType>

@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.model.caserunner.CaseRunnerGenerator;
 import org.testng.annotations.Test;
+
 
 
 
@@ -43,12 +45,12 @@ public class CaseRunnerGeneratorTest {
   public void testCaseRunnerGenerator() throws ParseException, IOException {
 	 CaseRunnerGenerator crg = new CaseRunnerGenerator(3);
 	 crg.createCaseRunners();
-	 for (int i=0; i<crg.getCaseRunnerJavaFilePathNames().size(); i++) {
+	 for (int i=0; i<crg.getCaseRunnerJavaFileNames().size(); i++) {
 		 //crg.changeTestMethodName(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFilePathNames().get(i), "runTest" + "abc");
 		 List<String> groups = new ArrayList<String>();
 		 groups.add("test1");
 		 groups.add("test2");
-		 crg.changeTestAnnotationGroups(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFilePathNames().get(i), groups, "runTest");
+		 crg.changeTestAnnotationGroups(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFileNames().get(i), groups, "runTest");
 	 }
   }
 }

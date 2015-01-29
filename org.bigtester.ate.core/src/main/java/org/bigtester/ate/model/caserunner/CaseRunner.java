@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project; //NOPMD
+package org.bigtester.ate.model.caserunner; //NOPMD
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
@@ -34,6 +34,8 @@ import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.TestParameters;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.project.IRunTestCase;
+import org.bigtester.ate.model.project.TestProjectListener;
 import org.bigtester.ate.systemlogger.LogbackWriter;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.NoSuchWindowException;

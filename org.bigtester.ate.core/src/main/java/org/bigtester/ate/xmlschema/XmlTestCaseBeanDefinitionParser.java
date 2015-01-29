@@ -58,7 +58,7 @@ AbstractBeanDefinitionParser {
 		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		BeanDefinitionBuilder factory = BeanDefinitionBuilder
 				.rootBeanDefinition(XmlTestCase.class);
-		String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME);
+		String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASEFILEPATHNAME);
         if (StringUtils.hasText(testCaseName)) {
         	factory.addConstructorArgValue( testCaseName);
         }
@@ -82,5 +82,13 @@ AbstractBeanDefinitionParser {
         }
         factory.addPropertyValue(XsdElementConstants.PROP_XMLTESTCASE_DEPENDONTESTCASES, children);
     }
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected boolean shouldGenerateId() {
+		return true;
+	}
 
 }

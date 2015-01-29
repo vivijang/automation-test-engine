@@ -305,7 +305,7 @@ public final class XsdElementConstants {
 	public static final String ATTR_ELEMENTACTIONDEF_ELEMENTACTION = "elementAction"; //NOPMD
 	
 	/** The Constant ATTR_XMLTESTCASE_TESTCASENAME. */
-	public static final String ATTR_XMLTESTCASE_TESTCASENAME = "testCaseName";
+	public static final String ATTR_XMLTESTCASE_TESTCASEFILEPATHNAME = "testCaseFilePathName";
 	
 	/** The Constant ATTR_TESTCASE_TESTCASENAME. */
 	public static final String ATTR_TESTCASE_TESTCASENAME = "testCaseName";

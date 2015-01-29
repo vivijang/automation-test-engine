@@ -35,7 +35,7 @@ public class XmlTestCase {
 	
 	
 	/** The test case name. */
-	private String testCaseName;
+	private String testCaseFilePathName;
 	
 	/** The depend on test cases. */
 	@Nullable
@@ -47,15 +47,15 @@ public class XmlTestCase {
 	 * @param testCaseName the test case name
 	 */
 	public XmlTestCase(String testCaseName) {
-		this.testCaseName = testCaseName;
+		this.testCaseFilePathName = testCaseName;
 	}
 	/**
 	 * Gets the test case name.
 	 *
 	 * @return the testCaseName
 	 */
-	public String getTestCaseName() {
-		return testCaseName;
+	public String getTestCaseFilePathName() {
+		return testCaseFilePathName;
 	}
 
 	/**
@@ -63,19 +63,15 @@ public class XmlTestCase {
 	 *
 	 * @param testCaseName the testCaseName to set
 	 */
-	public void setTestCaseName(final String testCaseName) {
-		this.testCaseName = testCaseName;
+	public void setTestCaseFilePathName(final String testCaseName) {
+		this.testCaseFilePathName = testCaseName;
 	}
 	/**
 	 * @return the dependOnTestCases
 	 */
+	@Nullable
 	public List<CaseDependency> getDependOnTestCases() {
-		final List<CaseDependency> dependOnTestCases2 = dependOnTestCases;
-		if (dependOnTestCases2 == null) {
-			throw GlobalUtils.createNotInitializedException("dependOnTestCases");
-		} else {
-			return dependOnTestCases2;
-		}
+		return dependOnTestCases;
 	}
 	/**
 	 * @param dependOnTestCases the dependOnTestCases to set

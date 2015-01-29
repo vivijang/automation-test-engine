@@ -35,6 +35,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.util.StringUtils;
 
+import com.github.javaparser.ParseException;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestProjectRunner defines ....
@@ -55,8 +57,9 @@ public final class TestProjectRunner {
 	 * @throws DatabaseUnitException 
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
+	 * @throws ParseException 
 	 */
-	public static void main(final String... args) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException {
+	public static void main(final String... args) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException, ParseException {
 		if (args.length > 0) {
 			runTest(args[0]);
 		} else {
@@ -67,8 +70,10 @@ public final class TestProjectRunner {
 	/**
 	 * Run test.
 	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	private static void runTest(ApplicationContext context) throws ClassNotFoundException {
+	private static void runTest(ApplicationContext context) throws ClassNotFoundException, ParseException, IOException {
 		TestProject testProj = GlobalUtils.findTestProjectBean(context);
 		testProj.runSuites();
 		
@@ -82,8 +87,9 @@ public final class TestProjectRunner {
 	 * @throws SQLException the SQL exception
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
+	 * @throws ParseException 
 	 */
-	public static void runTest(@Nullable final String testProjectXml) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException  {
+	public static void runTest(@Nullable final String testProjectXml) throws DatabaseUnitException, SQLException, IOException, ClassNotFoundException, ParseException  {
 		ApplicationContext context;
 		if (StringUtils.isEmpty(testProjectXml)) {
 			context = new ClassPathXmlApplicationContext(
