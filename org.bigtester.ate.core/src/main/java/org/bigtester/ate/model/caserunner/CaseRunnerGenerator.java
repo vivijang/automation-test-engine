@@ -45,6 +45,7 @@ import javax.tools.ToolProvider;
 
 import jodd.util.ClassLoaderUtil;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumCaseDependencyType;
@@ -61,7 +62,9 @@ import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
@@ -112,8 +115,9 @@ public class CaseRunnerGenerator {
 	 *
 	 * @param numberOfTestCases
 	 *            the number of test cases
+	 * @throws IOException 
 	 */
-	public CaseRunnerGenerator(List<TestSuite> suites) {
+	public CaseRunnerGenerator(List<TestSuite> suites) throws IOException {
 		this.suites = suites;
 		for (TestSuite tSuite : suites) {
 			this.numberOfTestCases = this.numberOfTestCases
@@ -121,6 +125,10 @@ public class CaseRunnerGenerator {
 		}
 		this.caseRunnerCacheAbsoluteFolder = System.getProperty("user.dir")
 				+ "/generated-code/caserunners/org/bigtester/ate/model/caserunner/";
+		File deleteOldCaseRunners = new File (caseRunnerCacheAbsoluteFolder);
+		if (deleteOldCaseRunners.exists()) {
+			FileUtils.deleteDirectory(deleteOldCaseRunners);
+		}
 
 	}
 
@@ -153,7 +161,9 @@ public class CaseRunnerGenerator {
 					this.caseRunnerJavaFileNames.put(tSuite.getTestCaseList()
 							.get(index).getTestCaseFilePathName(),
 							newCaseRunner.getCanonicalPath());
-
+					new TestCaseNameFieldVisitor().visit(caseRunnerCU, tSuite
+							.getTestCaseList().get(index)
+							.getTestCaseFilePathName());
 					new ClassNameVisitor().visit(caseRunnerCU, FilenameUtils
 							.removeExtension(newCaseRunner.getName()));
 
@@ -370,6 +380,33 @@ public class CaseRunnerGenerator {
 	}
 
 	/**
+	 * The Class ClassVisitor.
+	 *
+	 * @author Peidong Hu
+	 */
+	private static class TestCaseNameFieldVisitor extends
+			VoidVisitorAdapter<String> {
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void visit(@Nullable FieldDeclaration fieldInterfaceDec,
+				@Nullable String testCaseFilePath) {
+			if (null == fieldInterfaceDec) {
+				throw GlobalUtils
+						.createNotInitializedException("classorinterfacedeclaration");
+			} else {
+				for (VariableDeclarator var : fieldInterfaceDec.getVariables()) {
+					if (var.getId().getName().equals("currentExecutingTCName")) {
+						var.setInit(new StringLiteralExpr(testCaseFilePath));
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * The Class PackageNameVisitor.
 	 *
 	 * @author Peidong Hu
@@ -476,10 +513,12 @@ public class CaseRunnerGenerator {
 					List<MemberValuePair> testAnnoParams = new ArrayList<MemberValuePair>();
 					testAnnoParams.add(new MemberValuePair("groups",
 							new ArrayInitializerExpr(groups)));
-					testAnnoParams.add(new MemberValuePair("dataProvider", new StringLiteralExpr("dp")));
-					
-					List<CaseDependency> caseDeps = testCase.getDependOnTestCases();
-					
+					testAnnoParams.add(new MemberValuePair("dataProvider",
+							new StringLiteralExpr("dp")));
+
+					List<CaseDependency> caseDeps = testCase
+							.getDependOnTestCases();
+
 					if (null != caseDeps) {
 						List<Expression> dependsOnGroups = new ArrayList<Expression>();
 						boolean alwaysRun = true;

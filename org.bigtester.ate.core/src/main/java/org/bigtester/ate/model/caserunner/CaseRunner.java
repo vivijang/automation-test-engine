@@ -105,10 +105,14 @@ public class CaseRunner implements IRunTestCase {
 	/**
 	 * @return the currentExecutingTCName
 	 */
-	@Nullable
 	public String getCurrentExecutingTCName() {
-		return currentExecutingTCName;
-		
+		final String currentExecutingTCName2 = currentExecutingTCName;
+		if (null == currentExecutingTCName2 ) {
+			throw GlobalUtils.createNotInitializedException("current tc name");
+		} else {
+			return currentExecutingTCName2;
+		}
+
 	}
 
 	/**
@@ -150,32 +154,32 @@ public class CaseRunner implements IRunTestCase {
 	 */
 	@DataProvider(name = "dp")
 	public Object[][] getTestData(ITestContext ctx) {
-		XmlTest xmlTest = ctx.getCurrentXmlTest();
-		if (null == xmlTest)
-			throw new IllegalStateException(
-					"xmltest is not correctly populated.");
-		String testCaseN = xmlTest.getName();
-		if (null == testCaseN)
+		if (null == currentExecutingTCName) {
 			throw new IllegalStateException(
 					"xml test case name is not correctly populated.");
-		TestParameters params = new TestParameters(testCaseN, testCaseN);
-		for (int index = 0; index < ((TestRunner) ctx).getTestListeners()
-				.size(); index++) {
-			if (((TestRunner) ctx).getTestListeners().get(index) instanceof TestProjectListener) {
-				int thinkT = ((TestProjectListener) ((TestRunner) ctx)
-						.getTestListeners().get(index)).getMytp()
-						.getStepThinkTime();
-				params.setStepThinkTime(thinkT);
-				params.setGlobalAppCtx(((TestProjectListener) ((TestRunner) ctx)
-						.getTestListeners().get(index)).getMytp().getAppCtx());
-				break;
+		} else {
+			TestParameters params = new TestParameters(getCurrentExecutingTCName(),
+					getCurrentExecutingTCName());
+
+			for (int index = 0; index < ((TestRunner) ctx).getTestListeners()
+					.size(); index++) {
+				if (((TestRunner) ctx).getTestListeners().get(index) instanceof TestProjectListener) {
+					int thinkT = ((TestProjectListener) ((TestRunner) ctx)
+							.getTestListeners().get(index)).getMytp()
+							.getStepThinkTime();
+					params.setStepThinkTime(thinkT);
+					params.setGlobalAppCtx(((TestProjectListener) ((TestRunner) ctx)
+							.getTestListeners().get(index)).getMytp()
+							.getAppCtx());
+					break;
+				}
 			}
+
+			return new Object[][] { { params } };
 		}
 
-		return new Object[][] { { params } };
-
 	}
-	
+
 	/**
 	 * Test data.
 	 * 
@@ -217,14 +221,15 @@ public class CaseRunner implements IRunTestCase {
 	 *            the ctx
 	 * @throws Throwable
 	 */
-	//@Test(dataProvider = "dp")
+	// @Test(dataProvider = "dp")
 	public void runTest(TestParameters testParams) throws Throwable {
 		String testname = testParams.getTestFilename();
 
 		// ApplicationContext context;
 		try {
 			context = new FileSystemXmlApplicationContext(testname);
-			IMyWebDriver myWebD = (IMyWebDriver) GlobalUtils.findMyWebDriver(context);
+			IMyWebDriver myWebD = (IMyWebDriver) GlobalUtils
+					.findMyWebDriver(context);
 			mainDriver = myWebD.createDriver();
 			myTestCase = GlobalUtils.findTestCaseBean(getContext());
 			getMyTestCase().setStepThinkTime(testParams.getStepThinkTime());
@@ -258,14 +263,17 @@ public class CaseRunner implements IRunTestCase {
 				} else { // other test case bean creation errors. need to create
 					// another exception to handle it.
 					String[] fullST = Utils.stackTrace(fbe, false);
-					int TWO = 2; //NOPMD
-					if (fullST.length < TWO ) {
+					int TWO = 2; // NOPMD
+					if (fullST.length < TWO) {
 						LogbackWriter
 								.writeSysError("java internal error in stack trace.");
 					} else {
 						String errLog = fullST[1];
-						if (null == errLog) LogbackWriter.writeSysError("java internal error in stack trace.");
-						else LogbackWriter.writeSysError(errLog);
+						if (null == errLog)
+							LogbackWriter
+									.writeSysError("java internal error in stack trace.");
+						else
+							LogbackWriter.writeSysError(errLog);
 					}
 					throw fbe;
 
@@ -291,10 +299,11 @@ public class CaseRunner implements IRunTestCase {
 						.getBeansOfType(IMyWebDriver.class);
 				for (IMyWebDriver myWebDriver2 : myWebDrivers.values()) {
 					WebDriver weD = myWebDriver2.getWebDriver();
-					if (null != weD) weD.quit();
+					if (null != weD)
+						weD.quit();
 				}
 			}
-		} catch (UnreachableBrowserException | NoSuchWindowException e) { //NOPMD
+		} catch (UnreachableBrowserException | NoSuchWindowException e) { // NOPMD
 			// browser has been closed, no action needs to be done here.
 		}
 		if (null != context) {
