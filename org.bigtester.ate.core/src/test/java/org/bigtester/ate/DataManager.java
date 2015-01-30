@@ -68,109 +68,109 @@ public class DataManager {
 	@Getter
 	private String locked = ""; //NOPMD
 
-	/**
-	 * Test first data class.
-	 * 
-	 * @throws InterruptedException
-	 *             the interrupted exception
-	 * @throws StepExecutionException
-	 *             the step execution exception
-	 * @throws PageValidationException 
-	 */
-	@Test
-	public void testDataClassTestCase() throws InterruptedException,
-			StepExecutionException2, PageValidationException2 {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"Test-applicationContext.xml");
-		/** The my tc. */
-		TestCase myTestCase;
-		myTestCase = GlobalUtils.findTestCaseBean(context);
-		myTestCase.goSteps();
-		context.close();
-	}
-
-	/**
-	 * Test first data class.
-	 * 
-	 * @throws InterruptedException
-	 *             the interrupted exception
-	 */
-	@Test
-	public void testDataClassWithoutTestCase() throws InterruptedException {
-		//Thread.sleep(10000);
-		LogbackWriter.writeAppInfo("testng-msg: "
-				+ "lock on and 2nd thread running through" + locked);
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"Test-dbContext.xml");
-		ElementInputDataDaoImpl dao = (ElementInputDataDaoImpl) context
-				.getBean("elementInputDataDao");
-
-		ElementInputData eid = new ElementInputData("login Name", "peidonghu1");
-		ElementInputData eid2 = new ElementInputData("login Name", "peidonghu3");
-
-		dao.save(eid);
-		dao.save(eid2);
-
-		List<ElementInputData> persons = dao.getAll();
-		for (ElementInputData person : persons) {
-			LogbackWriter.writeAppInfo("testng-msg: " + person.toString());
-		}
-		context.close();
-		LogbackWriter.writeAppInfo("testng-msg: "
-				+ "lock on and 2nd thread running through" + locked);
-	}
-
-	/**
-	 * Test first data class.
-	 * 
-	 * @throws InterruptedException
-	 *             the interrupted exception
-	 * @throws SQLException 
-	 * @throws DatabaseUnitException 
-	 * @throws DataSetException 
-	 * @throws MalformedURLException 
-	 */
-	@Test
-	public void testAutomaticallyCreateTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
-
-		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"Test-dbContext.xml");
-		DataSource datas = (DataSource)context.getBean("dataSource");
-		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
-		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-		builder.setColumnSensing(true);
-		DatabaseOperation.CLEAN_INSERT.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
-		con.close();
-			
-		context.close();
-		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
-	}
-	
-	/**
-	 * Test first data class.
-	 * 
-	 * @throws InterruptedException
-	 *             the interrupted exception
-	 * @throws SQLException 
-	 * @throws DatabaseUnitException 
-	 * @throws DataSetException 
-	 * @throws MalformedURLException 
-	 */
-	@Test
-	public void testEnumConstantTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
-
-		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"Test-dbContext.xml");
-		DataSource datas = (DataSource)context.getBean("dataSource");
-		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
-		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-		builder.setColumnSensing(true);
-		DatabaseOperation.REFRESH.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
-		con.close();
-			
-		context.close();
-		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
-	}
+//	/**
+//	 * Test first data class.
+//	 * 
+//	 * @throws InterruptedException
+//	 *             the interrupted exception
+//	 * @throws StepExecutionException
+//	 *             the step execution exception
+//	 * @throws PageValidationException 
+//	 */
+//	@Test
+//	public void testDataClassTestCase() throws InterruptedException,
+//			StepExecutionException2, PageValidationException2 {
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				"Test-applicationContext.xml");
+//		/** The my tc. */
+//		TestCase myTestCase;
+//		myTestCase = GlobalUtils.findTestCaseBean(context);
+//		myTestCase.goSteps();
+//		context.close();
+//	}
+//
+//	/**
+//	 * Test first data class.
+//	 * 
+//	 * @throws InterruptedException
+//	 *             the interrupted exception
+//	 */
+//	@Test
+//	public void testDataClassWithoutTestCase() throws InterruptedException {
+//		//Thread.sleep(10000);
+//		LogbackWriter.writeAppInfo("testng-msg: "
+//				+ "lock on and 2nd thread running through" + locked);
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				"Test-dbContext.xml");
+//		ElementInputDataDaoImpl dao = (ElementInputDataDaoImpl) context
+//				.getBean("elementInputDataDao");
+//
+//		ElementInputData eid = new ElementInputData("login Name", "peidonghu1");
+//		ElementInputData eid2 = new ElementInputData("login Name", "peidonghu3");
+//
+//		dao.save(eid);
+//		dao.save(eid2);
+//
+//		List<ElementInputData> persons = dao.getAll();
+//		for (ElementInputData person : persons) {
+//			LogbackWriter.writeAppInfo("testng-msg: " + person.toString());
+//		}
+//		context.close();
+//		LogbackWriter.writeAppInfo("testng-msg: "
+//				+ "lock on and 2nd thread running through" + locked);
+//	}
+//
+//	/**
+//	 * Test first data class.
+//	 * 
+//	 * @throws InterruptedException
+//	 *             the interrupted exception
+//	 * @throws SQLException 
+//	 * @throws DatabaseUnitException 
+//	 * @throws DataSetException 
+//	 * @throws MalformedURLException 
+//	 */
+//	@Test
+//	public void testAutomaticallyCreateTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
+//
+//		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				"Test-dbContext.xml");
+//		DataSource datas = (DataSource)context.getBean("dataSource");
+//		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
+//		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+//		builder.setColumnSensing(true);
+//		DatabaseOperation.CLEAN_INSERT.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
+//		con.close();
+//			
+//		context.close();
+//		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
+//	}
+//	
+//	/**
+//	 * Test first data class.
+//	 * 
+//	 * @throws InterruptedException
+//	 *             the interrupted exception
+//	 * @throws SQLException 
+//	 * @throws DatabaseUnitException 
+//	 * @throws DataSetException 
+//	 * @throws MalformedURLException 
+//	 */
+//	@Test
+//	public void testEnumConstantTable() throws InterruptedException, SQLException, MalformedURLException, DataSetException, DatabaseUnitException {
+//
+//		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0));
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				"Test-dbContext.xml");
+//		DataSource datas = (DataSource)context.getBean("dataSource");
+//		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); //Create DBUnit Database connection 
+//		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+//		builder.setColumnSensing(true);
+//		DatabaseOperation.REFRESH.execute(con, builder.build(new File("src/main/resources/META-INF/data.xml"))); //Import your data
+//		con.close();
+//			
+//		context.close();
+//		LogbackWriter.writeUnitTestInfo(ATETestUtil.getMethodName(0) + "ended");
+//	}
 }

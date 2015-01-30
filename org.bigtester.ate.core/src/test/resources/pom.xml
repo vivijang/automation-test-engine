@@ -207,12 +207,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
+			<version>1.7.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
+			<version>1.7.7</version>
 		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>org.slf4j</groupId> -->
@@ -223,18 +223,18 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
+			<version>1.1.2</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
+			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-access</artifactId>
-			<version>${logback.version}</version>
+			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -271,11 +271,11 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.7.3</version>
 		</dependency>
-		<dependency>
-			<groupId>org.bigtester</groupId>
-			<artifactId>org.bigtester.general.problomatic2</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.bigtester</groupId> -->
+<!-- 			<artifactId>org.bigtester.general.problomatic2</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 		<!-- <dependency> -->
 		<!-- <groupId>net.xeon</groupId> -->
 		<!-- <artifactId>jspf.core</artifactId> -->
@@ -410,11 +410,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-       <groupId>org.apache.httpcomponents</groupId>
-       <artifactId>httpclient</artifactId>
-       <version>4.3.5</version>
-   </dependency>
+    
 	</dependencies>
 
 </project>

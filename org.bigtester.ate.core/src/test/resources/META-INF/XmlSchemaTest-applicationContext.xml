@@ -10,30 +10,30 @@
 	
 	<import resource="db-services.xml"/>
 	
-	<ate:fireFoxDriver id="MyWebDriver2" />
-	<ate:basePageObject id="myAbstractPageObject">
-		<property name="myWd">
-			<ref bean="MyWebDriver2" />
-		</property>
-	</ate:basePageObject>
+<!-- 	<ate:fireFoxDriver id="MyWebDriver2" /> -->
+<!-- 	<ate:basePageObject id="myAbstractPageObject"> -->
+<!-- 		<property name="myWd"> -->
+<!-- 			<ref bean="MyWebDriver2" /> -->
+<!-- 		</property> -->
+<!-- 	</ate:basePageObject> -->
 	
-	<ate:homePage id="homepg" homeUrl="http://www.hellostop.com" parent="myAbstractPageObject"/>
+<!-- 	<ate:homePage id="homepg" homeUrl="http://www.hellostop.com" parent="myAbstractPageObject"/> -->
 	
-	<ate:stepExpectedResultValue id="homeStepExpectedValue" dataValueID="1" parent="baseERValue"/>
+<!-- 	<ate:stepExpectedResultValue id="homeStepExpectedValue" dataValueID="1" parent="baseERValue"/> -->
 	
-	<ate:pagePropertyCorrectnessAsserter id="homePagePropertyAsserter">
-		<constructor-arg ref="homepg"/>
-		<property name="stepERValue">
-			<ref bean="homeStepExpectedValue"/>
-		</property>
-	</ate:pagePropertyCorrectnessAsserter>
+<!-- 	<ate:pagePropertyCorrectnessAsserter id="homePagePropertyAsserter"> -->
+<!-- 		<constructor-arg ref="homepg"/> -->
+<!-- 		<property name="stepERValue"> -->
+<!-- 			<ref bean="homeStepExpectedValue"/> -->
+<!-- 		</property> -->
+<!-- 	</ate:pagePropertyCorrectnessAsserter> -->
 	
-	<ate:pagePropertyCorrectnessAsserter id="homeElementExistenceAsserter">
-		<constructor-arg ref="homepg"/>
-		<property name="stepERValue">
-			<ref bean="homeStepExpectedValue"/>
-		</property>
-	</ate:pagePropertyCorrectnessAsserter>
+<!-- 	<ate:pagePropertyCorrectnessAsserter id="homeElementExistenceAsserter"> -->
+<!-- 		<constructor-arg ref="homepg"/> -->
+<!-- 		<property name="stepERValue"> -->
+<!-- 			<ref bean="homeStepExpectedValue"/> -->
+<!-- 		</property> -->
+<!-- 	</ate:pagePropertyCorrectnessAsserter> -->
 	
 		
 		

@@ -41,16 +41,16 @@ public class CaseRunnerGeneratorTest {
    * @throws ParseException the parse exception
    * @throws IOException Signals that an I/O exception has occurred.
    */
-  @Test
-  public void testCaseRunnerGenerator() throws ParseException, IOException {
-	 CaseRunnerGenerator crg = new CaseRunnerGenerator(3);
-	 crg.createCaseRunners();
-	 for (int i=0; i<crg.getCaseRunnerJavaFileNames().size(); i++) {
-		 //crg.changeTestMethodName(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFilePathNames().get(i), "runTest" + "abc");
-		 List<String> groups = new ArrayList<String>();
-		 groups.add("test1");
-		 groups.add("test2");
-		 crg.changeTestAnnotationGroups(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFileNames().get(i), groups, "runTest");
-	 }
-  }
+//  @Test
+//  public void testCaseRunnerGenerator() throws ParseException, IOException {
+//	 CaseRunnerGenerator crg = new CaseRunnerGenerator(3);
+//	 crg.createCaseRunners();
+//	 for (int i=0; i<crg.getCaseRunnerJavaFileNames().size(); i++) {
+//		 //crg.changeTestMethodName(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFilePathNames().get(i), "runTest" + "abc");
+//		 List<String> groups = new ArrayList<String>();
+//		 groups.add("test1");
+//		 groups.add("test2");
+//		 crg.changeTestAnnotationGroups(crg.getCaseRunnerCacheAbsoluteFolder() + crg.getCaseRunnerJavaFileNames().get(i), groups, "runTest");
+//	 }
+//  }
 }
