@@ -34,10 +34,16 @@ NOTE5) How to improve code quality of handling Null Pointer Exception
 	
 NOTE6) Install STS(Spring Tool Suite for Eclipse Luna) through Eclipse marketplace	
 
-NOTE7) Run HtmlUnit browser, add 'htmlunit-2.15-OSGi.jar' in java build path. This jar is in directory 'browserdriver'
-
-NOTE8) Run Firefox, create a profile file
+NOTE7) Run Firefox, create a profile file
        1) run Firefox in command line: firefox -p
        2) create a profile file with the name: dentisteasy
        3) save the profile, quit Firefox
+
+Note8) Remove the warning 'Plugin execNo grammar constraints (DTD or XML Schema) referenced in the document' in XML file .
+    a) Go to the Preferences window, then XML -> XML Files -> Validation. 
+    b) In the Validating files section of the preferences panel on the right, choose Ignore in the drop down box for the "No grammar specified" preference. 
+    c) You may need to close the file and then reopen it to make the warning go away.
+
+Note9) Remove the warning 'Plugin execution not covered by lifecycle configuration' in XML file.
+ 	   https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html 
 
