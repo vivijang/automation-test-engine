@@ -90,16 +90,16 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 				System.setProperty(BROWSERNAME, "browserdriver/windows/opera/64bit/0.1.0/operadriver.exe");
 				break;	
 			case Linux_32:	
-				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/32bit/0.1.0/operadriver.exe");
+				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/32bit/0.1.0/operadriver");
 				break;
 			case Linux_64:	
-				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/64bit/0.1.0/operadriver.exe");
+				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/64bit/0.1.0/operadriver");
 				break;
 			case Mac_OS_X_32:	
-				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/32bit/0.1.0/operadriver.exe");
+				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/32bit/0.1.0/operadriver");
 				break;	
 			case Mac_OS_X_64:	
-				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/64bit/0.1.0/operadriver.exe");
+				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/64bit/0.1.0/operadriver");
 				break;		
 			default:
 				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
