@@ -41,7 +41,34 @@ public final class OSinfo {
     /** The platform. */
     private EPlatform platform ;
     
+    /** The Constant OS64BIT. */
+    final static private String OS64BIT = "64";
+    
+    /** The Constant OS32BIT. */
+    final static private String OS32BIT = "32";
+	
+	/** The OSBIT. */
+    @Nullable
+	private String osBit; 
+			
+			
+    
     /**
+	 * @return the osBit
+	 */
+	public @Nullable String getOsBit() {
+		this.osBit = System.getProperty("sun.arch.data.model");
+		return osBit;
+	}
+
+	/**
+	 * @param osBit the osBit to set
+	 */
+	public void setOsBit(String osBit) {
+		this.osBit = osBit;
+	}
+
+	/**
 	 * @return the osName
 	 */
 	public @Nullable String getOsName() {
@@ -75,6 +102,7 @@ public final class OSinfo {
     public OSinfo(){
         osName = System.getProperty("os.name").toLowerCase();
     	platform = EPlatform.Others;
+    	osBit = getOsBit();
     }  
       
     /**
@@ -306,7 +334,25 @@ public final class OSinfo {
      * @return  the name of operating system
      */  
     public EPlatform getOSname(){  
-        if(isAix()){  
+    	if (isLinux()) { 
+        	if(OS32BIT.equals(osBit)) {
+                instance.platform = EPlatform.Linux_32;
+             } else if (OS64BIT.equals(osBit)) {
+             		instance.platform = EPlatform.Linux_64;
+               } else throw new IllegalStateException("OS Bit is not correct"); 
+    	}else if (isMacOSX()) {
+            	if(OS32BIT.equals(osBit)) {
+                   instance.platform = EPlatform.Mac_OS_X_32;
+                }else if (OS64BIT.equals(osBit)) {
+                		instance.platform = EPlatform.Mac_OS_X_64;
+                }else throw new IllegalStateException("OS Bit is not correct");
+    	}else if (isWindows()) {
+               	if(OS32BIT.equals(osBit)) {
+                    instance.platform = EPlatform.Windows_32;
+               	} else if (OS64BIT.equals(osBit)) {
+               		instance.platform = EPlatform.Windows_64;
+                } else throw new IllegalStateException("OS Bit is not correct");	
+    	}else if(isAix()){  
             instance.platform = EPlatform.AIX;  
         }else if (isDigitalUnix()) {  
             instance.platform = EPlatform.Digital_Unix;  
@@ -316,12 +362,8 @@ public final class OSinfo {
             instance.platform = EPlatform.HP_UX;  
         }else if (isIrix()) {  
             instance.platform = EPlatform.Irix;  
-        }else if (isLinux()) {  
-            instance.platform = EPlatform.Linux;  
         }else if (isMacOS()) {  
             instance.platform = EPlatform.Mac_OS;  
-        }else if (isMacOSX()) {  
-            instance.platform = EPlatform.Mac_OS_X;  
         }else if (isMPEiX()) {  
             instance.platform = EPlatform.MPEiX;  
         }else if (isNetWare()) {  
@@ -338,13 +380,11 @@ public final class OSinfo {
             instance.platform = EPlatform.Solaris;  
         }else if (isSunOS()) {  
             instance.platform = EPlatform.SunOS;  
-        }else if (isWindows()) {  
-            instance.platform = EPlatform.Windows;  
         }else{  
             instance.platform = EPlatform.Others;  
         }  
-        return instance.platform;  
-    }  
+         return instance.platform;  
+        }  
 }  
 
 

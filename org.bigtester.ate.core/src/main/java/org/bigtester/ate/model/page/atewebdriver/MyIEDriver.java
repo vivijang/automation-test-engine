@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import org.bigtester.ate.GlobalUtils;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -32,19 +33,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
  */
 public class MyIEDriver extends WebDriverBase implements IMyWebDriver{
 	
-	/**
-	 * Instantiates a new my IE driver.
-	 */
-	public MyIEDriver() {
-		//TODO create multi browsers and remote web driver handler
-		super();
-		System.setProperty("webdriver.ie.driver", "browserdriver/IEDriverServer32.exe");
-//		System.setProperty("webdriver.ie.driver.loglevel", "ERROR");
-//		System.setProperty("webdriver.ie.driver.logfile", "d:/develop/IEDriver64.log");
-//		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-//      ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-	}
-
+	/** The Constant BROWSERNAME. */
+	final static private String BROWSERNAME = "webdriver.ie.driver";
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -58,6 +49,23 @@ public class MyIEDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
+		OSinfo osinfo = new OSinfo(); 
+		EPlatform platform = osinfo.getOSname();
+//		System.setProperty("webdriver.ie.driver.loglevel", "ERROR");
+//		System.setProperty("webdriver.ie.driver.logfile", "d:/develop/IEDriver64.log");
+//		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+//      ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+		switch (platform)
+		{
+			case Windows_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/internetexplorer/32bit/2.44.0/IEDriverServer.exe");
+				break;
+			case Windows_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/internetexplorer/64bit/2.44.0/IEDriverServer.exe");
+				break;	
+			default:
+				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
+		}        
 		WebDriver retVal = new InternetExplorerDriver();
 		setWebDriver(retVal);
 		return retVal;

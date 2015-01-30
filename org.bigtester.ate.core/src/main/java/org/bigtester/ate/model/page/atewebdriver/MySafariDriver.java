@@ -22,7 +22,7 @@ package org.bigtester.ate.model.page.atewebdriver;
 
 import org.bigtester.ate.browser.BrowserProfile;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -37,6 +37,8 @@ public class MySafariDriver extends WebDriverBase implements IMyWebDriver{
 	/** The browser profile. */
 	@Nullable
 	final private BrowserProfile<SafariOptions> browserProfile;
+//	/** The Constant BROWSERNAME. */
+//	final static private String BROWSERNAME = "webdriver.safari.driver";
 	
 	/**
 	 * Instantiates a new my safari driver.
@@ -64,6 +66,7 @@ public class MySafariDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	
 	public BrowserProfile<SafariOptions> getBrowserProfile() {
+		
 		final BrowserProfile<SafariOptions> retVal = browserProfile;
 		if (null == retVal) {
 			throw new IllegalStateException("browserProfile is not correctly populated");
@@ -86,7 +89,32 @@ public class MySafariDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
-		WebDriver retVal = new ChromeDriver();
+//		OSinfo osinfo = new OSinfo(); 
+//		EPlatform platform = osinfo.getOSname();
+//		switch (platform)
+//		{
+//			case Windows_32:	
+//				System.setProperty(BROWSERNAME, "browserdriver/windows/safari/32bit/2.12/safaridriver.exe");
+//				break;
+//			case Windows_64:	
+//				System.setProperty(BROWSERNAME, "browserdriver/windows/safari/64bit/2.12/safaridriver.exe");
+//				break;	
+//			case Linux_32:	
+//				System.setProperty(BROWSERNAME, "browserdriver/linux/safari/32bit/2.12/safaridriver.exe");
+//				break;
+//			case Linux_64:	
+//				System.setProperty(BROWSERNAME, "browserdriver/linux/safari/64bit/2.12/safaridriver.exe");
+//				break;	
+//			case Mac_OS_X_32:	
+//				System.setProperty(BROWSERNAME, "browserdriver/osx/safari/32bit/2.11/safaridriver.exe");
+//				break;
+//			case Mac_OS_X_64:	
+//				System.setProperty(BROWSERNAME, "browserdriver/osx/safari/64bit/2.11/safaridriver.exe");
+//				break;		
+//			default:
+//				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
+//		}        
+		WebDriver retVal = new SafariDriver();
 		setWebDriver(retVal);
 		return retVal;
 		/*

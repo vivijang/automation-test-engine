@@ -32,16 +32,19 @@ public enum EPlatform {
     Any("any"),  
     
     /** The Linux. */
-    Linux("Linux"),  
+    Linux_32("32bit Linux"),
+    Linux_64("64bit Linux"),
     
-    /** The Mac_ os. */
+    /** The Mac_os. */
     Mac_OS("Mac OS"),  
     
-    /** The Mac_ o s_ x. */
-    Mac_OS_X("Mac OS X"),  
+    /** The Mac_os_x. */
+    Mac_OS_X_32("32bit Mac OS X"),  
+    Mac_OS_X_64("64bit Mac OS X"),  
     
     /** The Windows. */
-    Windows("Windows"),  
+    Windows_32("32bit Windows"),  
+    Windows_64("32bit Windows"),
     
     /** The O s2. */
     OS2("OS/2"),  

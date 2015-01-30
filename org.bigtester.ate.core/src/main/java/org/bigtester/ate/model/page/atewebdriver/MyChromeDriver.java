@@ -39,6 +39,9 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 	@Nullable
 	final private BrowserProfile<ChromeOptions> browserProfile;
 	
+	/** The Constant BROWSERNAME. */
+	final static private String BROWSERNAME = "webdriver.chrome.driver";
+	
 	/**
 	 * Instantiates a new my Chrome driver.
 	 */
@@ -79,12 +82,24 @@ public class MyChromeDriver extends WebDriverBase implements IMyWebDriver{
 		EPlatform platform = osinfo.getOSname();
 		switch (platform)
 		{
-			case Windows:	
-				System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver-win.exe");
+			case Windows_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/googlechrome/32bit/2.12/chromedriver.exe");
 				break;
-			case Linux:	
-				System.setProperty("webdriver.chrome.driver", "browserdriver/chromedriver-linux32");
+			case Windows_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/googlechrome/64bit/2.12/chromedriver.exe");
+				break;	
+			case Linux_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/linux/googlechrome/32bit/2.12/chromedriver.exe");
 				break;
+			case Linux_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/linux/googlechrome/64bit/2.12/chromedriver.exe");
+				break;	
+			case Mac_OS_X_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/osx/googlechrome/32bit/2.11/chromedriver.exe");
+				break;
+			case Mac_OS_X_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/osx/googlechrome/64bit/2.11/chromedriver.exe");
+				break;		
 			default:
 				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
 		}        

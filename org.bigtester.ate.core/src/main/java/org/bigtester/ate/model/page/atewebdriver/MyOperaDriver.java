@@ -23,6 +23,7 @@ package org.bigtester.ate.model.page.atewebdriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.browser.BrowserProfile;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -37,6 +38,9 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 	/** The browser profile. */
 	@Nullable
 	final private BrowserProfile<ChromeOptions> browserProfile;
+	/** The Constant BROWSERNAME. */
+	final static private String BROWSERNAME = "webdriver.opera.driver";
+	
 	
 	/**
 	 * Instantiates a new my Opera driver.
@@ -45,7 +49,7 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 		//TODO create Opera browsers and remote web driver handler
 		super();
 		browserProfile = null;
-		System.setProperty("webdriver.chrome.driver", "browserdriver/operadriver.exe");
+		System.setProperty("webdriver.chrome.driver", "browserdriver/windows/opera/32bit/0.1.0/operadriver.exe");
 	}
 
 	/**
@@ -75,6 +79,31 @@ public class MyOperaDriver extends WebDriverBase implements IMyWebDriver{
 	 */
 	@Override
 	public WebDriver createDriver() {
+		OSinfo osinfo = new OSinfo(); 
+		EPlatform platform = osinfo.getOSname();
+		switch (platform)
+		{
+			case Windows_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/opera/32bit/0.1.0/operadriver.exe");
+				break;
+			case Windows_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/windows/opera/64bit/0.1.0/operadriver.exe");
+				break;	
+			case Linux_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/32bit/0.1.0/operadriver.exe");
+				break;
+			case Linux_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/linux/opera/64bit/0.1.0/operadriver.exe");
+				break;
+			case Mac_OS_X_32:	
+				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/32bit/0.1.0/operadriver.exe");
+				break;	
+			case Mac_OS_X_64:	
+				System.setProperty(BROWSERNAME, "browserdriver/osx/opera/64bit/0.1.0/operadriver.exe");
+				break;		
+			default:
+				throw GlobalUtils.createNotInitializedException("operating system is not supported ");
+		}        
 		WebDriver retVal = new ChromeDriver();
 		setWebDriver(retVal);
 		return retVal;
