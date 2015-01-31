@@ -60,7 +60,7 @@ public final class XsdElementConstants {
 	public static final String ELEMENT_CASEDEPENDENCY = "CaseDependency";
 	
 	/** The Constant ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID. */
-	public static final String ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID = "dependOnTestCaseID";
+	public static final String ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID = "dependOnTestCaseID"; //NOPMD
 	
 	/** The Constant ATTR_CASEDEPENDENCY_DEPENDENCYTYPE. */
 	public static final String ATTR_CASEDEPENDENCY_DEPENDENCYTYPE = "dependencyType";
@@ -305,7 +305,7 @@ public final class XsdElementConstants {
 	public static final String ATTR_ELEMENTACTIONDEF_ELEMENTACTION = "elementAction"; //NOPMD
 	
 	/** The Constant ATTR_XMLTESTCASE_TESTCASENAME. */
-	public static final String ATTR_XMLTESTCASE_TESTCASEFILEPATHNAME = "testCaseFilePathName";
+	public static final String ATTR_XMLTESTCASE_TESTCASEFILEPATHNAME = "testCaseFilePathName";//NOPMD
 	
 	/** The Constant ATTR_TESTCASE_TESTCASENAME. */
 	public static final String ATTR_TESTCASE_TESTCASENAME = "testCaseName";

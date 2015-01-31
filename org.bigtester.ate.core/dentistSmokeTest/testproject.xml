@@ -35,7 +35,7 @@
 				<ate:CaseDependencies>
 					<ate:CaseDependency
 						dependOnTestCaseID="dentistSmokeTest/frontend_login_suite/publicHomePageValidation.xml"
-						dependencyType="TestCaseDataDependency" />
+						dependencyType="TestCaseStepDependency" />
 				</ate:CaseDependencies>
 			</ate:XmlTestCase>
 		</ate:TestSuite>

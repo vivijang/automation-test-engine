@@ -57,7 +57,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;//NOPMD, can't be deleted since this file will be used as a template to create runners
 import org.testng.internal.Utils;
-import org.testng.xml.XmlTest;
 
 // TODO: Auto-generated Javadoc
 /**

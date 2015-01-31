@@ -22,7 +22,6 @@ package org.bigtester.ate.model.project;
 
 import java.util.List;
 
-import org.bigtester.ate.GlobalUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc

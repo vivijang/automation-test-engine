@@ -20,23 +20,16 @@
  *******************************************************************************/
 package org.bigtester.ate.xmlschema;
 
-import java.util.List;
-
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumCaseDependencyType;
-import org.bigtester.ate.constant.RumtimeDataHolderType;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.CaseDependency;
-import org.bigtester.ate.model.project.TestSuite;
 import org.eclipse.jdt.annotation.Nullable;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
-import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
 // TODO: Auto-generated Javadoc
@@ -63,7 +56,7 @@ public class CaseDependencyBeanDefinitionParser extends
 		// value be supplied
 		String dependOnTestCaseID = element
 				.getAttribute(XsdElementConstants.ATTR_CASEDEPENDENCY_DEPENDONTESTCASEID);
-		BeanDefinitionBuilder factory = BeanDefinitionBuilder
+		BeanDefinitionBuilder factory = BeanDefinitionBuilder//NOPMD
 				.rootBeanDefinition(CaseDependency.class);
 		if (StringUtils.hasText(dependOnTestCaseID))
 			factory.addConstructorArgValue(dependOnTestCaseID);

@@ -18,44 +18,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.project;
+package org.bigtester.ate.model.project; //NOPMD
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.tools.Diagnostic;
-import javax.tools.DiagnosticCollector;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
-
-import org.apache.commons.io.FilenameUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.caserunner.CaseRunnerGenerator;
 import org.bigtester.ate.reporter.ATEXMLReporter;
 import org.bigtester.ate.systemlogger.LogbackWriter;
-import org.codehaus.janino.JavaSourceClassLoader;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-import org.testng.Assert;
 import org.testng.TestNG;
 import org.testng.reporters.XMLReporterConfig;
-import org.testng.xml.XmlClass;
 import org.testng.xml.XmlPackage;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.github.javaparser.ParseException;
-
-import jodd.util.ClassLoaderUtil;
 
 // TODO: Auto-generated Javadoc
 /**
