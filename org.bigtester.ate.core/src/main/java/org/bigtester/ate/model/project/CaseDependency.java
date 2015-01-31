@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,40 +18,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.xmlschema;
+package org.bigtester.ate.model.project;
 
-import java.text.SimpleDateFormat;
+import org.bigtester.ate.constant.EnumCaseDependencyType;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class JobDetailTemplate defines ....
+ * This class CaseDependency defines ....
  * @author Peidong Hu
  *
  */
-public class JobDetailTemplate {
+public class CaseDependency {
 	
-	/** The date. */
-	SimpleDateFormat dateFormat;
+	/** The depended test case id. */
+	final private String dependOnTestCaseID;
 	
-	/**
-	 * @return the dateFormat
-	 */
-	public SimpleDateFormat getDateFormat() {
-		return dateFormat;
-	}
-
-	/**
-	 * @param dateFormat the dateFormat to set
-	 */
-	public void setDateFormat(SimpleDateFormat dateFormat) {
-		this.dateFormat = dateFormat;
-	}
-
+	/** The dependency type. */
+	final private EnumCaseDependencyType dependencyType;
+	
 	/**
 	 * 
 	 */
-	public JobDetailTemplate() {
-		// TODO Auto-generated constructor stub
+	public CaseDependency(String dependOnTestCaseID, EnumCaseDependencyType dependencyType) {
+		this.dependencyType = dependencyType;
+		this.dependOnTestCaseID = dependOnTestCaseID;
+	}
+
+	/**
+	 * @return the dependOnTestCaseID
+	 */
+	public String getDependOnTestCaseID() {
+		return dependOnTestCaseID;
+	}
+
+	/**
+	 * @return the dependencyType
+	 */
+	public EnumCaseDependencyType getDependencyType() {
+		return dependencyType;
 	}
 
 }

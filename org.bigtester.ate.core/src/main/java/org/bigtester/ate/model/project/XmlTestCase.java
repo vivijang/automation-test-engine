@@ -20,6 +20,10 @@
  *******************************************************************************/
 package org.bigtester.ate.model.project;
 
+import java.util.List;
+
+import org.eclipse.jdt.annotation.Nullable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestCase defines ....
@@ -30,7 +34,11 @@ public class XmlTestCase {
 	
 	
 	/** The test case name. */
-	private String testCaseName;
+	private String testCaseFilePathName;
+	
+	/** The depend on test cases. */
+	@Nullable
+	private List<CaseDependency> dependOnTestCases;
 
 	/**
 	 * Instantiates a new xml test case.
@@ -38,15 +46,15 @@ public class XmlTestCase {
 	 * @param testCaseName the test case name
 	 */
 	public XmlTestCase(String testCaseName) {
-		this.testCaseName = testCaseName;
+		this.testCaseFilePathName = testCaseName;
 	}
 	/**
 	 * Gets the test case name.
 	 *
 	 * @return the testCaseName
 	 */
-	public String getTestCaseName() {
-		return testCaseName;
+	public String getTestCaseFilePathName() {
+		return testCaseFilePathName;
 	}
 
 	/**
@@ -54,8 +62,21 @@ public class XmlTestCase {
 	 *
 	 * @param testCaseName the testCaseName to set
 	 */
-	public void setTestCaseName(final String testCaseName) {
-		this.testCaseName = testCaseName;
+	public void setTestCaseFilePathName(final String testCaseName) {
+		this.testCaseFilePathName = testCaseName;
+	}
+	/**
+	 * @return the dependOnTestCases
+	 */
+	@Nullable
+	public List<CaseDependency> getDependOnTestCases() {
+		return dependOnTestCases;
+	}
+	/**
+	 * @param dependOnTestCases the dependOnTestCases to set
+	 */
+	public void setDependOnTestCases(List<CaseDependency> dependOnTestCases) {
+		this.dependOnTestCases = dependOnTestCases;
 	}
 
 	

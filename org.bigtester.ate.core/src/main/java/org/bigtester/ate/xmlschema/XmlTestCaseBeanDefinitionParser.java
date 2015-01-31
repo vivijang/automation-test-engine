@@ -21,13 +21,20 @@
 package org.bigtester.ate.xmlschema;
 
 
+import java.util.List;
+
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.project.XmlTestCase;
 import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.support.ManagedList;
+import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
+import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
 
@@ -39,31 +46,49 @@ import org.w3c.dom.Element;
  *
  */
 public class XmlTestCaseBeanDefinitionParser extends
-		AbstractSingleBeanDefinitionParser {
+AbstractBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected Class<XmlTestCase> getBeanClass(@Nullable Element element) {
-	        return XmlTestCase.class; 
-    }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	protected void doParse(@Nullable Element element, @Nullable BeanDefinitionBuilder bean) {
+	@Override
+	protected @Nullable AbstractBeanDefinition parseInternal(@Nullable Element element,
+			@Nullable ParserContext parserContext) {
         // this will never be null since the schema explicitly requires that a value be supplied
-		if (bean ==null || element == null ) throw GlobalUtils.createNotInitializedException("element and bean");
-		
-		String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASENAME);
-        if (StringUtils.hasText(testCaseName))
-        	bean.addConstructorArgValue( testCaseName);
-//
-//        // this however is an optional property
-//        String lenient = element.getAttribute("list-class");
-//        if (StringUtils.hasText(lenient)) {
-//            bean.addPropertyValue("lenient", Boolean.valueOf(lenient));
-//        }
+		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
+		BeanDefinitionBuilder factory = BeanDefinitionBuilder
+				.rootBeanDefinition(XmlTestCase.class);
+		String testCaseName = element.getAttribute(XsdElementConstants.ATTR_XMLTESTCASE_TESTCASEFILEPATHNAME);
+        if (StringUtils.hasText(testCaseName)) {
+        	factory.addConstructorArgValue( testCaseName);
+        }
+        List<Element> dependencies = (List<Element>) DomUtils.getChildElementsByTagName(element, XsdElementConstants.ELEMENT_CASEDEPENDENCIES);
+        if (null != dependencies && dependencies.size() == 1) {
+	        List<Element> allDependencies = (List<Element>) DomUtils.getChildElementsByTagName(dependencies.get(0), XsdElementConstants.ELEMENT_CASEDEPENDENCY);
+	        
+	        if (allDependencies != null && !allDependencies.isEmpty()) {
+	        	if (null == factory) throw GlobalUtils.createNotInitializedException("factory");
+	            parseCaseDependenciesInnerComponents(allDependencies, factory,  parserContext);
+	        }
+        }
+        return factory.getBeanDefinition();
     }
+	
+	private static void parseCaseDependenciesInnerComponents(List<Element> allDependencies, BeanDefinitionBuilder factory, ParserContext parserContext) {
+        ManagedList<BeanDefinition> children = new ManagedList<BeanDefinition>(allDependencies.size());
+        for (Element element : allDependencies) {
+        	CaseDependencyBeanDefinitionParser dependency = new CaseDependencyBeanDefinitionParser();
+        	children.add(dependency.parse(element, parserContext));
+        }
+        factory.addPropertyValue(XsdElementConstants.PROP_XMLTESTCASE_DEPENDONTESTCASES, children);
+    }
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected boolean shouldGenerateId() {
+		return true;
+	}
 
 }
