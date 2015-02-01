@@ -66,15 +66,9 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	/**
 	 * @return the browserProfile
 	 */
-	
+	@Nullable
 	public BrowserProfile<FirefoxProfile> getBrowserProfile() {
-		final BrowserProfile<FirefoxProfile> retVal = browserProfile;
-		if (null == retVal) {
-			throw new IllegalStateException("browserProfile is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
+		return browserProfile;
 	}
 	/**
 	 * {@inheritDoc}
@@ -90,12 +84,13 @@ public class MyFirefoxDriver extends WebDriverBase implements IMyWebDriver{
 	public WebDriver createDriver() {
 		WebDriver retVal = super.getWebDriver();
 		if ( null == retVal) {
-			if (null == getBrowserProfile().getProfile()) {
+			BrowserProfile<FirefoxProfile> bPro = getBrowserProfile();
+			if (null == bPro) {
 				retVal = new FirefoxDriver();
 			} else {
 				FirefoxBinary binary=new FirefoxBinary();
 				binary.addCommandLineOptions("-no-remote");
-				retVal = new FirefoxDriver(binary, getBrowserProfile().getProfile());
+				retVal = new FirefoxDriver(binary, bPro.getProfile());
 			}
 			setWebDriver(retVal);
 			

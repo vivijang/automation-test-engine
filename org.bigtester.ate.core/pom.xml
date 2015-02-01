@@ -1,16 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 	                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	                         
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>9</version>
 	</parent>
-	
+
 	<groupId>org.bigtester</groupId>
 	<artifactId>org.bigtester.ate.core</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
@@ -27,7 +26,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<scm>
 		<url>https://github.com/bigtester/automation-test-engine/tree/master/org.bigtester.ate.core</url>
 	</scm>
@@ -66,110 +65,119 @@
 
 			</plugins>
 		</pluginManagement>
-		
-		    <plugins>
-			    <plugin>
-				    <groupId>org.apache.maven.plugins</groupId>
-				    <artifactId>maven-eclipse-plugin</artifactId>
-				    <version>2.7</version>
-				    <configuration>
-					    <downloadSources>true</downloadSources>
-					    <downloadJavadocs>false</downloadJavadocs>
-					    <wtpversion>2.0</wtpversion>
-					    <additionalBuildcommands>
-						    <buildCommand>
-							    <name>org.springframework.ide.eclipse.core.springbuilder</name>
-						    </buildCommand>
-					    </additionalBuildcommands>
-					    <additionalProjectnatures>
-						    <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-					    </additionalProjectnatures>
-				    </configuration>
-			    </plugin>
-			    <plugin>
-				    <groupId>org.apache.maven.plugins</groupId>
-				    <artifactId>maven-compiler-plugin</artifactId>
-				    <version>${maven-compiler-plugin.version}</version>
-				    <configuration>
-					    <!-- or whatever version you use -->
-					    <source>1.7</source>
-					    <target>1.7</target>
-				    </configuration>
-			    </plugin>
-			    <plugin>
-                    <groupId>com.lazerycode.selenium</groupId>
-                    <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                    <version>1.0.4</version>
-                    <configuration>
-                        <!-- root directory that downloaded driver binaries will be stored in -->
-                        <rootStandaloneServerDirectory>browserdriver</rootStandaloneServerDirectory>
-                        <!-- Where you want to store downloaded zip files -->
-                        <downloadedZipFileDirectory>/tmp/zips</downloadedZipFileDirectory>
-                        <!-- Location of a custom repository map -->
-                        <customRepositoryMap>browserdriver/repo.xml</customRepositoryMap>
-                        <!-- This will ensure that the plugin only downloads binaries for the current OS, this will override anything specified in the <operatingSystems> configuration -->
-                        <onlyGetDriversForHostOperatingSystem>false</onlyGetDriversForHostOperatingSystem>
-                        <!-- Operating systems you want to download binaries for (Only valid options are: windows, linux, osx) -->
-                        <operatingSystems>
-                            <windows>true</windows>
-                            <linux>true</linux>
-                            <osx>true</osx>
-                        </operatingSystems>
-                        <!-- Download 32bit binaries -->
-                        <thirtyTwoBitBinaries>true</thirtyTwoBitBinaries>
-                        <!-- Download 64bit binaries -->
-                        <sixtyFourBitBinaries>true</sixtyFourBitBinaries>
-                        <!-- If set to false will download every version available (Other filters will be taken into account -->
-                        <onlyGetLatestVersions>true</onlyGetLatestVersions>
-                        <!-- Provide a list of drivers and binary versions to download (this is a map so only one version can be specified per driver) -->
-<!--                         <getSpecificExecutableVersions> -->
-<!--                             <googlechrome>18</googlechrome> -->
-<!--                         </getSpecificExecutableVersions> -->
-                        <!-- Throw an exception if any specified binary versions that the plugin tries to download do not exist -->
-                        <throwExceptionIfSpecifiedVersionIsNotFound>false</throwExceptionIfSpecifiedVersionIsNotFound>
-                        <!-- Number of times to attempt to download each file -->
-                        <fileDownloadRetryAttempts>2</fileDownloadRetryAttempts>
-                        <!-- Number of ms to wait before timing out when trying to connect to remote server to download file -->
-                        <fileDownloadConnectTimeout>20000</fileDownloadConnectTimeout>
-                        <!-- Number of ms to wait before timing out when trying to read file from remote server -->
-                        <fileDownloadReadTimeout>10000</fileDownloadReadTimeout>
-                        <!-- Overwrite any existing binaries that have been downloaded and extracted -->
-                        <overwriteFilesThatExist>true</overwriteFilesThatExist>
-                        <!-- Check file hashes of downloaded files.  Default: true -->
-                        <checkFileHashes>true</checkFileHashes>
-                        <!-- auto detect system proxy to use when downloading files -->
-                        <!-- To specify an explicit proxy set the environment variables http.proxyHost and http.proxyPort -->
-                        <useSystemProxy>true</useSystemProxy>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>selenium</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>							
-			
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo</groupId> -->
-			<!-- <artifactId>exec-maven-plugin</artifactId> -->
-			<!-- <version>1.1.1</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>install</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>java</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
 
-			<!-- <mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
-			<!-- <arguments> -->
-			<!-- <argument>testproject/testproject01.xml</argument> -->
-			<!-- </arguments> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<additionalBuildcommands>
+						<buildCommand>
+							<name>org.springframework.ide.eclipse.core.springbuilder</name>
+						</buildCommand>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<!-- or whatever version you use -->
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.lazerycode.selenium</groupId>
+				<artifactId>driver-binary-downloader-maven-plugin</artifactId>
+				<version>1.0.4</version>
+				<configuration>
+					<!-- root directory that downloaded driver binaries will be stored in -->
+					<rootStandaloneServerDirectory>browserdriver</rootStandaloneServerDirectory>
+					<!-- Where you want to store downloaded zip files -->
+					<downloadedZipFileDirectory>/tmp/zips</downloadedZipFileDirectory>
+					<!-- Location of a custom repository map -->
+					<customRepositoryMap>browserdriver/repo.xml</customRepositoryMap>
+					<!-- This will ensure that the plugin only downloads binaries for the 
+						current OS, this will override anything specified in the <operatingSystems> 
+						configuration -->
+					<onlyGetDriversForHostOperatingSystem>false</onlyGetDriversForHostOperatingSystem>
+					<!-- Operating systems you want to download binaries for (Only valid 
+						options are: windows, linux, osx) -->
+					<operatingSystems>
+						<windows>true</windows>
+						<linux>true</linux>
+						<osx>true</osx>
+					</operatingSystems>
+					<!-- Download 32bit binaries -->
+					<thirtyTwoBitBinaries>true</thirtyTwoBitBinaries>
+					<!-- Download 64bit binaries -->
+					<sixtyFourBitBinaries>true</sixtyFourBitBinaries>
+					<!-- If set to false will download every version available (Other filters 
+						will be taken into account -->
+					<onlyGetLatestVersions>true</onlyGetLatestVersions>
+					<!-- Provide a list of drivers and binary versions to download (this 
+						is a map so only one version can be specified per driver) -->
+					<!-- <getSpecificExecutableVersions> -->
+					<!-- <googlechrome>18</googlechrome> -->
+					<!-- </getSpecificExecutableVersions> -->
+					<!-- Throw an exception if any specified binary versions that the plugin 
+						tries to download do not exist -->
+					<throwExceptionIfSpecifiedVersionIsNotFound>false</throwExceptionIfSpecifiedVersionIsNotFound>
+					<!-- Number of times to attempt to download each file -->
+					<fileDownloadRetryAttempts>2</fileDownloadRetryAttempts>
+					<!-- Number of ms to wait before timing out when trying to connect to 
+						remote server to download file -->
+					<fileDownloadConnectTimeout>20000</fileDownloadConnectTimeout>
+					<!-- Number of ms to wait before timing out when trying to read file 
+						from remote server -->
+					<fileDownloadReadTimeout>10000</fileDownloadReadTimeout>
+					<!-- Overwrite any existing binaries that have been downloaded and extracted -->
+					<overwriteFilesThatExist>true</overwriteFilesThatExist>
+					<!-- Check file hashes of downloaded files. Default: true -->
+					<checkFileHashes>true</checkFileHashes>
+					<!-- auto detect system proxy to use when downloading files -->
+					<!-- To specify an explicit proxy set the environment variables http.proxyHost 
+						and http.proxyPort -->
+					<useSystemProxy>true</useSystemProxy>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>selenium</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+
+							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
+							<arguments>
+								<argument>dentistSmokeTest/testproject.xml</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- <plugin> -->
 			<!-- <groupId>org.apache.maven.plugins</groupId> -->
@@ -220,7 +228,7 @@
 			<!-- </plugin> -->
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -375,107 +383,107 @@
 			<version>2.5.0</version>
 		</dependency>
 		<dependency>
-            <groupId>org.eclipse.jdt</groupId>
-            <artifactId>org.eclipse.jdt.annotation</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>4.0-beta5</version>
-        </dependency>
-        <dependency>
-            <groupId>net.jodah</groupId>
-            <artifactId>typetools</artifactId>
-            <version>0.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.lazerycode.selenium</groupId>
-            <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-<dependency>
-    <groupId>com.github.javaparser</groupId>
-    <artifactId>javaparser-core</artifactId>
-    <version>2.0.0</version>
-</dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>org.eclipse.jdt.annotation</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.0-beta5</version>
+		</dependency>
+		<dependency>
+			<groupId>net.jodah</groupId>
+			<artifactId>typetools</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lazerycode.selenium</groupId>
+			<artifactId>driver-binary-downloader-maven-plugin</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-core</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 
-<dependency>
-	<groupId>org.jodd</groupId>
-	<artifactId>jodd</artifactId>
-	<version>3.3.8</version>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.aether</groupId>
-    <artifactId>aether-api</artifactId>
-    <version>1.0.2.v20150114</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.maven</groupId>
-    <artifactId>maven-aether-provider</artifactId>
-    <version>3.2.5</version>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.aether</groupId>
-    <artifactId>aether-connector-basic</artifactId>
-    <version>1.0.2.v20150114</version>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.aether</groupId>
-    <artifactId>aether-transport-http</artifactId>
-    <version>1.0.2.v20150114</version>
-</dependency>
-<dependency>
-    <groupId>org.eclipse.aether</groupId>
-    <artifactId>aether-transport-file</artifactId>
-    <version>1.0.2.v20150114</version>
-</dependency>
+		<dependency>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd</artifactId>
+			<version>3.3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.aether</groupId>
+			<artifactId>aether-api</artifactId>
+			<version>1.0.2.v20150114</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-aether-provider</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.aether</groupId>
+			<artifactId>aether-connector-basic</artifactId>
+			<version>1.0.2.v20150114</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.aether</groupId>
+			<artifactId>aether-transport-http</artifactId>
+			<version>1.0.2.v20150114</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.aether</groupId>
+			<artifactId>aether-transport-file</artifactId>
+			<version>1.0.2.v20150114</version>
+		</dependency>
 
-<dependency>
-      <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-utils</artifactId>
-      <version>3.0.21</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-compat</artifactId>
-      <version>3.2.5</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.codehaus.plexus</groupId>
-          <artifactId>plexus-utils</artifactId>
-        </exclusion>
-        <exclusion>
-          <artifactId>sisu-inject-plexus</artifactId>
-          <groupId>org.sonatype.sisu</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.maven.wagon</groupId>
-      <artifactId>wagon-http-lightweight</artifactId>
-      <version>2.8</version>
-      <exclusions>
-        <exclusion>
-          <groupId>nekohtml</groupId>
-          <artifactId>nekohtml</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>nekohtml</groupId>
-          <artifactId>xercesMinimal</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-       <groupId>org.apache.httpcomponents</groupId>
-       <artifactId>httpclient</artifactId>
-       <version>4.3.5</version>
-   </dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.21</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-compat</artifactId>
+			<version>3.2.5</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-utils</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>sisu-inject-plexus</artifactId>
+					<groupId>org.sonatype.sisu</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-http-lightweight</artifactId>
+			<version>2.8</version>
+			<exclusions>
+				<exclusion>
+					<groupId>nekohtml</groupId>
+					<artifactId>nekohtml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>nekohtml</groupId>
+					<artifactId>xercesMinimal</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.5</version>
+		</dependency>
 	</dependencies>
 
 </project>

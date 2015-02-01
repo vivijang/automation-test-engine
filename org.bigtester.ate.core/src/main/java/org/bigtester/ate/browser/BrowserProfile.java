@@ -100,7 +100,7 @@ public class BrowserProfile<T> {
 			ProfilesIni profileIni = new ProfilesIni();
 			T tmpProfile = (T) profileIni.getProfile(profileName); 
 			if (null == tmpProfile) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Could not find the browser profile.");
 			} else {
 				this.profile = tmpProfile;
 			}
