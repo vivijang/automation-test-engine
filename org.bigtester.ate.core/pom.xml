@@ -109,7 +109,7 @@
 					<!-- This will ensure that the plugin only downloads binaries for the 
 						current OS, this will override anything specified in the <operatingSystems> 
 						configuration -->
-					<onlyGetDriversForHostOperatingSystem>false</onlyGetDriversForHostOperatingSystem>
+					<onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
 					<!-- Operating systems you want to download binaries for (Only valid 
 						options are: windows, linux, osx) -->
 					<operatingSystems>
@@ -479,11 +479,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.5</version>
-		</dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.3.6</version>
+</dependency>
 	</dependencies>
 
 </project>
