@@ -20,6 +20,9 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.atewebdriver;
 
+import java.net.ProxySelector;
+
+import org.bigtester.ate.GlobalUtils;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.WebDriver;
 
@@ -55,4 +58,29 @@ public class WebDriverBase {
 		this.webDriver = webDriver;
 	}
 
+	/**
+	 * Instantiates a new web driver base.
+	 */
+	public WebDriverBase() {
+		// Following code is to defensively make sure that default proxySelector
+		// is not null.
+		// Selenium driver-binary-downloader-maven-plugin incorrectly set
+		// defaultProxySelector to null which causes error when creating
+		// httpclient.
+		// Issue has been opened for Selenium
+		// driver-binary-downloader-maven-plugin at
+		// https://github.com/Ardesco/selenium-standalone-server-plugin/issues/23
+		ProxySelector pSel = ProxySelector.getDefault();
+		if (null == pSel) {
+			try {
+				Class<?> cls = Class.forName("sun.net.spi.DefaultProxySelector");
+				if (cls != null && ProxySelector.class.isAssignableFrom(cls)) {
+					ProxySelector.setDefault((ProxySelector) cls.newInstance());
+				}
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException err) {
+				throw GlobalUtils.createInternalError("creating default proxy selector"); //NOPMD
+			}
+		}
+
+	}
 }

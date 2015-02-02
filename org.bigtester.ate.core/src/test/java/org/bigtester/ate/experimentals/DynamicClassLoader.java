@@ -24,10 +24,9 @@ import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.DefaultArtifact;
+import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.model.Dependency;
 import org.eclipse.aether.resolution.ArtifactDescriptorException;
-import org.eclipse.aether.resolution.ArtifactDescriptorRequest;
-import org.eclipse.aether.resolution.ArtifactDescriptorResult;
 import org.eclipse.aether.resolution.ArtifactRequest;
 import org.eclipse.aether.resolution.ArtifactResolutionException;
 import org.eclipse.aether.resolution.ArtifactResult;
@@ -36,14 +35,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.tools.Diagnostic;
@@ -55,15 +52,11 @@ import javax.tools.ToolProvider;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.codehaus.janino.JavaSourceClassLoader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
+import org.apache.maven.project.MavenProject;
 import org.bigtester.ate.model.project.IRunTestCase;
 
 /**
@@ -131,13 +124,20 @@ public class DynamicClassLoader extends UnitTestBase {
 
 	@Test
 	public void test3() throws FileNotFoundException, IOException,
-			XmlPullParserException {
-		File pomFile = new File(getTestResourcesDirectory(), "pom.xml");
-		Model modelPom = readPom(pomFile);
-		System.out.println("--------- Model -------------");
-		for (Dependency dependency : modelPom.getDependencies()) {
-			System.out.println("Model Dependency:" + dependency);
+			XmlPullParserException, DependencyResolutionRequiredException {
+		MavenXpp3Reader reader = new MavenXpp3Reader(); 
+		
+		File pomFile = new File("pom.xml");
+		Model model = reader.read(new FileReader(pomFile)); 
+		MavenProject project = new MavenProject(model); 
+		List<Dependency> runtimeClasspathElements = project.getDependencies();
+		for (Dependency runtimeClasspathElement : runtimeClasspathElements) {
+			System.out.println(runtimeClasspathElement);
 		}
+//		System.out.println("--------- Model -------------");
+//		for (Dependency dependency : modelPom.getDependencies()) {
+//			System.out.println("Model Dependency:" + dependency);
+//		}
 	}
 
 	@Test
@@ -147,6 +147,38 @@ public class DynamicClassLoader extends UnitTestBase {
 		System.out.println(StringUtils.replace(classPath, "/home/peidong/.m2/", System.getProperty("user.home")+System.getProperty("file.separator") +".m2" + System.getProperty("file.separator")));
 		System.out.println(StringUtils.replace(classPath, "/home/peidong/.m2/", System.getProperty("user.home")+System.getProperty("file.separator") +".m2" + System.getProperty("file.separator")));
 	}
+	
+//	@Test
+//	public void test5() throws DependencyResolutionRequiredException {
+//		File pomFile = new File(getTestResourcesDirectory(), "pom.xml");
+//		MavenProject project = createProjectFromPom(pomFile);
+//		List<String> runtimeClasspathElements = project.getRuntimeClasspathElements();
+//		for (String runtimeClasspathElement : runtimeClasspathElements) {
+//			System.out.println(runtimeClasspathElement);
+//		}
+//		
+//	}
+//	
+//	private MavenProject createProjectFromPom(File pom) {
+//        MavenEmbedder maven = new MavenEmbedder();
+//        maven.setOffline(true);
+//        maven.setClassLoader(Thread.currentThread().getContextClassLoader());
+//        maven.setLogger(new MavenEmbedderConsoleLogger());
+//
+//        MavenProject p = null;
+//
+//        try {
+//            maven.setAlignWithUserInstallation(true);
+//            maven.start();
+//            p = maven.readProjectWithDependencies(pom);
+//            maven.stop();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return p;
+//    }
+	
 	/**
 	 * F2 test.
 	 * 
