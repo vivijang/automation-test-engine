@@ -24,7 +24,7 @@
                 </bitrate>
             </version>
         </driver>
-         <driver id="phantomjs">
+         <driver id="operachromium">
             <version id="0.1.0">
                 <bitrate thirtytwobit="true" sixtyfourbit="true">
                     <filelocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v0.1.0/operadriver_win32.zip</filelocation>
@@ -49,7 +49,7 @@
                 </bitrate>
             </version>
         </driver>
-        <driver id="phantomjs">
+        <driver id="operachromium">
             <version id="0.1.0">
                 <bitrate sixtyfourbit="true">
                     <filelocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v0.1.0/operadriver_linux64.zip</filelocation>
@@ -74,7 +74,7 @@
                 </bitrate>
             </version>
         </driver>
-       <driver id="phantomjs">
+       <driver id="operachromium">
             <version id="0.1.0">
                 <bitrate sixtyfourbit="true">
                     <filelocation>https://github.com/operasoftware/operachromiumdriver/releases/download/v0.1.0/operadriver_mac64.zip</filelocation>
