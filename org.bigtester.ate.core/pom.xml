@@ -12,7 +12,7 @@
 
 	<groupId>org.bigtester</groupId>
 	<artifactId>org.bigtester.ate.core</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Automation Test Engine Core</name>
@@ -158,74 +158,74 @@
 				</executions>
 			</plugin>
 
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
+<!-- 				<version>1.1.1</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>install</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>java</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+
+<!-- 							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
+<!-- 							<arguments> -->
+<!-- 								<argument>dentistSmokeTest/testproject.xml</argument> -->
+<!-- 							</arguments> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
+
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>java</goal>
-						</goals>
-						<configuration>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-shade-plugin</artifactId>
+			<version>2.1</version>
 
-							<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
-							<arguments>
-								<argument>dentistSmokeTest/testproject.xml</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
+			<executions>
+			<execution>
+			<phase>package</phase>
+			<goals>
+			<goal>shade</goal>
+			</goals>
+			<configuration>
+			<finalName>ate</finalName>
+			<shadedArtifactAttached>true</shadedArtifactAttached>
+			<shadedClassifierName>jar-with-dependencies</shadedClassifierName>
+			<transformers>
+			<transformer
+			implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+			<mainClass>org.bigtester.ate.TestProjectRunner</mainClass>
+			</transformer>
+			<transformer
+			implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+			<resource>META-INF/spring.handlers</resource>
+			</transformer>
+			<transformer
+			implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+			<resource>META-INF/spring.schemas</resource>
+			</transformer>
+			<transformer
+			implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+			<resource>META-INF/spring.tooling</resource>
+			</transformer>
+			</transformers>
+			<filters>
+			<filter>
+			<artifact>*:*</artifact>
+			<excludes>
+			<exclude>META-INF/*.SF</exclude>
+			<exclude>META-INF/*.DSA</exclude>
+			<exclude>META-INF/*.RSA</exclude>
+			</excludes>
+			</filter>
+			</filters>
+			</configuration>
+			</execution>
+			</executions>
 			</plugin>
-
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-shade-plugin</artifactId> -->
-			<!-- <version>2.1</version> -->
-
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>package</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>shade</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
-			<!-- <finalName>ate</finalName> -->
-			<!-- <shadedArtifactAttached>true</shadedArtifactAttached> -->
-			<!-- <shadedClassifierName>jar-with-dependencies</shadedClassifierName> -->
-			<!-- <transformers> -->
-			<!-- <transformer -->
-			<!-- implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> -->
-			<!-- <mainClass>org.bigtester.ate.TestProjectRunner</mainClass> -->
-			<!-- </transformer> -->
-			<!-- <transformer -->
-			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
-			<!-- <resource>META-INF/spring.handlers</resource> -->
-			<!-- </transformer> -->
-			<!-- <transformer -->
-			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
-			<!-- <resource>META-INF/spring.schemas</resource> -->
-			<!-- </transformer> -->
-			<!-- <transformer -->
-			<!-- implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
-			<!-- <resource>META-INF/spring.tooling</resource> -->
-			<!-- </transformer> -->
-			<!-- </transformers> -->
-			<!-- <filters> -->
-			<!-- <filter> -->
-			<!-- <artifact>*:*</artifact> -->
-			<!-- <excludes> -->
-			<!-- <exclude>META-INF/*.SF</exclude> -->
-			<!-- <exclude>META-INF/*.DSA</exclude> -->
-			<!-- <exclude>META-INF/*.RSA</exclude> -->
-			<!-- </excludes> -->
-			<!-- </filter> -->
-			<!-- </filters> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
 		</plugins>
 	</build>
 
@@ -485,7 +485,11 @@
     <artifactId>httpclient</artifactId>
     <version>4.3.3</version>
 </dependency>
-
+<dependency>
+  <groupId>com.jcabi</groupId>
+  <artifactId>jcabi-aether</artifactId>
+  <version>0.10.1</version>
+</dependency>
 	</dependencies>
 
 </project>

@@ -41,6 +41,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.tools.Diagnostic;
@@ -58,6 +59,8 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
 import org.bigtester.ate.model.project.IRunTestCase;
+
+import com.jcabi.aether.Classpath;
 
 /**
  * The Class DynamicClassLoader.
@@ -130,6 +133,11 @@ public class DynamicClassLoader extends UnitTestBase {
 		File pomFile = new File("pom.xml");
 		Model model = reader.read(new FileReader(pomFile)); 
 		MavenProject project = new MavenProject(model); 
+//		Collection<File> jars = new Classpath(
+//				  project,
+//				  new File("/home/peidong/.m2/respository"),
+//				  "test" // the scope you're interested in
+//				);
 		List<Dependency> runtimeClasspathElements = project.getDependencies();
 		for (Dependency runtimeClasspathElement : runtimeClasspathElements) {
 			System.out.println(runtimeClasspathElement);
@@ -140,6 +148,18 @@ public class DynamicClassLoader extends UnitTestBase {
 //		}
 	}
 
+	@Test
+	public void test5() throws Exception {
+		Class cls = Class.forName("org.testng.TestNG");
+
+        // returns the ClassLoader object associated with this Class
+        ClassLoader cLoader = cls.getClassLoader();
+        
+        ((URLClassLoader) cLoader).getURLs();
+        
+        System.out.println(Arrays.toString(((URLClassLoader) cLoader).getURLs()));
+	}
+	
 	@Test
 	public void test4() {
 		System.out.println(System.getProperty("user.home"));
