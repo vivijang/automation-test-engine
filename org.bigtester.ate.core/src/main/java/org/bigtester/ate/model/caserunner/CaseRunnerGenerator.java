@@ -48,7 +48,6 @@ import jodd.util.ClassLoaderUtil;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumCaseDependencyType;
 import org.bigtester.ate.model.page.atewebdriver.EPlatform;
@@ -582,6 +581,7 @@ public class CaseRunnerGenerator {
 			// Create a new custom class loader, pointing to the directory that
 			// contains the compiled
 			// classes, this should point to the top of the package structure!
+			//TODO the / separator needs to be revised to platform awared 
 			URLClassLoader classLoader = new URLClassLoader(
 					new URL[] { new File(System.getProperty("user.dir")
 							+ "/generated-code/caserunners/").toURI().toURL() },
@@ -609,11 +609,11 @@ public class CaseRunnerGenerator {
 		Class cls;
 		String retVal;
 		try {
-			cls = Class.forName("org.bigtester.ate.TestProjectRunner");
+			cls = Class.forName("org.bigtester.ate.TestProjectRunner");//NOPMD
 		} catch (ClassNotFoundException e) {
 			retVal = System.getProperty("java.class.path")
 					+ ":dist/InlineCompiler.jar:target/*.jar";
-			return retVal;
+			return retVal;//NOPMD
 		}
 
 		// returns the ClassLoader object associated with this Class
@@ -635,7 +635,7 @@ public class CaseRunnerGenerator {
 				+ "*.jar" + pathSep + "dist"
 				+ System.getProperty("file.separator") + "InlineCompiler.jar";
 		for (URL path : paths) {
-			retVal = retVal + pathSep + path.getPath();
+			retVal = retVal + pathSep + path.getPath();//NOPMD
 		}
 
 		return retVal;

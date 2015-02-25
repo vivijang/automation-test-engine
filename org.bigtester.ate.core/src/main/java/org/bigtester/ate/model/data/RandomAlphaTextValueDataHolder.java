@@ -18,14 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.constant;
+package org.bigtester.ate.model.data;
+
+import org.bigtester.ate.constant.EnumRunTimeDataType;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class RumtimeDataHolderType defines ....
+ * This class ManualAssignedValueDataHolder defines ....
  * @author Peidong Hu
  *
  */
-public enum RumtimeDataHolderType {
-	MANUALASSIGNED, PAGESOURCEPARSED, CASESERVICEPARSED, STEPSERVICEPARSED, RANDOMALPHATEXT, RANDOMNUMBERS, RANDOMTEXTNUMBERS, RANDOMEMAIL
+public class RandomAlphaTextValueDataHolder extends AbstractRandomValueDataHolder  implements IStepInputData{
+
+	/**
+	 * @param dataType
+	 * @param strDataValue
+	 * @param springBeanID
+	 */
+	public RandomAlphaTextValueDataHolder(
+			String springBeanID, int textLength) {
+		super(EnumRunTimeDataType.TEXT, "", springBeanID);
+		String strRandomValue = generateRandomString(textLength,Mode.ALPHA);
+		super.setStrDataValue(strRandomValue);
+	}
 }

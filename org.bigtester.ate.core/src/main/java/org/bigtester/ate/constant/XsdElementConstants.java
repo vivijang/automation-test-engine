@@ -170,6 +170,8 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_INDEXOFSAMETYPEDATAONPAGE = "indexOfSameTypeDataOnPage"; //NOPMD
 	
+	public static final String ATTR_RUNTIMEDATAHOLDER_RANDOMINPUTLENGTH = "randomInputLength"; //NOPMD
+	
 	
 	/** The Constant ATTR_RUNTIMEDATAHOLDER_DATAVALUE. */
 	public static final String ATTR_RUNTIMEDATAHOLDER_DATAVALUE = "dataValue";

@@ -28,6 +28,10 @@ import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.data.CaseServiceParsedDataHolder;
 import org.bigtester.ate.model.data.ManualAssignedValueDataHolder;
 import org.bigtester.ate.model.data.PageParsedDataHolder;
+import org.bigtester.ate.model.data.RandomAlphaNumericValueDataHolder;
+import org.bigtester.ate.model.data.RandomAlphaTextValueDataHolder;
+import org.bigtester.ate.model.data.RandomEmailDataHolder;
+import org.bigtester.ate.model.data.RandomNumericValueDataHolder;
 import org.bigtester.ate.model.data.StepServiceParsedDataHolder;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -85,6 +89,18 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 			break;
 		case STEPSERVICEPARSED:
 			bDef.setBeanClassName(StepServiceParsedDataHolder.class.getName());
+			break;
+		case RANDOMALPHATEXT:
+			bDef.setBeanClassName(RandomAlphaTextValueDataHolder.class.getName());
+			break;
+		case RANDOMNUMBERS:
+			bDef.setBeanClassName(RandomNumericValueDataHolder.class.getName());
+			break;
+		case RANDOMTEXTNUMBERS:
+			bDef.setBeanClassName(RandomAlphaNumericValueDataHolder.class.getName());
+			break;
+		case RANDOMEMAIL:
+			bDef.setBeanClassName(RandomEmailDataHolder.class.getName());
 			break;
 		default:
 			break;
@@ -144,6 +160,14 @@ public class RunTimeDataHolderBeanDefinitionParser extends
 			int index = Integer.parseInt(indexOfSameTypeDataOnPage);
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
 					index);
+		}
+		
+		String randomTextLength = element
+				.getAttribute(XsdElementConstants.ATTR_RUNTIMEDATAHOLDER_RANDOMINPUTLENGTH);
+		if (StringUtils.hasText(randomTextLength)) {
+			int length = Integer.parseInt(randomTextLength);
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					length);
 		}
 		
 		parserContext.getRegistry().registerBeanDefinition(

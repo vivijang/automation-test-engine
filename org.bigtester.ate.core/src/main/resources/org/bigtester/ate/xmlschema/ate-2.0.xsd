@@ -481,6 +481,12 @@
 							<xsd:enumeration value="PageSourceParsed" />
 							<xsd:enumeration value="CaseServiceParsed" />
 							<xsd:enumeration value="StepServiceParsed" />
+							
+							<xsd:enumeration value="RandomAlphaText" />
+							<xsd:enumeration value="RandomNumbers" />
+							<xsd:enumeration value="RandomTextNumbers" />
+							<xsd:enumeration value="RandomEmail" />
+							
 						</xsd:restriction>
 					</xsd:simpleType>
 				</xsd:attribute>
@@ -489,6 +495,7 @@
 				<xsd:attribute name="pageHtmlRightBoundry" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="subCaseMappedDataHolderID" type="xsd:string"></xsd:attribute>
 				<xsd:attribute name="indexOfSameTypeDataOnPage" type="xsd:int"></xsd:attribute>
+				<xsd:attribute name="randomInputLength" type="xsd:int"></xsd:attribute>
 				<xsd:attribute name="page" type="xsd:string">
 					<xsd:annotation>
 						<xsd:appinfo>
@@ -499,7 +506,7 @@
 						</xsd:appinfo>
 					</xsd:annotation>
 				</xsd:attribute>
-				<xsd:attribute name="dataType" use="required">
+				<xsd:attribute name="dataType">
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">
 							<xsd:enumeration value="Text" />
