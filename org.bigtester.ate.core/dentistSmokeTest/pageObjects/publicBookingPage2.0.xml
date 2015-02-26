@@ -7,7 +7,7 @@
                            http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                            http://www.bigtester.org/schema/ate 
-                           http://www.bigtester.org/schema/ate/ate.xsd">
+                           http://www.bigtester.org/schema/ate/ate-2.0.xsd">
 
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
@@ -18,9 +18,9 @@
 	<ate:regularPage id="publicSmsAuthentication"
 		dataFile="dentistSmokeTest/pageObjects/publicBookingPage.data.xml" />
 
-	<ate:myWebElement id="typeInBookingCommentsWE" elementFind="bookingCommentsEF"
+	<ate:elementActionDef id="typeInBookingCommentsWE" elementFind="bookingCommentsEF"
 		elementAction="typeInCommentsEA">
-	</ate:myWebElement>
+	</ate:elementActionDef>
 	<ate:elementFindById id="bookingCommentsEF"
 		findByValue="contacts-message" />
 	<ate:sendKeysAction id="typeInCommentsEA" dataValue="bookingCommentsValue" />
@@ -28,21 +28,21 @@
 		dataValue="test booking comments" dataType="Text" />
 	
 	
-	<ate:myWebElement id="clickContinueWE" elementFind="continueButtonEF"
+	<ate:elementActionDef id="clickContinueWE" elementFind="continueButtonEF"
 		elementAction="clickContinueEA">
-	</ate:myWebElement>
+	</ate:elementActionDef>
 	<ate:elementFindByXpath id="continueButtonEF"
 		findByValue="//a[@onclick='javascript:Submit();']" />
 	<ate:clickAction id="clickContinueEA"/>
 	
-	<ate:myWebElement id="clickSmsCodeInputWE" elementFind="smsCodeEF"
+	<ate:elementActionDef id="clickSmsCodeInputWE" elementFind="smsCodeEF"
 		elementAction="clickSmsInputEA">
-	</ate:myWebElement>
+	</ate:elementActionDef>
 	<ate:clickAction id="clickSmsInputEA"/>
 
-	<ate:myWebElement id="typeInSmsCodeWE" elementFind="smsCodeEF"
+	<ate:elementActionDef id="typeInSmsCodeWE" elementFind="smsCodeEF"
 		elementAction="typeInSmsEA">
-	</ate:myWebElement>
+	</ate:elementActionDef>
 	<ate:elementFindByXpath id="smsCodeEF"
 		findByValue="//input[@id='smsCodeCheck']" />
 	<ate:sendKeysAction id="typeInSmsEA" dataValue="bookingSmsCodeInputValue" />
@@ -50,23 +50,23 @@
 		dataType="Text" subCaseMappedDataHolderID="bookingSmsCode"
 		dataHolderType="CaseServiceParsed" />
 
-	<ate:myWebElement id="tabKeySmsCodeInput" elementFind="smsCodeEF"
+	<ate:elementActionDef id="tabKeySmsCodeInput" elementFind="smsCodeEF"
 		elementAction="tabKeySmsCodeInputTab_EA"/>
 	<ate:sendKeysAction id="tabKeySmsCodeInputTab_EA" dataValue="tab"/>
 	<ate:runTimeDataHolder id="tab" dataType="Text" dataValue="[TAB]" dataHolderType="ManualAssigned"/>
 	
-	<ate:myWebElement id="smsCodeVerifyEnterKeyWE" elementFind="verifyButtonEF"
+	<ate:elementActionDef id="smsCodeVerifyEnterKeyWE" elementFind="verifyButtonEF"
 		elementAction="verifyButtonEnterEA"/>
 	<ate:sendKeysAction id="verifyButtonEnterEA" dataValue="enter"/>
 	<ate:runTimeDataHolder id="enter" dataType="Text" dataValue="[ENTER]" dataHolderType="ManualAssigned"/>
 
 
-	<ate:myWebElement id="moveMouseToVerifyButton" elementFind="verifyButtonEF"
+	<ate:elementActionDef id="moveMouseToVerifyButton" elementFind="verifyButtonEF"
 		elementAction="moveMouseToEA" />
 		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->
 	<ate:mouseMoveToAction id="moveMouseToEA" />
 	
-	<ate:myWebElement id="clickVerifyWE" elementFind="verifyButtonEF"
+	<ate:elementActionDef id="clickVerifyWE" elementFind="verifyButtonEF"
 		elementAction="clickVerifyEA" />
 		<!-- 		findByValue="//div[@class='col-md-6'][.//a[@onclick='checkSmsCode()']]" /> -->
 	<ate:elementFindByXpath id="verifyButtonEF"

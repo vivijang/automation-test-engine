@@ -15,9 +15,9 @@
 
 	<import resource="classpath:META-INF/logger-reporter.xml" />
 	<import resource="classpath:META-INF/case_base_bean.xml" />
-	<import resource="../pageObjects/publicHomePage.xml" />
-	<import resource="../pageObjects/publicLoginPage.xml" />
-	<import resource="../pageObjects/publicLoginDashBoard.xml" />
+	<import resource="../pageObjects/publicHomePage2.0.xml" />
+	<import resource="../pageObjects/publicLoginPage2.0.xml" />
+	<import resource="../pageObjects/publicLoginDashBoard2.0.xml" />
 	<import resource="../pageObjects/publicPersonalInformation.xml" />
 	<import resource="../pageObjects/lastPage.xml" />
 <!-- 

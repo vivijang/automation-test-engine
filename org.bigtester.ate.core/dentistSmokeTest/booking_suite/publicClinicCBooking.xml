@@ -8,7 +8,7 @@
                            http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
                            http://www.bigtester.org/schema/ate 
-                           http://www.bigtester.org/schema/ate/ate.xsd">
+                           http://www.bigtester.org/schema/ate/ate-2.0.xsd">
 	                       
 	<!-- this registers beans annotated with @Aspect -->
 	<aop:aspectj-autoproxy />
@@ -16,10 +16,10 @@
 	<import resource="classpath:META-INF/logger-reporter.xml" />
 <!-- 	<import resource="classpath:META-INF/page_base_bean.xml" /> -->
 	<import resource="classpath:META-INF/case_base_bean.xml" />
-	<import resource="../pageObjects/publicHomePage.xml" />
+	<import resource="../pageObjects/publicHomePage2.0.xml" />
 	<import resource="../pageObjects/publicPracticeProfile.xml" />
-	<import resource="../pageObjects/publicBookingPage.xml" />
-	<import resource="../pageObjects/publicLoginPage.xml" />
+	<import resource="../pageObjects/publicBookingPage2.0.xml" />
+	<import resource="../pageObjects/publicLoginPage2.0.xml" />
 	<import resource="../pageObjects/lastPage.xml" />
 
 <!-- 
@@ -40,40 +40,40 @@
 		</ate:homeStep>
 		<ate:elementStep id="clickServiceSelector"
 			stepDescription="Click service Selector" stepName="clickServiceSelector"
-			targetStep="true" myWebElement="Service_Selector">
+			targetStep="true" elementActionDef="Service_Selector">
 		</ate:elementStep>
 		
 		
 		<ate:elementStep id="clickService_Consultation"
 			stepDescription="Service_Consultation" stepName="Service_Consultation"
-			targetStep="true" myWebElement="Service_Consultation">
+			targetStep="true" elementActionDef="Service_Consultation">
 		</ate:elementStep>
 <!-- 		<ate:elementStep id="tabTest" stepName="tabTest" myWebElement="Service_SelectorTabKey" targetStep="true"/> -->
 		<ate:elementStep id="typeInLocation_Input"
 			stepDescription="type in Location_Input" stepName="Location_Input"
-			targetStep="true" myWebElement="Location_Input">
+			targetStep="true" elementActionDef="Location_Input">
 		</ate:elementStep>
 
 		<ate:elementStep id="clickFirstLocation"
 			stepDescription="click first location" stepName="clickfirstLocation"
-			targetStep="true" myWebElement="LocationList">
+			targetStep="true" elementActionDef="LocationList">
 		</ate:elementStep>
 
 		<ate:elementStep id="clickDate_Selector"
 			stepDescription="click Date_Selector" stepName="Date_Selector"
-			targetStep="true" myWebElement="Date_Selector">
+			targetStep="true" elementActionDef="Date_Selector">
 
 		</ate:elementStep>
 		<ate:elementStep id="clickNext_Week_Selection"
 			stepDescription="click Next_Week_Selection" stepName="Next_Week_Selection"
-			targetStep="true" myWebElement="Next_Week_Selection">
+			targetStep="true" elementActionDef="Next_Week_Selection">
 		</ate:elementStep>
 		<ate:elementStep id="clickClinic_C" stepDescription="click Clinic_C"
-			stepName="Clinic_C" targetStep="true" myWebElement="Clinic_C">
+			stepName="Clinic_C" targetStep="true" elementActionDef="Clinic_C">
 		</ate:elementStep>
 		<ate:elementStep id="clickBook_Button"
 			stepDescription="click Book_Button" stepName="Book_Button"
-			targetStep="true" myWebElement="Book_Button" pageObject="publicPracticeProfileClinicC">
+			targetStep="true" elementActionDef="Book_Button" pageObject="publicPracticeProfileClinicC">
 
 			<property name="expectedResultAsserter">
 				<list>
@@ -83,30 +83,30 @@
 		</ate:elementStep>
 		<ate:elementStep id="clickAvailableBooking"
 			stepDescription="cclickAvailableBookingWE" stepName="clickAvailableBooking"
-			targetStep="true" myWebElement="clickAvailableBookingWE" pageObject="publicPracticeProfileClinicC">
+			targetStep="true" elementActionDef="clickAvailableBookingWE" pageObject="publicPracticeProfileClinicC">
 		</ate:elementStep>
 		
 		<ate:elementStep id="switchToBookingWindow"
 			stepDescription="switchToBookingWindow" stepName="switchToBookingWindow"
-			targetStep="false" myWebElement="switchToBookingWindowWE">
+			targetStep="false" elementActionDef="switchToBookingWindowWE">
 		</ate:elementStep>
 		
 		<ate:elementStep id="publicLogin_typeUsername"
 			stepDescription="type in public user name" stepName="typeUsername"
-			targetStep="true" myWebElement="loginUserNameWE" >
+			targetStep="true" elementActionDef="loginUserNameWE" >
 		</ate:elementStep>
 		<ate:elementStep id="publicLogin_typePassword"
 			stepDescription="type in public user password" stepName="typePassword"
-			targetStep="true" myWebElement="loginPasswordWE" >
+			targetStep="true" elementActionDef="loginPasswordWE" >
 		</ate:elementStep>
 		<ate:elementStep id="typeInBookingComments"
 			stepDescription="typeInBookingComments" stepName="typeInBookingComments"
-			targetStep="true" myWebElement="typeInBookingCommentsWE">
+			targetStep="true" elementActionDef="typeInBookingCommentsWE">
 		</ate:elementStep>
 		
 		<ate:elementStep id="loginContinueBooking"
 			stepDescription="loginContinueBooking" stepName="loginContinueBooking"
-			targetStep="true" myWebElement="clickContinueWE">
+			targetStep="true" elementActionDef="clickContinueWE">
 		</ate:elementStep>
 		
 		<ate:caseTypeService id="getSmsCode" testCaseName="getSmsCode"
@@ -121,11 +121,11 @@
 		
 		<ate:elementStep id="clickSmsCodeInput"
 			stepDescription="clickSmsCodeInput" stepName="clickSmsCodeInput"
-			targetStep="true" myWebElement="clickSmsCodeInputWE">
+			targetStep="true" elementActionDef="clickSmsCodeInputWE">
 		</ate:elementStep>
 		<ate:elementStep id="filloutSmsCode"
 			stepDescription="filloutSmsCode" stepName="filloutSmsCode"
-			targetStep="true" myWebElement="typeInSmsCodeWE">
+			targetStep="true" elementActionDef="typeInSmsCodeWE">
 		</ate:elementStep>
 <!-- 		<ate:elementStep id="smsCodeTabKey" -->
 <!-- 			stepDescription="smsCodeTabKey" stepName="smsCodeTabKey" -->
@@ -144,12 +144,12 @@
 
 		<ate:elementStep id="moveCursortoVerifySms"
 			stepDescription="moveCursortoVerifySms" stepName="moveCursortoVerifySms"
-			targetStep="true" myWebElement="moveMouseToVerifyButton" pageObject="publicSmsAuthentication">
+			targetStep="true" elementActionDef="moveMouseToVerifyButton" pageObject="publicSmsAuthentication">
 		
 		</ate:elementStep>
 		<ate:elementStep id="clickVerifySms"
 			stepDescription="clickVerifySms" stepName="clickVerifySms"
-			targetStep="true" myWebElement="clickVerifyWE" pageObject="publicSmsAuthentication">
+			targetStep="true" elementActionDef="clickVerifyWE" pageObject="publicSmsAuthentication">
 			<property name="expectedResultAsserter">
 				<list>
 					<ref bean="publicBookingConfirmElementExistenceAsserter" />
