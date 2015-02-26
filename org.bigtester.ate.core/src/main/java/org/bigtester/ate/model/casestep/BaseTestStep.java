@@ -24,6 +24,7 @@ package org.bigtester.ate.model.casestep;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IDataParser;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
@@ -52,6 +53,12 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 
 	/** The target step. */
 	private boolean targetStep;
+
+	/** The optional step. default is false*/
+	private boolean optionalStep;
+	
+	/** The passed. */
+	private StepResultStatus stepResultStatus = StepResultStatus.FAIL;
 
 	/** The step name. */
 	private String stepName = "";
@@ -97,7 +104,18 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	public BaseTestStep( MyWebElement myWebElement) {
 		this.myWebElement = myWebElement;
 	}
-	
+	/**
+	 * @return the optionalStep
+	 */
+	public boolean isOptionalStep() {
+		return optionalStep;
+	}
+	/**
+	 * @param optionalStep the optionalStep to set
+	 */
+	public void setOptionalStep(boolean optionalStep) {
+		this.optionalStep = optionalStep;
+	}
 	/**
 	 * Instantiates a new base test step.
 	 *
@@ -309,4 +327,22 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 			getDataHolders().get(i).parseData();
 		}
 	}
+	
+	
+	/**
+	 * @return the stepResultStatus
+	 */
+	public StepResultStatus getStepResultStatus() {
+		return stepResultStatus;
+	}
+	/**
+	 * @param stepResultStatus the stepResultStatus to set
+	 */
+	public void setStepResultStatus(StepResultStatus stepResultStatus) {
+		this.stepResultStatus = stepResultStatus;
+	}
+
+
+
+	
 }

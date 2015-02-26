@@ -22,6 +22,8 @@ package org.bigtester.ate.model.casestep;
 
 import java.util.List;
 
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
@@ -143,9 +145,16 @@ public class TestCase {
 			}
 
 			//setCurrentWebDriver(getCurrentTestStep().getMyWebDriver());
-
-			getCurrentTestStep().doStep();// NOPMD
-
+			try {
+				getCurrentTestStep().doStep();// NOPMD
+				getCurrentTestStep().setStepResultStatus(StepResultStatus.PASS);
+			} catch (StepExecutionException2 stepE) {
+				if (stepE.getErrorCode() == ExceptionErrorCode.WEBELEMENT_NOTFOUND && getCurrentTestStep().isOptionalStep()) {
+					getCurrentTestStep().setStepResultStatus(StepResultStatus.SKIP);
+				} else {
+					throw stepE;
+				}
+			}
 			if (stepThinkTime > 0) {
 				ThinkTime thinkTimer = new ThinkTime(stepThinkTime);
 				thinkTimer.setTimer();

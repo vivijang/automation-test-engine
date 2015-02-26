@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -22,12 +22,12 @@ package org.bigtester.ate.constant;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class EnumAssertResult defines ....
+ * This class StepResultStatus defines ....
  * @author Peidong Hu
  *
  */
-public enum EnumAssertResult {
-	//TODO add more result values
-	PAGEELEMENTEXIST, PAGEELEMENTNOTEXIST, ELEMENTPROPERTYCORRECT, ELEMENTPROPERTYNOTCORRECT,
-	PAGEPROPERTYCORRECT, PAGEPROPERTYNOTCORRECT
+public enum StepResultStatus {
+
+		PASS, FAIL, SKIP
+	
 }

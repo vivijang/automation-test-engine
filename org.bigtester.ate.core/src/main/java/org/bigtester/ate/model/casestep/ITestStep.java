@@ -22,6 +22,7 @@ package org.bigtester.ate.model.casestep; //NOPMD
 
 import java.util.List;
 
+import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IDataParser;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
@@ -46,6 +47,14 @@ public interface ITestStep {
 	 * @return true, if is target step
 	 */
 	boolean isTargetStep();
+	
+	/**
+	 * Checks if is optional step.
+	 *
+	 * @return true, if is optional step
+	 */
+	boolean isOptionalStep();
+	
 	/**
 	 * Checks if is page validation.
 	 *
@@ -117,4 +126,19 @@ public interface ITestStep {
 	 */
 
 	void doStep () throws StepExecutionException2, PageValidationException2, RuntimeDataException;
+	
+	/**
+	 * Sets the step result status.
+	 *
+	 * @param stepResultStatus the new step result status
+	 */
+	void setStepResultStatus(StepResultStatus stepResultStatus); 
+	
+	/**
+	 * Gets the step result status.
+	 *
+	 * @return the step result status
+	 */
+	StepResultStatus getStepResultStatus();
+	
 }

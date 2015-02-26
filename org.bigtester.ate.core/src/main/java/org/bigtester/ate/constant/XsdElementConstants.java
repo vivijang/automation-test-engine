@@ -267,6 +267,9 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_TESTSTEP_TARGETSTEP. */
 	public static final String ATTR_TESTSTEP_TARGETSTEP = "targetStep";
 	
+	/** The Constant ATTR_TESTSTEP_OPTIONALSTEP. */
+	public static final String ATTR_TESTSTEP_OPTIONALSTEP = "optionalStep";
+	
 	/** The Constant ATTR_TESTSTEP_STEPNAME. */
 	public static final String ATTR_TESTSTEP_STEPNAME = "stepName";
 	

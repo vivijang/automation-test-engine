@@ -21,16 +21,14 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
-import org.bigtester.ate.constant.XsdElementConstants;
+
 import org.bigtester.ate.model.casestep.ElementTestStep;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
+
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.util.StringUtils;
+
 import org.w3c.dom.Element;
 
 // TODO: Auto-generated Javadoc
@@ -41,7 +39,7 @@ import org.w3c.dom.Element;
  *
  */
 public class ElementStepBeanDefinitionParser extends
-		AbstractBeanDefinitionParser {
+	BaseTestStepBeanDefinitionParser {
 
 	/**
 	 * {@inheritDoc}
@@ -49,48 +47,49 @@ public class ElementStepBeanDefinitionParser extends
 	@Override
 	protected AbstractBeanDefinition parseInternal(@Nullable Element element,
 			@Nullable ParserContext parserContext) {
+		
 		// Here we parse the Spring elements such as < property>
 		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// Here we parse the Spring elements such as < property>
-		BeanDefinitionHolder holder = parserContext.getDelegate()
-				.parseBeanDefinitionElement(element);
-		BeanDefinition bDef = holder.getBeanDefinition();
+//		BeanDefinitionHolder holder = parserContext.getDelegate()
+//				.parseBeanDefinitionElement(element);
+		BeanDefinition bDef = super.parseInternal(element, parserContext);
 		bDef.setBeanClassName(ElementTestStep.class.getName());
 
-		String pageObject = element
-				.getAttribute(XsdElementConstants.ATTR_BASETESTSTEP_PAGEOBJECT);
-		if (StringUtils.hasText(pageObject)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(pageObject));
-		}
-		String myWE = element
-				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_MYWEBELEMENT);
-		if (StringUtils.hasText(myWE)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(myWE));
-		}
-		String ead = element
-				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_ELEMENTACTIONDEF);
-		if (StringUtils.hasText(ead)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(ead));
-		}
-		
-		
-		boolean target = Boolean.parseBoolean(element
-				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
-		bDef.getPropertyValues().addPropertyValue(
-				XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);
-
-		String stepName = element
-				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
-		bDef.getPropertyValues().addPropertyValue(
-				XsdElementConstants.ATTR_TESTSTEP_STEPNAME, stepName);
-
-		String stepDesc = element
-				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
-		bDef.getPropertyValues().addPropertyValue(
-				XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
+//		String pageObject = element
+//				.getAttribute(XsdElementConstants.ATTR_BASETESTSTEP_PAGEOBJECT);
+//		if (StringUtils.hasText(pageObject)) {
+//			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+//					new RuntimeBeanReference(pageObject));
+//		}
+//		String myWE = element
+//				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_MYWEBELEMENT);
+//		if (StringUtils.hasText(myWE)) {
+//			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+//					new RuntimeBeanReference(myWE));
+//		}
+//		String ead = element
+//				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_ELEMENTACTIONDEF);
+//		if (StringUtils.hasText(ead)) {
+//			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+//					new RuntimeBeanReference(ead));
+//		}
+//		
+//		
+//		boolean target = Boolean.parseBoolean(element
+//				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
+//		bDef.getPropertyValues().addPropertyValue(
+//				XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);
+//
+//		String stepName = element
+//				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
+//		bDef.getPropertyValues().addPropertyValue(
+//				XsdElementConstants.ATTR_TESTSTEP_STEPNAME, stepName);
+//
+//		String stepDesc = element
+//				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
+//		bDef.getPropertyValues().addPropertyValue(
+//				XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
 
 		parserContext.getRegistry().registerBeanDefinition(
 				element.getAttribute("id"), bDef);

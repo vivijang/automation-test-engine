@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.ICaseServiceParsedDataParser;
 import org.bigtester.ate.model.data.IDataParser;
@@ -48,6 +49,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  */
 public class CaseTypeService extends TestCase implements ITestStep { // NOPMD
 
+	/** The step result status. */
+	private StepResultStatus stepResultStatus = StepResultStatus.FAIL;
+	
 	/** The test case file name. */
 	final private String testCaseFileName;
 
@@ -216,6 +220,30 @@ public class CaseTypeService extends TestCase implements ITestStep { // NOPMD
 	 */
 	public void setDataHolders(List<IDataParser> dataHolders) {
 		this.dataHolders = dataHolders;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isOptionalStep() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setStepResultStatus(StepResultStatus stepResultStatus) {
+		this.stepResultStatus = stepResultStatus;
+		
+	}
+
+	/**
+	 * @return the stepResultStatus
+	 */
+	public StepResultStatus getStepResultStatus() {
+		return stepResultStatus;
 	}
 
 }

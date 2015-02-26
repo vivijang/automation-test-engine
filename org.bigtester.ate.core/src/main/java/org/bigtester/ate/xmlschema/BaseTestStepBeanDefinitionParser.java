@@ -67,6 +67,43 @@ public class BaseTestStepBeanDefinitionParser extends
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
 					new RuntimeBeanReference(myWebElement));
 		}
+		
+		String ead = element
+				.getAttribute(XsdElementConstants.ATTR_ELEMENTSTEP_ELEMENTACTIONDEF);
+		if (StringUtils.hasText(ead)) {
+			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+					new RuntimeBeanReference(ead));
+		}
+		
+				
+		boolean target = Boolean.parseBoolean(element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP));
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_TARGETSTEP, target);
+		
+		boolean optional;
+		
+		if (target) {
+			optional = false;
+		} else {
+			optional = Boolean.parseBoolean(element
+					.getAttribute(XsdElementConstants.ATTR_TESTSTEP_OPTIONALSTEP));
+		}
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_OPTIONALSTEP, optional);
+		
+
+		String stepName = element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPNAME);
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_STEPNAME, stepName);
+
+		String stepDesc = element
+				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
+
+		
 //        String text = element.getAttribute("text");
 //        bd.getPropertyValues().addPropertyValue("text", text);
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);
