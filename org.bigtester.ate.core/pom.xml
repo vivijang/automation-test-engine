@@ -46,6 +46,11 @@
 		<!-- <name>ProjectRepo</name> -->
 		<!-- <url>file://${project.basedir}/src/lib</url> -->
 		<!-- </repository> -->
+		<repository>
+            <id>repo-id</id>
+            <name>repo-name</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
 	</repositories>
 
 	<properties>
