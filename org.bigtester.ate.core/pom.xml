@@ -40,8 +40,10 @@
         <pluginRepository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshots</name>
-            <url>https://repository.sonatype.org/content/groups/public/</url>
-            <snapshots> <enabled>true</enabled> </snapshots> 
+            <url>https://oss.sonatype.org/service/local/repositories/snapshots/content/ </url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots> 
         </pluginRepository>
     </pluginRepositories>
     
