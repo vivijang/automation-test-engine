@@ -43,6 +43,9 @@ public abstract class AbstractElementFind extends AbstractTestObjectFinderImpl{
 	/** The find by value. */
 	private String findByValue;
 	
+	/** The index of same elements. */
+	private int indexOfSameElements;
+	
 	/** The wait. */
 	@Nullable
 	transient protected Wait<WebDriver> wait;
@@ -146,6 +149,22 @@ public abstract class AbstractElementFind extends AbstractTestObjectFinderImpl{
 	public WebElement doFind(IMyWebDriver myWebDriver) throws NoSuchElementException {
 
 		return doFind(myWebDriver, findByValue);
+	}
+
+
+	/**
+	 * @return the indexOfSameElements
+	 */
+	public int getIndexOfSameElements() {
+		return indexOfSameElements;
+	}
+
+
+	/**
+	 * @param indexOfSameElements the indexOfSameElements to set
+	 */
+	public void setIndexOfSameElements(int indexOfSameElements) {
+		this.indexOfSameElements = indexOfSameElements;
 	}
 
 

@@ -297,6 +297,12 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_ELEMENTFINDBYID_FINDBYVALUE. */
 	public static final String ATTR_ELEMENTFINDBYID_FINDBYVALUE = "findByValue";
 	
+	/** The Constant ATTR_GENERICELEMENTFIND_FINDBYVALUE. */
+	public static final String ATTR_GENERICELEMENTFIND_FINDBYVALUE = "findByValue";
+	
+	/** The Constant ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS. */
+	public static final String ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS = "indexOfSameElements";
+	
 	/** The Constant ATTR_MYWEBELEMENT_ELEMENTFIND. */
 	public static final String ATTR_MYWEBELEMENT_ELEMENTFIND = "elementFind";
 	

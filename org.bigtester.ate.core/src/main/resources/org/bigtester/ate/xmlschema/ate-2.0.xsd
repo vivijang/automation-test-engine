@@ -398,6 +398,15 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<xsd:complexType name="GenericElementFindType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="findByValue" type="xsd:string" />
+				<xsd:attribute name="indexOfSameElements" type="xsd:int" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
 	<xsd:complexType name="ElementFindByIdType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
@@ -405,6 +414,7 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+
 	<xsd:complexType name="BrowserWindowFindByTitleType">
 		<xsd:complexContent>
 			<xsd:extension base="beans:identifiedType">
@@ -666,7 +676,7 @@
 
 
 	<xsd:element name="elementFindById" type="ElementFindByIdType" />
-	<xsd:element name="elementFindByXpath" type="ElementFindByXpathType" />
+	<xsd:element name="elementFindByXpath" type="GenericElementFindType" />
 	<xsd:element name="clickAction" type="ClickActionType"/>
 	<xsd:element name="mouseMoveToAction" type="MouseMoveToActionType"/>
 	<xsd:element name="browserWindowSwitch" type="TestWindowsSwitchActionType"/>

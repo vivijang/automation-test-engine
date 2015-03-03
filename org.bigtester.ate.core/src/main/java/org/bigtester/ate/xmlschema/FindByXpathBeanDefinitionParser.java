@@ -52,10 +52,17 @@ public class FindByXpathBeanDefinitionParser extends
 		// Here we parse the Spring elements such as < property>
 		if (parserContext==null || element == null ) throw GlobalUtils.createNotInitializedException("element and parserContext");
 		// this will never be null since the schema explicitly requires that a value be supplied
-        String findbyValue = element.getAttribute(XsdElementConstants.ATTR_ELEMENTFINDBYID_FINDBYVALUE);
-        BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementFindByXpath.class);
+		BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(ElementFindByXpath.class);
+		String findbyValue = element.getAttribute(XsdElementConstants.ATTR_GENERICELEMENTFIND_FINDBYVALUE);
         if (StringUtils.hasText(findbyValue))
         	factory.addConstructorArgValue(findbyValue);
+        
+        String strIndex = element.getAttribute(XsdElementConstants.ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS);
+        if (StringUtils.hasText(strIndex)) {
+        	factory.addPropertyValue(XsdElementConstants.ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS, Integer.parseInt(strIndex));
+        } else {
+        	factory.addPropertyValue(XsdElementConstants.ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS, 0);
+        }
         
         return factory.getBeanDefinition();
 	}

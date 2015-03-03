@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:ate="http://www.bigtester.org/schema/ate" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.bigtester.org/schema/ate 
+                           http://www.bigtester.org/schema/ate/ate-2.0.xsd">
+	                       
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy/>
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/page_base_bean.xml" />
+	
+	<ate:regularPage id="adminProfile" 
+		dataFile="dentistSmokeTest/backend_pages/adminProfile.data.xml"/>
+		
+		
+<!-- click my profile definition -->
+	<ate:elementActionDef id="clickMyProfileLinkEAD" elementFind="myProfileEF" elementAction="myProfileClickEA"/>
+	<ate:elementFindByXpath id="myProfileEF" findByValue="//a[@href='#/profile']" />
+	<ate:clickAction id="myProfileClickEA"  />
+	
+	
+<!-- click services tab definition -->
+	<ate:elementActionDef id="clickServicesTabEAD" elementFind="serviceTabEF" elementAction="serviceTabEA"/>
+	<ate:elementFindByXpath id="serviceTabEF" findByValue="//a[@href='/#tab_1_2']" />
+	<ate:clickAction id="serviceTabEA"  />
+	
+	<!-- click services tab definition -->
+	<ate:elementActionDef id="clickAddServiceButtonEAD" elementFind="addServiceEF" elementAction="addServerEA"/>
+	<ate:elementFindByXpath id="addServiceEF" findByValue="//a[@ng-click='addPracticeService()']" />
+	<ate:clickAction id="addServerEA"  />
+	
+	<!-- click new service name to edit definition -->
+	<ate:elementActionDef id="clickToEditNewServiceEAD" elementFind="newServiceNameEF" elementAction="clicNewServiceEA"/>
+	<ate:elementFindByXpath id="newServiceNameEF" findByValue="//h2[contains(@class,'editable-empty')]" />
+	<ate:clickAction id="clicNewServiceEA"  />
+	
+	<!-- click services selection definition -->
+	<ate:elementActionDef id="clickNewServiceSelectionEAD" elementFind="newServiceSelectionEF" elementAction="newServiceSelectionClickEA"/>
+	<ate:elementFindByXpath id="newServiceSelectionEF" findByValue="//select[contains(@class,'editable-has-buttons')]" />
+	<ate:clickAction id="newServiceSelectionClickEA"  />
+	
+	<!-- click services tab definition -->
+	<ate:elementActionDef id="clickDeleteNewlyCreatedServiceEAD" elementFind="newlyCreatedDeleteEF" elementAction="clickNewCreatedDeleteEA"/>
+	<ate:elementFindByXpath id="newlyCreatedDeleteEF" findByValue="//a[@ng-click='deletePracticeService(service)']" indexOfSameElements="-1"/>
+	<ate:clickAction id="clickNewCreatedDeleteEA"  />
+	
+	
+</beans>

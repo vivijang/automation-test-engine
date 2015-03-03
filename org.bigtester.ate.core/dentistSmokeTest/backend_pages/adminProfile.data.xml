@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+<!-- public login english dashboard -->
+<STEPEXPECTEDRESULT  ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(.,'Staffer Calendars')]" ASSERTPRIORITY="HIGH"	PAGENAME="admindashboard"	STEPERSETID="adminDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
+<STEPEXPECTEDRESULT  ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(@class,'username')]" ASSERTPRIORITY="HIGH"	PAGENAME="admindashboard"	STEPERSETID="adminDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
+
+</dataset>

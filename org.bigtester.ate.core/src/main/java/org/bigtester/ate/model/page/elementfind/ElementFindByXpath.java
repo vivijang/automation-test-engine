@@ -20,6 +20,8 @@
  *******************************************************************************/
 package org.bigtester.ate.model.page.elementfind;
 
+import java.util.List;
+
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.By;
@@ -64,7 +66,18 @@ public class ElementFindByXpath extends AbstractElementFind implements IElementF
 								throw new IllegalStateException(
 										"webdriver is not correctly populated.");
 							} else {
-								return driver.findElement(By.xpath(findByValue));
+								List<WebElement> allElements = driver.findElements(By.xpath(findByValue));
+								if (allElements.size() == 0) throw new NoSuchElementException(findByValue);
+								WebElement retVal;
+								if (getIndexOfSameElements() < -1) {
+									retVal = allElements.get(0);
+								} else if (getIndexOfSameElements() == -1) {
+									retVal = allElements.get(allElements.size() - 1);
+								} else {
+									retVal = allElements.get(getIndexOfSameElements());
+								}
+								return retVal;
+								//return driver.findElement(By.xpath(findByValue));
 							}
 						}
 					});

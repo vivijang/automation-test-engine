@@ -24,9 +24,10 @@
 		<ate:TestSuite id="backend_login_suite" suiteName="admin_login">
 <!-- 			<ate:XmlTestCase -->
 <!-- 				testCaseFilePathName="dentistSmokeTest/backend_login/adminLoginSuccess.xml" /> -->
-		
 			<ate:XmlTestCase
-				testCaseFilePathName="dentistSmokeTest/backend_login/adminRegistration.xml" />
+				testCaseFilePathName="dentistSmokeTest/backend_login/adminProfileAddDeleteService.xml" />
+<!-- 			<ate:XmlTestCase -->
+<!-- 				testCaseFilePathName="dentistSmokeTest/backend_login/adminRegistration.xml" /> -->
 		</ate:TestSuite>
 <!-- 		<ate:TestSuite id="frontend_login_suite" suiteName="frontend_login_suite"> -->
 <!-- 			<ate:XmlTestCase -->
