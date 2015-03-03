@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:ate="http://www.bigtester.org/schema/ate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.bigtester.org/schema/ate 
+                           http://www.bigtester.org/schema/ate/ate-2.0.xsd">
+
+	<!-- this registers beans annotated with @Aspect -->
+	<aop:aspectj-autoproxy />
+
+	<import resource="classpath:META-INF/logger-reporter.xml" />
+	<import resource="classpath:META-INF/page_base_bean.xml" />
+
+	<ate:homePage id="adminHomePage" homeUrl="http://www.dentisteasy.com/admin"
+		dataFile="dentistSmokeTest/backend_pages/adminHomePage.data.xml" />
+
+
+	<ate:elementActionDef id="clickAdminHomepageEnglish" elementFind="adminHomePageEnglishLink"
+		elementAction="adminHomePageEnglishLinkClick">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="adminHomePageEnglishLink"
+		findByValue="//a[contains(@href, '/admin/index.html')]" />
+	<ate:clickAction id="adminHomePageEnglishLinkClick" />
+
+	<ate:elementActionDef id="inputAdminLoginUsername" elementFind="adminLoginUsername"
+		elementAction="adminLoginInput">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="adminLoginUsername"
+		findByValue="//input[@name='email']" />
+	<ate:sendKeysAction id="adminLoginInput" 
+		dataValue="adminUsername" />
+	<ate:runTimeDataHolder id="adminUsername" dataHolderType="ManualAssigned" dataValue="willwy2004@yahoo.com" dataType="Text" />
+	
+	<ate:elementActionDef id="inputAdminLoginPassword" elementFind="adminLoginPassword"
+		elementAction="adminPasswordInput">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="adminLoginPassword"
+		findByValue="//input[@name='password']" />
+	<ate:sendKeysAction id="adminPasswordInput" 
+		dataValue="adminPassword" />
+	<ate:runTimeDataHolder id="adminPassword" dataHolderType="ManualAssigned" dataValue="abc123" dataType="Text" />
+	
+	
+	<ate:elementActionDef id="clickAdminLoginButton" elementFind="adminLoginButton"
+		elementAction="clickLoginButton">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="adminLoginButton"
+		findByValue="//button[@type='submit']" />
+	<ate:clickAction id="clickLoginButton" />
+	
+	<ate:elementActionDef id="clickCreateAdminAccountLink" elementFind="adminCreateAccountLinkEF"
+		elementAction="clickCreateAccountEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="adminCreateAccountLinkEF"
+		findByValue="//a[@id='register-btn']" />
+	<ate:clickAction id="clickCreateAccountEA" />
+	
+	
+		<!-- elementactiondef of typeInName -->
+	<ate:elementActionDef id="typeInPracticeName"   elementFind="signUpPracticeNameEF" elementAction="signUpPracticeNameEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticeNameEF"
+		findByValue="//input[@name='practiceName']" />
+	<ate:sendKeysAction id="signUpPracticeNameEA" dataValue="randomPracticenameDVID"  />
+	
+	<ate:runTimeDataHolder id="randomPracticenameDVID" dataHolderType="RandomAlphaText" randomInputLength="10"/>
+	<ate:runTimeDataHolder id="randomPracticeAddressDVID" dataHolderType="RandomAlphaText" randomInputLength="10"/>
+	<ate:runTimeDataHolder id="randomPracticeEmailDVID" dataHolderType="RandomEmail"/>
+	<ate:runTimeDataHolder id="randomPracticePhoneDVID" dataHolderType="RandomNumbers" randomInputLength="10" />
+	<ate:runTimeDataHolder id="randomPracticePasswordDVID" dataHolderType="RandomTextNumbers" randomInputLength="10" />
+	
+	<!-- elementactiondef of typeInname -->
+	<ate:elementActionDef id="typeInPracticeAddress"   elementFind="signUpPracticeAddressEF" elementAction="signUpPracticeAddressEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticeAddressEF"
+		findByValue="//input[@name='practiceAddress']" />
+	<ate:sendKeysAction id="signUpPracticeAddressEA" dataValue="randomPracticeAddressDVID"  />
+
+<!-- elementactiondef of clickEmailInput -->
+	<ate:elementActionDef id="clickPracticeEmailInput"   elementFind="signUpPracticeEmailEF" elementAction="signUpPracticeEmailClickEA">
+	</ate:elementActionDef>
+<ate:clickAction id="signUpPracticeEmailClickEA" />
+
+<!-- elementactiondef of typeInEmail -->
+	<ate:elementActionDef id="typeInPracticeEmail"   elementFind="signUpPracticeEmailEF" elementAction="signUpPracticeEmailEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticeEmailEF"
+		findByValue="//input[@id='register_email']" />
+	<ate:sendKeysAction id="signUpPracticeEmailEA" dataValue="randomPracticeEmailDVID"  />
+	
+	<ate:elementActionDef id="clickPracticePhoneInput"   elementFind="signUpPracticePhoneEF" elementAction="signUpPracticePhoneClickEA">
+	</ate:elementActionDef>
+<ate:clickAction id="signUpPracticePhoneClickEA" />
+
+	<!-- elementactiondef of typeInPhone -->
+	<ate:elementActionDef id="typeInPracticePhone"   elementFind="signUpPracticePhoneEF" elementAction="signUpPracticePhoneEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticePhoneEF"
+		findByValue="//input[@name='practicePhone']" />
+	<ate:sendKeysAction id="signUpPracticePhoneEA" dataValue="randomPracticePhoneDVID"  />
+	
+	<!-- elementactiondef of typeInPassword -->
+	<ate:elementActionDef id="typeInPracticePassword"   elementFind="signUpPracticePasswordEF" elementAction="signUpPracticePasswordEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticePasswordEF"
+		findByValue="//input[@id='register_password']" />
+	<ate:sendKeysAction id="signUpPracticePasswordEA" dataValue="randomPracticePasswordDVID"  />
+	
+	<!-- elementactiondef of re-typeInPassword -->
+	<ate:elementActionDef id="reTypeInPracticePassword"   elementFind="signUpPracticeRPasswordEF" elementAction="signUpPracticeRPasswordEA">
+	</ate:elementActionDef>
+	<ate:elementFindByXpath id="signUpPracticeRPasswordEF"
+		findByValue="//input[@name='rpassword']" />
+	<ate:sendKeysAction id="signUpPracticeRPasswordEA" dataValue="randomPracticePasswordDVID"  />
+	
+	
+	
+<!-- click agree term check box ate:elementActionDef definition -->
+	<ate:elementActionDef id="clickAgreeTerms"   elementFind="agreeTermsBoxEF" elementAction="agreeTermsClickEA"/>
+	<ate:elementFindByXpath id="agreeTermsBoxEF"
+		findByValue="//label[contains(.,'I agree to the')]" />
+	<ate:clickAction id="agreeTermsClickEA" />
+
+<!-- click sign up button def ate:elementActionDef definition -->
+	<ate:elementActionDef id="clickPracticeSignUp"   elementFind="signUpButtonEF" elementAction="signUpButtonClickEA"/>
+	<ate:elementFindByXpath id="signUpButtonEF"
+		findByValue="//button[@id='register-submit-btn']" />
+	<ate:clickAction id="signUpButtonClickEA" />
+
+<ate:pageElementExistenceAsserter
+		id="adminRegisterSuccessAsserter" resultPage="adminHomePage" stepERValue="adminRegisterSuccessERValue" />
+		
+<ate:stepExpectedResultValue id="adminRegisterSuccessERValue"
+		dataValueID="adminRegisterSuccessVID"   />
+
+
+</beans>
