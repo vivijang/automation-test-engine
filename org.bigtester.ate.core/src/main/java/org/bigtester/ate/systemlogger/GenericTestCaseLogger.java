@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.systemlogger;
 
-import java.util.Map;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,8 +28,6 @@ import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.AbstractATECaseExecE;
 import org.bigtester.ate.model.AbstractATEException;
-import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
-import org.bigtester.ate.systemlogger.problemhandler.ProblemBrowserHandler;
 import org.bigtester.ate.systemlogger.problemhandler.ProblemLogbackHandler;
 import org.bigtester.ate.systemlogger.problems.ATEProblemFactory;
 import org.bigtester.ate.systemlogger.problems.GenericATEProblem;
@@ -120,9 +116,9 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 			return;
 		}
 
-		IMyWebDriver myWebDriver;
+		//IMyWebDriver myWebDriver;
 		Problem prb;
-		ProblemBrowserHandler pbh;
+		//ProblemBrowserHandler pbh;
 
 		setAlreadyCasePointCut(error);
 

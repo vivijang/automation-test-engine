@@ -298,10 +298,10 @@ public final class XsdElementConstants {
 	public static final String ATTR_ELEMENTFINDBYID_FINDBYVALUE = "findByValue";
 	
 	/** The Constant ATTR_GENERICELEMENTFIND_FINDBYVALUE. */
-	public static final String ATTR_GENERICELEMENTFIND_FINDBYVALUE = "findByValue";
+	public static final String ATTR_GENERICELEMENTFIND_FINDBYVALUE = "findByValue"; //NOPMD
 	
 	/** The Constant ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS. */
-	public static final String ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS = "indexOfSameElements";
+	public static final String ATTR_GENERICELEMENTFIND_INDEXOFSAMEELEMENTS = "indexOfSameElements"; //NOPMD
 	
 	/** The Constant ATTR_MYWEBELEMENT_ELEMENTFIND. */
 	public static final String ATTR_MYWEBELEMENT_ELEMENTFIND = "elementFind";
