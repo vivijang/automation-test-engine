@@ -11,14 +11,14 @@ Now, with ATE, this world suddenly becomes simple and easy for everyone. QA team
 ATE User Quick Start manual should be enough for manual QA tester to start from without any specfic training. Time needed to run first test case is less than the duration of getting familar with a smart TV.
 
 If needed, only minimal training will help to be capable of using this tool. The training shall have the following knowledge,
-* HTML tag, which has already been possessed by most manual QA testers
-* Minimal SQL statements, which have been possessed by most manual QA testers
-* Understand Spring Application Context xml format, 2-3 hour's training session.
-* ATE environment introduction, 1-2 hour's training session.
+* HTML, which has already been possessed by most manual QA testers
+* Understand and create XML file.
 
 ATE automation testers don't need any programming or domain specific language skills to use this tool.
 
-ATE's design and source code are also a perfect study material for application programming in Java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, JPA, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc. At the same time, the industry most popular automation testing tool, Selenium, which is creating jobs doubled as many as QTP, will be learned as well.
+ATE's design and source code are also a perfect study material for application programming in Java. Design has touched almost every aspects of java tactical technologies popularly used in the application development projects. These technologies including Spring, Log4j/Logback, JPA, Data management, TestNG, Jenkins, AOP, IOC/DI. On-going modules will include RESTFul, SOAP, Graph database, Andoid and Apple Mobile development etc. 
+
+Contributor of ATE project will learn the most popular automation testing tool, Selenium, which is creating jobs doubled as many as QTP.
 
 NOTE1: Selenium and QTP job opening numbers retrieved from Indeed.com.
 
