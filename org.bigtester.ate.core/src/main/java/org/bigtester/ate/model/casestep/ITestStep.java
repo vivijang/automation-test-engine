@@ -74,6 +74,7 @@ public interface ITestStep {
 	 *
 	 * @return the my web driver
 	 */
+	@Nullable
 	IMyWebDriver getMyWebDriver();
 	/**
 	 * Gets the step name.
@@ -110,6 +111,7 @@ public interface ITestStep {
 	 *
 	 * @return the data holders
 	 */
+	@Nullable
 	List<IDataParser> getDataHolders();
 	/**
 	 * Checks if is element step.
