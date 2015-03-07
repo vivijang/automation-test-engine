@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-<!-- repeatStepDataHolders -->
-<REPEATSTEPDATAHOLDERS REPEATSTEPID="" DATAHOLDERID=""	DATAHOLDERTYPE=""	DATAHOLDERVALUE=""	/>
+	<!-- repeatStepDataHolders -->
+	<RepeatStepDataHolders IterationIndex=""
+		RepeatStepId="" DataHolderId="" DataHolderType="" DataHolderValue="" />
 
-<REPEATSTEPASSERTERS REPEATSTEPID="" ASSERTERID=""	DATAHOLDERTYPE=""	DATAHOLDERVALUE=""	/>
+	<RepeatStepAsserters IterationIndex=""
+		RepeatStepId="" AsserterId="" />
 
-<STEPEXPECTEDRESULT  ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(., 'your account is created!')]"	ASSERTPRIORITY="HIGH" PAGENAME="adminhomepage"	STEPERSETID="adminRegisterSuccessVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
-
+	<RepeatStepErElementExistence IterationIndex=""
+		ElementFindBy="xpath" ElementFindByValue="//span[contains(., 'your account is created!')]"
+		AssertPriority="high" PageName="adminhomepage" StepErSetId="adminregistersuccessvid"
+		TestDataContext_IdColumn="5" />
+	
+	<RepeatStepErPagePropertyValue IterationIndex=""
+		AssertProperty="page_title" AssertValue="my page title"
+		AssertPriority="high" PageName="adminhomepage" StepErSetId="adminregistersuccessvid"
+		TestDataContext_IdColumn="5" />
 
 </dataset>
