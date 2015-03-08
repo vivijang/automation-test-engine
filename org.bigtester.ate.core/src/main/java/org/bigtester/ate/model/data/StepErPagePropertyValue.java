@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
-import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
+import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
 import org.bigtester.ate.model.data.exception.TestDataException;
 
 // TODO: Auto-generated Javadoc
@@ -34,16 +34,16 @@ import org.bigtester.ate.model.data.exception.TestDataException;
  * @author Peidong Hu
  *
  */
-public class StepExpectedResultValue extends BaseERValue{
+public class StepErPagePropertyValue extends BaseERValue{
 	
 	/**
 	 * @param stepERDao
 	 * @throws TestDataException 
 	 */
-	public StepExpectedResultValue(StepExpectedResultDaoImpl stepERDao, String dataValueID) throws TestDataException {
+	public StepErPagePropertyValue(StepExpectedResultDaoImpl stepERDao, String erSetId) throws TestDataException {
 		super(stepERDao);
-		this.dataValueID = dataValueID;
-		this.value = getStepERDao().getERs(dataValueID);
+		this.dataValueID = erSetId;
+		this.value = getStepERDao().getErPageProperties(erSetId);
 	}
 	/**
 	 * Gets the value.
@@ -51,7 +51,7 @@ public class StepExpectedResultValue extends BaseERValue{
 	 * @return the value
 	 */
 	
-	private List<StepExpectedResult> value = new ArrayList<StepExpectedResult>(); //NOPMD
+	private List<StepErPageProperty> value = new ArrayList<StepErPageProperty>(); //NOPMD
 	
 	
 	/**
@@ -64,13 +64,13 @@ public class StepExpectedResultValue extends BaseERValue{
 	/**
 	 * @return the value
 	 */
-	public List<StepExpectedResult> getValue() {
+	public List<StepErPageProperty> getValue() {
 		return value;
 	}
 	/**
 	 * @param value the value to set
 	 */
-	public void setValue(List<StepExpectedResult> value) {
+	public void setValue(List<StepErPageProperty> value) {
 		this.value = value;
 	}
 	/**

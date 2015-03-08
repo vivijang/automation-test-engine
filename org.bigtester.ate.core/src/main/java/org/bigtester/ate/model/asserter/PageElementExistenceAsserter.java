@@ -30,6 +30,7 @@ import org.bigtester.ate.constant.EnumElementFindType;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.data.StepErElementExistenceValue;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
@@ -38,6 +39,7 @@ import org.bigtester.ate.model.page.page.ATEPageFactory;
 import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
@@ -51,10 +53,14 @@ import org.openqa.selenium.TimeoutException;
 public class PageElementExistenceAsserter extends
 		AbstractExpectedResultAsserter implements IExpectedResultAsserter {
 
+	/** The step er value. */
+	@Nullable
+	private StepErElementExistenceValue stepERValue;
+	
 	/**
 	 * @param pageObj
 	 */
-	public PageElementExistenceAsserter(final IPageObject pageObj, StepExpectedResultValue stepERValue) {
+	public PageElementExistenceAsserter(final IPageObject pageObj, StepErElementExistenceValue stepERValue) {
 		super();
 		setResultPage(pageObj);
 		setStepERValue(stepERValue);
@@ -221,6 +227,20 @@ public class PageElementExistenceAsserter extends
 				}
 			}
 		}
+	}
+
+	/**
+	 * @return the stepERValue
+	 */
+	public StepErElementExistenceValue getStepERValue() {
+		return stepERValue;
+	}
+
+	/**
+	 * @param stepERValue the stepERValue to set
+	 */
+	public void setStepERValue(StepErElementExistenceValue stepERValue) {
+		this.stepERValue = stepERValue;
 	}
 
 }

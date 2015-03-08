@@ -24,6 +24,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.bigtester.ate.GlobalUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
 
 
 // TODO: Auto-generated Javadoc
@@ -37,24 +40,46 @@ import javax.persistence.Table;
 @Table
 public class RepeatStepErElementExistence extends StepErElementExistence {
 
-	/** The step er set id. */
-
-	
 	@Column
-	private int IterationIndex; // NOPMD
+	private int iterationIndex; // NOPMD
+	
+	/** The step er set id. */
+	@Column
+	@Nullable
+	private String repeatStepBeanId;
 
 	/**
 	 * @return the iterationIndex
 	 */
 	public int getIterationIndex() {
-		return IterationIndex;
+		return iterationIndex;
+	}
+
+	/**
+	 * @return the repeatStepBeanId
+	 */
+	public String getRepeatStepBeanId() {
+		final String repeatStepBeanId2 = repeatStepBeanId;
+		if (null == repeatStepBeanId2) {
+			throw GlobalUtils.createNotInitializedException("repeat step bean id");
+			
+		} else {
+			return repeatStepBeanId2;
+		}
 	}
 
 	/**
 	 * @param iterationIndex the iterationIndex to set
 	 */
 	public void setIterationIndex(int iterationIndex) {
-		IterationIndex = iterationIndex;
+		this.iterationIndex = iterationIndex;
+	}
+
+	/**
+	 * @param repeatStepBeanId the repeatStepBeanId to set
+	 */
+	public void setRepeatStepBeanId(String repeatStepBeanId) {
+		this.repeatStepBeanId = repeatStepBeanId;
 	}
 
 }

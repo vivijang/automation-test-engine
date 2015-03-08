@@ -34,7 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
 // TODO: Auto-generated Javadoc
 /**
  * This class StepResult defines ....
- * 
+ * This is a desperate dbtable
  * @author Peidong Hu
  *
  */

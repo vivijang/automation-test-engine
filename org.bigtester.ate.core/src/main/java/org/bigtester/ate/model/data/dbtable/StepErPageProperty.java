@@ -24,6 +24,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.eclipse.jdt.annotation.Nullable;
 
 
 // TODO: Auto-generated Javadoc
@@ -35,25 +36,60 @@ import javax.persistence.Table;
  */
 @Entity
 @Table
-public class RepeatStepErPagePropertyValue extends StepErPagePropertyValue {
-
-/** The step er set id. */
+public class StepErPageProperty extends BaseStepExpectedResult {
 
 	
 	@Column
-	private int IterationIndex; // NOPMD
+	/** The Assert property. */
+	@Nullable
+	private String AssertProperty; // NOPMD
 
+	@Column
+	/** The Assert value. */
+	@Nullable
+	private String AssertValue; // NOPMD
+
+	
 	/**
-	 * @return the iterationIndex
+	 * @return the assertProperty
 	 */
-	public int getIterationIndex() {
-		return IterationIndex;
+	public String getAssertProperty() {
+		final String retVal = AssertProperty;
+		if (null == retVal) {
+			throw new IllegalStateException("asertproperty collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
 
 	/**
-	 * @param iterationIndex the iterationIndex to set
+	 * @return the assertValue
 	 */
-	public void setIterationIndex(int iterationIndex) {
-		IterationIndex = iterationIndex;
+	public String getAssertValue() {
+		final String retVal = AssertValue;
+		if (null == retVal) {
+			throw new IllegalStateException("assertvalue collumn is not correctly populated");
+			
+		} else {
+			return retVal;
+		}
 	}
+
+	
+	/**
+	 * @param assertProperty the assertProperty to set
+	 */
+	public void setAssertProperty(String assertProperty) {
+		AssertProperty = assertProperty;
+	}
+
+	/**
+	 * @param assertValue the assertValue to set
+	 */
+	public void setAssertValue(String assertValue) {
+		AssertValue = assertValue;
+	}
+
+	
 }

@@ -24,7 +24,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.bigtester.ate.GlobalUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
 
 
 // TODO: Auto-generated Javadoc
@@ -36,60 +38,47 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 @Entity
 @Table
-public class StepErPagePropertyValue extends BaseStepExpectedResult {
+public class RepeatStepErPageProperty extends StepErPageProperty {
 
+
+	/** The repeat step bean id. */
+	@Column
+	@Nullable
+	private String repeatStepBeanId;
 	
 	@Column
-	/** The Assert property. */
-	@Nullable
-	private String AssertProperty; // NOPMD
-
-	@Column
-	/** The Assert value. */
-	@Nullable
-	private String AssertValue; // NOPMD
-
-	
+	private int iterationIndex; // NOPMD
 	/**
-	 * @return the assertProperty
+	 * @return the repeatStepBeanId
 	 */
-	public String getAssertProperty() {
-		final String retVal = AssertProperty;
-		if (null == retVal) {
-			throw new IllegalStateException("asertproperty collumn is not correctly populated");
+	public String getRepeatStepBeanId() {
+		final String repeatStepBeanId2 = repeatStepBeanId;
+		if (null == repeatStepBeanId2) {
+			throw GlobalUtils.createNotInitializedException("repeat step bean id");
 			
 		} else {
-			return retVal;
+			return repeatStepBeanId2;
 		}
 	}
 
 	/**
-	 * @return the assertValue
+	 * @return the iterationIndex
 	 */
-	public String getAssertValue() {
-		final String retVal = AssertValue;
-		if (null == retVal) {
-			throw new IllegalStateException("assertvalue collumn is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
-	}
-
-	
-	/**
-	 * @param assertProperty the assertProperty to set
-	 */
-	public void setAssertProperty(String assertProperty) {
-		AssertProperty = assertProperty;
+	public int getIterationIndex() {
+		return iterationIndex;
 	}
 
 	/**
-	 * @param assertValue the assertValue to set
+	 * @param iterationIndex the iterationIndex to set
 	 */
-	public void setAssertValue(String assertValue) {
-		AssertValue = assertValue;
+	public void setIterationIndex(int iterationIndex) {
+		this.iterationIndex = iterationIndex;
 	}
-
+	/**
+	 * @param repeatStepBeanId the repeatStepBeanId to set
+	 */
+	public void setRepeatStepBeanId(String repeatStepBeanId) {
+		this.repeatStepBeanId = repeatStepBeanId;
+	}
 	
 }

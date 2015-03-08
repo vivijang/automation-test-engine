@@ -22,9 +22,10 @@ package org.bigtester.ate.model.data.dao;
 
 import java.util.List;
 
-
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
+import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
+import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
 import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
 import org.bigtester.ate.model.data.exception.TestDataException;
 
@@ -57,5 +58,44 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl{
     	}
     }
     
+    /**
+     * Gets the step expected results list.
+     *
+     * @param sERSetID the s er set id
+     * @return the e rs
+     * @throws TestDataException the test data exception
+     */
+    public List<StepErElementExistence> getErElementExistences(String sERSetID) throws TestDataException{
+    	
+    	List<StepErElementExistence> sERs = (List<StepErElementExistence>) getDbEM()
+		.createQuery("select p from StepErElementExistence p where p.stepERSetID = :stepERSetID", StepErElementExistence.class)
+		.setParameter("stepERSetID", sERSetID)
+		.getResultList();
+    	if (sERs.isEmpty()) {
+    		throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND, ExceptionErrorCode.TESTDATA_NOTFOUND);
+    	} else {
+    		return sERs;
+    	}
+    }
+    
+    /**
+     * Gets the step expected results list.
+     *
+     * @param sERSetID the s er set id
+     * @return the e rs
+     * @throws TestDataException the test data exception
+     */
+    public List<StepErPageProperty> getErPageProperties(String sERSetID) throws TestDataException{
+    	
+    	List<StepErPageProperty> sERs = (List<StepErPageProperty>) getDbEM()
+		.createQuery("select p from StepErPageProperty p where p.stepERSetID = :stepERSetID", StepErPageProperty.class)
+		.setParameter("stepERSetID", sERSetID)
+		.getResultList();
+    	if (sERs.isEmpty()) {
+    		throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND, ExceptionErrorCode.TESTDATA_NOTFOUND);
+    	} else {
+    		return sERs;
+    	}
+    }
     
 }
