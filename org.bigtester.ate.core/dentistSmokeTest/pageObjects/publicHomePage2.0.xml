@@ -107,17 +107,17 @@
 		findByValue="//div[@class='pac-item'][1]" />
 	<ate:clickAction id="LocationList_EA" />
 
-	<ate:pagePropertyCorrectnessAsserter
-		id="publicHomePagePropertyAsserter" resultPage="publicHomePage"
-		stepERValue="publicHomePageValidationValue" />
+<!-- 	<ate:pagePropertyCorrectnessAsserter -->
+<!-- 		id="publicHomePagePropertyAsserter" resultPage="publicHomePage" -->
+<!-- 		stepERValue="publicHomePageValidationValue" /> -->
 
 	<ate:pageElementExistenceAsserter
 		id="publicHomePageElementExistenceAsserter" resultPage="publicHomePage"
-		stepERValue="publicHomePageValidationValue" />
+		stepERValue="publicHomePageVID" />
 
 
-	<ate:stepExpectedResultValue id="publicHomePageValidationValue"
-		dataValueID="publicHomePageVID" />
+<!-- 	<ate:stepExpectedResultValue id="publicHomePageValidationValue" -->
+<!-- 		dataValueID="publicHomePageVID" /> -->
 
 
 </beans>

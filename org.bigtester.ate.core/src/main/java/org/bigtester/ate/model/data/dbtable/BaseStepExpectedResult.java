@@ -23,6 +23,7 @@ package org.bigtester.ate.model.data.dbtable;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
 
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumAssertPriority;
@@ -35,6 +36,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @author Peidong Hu
  *
  */
+@MappedSuperclass
 public class BaseStepExpectedResult extends BaseTestDataTable {
 
 	/** The assert priority. */
