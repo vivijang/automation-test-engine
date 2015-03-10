@@ -22,24 +22,14 @@ package org.bigtester.ate.model.asserter;
 
 import java.util.Map;
 
-import org.bigtester.ate.GlobalUtils;
-import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
-import org.bigtester.ate.constant.EnumElementFindType;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
-import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.data.StepErElementExistenceValue;
-import org.bigtester.ate.model.data.StepExecutionResult;
-import org.bigtester.ate.model.data.StepExpectedResultValue;
+import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
-import org.bigtester.ate.model.page.exception.PageValidationException2;
-import org.bigtester.ate.model.page.page.ATEPageFactory;
-import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
-import org.eclipse.jdt.annotation.Nullable;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
@@ -51,180 +41,63 @@ import org.openqa.selenium.TimeoutException;
  * 
  */
 public class PageElementExistenceAsserter extends
-		AbstractExpectedResultAsserter implements IExpectedResultAsserter {
+		AbstractExpectedResultAsserter implements IExpectedResultAsserter,
+		IStepExecutionResult {
 
 	/** The step er value. */
-	@Nullable
 	private StepErElementExistenceValue stepERValue;
-	
+
 	/**
 	 * @param pageObj
 	 */
-	public PageElementExistenceAsserter(final IPageObject pageObj, StepErElementExistenceValue stepERValue) {
+	public PageElementExistenceAsserter(final IPageObject pageObj,
+			StepErElementExistenceValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		setStepERValue(stepERValue);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setStepERValue(StepExpectedResultValue stepERValue) {
-		super.setStepERValue(stepERValue);
-
-		for (int i = 0; i < stepERValue.getValue().size(); i++) {
-			if (stepERValue.getValue().get(i).getTestDataContext()
-					.getContextFieldValue()
-					.equalsIgnoreCase(AssertType.PAGE_ELEMENT_EXISTENCE)) {
-				
-				EnumElementFindType findByType = stepERValue.getValue().get(i).getElementFindBy();
-				if (null == findByType) {
-					continue;
-				} else {
-					IATEPageFactory ipf = ATEPageFactory.getInstance();
-					MyWebElement mwe = ipf.getMyWebElement(findByType,
-							stepERValue.getValue().get(i).getElementFindByValue(), getResultPage().getMyWd());
-					super.getResultPage().getMyWebElementList().put(stepERValue.getValue()
-							.get(i).getIdColumn(), mwe);
-					interestingERDBIndexes.add(stepERValue.getValue().get(i)
-							.getIdColumn());
-				}
-			}
-		}
+		this.stepERValue = stepERValue;
+		setExecResult(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean assertER() throws PageValidationException2 {
-		execResult.setStepExpectedResultValue(getStepERValue());
-
-		boolean retVal = false; // NOPMD
+	public void assertER() {
 		Map<Long, MyWebElement> myWebElementList = getResultPage()
 				.getMyWebElementList();
 		if (!myWebElementList.isEmpty()) {
 			MyWebElement webelement;
-			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
-				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
+			for (int index = 0; index < stepERValue.getValue().size(); index++) {
+				StepErElementExistence sErEE = stepERValue.getValue().get(index);
+				webelement = myWebElementList.get(sErEE.getIdColumn());
 				try {
-					((IElementFind)webelement.getTestObjectFinder()).doFind(
+					((IElementFind) webelement.getTestObjectFinder()).doFind(
 							getResultPage().getMyWd(),
-							((IElementFind)webelement.getTestObjectFinder()).getFindByValue());
-				} catch (NoSuchElementException e) {
-					execResult.getActualResult().getResultSet()
-							.put(interestingERDBIndexes.get(index), NOTEXIST);
-					execResult.getComparedResult().put(
-							interestingERDBIndexes.get(index),
-							EnumAssertResult.PAGEELEMENTEXIST);
-					// Restricted page validation, fail test case if any element
-					PageValidationException2 pve = new PageValidationException2(
-							ExceptionMessage.MSG_WEBELEMENT_NOTFOUND,
-							ExceptionErrorCode.WEBELEMENT_NOTFOUND,
-							(IElementFind) webelement.getTestObjectFinder(), getResultPage()
-									.getMyWd(),
-							GlobalUtils
-									.findTestCaseBean(getApplicationContext()));
-					pve.initCause(e);
-					throw pve;
-				}
-				execResult.getActualResult().getResultSet()
-						.put(interestingERDBIndexes.get(index), EXIST);
-				execResult.getComparedResult().put(
-						interestingERDBIndexes.get(index),
-						EnumAssertResult.PAGEELEMENTEXIST);
-			}
-			retVal = true;
-		}
-		return retVal;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void assertER2() {
-		execResult.setStepExpectedResultValue(getStepERValue());
-		
-		Map<Long, MyWebElement> myWebElementList = getResultPage()
-				.getMyWebElementList();
-		if (!myWebElementList.isEmpty()) {
-			MyWebElement webelement;
-			for (int index = 0; index < interestingERDBIndexes.size(); index++) {
-				webelement = myWebElementList.get(interestingERDBIndexes.get(index));
-				try {
-					((IElementFind)webelement.getTestObjectFinder()).doFind(
-							getResultPage().getMyWd(),
-							((IElementFind)webelement.getTestObjectFinder()).getFindByValue());
-					execResult.getActualResult().getResultSet()
-							.put(interestingERDBIndexes.get(index), EXIST);
-					execResult.getComparedResult().put(
-							interestingERDBIndexes.get(index),
-							EnumAssertResult.PAGEELEMENTEXIST);
-				} catch (NoSuchElementException e) {
-					execResult.getActualResult().getResultSet()
-							.put(interestingERDBIndexes.get(index), NOTEXIST);
-					execResult.getComparedResult().put(
-							interestingERDBIndexes.get(index),
-							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					execResult.getFailedResults().put(
-							getStepERValue().getValue().get(index)
-									.getIdColumn(),
-							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					EnumAssertPriority failedPriority = getStepERValue().getValue().get(index)
-							.getAssertPriority(); 
-					if ( null != failedPriority && failedPriority.equals(EnumAssertPriority.HIGH)) {
-						execResult.setFlagFailCase(true);
+							((IElementFind) webelement.getTestObjectFinder())
+									.getFindByValue());
+					ItemCompareResult icr = new ItemCompareResult(sErEE.getElementFindBy()
+							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTEXIST.toString(),
+							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTEXIST);
+					getExecResult().getComparedItemResults().put(
+							stepERValue.getValue().get(index).getIdColumn(),
+							icr);
+				} catch (NoSuchElementException | TimeoutException et) {
+					ItemCompareResult icr = new ItemCompareResult(sErEE.getElementFindBy()
+							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTNOTEXIST.toString(),
+							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTNOTEXIST);
+					getExecResult().getComparedItemResults().put(
+							stepERValue.getValue().get(index).getIdColumn(),
+							icr);
+					getExecResult().getFailedItemResults().put(
+							stepERValue.getValue().get(index).getIdColumn(),
+							icr);
+					EnumAssertPriority failedPriority = getStepERValue()
+							.getValue().get(index).getAssertPriority();
+					if (failedPriority.equals(EnumAssertPriority.HIGH)) {
+						setFlagFailCase(true);
 					}
 
-				} catch (TimeoutException et) {
-					execResult.getActualResult().getResultSet()
-							.put(interestingERDBIndexes.get(index), NOTEXIST);
-					execResult.getComparedResult().put(
-							interestingERDBIndexes.get(index),
-							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					execResult.getFailedResults().put(
-							getStepERValue().getValue().get(index)
-									.getIdColumn(),
-							EnumAssertResult.PAGEELEMENTNOTEXIST);
-					EnumAssertPriority failedPriority = getStepERValue().getValue().get(index)
-							.getAssertPriority();
-					if ( null != failedPriority && failedPriority.equals(EnumAssertPriority.HIGH)) {
-						execResult.setFlagFailCase(true);
-					}
-				}
-
-			}
-			StepExecutionResult ser = getExecResult();
-			StepExpectedResultValue serv = ser.getStepExpectedResultValue();
-			if (serv != null) {
-				for (int index = 0; index < serv.getValue().size(); index++) {
-					if (ser.getActualResult().getResultSet()
-							.get(serv.getValue().get(index).getIdColumn()) != null) {
-						assertReportMSG += serv.getValue().get(index)
-								.getTestDataContext().getContextFieldValue();
-						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ serv.getValue().get(index)
-										.getAssertPriority();
-						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ serv.getValue().get(index).getElementFindBy();
-						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ serv.getValue().get(index)
-										.getElementFindByValue();
-						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ ReportMessage.MSG_SEPERATOR
-								+ ser.getActualResult()
-										.getResultSet()
-										.get(serv.getValue().get(index)
-												.getIdColumn());
-						assertReportMSG += ReportMessage.MSG_SEPERATOR
-								+ ReportMessage.MSG_SEPERATOR
-								+ ser.getComparedResult()
-										.get(serv.getValue().get(index)
-												.getIdColumn()).toString();
-						assertReportMSG += '\n';
-					}
-				}
+				} 
 			}
 		}
 	}
@@ -237,7 +110,8 @@ public class PageElementExistenceAsserter extends
 	}
 
 	/**
-	 * @param stepERValue the stepERValue to set
+	 * @param stepERValue
+	 *            the stepERValue to set
 	 */
 	public void setStepERValue(StepErElementExistenceValue stepERValue) {
 		this.stepERValue = stepERValue;

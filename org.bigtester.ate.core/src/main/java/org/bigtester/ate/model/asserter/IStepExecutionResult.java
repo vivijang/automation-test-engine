@@ -18,29 +18,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.asserter;
 
 import java.util.Map;
-import java.util.HashMap;
+
+import org.bigtester.ate.model.data.ItemCompareResult;
+
+
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ActualResult defines ....
- * desperate
+ * This class StepExecuteResult defines ....
  * @author Peidong Hu
  *
  */
-public class ActualResult {
+public interface IStepExecutionResult {
 	
-	/** The result set. */
-	private final transient Map<Long, String> resultSet = new HashMap<Long, String>(); //NOPMD 
+	
+	/**
+	 * @return the comparedResult
+	 */
+	Map<Long, ItemCompareResult> getComparedItemResults() ;
+	
+	/**
+	 * @return the failedResults
+	 */
+	Map<Long, ItemCompareResult> getFailedItemResults() ;
 
 	/**
-	 * @return the resultSet
+	 * @return the flagFailCase
 	 */
-	public Map<Long, String> getResultSet() {
-		return resultSet;
-	}
-
+	boolean isFlagFailCase() ;
+			
 	
 }

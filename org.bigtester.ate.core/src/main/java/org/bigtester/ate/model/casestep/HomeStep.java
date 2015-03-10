@@ -106,7 +106,7 @@ public class HomeStep extends BaseTestStep implements ITestStep{
 			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();//NOPMD
 			for (int i=0; i < asserters.size(); i++) {
 				listAsserters.add(asserters.get(i));
-				asserters.get(i).assertER2();
+				asserters.get(i).assertER();
 				if (asserters.get(i).getExecResult().isFlagFailCase()) {
 					flagThrowE = true;//NOPMD
 				}

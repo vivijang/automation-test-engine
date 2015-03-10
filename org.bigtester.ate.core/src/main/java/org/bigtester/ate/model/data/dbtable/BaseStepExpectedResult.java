@@ -104,4 +104,11 @@ public class BaseStepExpectedResult extends BaseTestDataTable {
 		this.stepERSetID = stepERSetID;
 	}
 
+	/**
+	 * @return the assertPriority
+	 */
+	public EnumAssertPriority getAssertPriority() {
+		return assertPriority;
+	}
+
 }

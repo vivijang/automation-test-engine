@@ -20,11 +20,12 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import org.bigtester.ate.model.data.StepExecutionResult;
-import org.bigtester.ate.model.data.StepExpectedResultValue;
+import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.BeansException;
@@ -44,16 +45,28 @@ public abstract class AbstractExpectedResultAsserter implements
 	/** The result page. */
 	@Nullable
 	private IPageObject resultPage;
-
-	/** The interesting erdb indexes. */
-	protected final transient List<Long> interestingERDBIndexes = new ArrayList<Long>(); // NOPMD
-
-	/** The step er value. */
-	@Nullable
-	private StepExpectedResultValue stepERValue;
+	
+	/**
+	 * Compared item results.
+	 *
+	 * @return the map
+	 */
+	final protected Map<Long, ItemCompareResult> comparedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>();
+	
+	
+	/**
+	 * Failed item results.
+	 *
+	 * @return the map
+	 */
+	final protected Map<Long, ItemCompareResult> failedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>();
+	
+	/** The Flag fail case. */
+	private boolean flagFailCase;
 
 	/** The exec result. */
-	protected final transient StepExecutionResult execResult = new StepExecutionResult();
+	@Nullable
+	protected IStepExecutionResult execResult;
 
 	/** The application context. */
 	@Nullable
@@ -81,13 +94,7 @@ public abstract class AbstractExpectedResultAsserter implements
 		return assertReportMSG;
 	}
 
-	/**
-	 * @return the interestingERDBIndexes
-	 */
-	public List<Long> getInterestingERDBIndexes() {
-		return interestingERDBIndexes;
-	}
-
+	
 	/**
 	 * Gets the result page.
 	 *
@@ -115,33 +122,17 @@ public abstract class AbstractExpectedResultAsserter implements
 		this.resultPage = resultPage;
 	}
 
-	/**
-	 * @return the stepERValue
-	 */
-
-	public StepExpectedResultValue getStepERValue() throws IllegalStateException{
-		final StepExpectedResultValue stepERValue2 = stepERValue;
-		if ( null == stepERValue2 ) {
-			throw new IllegalStateException("StepERValue is not correctly initialized in asserter");
-		} else {
-
-			return stepERValue2;
-		}
-	}
-
-	/**
-	 * @param stepERValue
-	 *            the stepERValue to set
-	 */
-	public void setStepERValue(StepExpectedResultValue stepERValue) {
-		this.stepERValue = stepERValue;
-	}
 
 	/**
 	 * @return the execResult
 	 */
-	public StepExecutionResult getExecResult() {
-		return execResult;
+	public IStepExecutionResult getExecResult() {
+		final IStepExecutionResult execResult2 = execResult;
+		if (null == execResult2) {
+			throw GlobalUtils.createNotInitializedException("execResult");
+		} else {
+			return execResult2;
+		}
 	}
 
 	/**
@@ -171,5 +162,59 @@ public abstract class AbstractExpectedResultAsserter implements
 		} else {
 			return applicationContext2;
 		}
+	}
+
+	/**
+	 * @param execResult the execResult to set
+	 */
+	public void setExecResult(IStepExecutionResult execResult) {
+		this.execResult = execResult;
+	}
+
+
+	/**
+	 * @return the comparedItemResults
+	 */
+	public Map<Long, ItemCompareResult> getComparedItemResults() {
+		return comparedItemResults;
+	}
+
+
+	/**
+	 * @return the failedItemResults
+	 */
+	public Map<Long, ItemCompareResult> getFailedItemResults() {
+		return failedItemResults;
+	}
+
+
+	/**
+	 * @return the flagFailCase
+	 */
+	public boolean isFlagFailCase() {
+		return flagFailCase;
+	}
+
+
+	/**
+	 * @param flagFailCase the flagFailCase to set
+	 */
+	public void setFlagFailCase(boolean flagFailCase) {
+		flagFailCase = flagFailCase;
+	}
+	
+
+	protected void appendAssertReportMSG(ItemCompareResult icr) {
+		assertReportMSG += icr.getCompareItem();
+		assertReportMSG += ReportMessage.MSG_SEPERATOR
+				+ icr.getExpectedValue();
+		assertReportMSG += ReportMessage.MSG_SEPERATOR
+				+ icr.getActualValue();
+		assertReportMSG += ReportMessage.MSG_SEPERATOR
+				+ icr.getAssertPriority();
+		assertReportMSG += ReportMessage.MSG_SEPERATOR
+				+ ReportMessage.MSG_SEPERATOR
+				+ icr.getComparedResult();
+		assertReportMSG += "</br>";
 	}
 }

@@ -115,7 +115,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 			boolean flagThrowE = false;
 			List<IExpectedResultAsserter> listAsserters = new ArrayList<IExpectedResultAsserter>();
 			for (int i=0; i < asserterList.size(); i++) {
-				asserterList.get(i).assertER2();
+				asserterList.get(i).assertER();
 				if (asserterList.get(i).getExecResult().isFlagFailCase()) {
 					flagThrowE = true;
 				}

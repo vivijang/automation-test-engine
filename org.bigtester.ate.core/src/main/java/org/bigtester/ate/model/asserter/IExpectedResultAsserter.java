@@ -34,16 +34,9 @@ import org.bigtester.ate.model.page.page.IPageObject;
 public interface IExpectedResultAsserter {
 	
 	/**
-	 * Assert er.
-	 *
-	 * @return true, if successful
+	 * Assert e r.
 	 */
-	boolean assertER() throws PageValidationException2;
-	
-	/**
-	 * Assert e r2.
-	 */
-	void assertER2();
+	void assertER();
 	
 	/**
 	 * Gets the result page.
@@ -57,7 +50,7 @@ public interface IExpectedResultAsserter {
 	 *
 	 * @return the exec result
 	 */
-	StepExecutionResult getExecResult();
+	IStepExecutionResult getExecResult();
 	
 	/**
 	 * Gets the assert report msg.

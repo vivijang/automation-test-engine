@@ -28,6 +28,8 @@ import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.PagePropertyType;
 import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.data.StepErElementExistenceValue;
+import org.bigtester.ate.model.data.StepErPagePropertyValue;
 import org.bigtester.ate.model.data.StepExecutionResult;
 import org.bigtester.ate.model.data.StepExpectedResultValue;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
@@ -44,144 +46,25 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class PagePropertyCorrectnessAsserter extends
-		AbstractExpectedResultAsserter implements IExpectedResultAsserter {
-
+		AbstractExpectedResultAsserter implements IExpectedResultAsserter, IStepExecutionResult {
+	
+	/** The step er value. */
+	private StepErPagePropertyValue stepERValue;
 	/**
 	 * @param pageObj
 	 */
-	public PagePropertyCorrectnessAsserter(final IPageObject pageObj, StepExpectedResultValue stepERValue) {
+	public PagePropertyCorrectnessAsserter(final IPageObject pageObj, StepErPagePropertyValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		setStepERValue(stepERValue);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setStepERValue(StepExpectedResultValue stepERValue) {
-		super.setStepERValue(stepERValue);
-
-		for (int i = 0; i < stepERValue.getValue().size(); i++) {
-			if (stepERValue.getValue().get(i).getTestDataContext()
-					.getContextFieldValue()
-					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
-				String assertProperty = stepERValue.getValue().get(i)
-						.getAssertProperty();
-				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
-					Cookie cki = new Cookie(stepERValue.getValue().get(i)
-							.getAssertValue(), stepERValue.getValue().get(i)
-							.getElementFindByValue());
-					super.getResultPage().getCookies().add(cki);
-					interestingERDBIndexes.add(stepERValue.getValue().get(i)
-							.getIdColumn());
-				} else if (PagePropertyType.PAGE_TITLE
-						.equalsIgnoreCase(assertProperty)) {
-					super.getResultPage().setPageTitle(
-							stepERValue.getValue().get(i).getAssertValue());
-					interestingERDBIndexes.add(stepERValue.getValue().get(i)
-							.getIdColumn());
-				}
-			}
-		}
+		this.stepERValue = stepERValue;
+		setExecResult(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean assertER() throws PageValidationException2 {
-		execResult.setStepExpectedResultValue(getStepERValue());
-
-		boolean retVal = true; // NOPMD
-
-		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
-		if (null == webDriver) {
-			throw new IllegalStateException("webDriver is not correctly populated.");
-		}
-		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
-			if (getStepERValue().getValue().get(i).getTestDataContext()
-					.getContextFieldValue()
-					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
-				String assertProperty = getStepERValue().getValue().get(i)
-						.getAssertProperty();
-				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
-
-					Cookie cki = new Cookie(getStepERValue().getValue().get(i)
-							.getAssertValue(), getStepERValue().getValue()
-							.get(i).getElementFindByValue());
-					if (webDriver.manage().getCookies().contains(cki)) {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), CORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYCORRECT);
-					} else {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), NOTCORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						PageValidationException2 pve = new PageValidationException2(
-								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
-								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
-								assertProperty, getResultPage().getMyWd(),
-								GlobalUtils.findTestCaseBean(getApplicationContext()));
-						retVal = false;// NOPMD
-						throw pve;
-
-					}
-				} else if (PagePropertyType.PAGE_TITLE
-						.equalsIgnoreCase(assertProperty)) {
-					if (webDriver.getTitle()
-							.equals(getStepERValue().getValue().get(i)
-									.getAssertValue())) {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), CORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYCORRECT);
-					} else {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), NOTCORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						PageValidationException2 pve = new PageValidationException2(
-								ExceptionMessage.MSG_NONCORRECT_PAGEPROPERTY,
-								ExceptionErrorCode.PAGEPROPERTY_INCORRECT,
-								PagePropertyType.PAGE_TITLE, getResultPage()
-										.getMyWd(),
-										GlobalUtils.findTestCaseBean(getApplicationContext()));
-						retVal = false; // NOPMD
-						throw pve;
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void assertER2() {
+	public void assertER() {
 		execResult.setStepExpectedResultValue(getStepERValue());
 
 		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
@@ -301,5 +184,19 @@ public class PagePropertyCorrectnessAsserter extends
 			}
 		}
 
+	}
+
+	/**
+	 * @return the stepERValue
+	 */
+	public StepErPagePropertyValue getStepERValue() {
+		return stepERValue;
+	}
+
+	/**
+	 * @param stepERValue the stepERValue to set
+	 */
+	public void setStepERValue(StepErPagePropertyValue stepERValue) {
+		this.stepERValue = stepERValue;
 	}
 }
