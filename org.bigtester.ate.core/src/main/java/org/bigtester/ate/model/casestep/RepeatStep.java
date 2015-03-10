@@ -20,6 +20,7 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
@@ -56,15 +57,15 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 	private int repeatTimes;
 	
 	/** The step i ds. */
-	final private List<String> stepIDs;
+	final private List<Integer> stepIDs = new ArrayList<Integer>();
 		
-	/** The input data holders. */
-	final private List<IStepInputData> inputDataHolders;
-	
-	/** The data parsers. */
-	final private List<IDataParser> dataParsers;
-	
-	final private List<IExpectedResultAsserter> expectedResultAsserters;
+//	/** The input data holders. */
+//	final private List<IStepInputData> inputDataHolders;
+//	
+//	/** The data parsers. */
+//	final private List<IDataParser> dataParsers;
+//	
+//	final private List<IExpectedResultAsserter> expectedResultAsserters;
 	
 	public RepeatStep(String startStepID, String endStepID, TestCase testCase) {
 		this.startStepID = startStepID;
@@ -72,8 +73,18 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 		this.continueOnFailure = false;
 		this.repeatTimes = 1;
 		this.testCase = testCase;
+		int startIndex = 0;
+		int endIndex = testCase.getTestStepList().size();
 		for (int i=0; i<testCase.getTestStepList().size(); i++) {
-			
+			if (testCase.getTestStepList().get(i).getStepName() == this.startStepID) {
+				startIndex = i;
+			}
+			if (testCase.getTestStepList().get(i).getStepName() == this.endStepID) {
+				endIndex = i;
+			}
+			if (i >= startIndex && i<=endIndex) {
+				stepIDs.add(i);
+			}
 		}
 		
 	}
@@ -202,30 +213,30 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 		this.repeatTimes = repeatTimes;
 	}
 
-	/**
-	 * @return the inputDataHolders
-	 */
-	public List<IStepInputData> getInputDataHolders() {
-		return inputDataHolders;
-	}
-
-	
-
-	/**
-	 * @return the dataParsers
-	 */
-	public List<IDataParser> getDataParsers() {
-		return dataParsers;
-	}
-
-	
-
-	/**
-	 * @return the expectedResultAsserters
-	 */
-	public List<IExpectedResultAsserter> getExpectedResultAsserters() {
-		return expectedResultAsserters;
-	}
+//	/**
+//	 * @return the inputDataHolders
+//	 */
+//	public List<IStepInputData> getInputDataHolders() {
+//		return inputDataHolders;
+//	}
+//
+//	
+//
+//	/**
+//	 * @return the dataParsers
+//	 */
+//	public List<IDataParser> getDataParsers() {
+//		return dataParsers;
+//	}
+//
+//	
+//
+//	/**
+//	 * @return the expectedResultAsserters
+//	 */
+//	public List<IExpectedResultAsserter> getExpectedResultAsserters() {
+//		return expectedResultAsserters;
+//	}
 
 	
 }

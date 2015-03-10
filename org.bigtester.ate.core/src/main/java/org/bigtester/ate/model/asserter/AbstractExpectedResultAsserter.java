@@ -51,7 +51,7 @@ public abstract class AbstractExpectedResultAsserter implements
 	 *
 	 * @return the map
 	 */
-	final protected Map<Long, ItemCompareResult> comparedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>();
+	final protected Map<Long, ItemCompareResult> comparedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>();//NOPMD
 	
 	
 	/**
@@ -59,7 +59,7 @@ public abstract class AbstractExpectedResultAsserter implements
 	 *
 	 * @return the map
 	 */
-	final protected Map<Long, ItemCompareResult> failedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>();
+	final protected Map<Long, ItemCompareResult> failedItemResults = new ConcurrentHashMap<Long, ItemCompareResult>(); //NOPMD
 	
 	/** The Flag fail case. */
 	private boolean flagFailCase;
@@ -200,10 +200,15 @@ public abstract class AbstractExpectedResultAsserter implements
 	 * @param flagFailCase the flagFailCase to set
 	 */
 	public void setFlagFailCase(boolean flagFailCase) {
-		flagFailCase = flagFailCase;
+		this.flagFailCase = flagFailCase;
 	}
 	
 
+	/**
+	 * Append assert report msg.
+	 *
+	 * @param icr the icr
+	 */
 	protected void appendAssertReportMSG(ItemCompareResult icr) {
 		assertReportMSG += icr.getCompareItem();
 		assertReportMSG += ReportMessage.MSG_SEPERATOR

@@ -20,19 +20,13 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
-import org.bigtester.ate.constant.ExceptionErrorCode;
-import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.constant.PagePropertyType;
-import org.bigtester.ate.constant.ReportMessage;
-import org.bigtester.ate.model.data.StepErElementExistenceValue;
+import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.data.StepErPagePropertyValue;
-import org.bigtester.ate.model.data.StepExecutionResult;
-import org.bigtester.ate.model.data.StepExpectedResultValue;
-import org.bigtester.ate.model.page.exception.PageValidationException2;
+import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -65,125 +59,68 @@ public class PagePropertyCorrectnessAsserter extends
 	 */
 	@Override
 	public void assertER() {
-		execResult.setStepExpectedResultValue(getStepERValue());
-
+	
 		WebDriver webDriver = getResultPage().getMyWd().getWebDriver();// NOPMD
 		if (null == webDriver) {
 			throw new IllegalStateException("webDriver is not correctly populated.");
 		}
-		for (int i = 0; i < getStepERValue().getValue().size(); i++) {
-			if (getStepERValue().getValue().get(i).getTestDataContext()
+		for (int i = 0; i < stepERValue.getValue().size(); i++) {
+			StepErPageProperty sErPP = stepERValue.getValue().get(i);
+			if (sErPP.getTestDataContext()
 					.getContextFieldValue()
 					.equalsIgnoreCase(AssertType.PAGE_PROPERTY_CORRECTNESS)) {
-				String assertProperty = getStepERValue().getValue().get(i)
+				String assertProperty = sErPP
 						.getAssertProperty();
+				boolean correctFlag;
 				if (PagePropertyType.COOKIE.equalsIgnoreCase(assertProperty)) {
 
-					Cookie cki = new Cookie(getStepERValue().getValue().get(i)
-							.getAssertValue(), getStepERValue().getValue()
-							.get(i).getElementFindByValue());
+					Cookie cki = new Cookie(sErPP
+							.getAssertValue(), sErPP.getAssertValue());
 					if (webDriver.manage().getCookies().contains(cki)) {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), CORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYCORRECT);
+						correctFlag = true;
+						
 					} else {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), NOTCORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
-										.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						EnumAssertPriority failPriority = getStepERValue().getValue().get(i).getAssertPriority();
-						if (null != failPriority && failPriority.equals(EnumAssertPriority.HIGH)) {
-							execResult.setFlagFailCase(true);
-						}
+						correctFlag = false;
 					}
 				} else if (PagePropertyType.PAGE_TITLE
 						.equalsIgnoreCase(assertProperty)) {
 					if (webDriver.getTitle()
-							.equals(getStepERValue().getValue().get(i)
+							.equals(sErPP
 									.getAssertValue())) {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), CORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYCORRECT);
+						correctFlag = true;
+						
 					} else {
-						execResult
-								.getActualResult()
-								.getResultSet()
-								.put(getStepERValue().getValue().get(i)
-										.getIdColumn(), NOTCORRECT);
-						execResult.getComparedResult().put(
-								getStepERValue().getValue().get(i)
-										.getIdColumn(),
-								EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						execResult.getFailedResults().put(getStepERValue().getValue().get(i)
-								.getIdColumn(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
-						EnumAssertPriority failPriority = getStepERValue().getValue().get(i)
-								.getAssertPriority(); 
-						if (null != failPriority && failPriority.equals(EnumAssertPriority.HIGH)) {
-							execResult.setFlagFailCase(true);
-						}
+						correctFlag = false;
+						
 					}
+				} else {
+					correctFlag = true;
+				}
+				if (correctFlag) {
+					ItemCompareResult icr = new ItemCompareResult(sErPP.getAssertProperty()
+							, sErPP.getAssertValue(), EnumAssertResult.PAGEPROPERTYCORRECT.toString(),
+							sErPP.getAssertPriority(), EnumAssertResult.PAGEPROPERTYCORRECT);
+					getExecResult().getComparedItemResults().put(
+							sErPP.getIdColumn(),
+							icr);
+					super.appendAssertReportMSG(icr);
+				} else {
+					ItemCompareResult icr = new ItemCompareResult(sErPP.getAssertProperty()
+							, sErPP.getAssertValue(), EnumAssertResult.PAGEPROPERTYNOTCORRECT.toString(),
+							sErPP.getAssertPriority(), EnumAssertResult.PAGEPROPERTYNOTCORRECT);
+					getExecResult().getComparedItemResults().put(
+							sErPP.getIdColumn(),
+							icr);
+					getExecResult().getFailedItemResults().put(sErPP.getIdColumn(),
+							icr);
+					EnumAssertPriority failPriority = getStepERValue().getValue().get(i).getAssertPriority();
+					if (failPriority.equals(EnumAssertPriority.HIGH)) {
+						setFlagFailCase(true);
+					}
+					super.appendAssertReportMSG(icr);
 				}
 			}
 		}
-		StepExecutionResult ser = getExecResult();
-		StepExpectedResultValue serv = ser.getStepExpectedResultValue();
-		if (serv != null) {
-			for (int index = 0; index < serv.getValue().size(); index++) {
-				if (ser.getActualResult().getResultSet()
-						.get(serv.getValue().get(index).getIdColumn()) != null) {
-					assertReportMSG += serv.getValue().get(index)
-							.getTestDataContext()
-							.getContextFieldValue();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ serv.getValue().get(index)
-									.getAssertPriority();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ serv.getValue().get(index)
-									.getAssertProperty();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ serv.getValue().get(index)
-									.getAssertValue();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ serv.getValue().get(index)
-									.getElementFindBy();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ serv.getValue().get(index)
-									.getElementFindByValue();
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ ReportMessage.MSG_SEPERATOR
-							+ ser.getActualResult()
-									.getResultSet()
-									.get(serv.getValue().get(index)
-											.getIdColumn());
-					assertReportMSG += ReportMessage.MSG_SEPERATOR
-							+ ReportMessage.MSG_SEPERATOR
-							+ ser.getComparedResult()
-									.get(serv.getValue().get(index)
-											.getIdColumn()).toString();
-					assertReportMSG += '\n';
-				}
-			}
-		}
-
 	}
 
 	/**

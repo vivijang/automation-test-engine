@@ -125,7 +125,7 @@ public final class TestStepsXMLReporterUtils {
 			for (int i = 0; i < asserters
 					.size(); i++) {
 				stepResultMSG.append(asserters.get(i).getAssertReportMSG());
-				stepResultMSG.append('\n');
+				stepResultMSG.append("</br>");
 //				StepExecutionResult ser = tsr.getThisStep()
 //						.getExpectedResultAsserter().get(i).getExecResult();
 //				StepExpectedResultValue serv = ser.getStepExpectedResultValue();

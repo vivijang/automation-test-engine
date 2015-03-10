@@ -23,6 +23,8 @@ package org.bigtester.ate.model.data.dbtable;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -108,7 +110,12 @@ public class BaseStepExpectedResult extends BaseTestDataTable {
 	 * @return the assertPriority
 	 */
 	public EnumAssertPriority getAssertPriority() {
-		return assertPriority;
+		final EnumAssertPriority assertPriority2 = assertPriority;
+		if (null == assertPriority2) {
+			throw GlobalUtils.createNotInitializedException("assertPriority");
+		} else {
+			return assertPriority2;
+		}
 	}
 
 }

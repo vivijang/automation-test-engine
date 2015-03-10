@@ -79,17 +79,17 @@ public class PageElementExistenceAsserter extends
 							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTEXIST.toString(),
 							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTEXIST);
 					getExecResult().getComparedItemResults().put(
-							stepERValue.getValue().get(index).getIdColumn(),
+							sErEE.getIdColumn(),
 							icr);
 				} catch (NoSuchElementException | TimeoutException et) {
 					ItemCompareResult icr = new ItemCompareResult(sErEE.getElementFindBy()
 							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTNOTEXIST.toString(),
 							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTNOTEXIST);
 					getExecResult().getComparedItemResults().put(
-							stepERValue.getValue().get(index).getIdColumn(),
+							sErEE.getIdColumn(),
 							icr);
 					getExecResult().getFailedItemResults().put(
-							stepERValue.getValue().get(index).getIdColumn(),
+							sErEE.getIdColumn(),
 							icr);
 					EnumAssertPriority failedPriority = getStepERValue()
 							.getValue().get(index).getAssertPriority();
