@@ -23,6 +23,8 @@ package org.bigtester.ate.model.casestep;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.constant.ExceptionErrorCode;
+import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IDataParser;
 import org.bigtester.ate.model.data.IStepInputData;
@@ -32,63 +34,77 @@ import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
+import org.bigtester.ate.model.utils.ThinkTime;
 import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class RepeatStep defines ....
+ * 
  * @author Peidong Hu
  *
  */
-public class RepeatStep extends AbstractTestStep implements ITestStep{
+public class RepeatStep extends AbstractTestStep implements ITestStep {
 
 	/** The test case. */
 	final private TestCase testCase;
 	/** The start step id. */
-	private String startStepID;
-	
+	private String startStepName;
+
 	/** The end step id. */
-	private String endStepID;
+	private String endStepName;
 
 	/** The continue on failure. */
 	private boolean continueOnFailure;
-	
+
 	/** The repeat times. */
-	private int repeatTimes;
-	
+	private int numberOfIterations;
+
 	/** The step i ds. */
-	final private List<Integer> stepIDs = new ArrayList<Integer>();
-		
-//	/** The input data holders. */
-//	final private List<IStepInputData> inputDataHolders;
-//	
-//	/** The data parsers. */
-//	final private List<IDataParser> dataParsers;
-//	
-//	final private List<IExpectedResultAsserter> expectedResultAsserters;
-	
-	public RepeatStep(String startStepID, String endStepID, TestCase testCase) {
-		this.startStepID = startStepID;
-		this.endStepID = endStepID;
+	final private List<Integer> stepIndexes = new ArrayList<Integer>();
+
+	// /** The input data holders. */
+	// final private List<IStepInputData> inputDataHolders;
+	//
+	// /** The data parsers. */
+	// final private List<IDataParser> dataParsers;
+	//
+	// final private List<IExpectedResultAsserter> expectedResultAsserters;
+
+	/**
+	 * Instantiates a new repeat step.
+	 *
+	 * @param startStepName
+	 *            the start step name
+	 * @param endStepName
+	 *            the end step name
+	 * @param testCase
+	 *            the test case
+	 */
+	public RepeatStep(String startStepName, String endStepName,
+			TestCase testCase) {
+		super();
+		this.startStepName = startStepName;
+		this.endStepName = endStepName;
 		this.continueOnFailure = false;
-		this.repeatTimes = 1;
+		this.numberOfIterations = 1;
 		this.testCase = testCase;
 		int startIndex = 0;
 		int endIndex = testCase.getTestStepList().size();
-		for (int i=0; i<testCase.getTestStepList().size(); i++) {
-			if (testCase.getTestStepList().get(i).getStepName() == this.startStepID) {
+		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
+			if (testCase.getTestStepList().get(i).getStepName() == this.startStepName) {
 				startIndex = i;
 			}
-			if (testCase.getTestStepList().get(i).getStepName() == this.endStepID) {
+			if (testCase.getTestStepList().get(i).getStepName() == this.endStepName) {
 				endIndex = i;
 			}
-			if (i >= startIndex && i<=endIndex) {
-				stepIDs.add(i);
+			if (i >= startIndex && i <= endIndex) {
+				stepIndexes.add(i);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -153,36 +169,81 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 	@Override
 	public void doStep() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
-		// TODO Auto-generated method stub
-		
+		repeatSteps();
+
+	}
+
+	/**
+	 * run steps.
+	 * 
+	 * @throws RuntimeDataException
+	 * @throws StepExecutionException
+	 * @throws PageValidationException
+	 */
+	private void repeatSteps() throws StepExecutionException2,
+			PageValidationException2, RuntimeDataException {
+		for (int iteration = 0; iteration < getNumberOfIterations(); iteration++) {
+			for (int i = 0; i < getStepIndexes().size(); i++) {
+				ITestStep currentTestStepTmp = getTestCase().getTestStepList()
+						.get(getStepIndexes().get(i));
+				if (null == currentTestStepTmp) {
+					throw new IllegalStateException(
+							"Test Step List was not successfully initialized by ApplicationContext at list index"
+									+ i);
+				} else {
+					getTestCase().setCurrentTestStep(currentTestStepTmp);
+				}
+
+				try {
+					getTestCase().getCurrentTestStep().doStep();// NOPMD
+					getTestCase().getCurrentTestStep().setStepResultStatus(
+							StepResultStatus.PASS);
+				} catch (StepExecutionException2 stepE) {
+					if (stepE.getErrorCode() == ExceptionErrorCode.WEBELEMENT_NOTFOUND
+							&& getTestCase().getCurrentTestStep().isOptionalStep()) {
+						getTestCase().getCurrentTestStep().setStepResultStatus(
+								StepResultStatus.SKIP);
+					} else {
+						throw stepE;
+					}
+				}
+				if (getTestCase().getStepThinkTime() > 0) {
+					ThinkTime thinkTimer = new ThinkTime(getTestCase().getStepThinkTime());
+					thinkTimer.setTimer();
+				}
+
+			}
+		}
 	}
 
 	/**
 	 * @return the startStepID
 	 */
-	public String getStartStepID() {
-		return startStepID;
+	public String getStartStepName() {
+		return startStepName;
 	}
 
 	/**
-	 * @param startStepID the startStepID to set
+	 * @param startStepName
+	 *            the startStepID to set
 	 */
-	public void setStartStepID(String startStepID) {
-		this.startStepID = startStepID;
+	public void setStartStepName(String startStepName) {
+		this.startStepName = startStepName;
 	}
 
 	/**
 	 * @return the endStepID
 	 */
-	public String getEndStepID() {
-		return endStepID;
+	public String getEndStepName() {
+		return endStepName;
 	}
 
 	/**
-	 * @param endStepID the endStepID to set
+	 * @param endStepName
+	 *            the endStepID to set
 	 */
-	public void setEndStepID(String endStepID) {
-		this.endStepID = endStepID;
+	public void setEndStepName(String endStepName) {
+		this.endStepName = endStepName;
 	}
 
 	/**
@@ -193,7 +254,8 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 	}
 
 	/**
-	 * @param continueOnFailure the continueOnFailure to set
+	 * @param continueOnFailure
+	 *            the continueOnFailure to set
 	 */
 	public void setContinueOnFailure(boolean continueOnFailure) {
 		this.continueOnFailure = continueOnFailure;
@@ -202,41 +264,55 @@ public class RepeatStep extends AbstractTestStep implements ITestStep{
 	/**
 	 * @return the repeatTimes
 	 */
-	public int getRepeatTimes() {
-		return repeatTimes;
+	public int getNumberOfIterations() {
+		return numberOfIterations;
 	}
 
 	/**
-	 * @param repeatTimes the repeatTimes to set
+	 * @param numberOfIterations
+	 *            the repeatTimes to set
 	 */
-	public void setRepeatTimes(int repeatTimes) {
-		this.repeatTimes = repeatTimes;
+	public void setNumberOfIterations(int numberOfIterations) {
+		this.numberOfIterations = numberOfIterations;
 	}
 
-//	/**
-//	 * @return the inputDataHolders
-//	 */
-//	public List<IStepInputData> getInputDataHolders() {
-//		return inputDataHolders;
-//	}
-//
-//	
-//
-//	/**
-//	 * @return the dataParsers
-//	 */
-//	public List<IDataParser> getDataParsers() {
-//		return dataParsers;
-//	}
-//
-//	
-//
-//	/**
-//	 * @return the expectedResultAsserters
-//	 */
-//	public List<IExpectedResultAsserter> getExpectedResultAsserters() {
-//		return expectedResultAsserters;
-//	}
+	/**
+	 * @return the testCase
+	 */
+	public TestCase getTestCase() {
+		return testCase;
+	}
 
-	
+	/**
+	 * @return the stepIndexes
+	 */
+	public List<Integer> getStepIndexes() {
+		return stepIndexes;
+	}
+
+	// /**
+	// * @return the inputDataHolders
+	// */
+	// public List<IStepInputData> getInputDataHolders() {
+	// return inputDataHolders;
+	// }
+	//
+	//
+	//
+	// /**
+	// * @return the dataParsers
+	// */
+	// public List<IDataParser> getDataParsers() {
+	// return dataParsers;
+	// }
+	//
+	//
+	//
+	// /**
+	// * @return the expectedResultAsserters
+	// */
+	// public List<IExpectedResultAsserter> getExpectedResultAsserters() {
+	// return expectedResultAsserters;
+	// }
+
 }

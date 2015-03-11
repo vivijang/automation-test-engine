@@ -43,7 +43,7 @@ import org.openqa.selenium.TimeoutException;
  * 
  * @author Peidong Hu
  */
-public class ElementTestStep extends BaseTestStep implements ITestStep {
+public class ElementTestStep extends BaseTestStep implements ITestStep, IRepeatable {
 
 	/**
 	 * Gets the my web element.
@@ -139,5 +139,13 @@ public class ElementTestStep extends BaseTestStep implements ITestStep {
 	@Override
 	public IMyWebDriver getMyWebDriver() {
 		return getMyWebElement().getMyWd();
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean refreshStepData() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
