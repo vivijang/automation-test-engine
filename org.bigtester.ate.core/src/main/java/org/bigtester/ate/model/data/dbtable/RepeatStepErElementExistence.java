@@ -20,7 +20,10 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.dbtable;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -37,7 +40,8 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  */
 @Entity
-@Table
+
+@DiscriminatorValue(value="RepeatStepErElementExistence") 
 public class RepeatStepErElementExistence extends StepErElementExistence {
 
 	@Column

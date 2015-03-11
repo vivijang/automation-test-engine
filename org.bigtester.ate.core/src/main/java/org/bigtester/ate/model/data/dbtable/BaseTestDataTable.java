@@ -34,7 +34,7 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  */
 @MappedSuperclass
-public class BaseTestDataTable extends BaseDBTable{
+public abstract class BaseTestDataTable extends BaseDBTable{
 
 	@ManyToOne
 	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")

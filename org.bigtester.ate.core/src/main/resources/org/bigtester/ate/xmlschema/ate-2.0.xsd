@@ -313,14 +313,14 @@
 				</xsd:attribute>
 				<xsd:attribute name="stepERValue" type="xsd:string"
 					use="required">
-					<xsd:annotation>
-						<xsd:appinfo>
-							<tool:annotation kind="ref">
-								<tool:expected-type
-									type="org.bigtester.ate.model.data.StepExpectedResultValue" />
-							</tool:annotation>
-						</xsd:appinfo>
-					</xsd:annotation>
+<!-- 					<xsd:annotation> -->
+<!-- 						<xsd:appinfo> -->
+<!-- 							<tool:annotation kind="ref"> -->
+<!-- 								<tool:expected-type -->
+<!-- 									type="org.bigtester.ate.model.data.StepExpectedResultValue" /> -->
+<!-- 							</tool:annotation> -->
+<!-- 						</xsd:appinfo> -->
+<!-- 					</xsd:annotation> -->
 				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -385,14 +385,14 @@
 				</xsd:attribute>
 				<xsd:attribute name="stepERValue" type="xsd:string"
 					use="required">
-					<xsd:annotation>
-						<xsd:appinfo>
-							<tool:annotation kind="ref">
-								<tool:expected-type
-									type="org.bigtester.ate.model.data.StepExpectedResultValue" />
-							</tool:annotation>
-						</xsd:appinfo>
-					</xsd:annotation>
+<!-- 					<xsd:annotation> -->
+<!-- 						<xsd:appinfo> -->
+<!-- 							<tool:annotation kind="ref"> -->
+<!-- 								<tool:expected-type -->
+<!-- 									type="org.bigtester.ate.model.data.StepExpectedResultValue" /> -->
+<!-- 							</tool:annotation> -->
+<!-- 						</xsd:appinfo> -->
+<!-- 					</xsd:annotation> -->
 				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>

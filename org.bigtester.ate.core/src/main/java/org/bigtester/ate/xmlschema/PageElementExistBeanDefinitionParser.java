@@ -70,17 +70,18 @@ public class PageElementExistBeanDefinitionParser extends
 		}
 		String stepERValue = element
 				.getAttribute(XsdElementConstants.ATTR_ABSTRACTEXPECTEDRESULTASSERTER_STEPERVALUE);
-		ConstructorArgumentValues erValueDefConstrs = new ConstructorArgumentValues();
-		erValueDefConstrs.addGenericArgumentValue(stepERValue);
-		BeanDefinition erValueDef = new ChildBeanDefinition(
-				XsdElementConstants.ELEMENT_ID_BASEERVALUE,
-				StepErElementExistenceValue.class, erValueDefConstrs, null);
-
-		parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID", erValueDef);
-
+		
 		if (StringUtils.hasText(stepERValue)) {
+			ConstructorArgumentValues erValueDefConstrs = new ConstructorArgumentValues();
+			erValueDefConstrs.addGenericArgumentValue(stepERValue);
+			BeanDefinition erValueDef = new ChildBeanDefinition(
+					XsdElementConstants.ELEMENT_ID_BASEERVALUE,
+					StepErElementExistenceValue.class, erValueDefConstrs, null);
+
+			parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID", erValueDef);
+
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(stepERValue));
+					new RuntimeBeanReference(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID"));
 		}
 
 		parserContext.getRegistry().registerBeanDefinition(
