@@ -37,7 +37,7 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  */
 @MappedSuperclass
-public abstract class BaseStepExpectedResult extends BaseTestDataTable {
+public class BaseStepExpectedResult extends BaseTestDataTable {
 
 	/** The assert priority. */
 

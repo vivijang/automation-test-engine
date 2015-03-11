@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.dbtable;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -41,7 +39,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 @Entity
 @Table
-@DiscriminatorValue(value="RepeatStepErPageProperty")  
+@DiscriminatorValue(value="No")  
 public class RepeatStepErPageProperty extends StepErPageProperty {
 
 

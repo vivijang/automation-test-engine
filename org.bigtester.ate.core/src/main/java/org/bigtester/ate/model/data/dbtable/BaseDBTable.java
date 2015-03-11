@@ -36,7 +36,7 @@ import lombok.Setter;
  *
  */
 @MappedSuperclass
-public abstract class BaseDBTable { //NOPMD
+public class BaseDBTable { //NOPMD
 	
 	
 	/** The id Column. */

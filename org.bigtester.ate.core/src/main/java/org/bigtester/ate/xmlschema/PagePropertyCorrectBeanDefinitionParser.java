@@ -23,11 +23,14 @@ package org.bigtester.ate.xmlschema;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.asserter.PagePropertyCorrectnessAsserter;
+import org.bigtester.ate.model.data.StepErPagePropertyValue;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.ChildBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
@@ -65,8 +68,18 @@ public class PagePropertyCorrectBeanDefinitionParser extends
 		String stepERValue = element
 				.getAttribute(XsdElementConstants.ATTR_ABSTRACTEXPECTEDRESULTASSERTER_STEPERVALUE);
 		if (StringUtils.hasText(stepERValue)) {
+			ConstructorArgumentValues erValueDefConstrs = new ConstructorArgumentValues();
+			erValueDefConstrs.addGenericArgumentValue(stepERValue);
+			BeanDefinition erValueDef = new ChildBeanDefinition(
+					XsdElementConstants.ELEMENT_ID_BASEERVALUE,
+					StepErPagePropertyValue.class, erValueDefConstrs, null);
+
+			parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID", erValueDef);
+
+			
+			
 			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(stepERValue));
+					new RuntimeBeanReference(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID"));
 		}
 		
         parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id"), bDef);

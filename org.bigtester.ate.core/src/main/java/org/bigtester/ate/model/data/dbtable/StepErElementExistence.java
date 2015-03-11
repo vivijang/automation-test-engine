@@ -45,8 +45,8 @@ import org.eclipse.jdt.annotation.Nullable;
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="StepErType",discriminatorType=DiscriminatorType.STRING)  
-@DiscriminatorValue(value="StepErElementExistence")  
+@DiscriminatorColumn(name="FirstTimeExecution",discriminatorType=DiscriminatorType.STRING)  
+@DiscriminatorValue(value="Yes")  
 public class StepErElementExistence extends BaseStepExpectedResult {
 
 	// @ManyToOne

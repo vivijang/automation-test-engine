@@ -20,14 +20,14 @@
  *******************************************************************************/
 package org.bigtester.ate.model.asserter;
 
-import java.util.Map;
-
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.data.StepErElementExistenceValue;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
 import org.bigtester.ate.model.page.elementfind.IElementFind;
+import org.bigtester.ate.model.page.page.ATEPageFactory;
+import org.bigtester.ate.model.page.page.IATEPageFactory;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.bigtester.ate.model.page.page.MyWebElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -63,43 +63,47 @@ public class PageElementExistenceAsserter extends
 	 */
 	@Override
 	public void assertER() {
-		Map<Long, MyWebElement> myWebElementList = getResultPage()
-				.getMyWebElementList();
-		if (!myWebElementList.isEmpty()) {
-			MyWebElement webelement;
-			for (int index = 0; index < stepERValue.getValue().size(); index++) {
-				StepErElementExistence sErEE = stepERValue.getValue().get(index);
-				webelement = myWebElementList.get(sErEE.getIdColumn());
-				try {
-					((IElementFind) webelement.getTestObjectFinder()).doFind(
-							getResultPage().getMyWd(),
-							((IElementFind) webelement.getTestObjectFinder())
-									.getFindByValue());
-					ItemCompareResult icr = new ItemCompareResult(sErEE.getElementFindBy()
-							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTEXIST.toString(),
-							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTEXIST);
-					getExecResult().getComparedItemResults().put(
-							sErEE.getIdColumn(),
-							icr);
-				} catch (NoSuchElementException | TimeoutException et) {
-					ItemCompareResult icr = new ItemCompareResult(sErEE.getElementFindBy()
-							.toString(), sErEE.getElementFindByValue(), EnumAssertResult.PAGEELEMENTNOTEXIST.toString(),
-							sErEE.getAssertPriority(), EnumAssertResult.PAGEELEMENTNOTEXIST);
-					getExecResult().getComparedItemResults().put(
-							sErEE.getIdColumn(),
-							icr);
-					getExecResult().getFailedItemResults().put(
-							sErEE.getIdColumn(),
-							icr);
-					EnumAssertPriority failedPriority = getStepERValue()
-							.getValue().get(index).getAssertPriority();
-					if (failedPriority.equals(EnumAssertPriority.HIGH)) {
-						setFlagFailCase(true);
-					}
 
-				} 
+		for (int index = 0; index < stepERValue.getValue().size(); index++) {
+			IATEPageFactory ipf = ATEPageFactory.getInstance();
+			StepErElementExistence sErEE = stepERValue.getValue().get(index);
+			MyWebElement webelement = ipf.getMyWebElement(
+					sErEE.getElementFindBy(), sErEE.getElementFindByValue(),
+					getResultPage().getMyWd());
+			try {
+				((IElementFind) webelement.getTestObjectFinder()).doFind(
+						getResultPage().getMyWd(), ((IElementFind) webelement
+								.getTestObjectFinder()).getFindByValue());
+				ItemCompareResult icr = new ItemCompareResult(sErEE
+						.getElementFindBy().toString(),
+						sErEE.getElementFindByValue(),
+						EnumAssertResult.PAGEELEMENTEXIST.toString(),
+						sErEE.getAssertPriority(),
+						EnumAssertResult.PAGEELEMENTEXIST);
+				getExecResult().getComparedItemResults().put(
+						sErEE.getIdColumn(), icr);
+				super.appendAssertReportMSG(icr);
+			} catch (NoSuchElementException | TimeoutException et) {
+				ItemCompareResult icr = new ItemCompareResult(sErEE
+						.getElementFindBy().toString(),
+						sErEE.getElementFindByValue(),
+						EnumAssertResult.PAGEELEMENTNOTEXIST.toString(),
+						sErEE.getAssertPriority(),
+						EnumAssertResult.PAGEELEMENTNOTEXIST);
+				getExecResult().getComparedItemResults().put(
+						sErEE.getIdColumn(), icr);
+				getExecResult().getFailedItemResults().put(sErEE.getIdColumn(),
+						icr);
+				EnumAssertPriority failedPriority = getStepERValue().getValue()
+						.get(index).getAssertPriority();
+				if (failedPriority.equals(EnumAssertPriority.HIGH)) {
+					setFlagFailCase(true);
+				}
+				super.appendAssertReportMSG(icr);
+
 			}
 		}
+
 	}
 
 	/**
