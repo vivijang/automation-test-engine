@@ -41,25 +41,25 @@ import org.eclipse.jdt.annotation.Nullable;
 public class RepeatStepErElementExistence extends StepErElementExistence {
 
 	@Column
-	private int iterationIndex; // NOPMD
+	private int iteration; // NOPMD
 	
 	/** The step er set id. */
 	@Column
 	@Nullable
-	private String repeatStepBeanId;
+	private String repeatStepName;
 
 	/**
 	 * @return the iterationIndex
 	 */
-	public int getIterationIndex() {
-		return iterationIndex;
+	public int getIteration() {
+		return iteration;
 	}
 
 	/**
 	 * @return the repeatStepBeanId
 	 */
-	public String getRepeatStepBeanId() {
-		final String repeatStepBeanId2 = repeatStepBeanId;
+	public String getRepeatStepName() {
+		final String repeatStepBeanId2 = repeatStepName;
 		if (null == repeatStepBeanId2) {
 			throw GlobalUtils.createNotInitializedException("repeat step bean id");
 			
@@ -71,15 +71,15 @@ public class RepeatStepErElementExistence extends StepErElementExistence {
 	/**
 	 * @param iterationIndex the iterationIndex to set
 	 */
-	public void setIterationIndex(int iterationIndex) {
-		this.iterationIndex = iterationIndex;
+	public void setIteration(int iterationIndex) {
+		this.iteration = iterationIndex;
 	}
 
 	/**
-	 * @param repeatStepBeanId the repeatStepBeanId to set
+	 * @param repeatStepName the repeatStepBeanId to set
 	 */
-	public void setRepeatStepBeanId(String repeatStepBeanId) {
-		this.repeatStepBeanId = repeatStepBeanId;
+	public void setRepeatStepName(String repeatStepName) {
+		this.repeatStepName = repeatStepName;
 	}
 
 }

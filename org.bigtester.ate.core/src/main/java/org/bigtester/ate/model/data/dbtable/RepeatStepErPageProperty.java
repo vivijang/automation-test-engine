@@ -46,15 +46,15 @@ public class RepeatStepErPageProperty extends StepErPageProperty {
 	/** The repeat step bean id. */
 	@Column
 	@Nullable
-	private String repeatStepBeanId;
+	private String repeatStepName;
 	
 	@Column
-	private int iterationIndex; // NOPMD
+	private int iteration; // NOPMD
 	/**
 	 * @return the repeatStepBeanId
 	 */
-	public String getRepeatStepBeanId() {
-		final String repeatStepBeanId2 = repeatStepBeanId;
+	public String getRepeatStepName() {
+		final String repeatStepBeanId2 = repeatStepName;
 		if (null == repeatStepBeanId2) {
 			throw GlobalUtils.createNotInitializedException("repeat step bean id");
 			
@@ -66,21 +66,21 @@ public class RepeatStepErPageProperty extends StepErPageProperty {
 	/**
 	 * @return the iterationIndex
 	 */
-	public int getIterationIndex() {
-		return iterationIndex;
+	public int getIteration() {
+		return iteration;
 	}
 
 	/**
-	 * @param iterationIndex the iterationIndex to set
+	 * @param iteration the iterationIndex to set
 	 */
-	public void setIterationIndex(int iterationIndex) {
-		this.iterationIndex = iterationIndex;
+	public void setIteration(int iteration) {
+		this.iteration = iteration;
 	}
 	/**
-	 * @param repeatStepBeanId the repeatStepBeanId to set
+	 * @param repeatStepName the repeatStepBeanId to set
 	 */
-	public void setRepeatStepBeanId(String repeatStepBeanId) {
-		this.repeatStepBeanId = repeatStepBeanId;
+	public void setRepeatStepName(String repeatStepName) {
+		this.repeatStepName = repeatStepName;
 	}
 	
 }

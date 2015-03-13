@@ -27,5 +27,17 @@ package org.bigtester.ate.model.casestep;
  *
  */
 public interface IRepeatable {
-	boolean refreshStepData();
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
+	boolean refreshStepData(String repeatStepName, int iteration);
 }
