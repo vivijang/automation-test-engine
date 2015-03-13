@@ -144,7 +144,7 @@ public class ElementTestStep extends BaseTestStep implements ITestStep, IRepeata
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean refreshStepData() {
+	public boolean refreshStepData(String repeatStepName, int iteration) {
 		// TODO Auto-generated method stub
 		return false;
 	}
