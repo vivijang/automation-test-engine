@@ -39,5 +39,23 @@ public interface IRepeatable {
 	 *
 	 * @return true, if successful
 	 */
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
 	boolean refreshStepData(String repeatStepName, int iteration);
 }
