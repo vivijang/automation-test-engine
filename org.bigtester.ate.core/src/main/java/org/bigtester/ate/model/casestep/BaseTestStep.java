@@ -44,47 +44,68 @@ import org.springframework.context.ApplicationContextAware;
  * 
  */
 public class BaseTestStep implements ApplicationContextAware {//NOPMD
-	/** The page object. */
-	@Nullable
-	private IPageObject pageObject;
-
-	/** The forced page validation. */
-	private boolean forcedPageValidation;
-
-	/** The target step. */
-	private boolean targetStep;
-
-	/** The optional step. default is false*/
-	private boolean optionalStep;
+	/** The current iteration. */
+	private int currentIteration;
 	
-	/** The passed. */
-	private StepResultStatus stepResultStatus = StepResultStatus.FAIL;
-
-	/** The step name. */
-	private String stepName = "";
-
-	/** The step description. */
-	@Nullable
-	private String stepDescription = "";
-	
-	/** The element step flag. */
-	
-	private transient boolean elementStepFlag;
-	
-	/** The my web element. */
-	@Nullable
-	protected MyWebElement myWebElement;
-	
-	/** The i expected result asserter. */
-	private List<IExpectedResultAsserter> expectedResultAsserter = new ArrayList<IExpectedResultAsserter>();
-	
-	/** The data holders. */
-	private List<IDataParser> dataHolders = new ArrayList<IDataParser>();
+	/** The current repeat step name. */
+	private String currentRepeatStepName = "";
 	
 	/** The application context. */
 	@Nullable
 	private ApplicationContext applicationContext;
 
+	/** The data holders. */
+	private List<IDataParser> dataHolders = new ArrayList<IDataParser>();
+
+	/** The element step flag. */
+	
+	private transient boolean elementStepFlag;
+
+	/** The i expected result asserter. */
+	private List<IExpectedResultAsserter> expectedResultAsserter = new ArrayList<IExpectedResultAsserter>();
+	
+	/** The forced page validation. */
+	private boolean forcedPageValidation;
+
+	/** The my web element. */
+	@Nullable
+	protected MyWebElement myWebElement;
+
+	/** The optional step. default is false*/
+	private boolean optionalStep;
+	
+	/** The page object. */
+	@Nullable
+	private IPageObject pageObject;
+	
+	/** The step description. */
+	@Nullable
+	private String stepDescription = "";
+	
+	/** The step name. */
+	private String stepName = "";
+	
+	/** The passed. */
+	private StepResultStatus stepResultStatus = StepResultStatus.FAIL;
+	
+	/** The target step. */
+	private boolean targetStep;
+	
+	/**
+	 * Instantiates a new base test step.
+	 */
+	public BaseTestStep() {
+		elementStepFlag = false;
+	}
+	
+	/**
+	 * Instantiates a new base test step.
+	 *
+	 * @param pageObject the page object
+	 */
+	public BaseTestStep( IPageObject pageObject ) {
+		this.pageObject = pageObject;
+	}
 	/**
 	 * Instantiates a new base test step.
 	 *
@@ -95,73 +116,49 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 		this.pageObject = pageObject;
 		this.myWebElement = myWebElement;
 	}
+	
 	/**
 	 * Instantiates a new base test step.
 	 *
-	 * @param pageObject the page object
 	 * @param myWebElement the my web element
 	 */
 	public BaseTestStep( MyWebElement myWebElement) {
 		this.myWebElement = myWebElement;
 	}
+	
 	/**
-	 * @return the optionalStep
-	 */
-	public boolean isOptionalStep() {
-		return optionalStep;
-	}
-	/**
-	 * @param optionalStep the optionalStep to set
-	 */
-	public void setOptionalStep(boolean optionalStep) {
-		this.optionalStep = optionalStep;
-	}
-	/**
-	 * Instantiates a new base test step.
+	 * Gets the application context.
 	 *
-	 * @param pageObject the page object
-	 * @param myWebElement the my web element
+	 * @return the application context
+	 * @throws IllegalStateException the illegal state exception
 	 */
-	public BaseTestStep( IPageObject pageObject ) {
-		this.pageObject = pageObject;
+	public ApplicationContext getApplicationContext() throws IllegalStateException{
+		
+		final ApplicationContext applicationContext2 = applicationContext;
+		if (null == applicationContext2) {
+			throw new IllegalStateException("applicationContext is not correctly initialized in test step");
+		} else {
+			return applicationContext2;
+		}
 	}
+	
 	/**
-	 * Gets the step name.
-	 * 
-	 * @return the stepName
+	 * Gets the data holders.
+	 *
+	 * @return the dataHolders
 	 */
-	public String getStepName() {
-		return stepName;
+	public List<IDataParser> getDataHolders() {
+		return dataHolders;
+		
 	}
-
+	
 	/**
-	 * Sets the step name.
-	 * 
-	 * @param stepName
-	 *            the stepName to set
+	 * Gets the expected result asserter.
+	 *
+	 * @return the iExpectedResultAsserter
 	 */
-	public void setStepName(final String stepName) {
-		this.stepName = stepName;
-	}
-
-	/**
-	 * Gets the step description.
-	 * 
-	 * @return the stepDescription
-	 */
-	@Nullable
-	public String getStepDescription() {
-		return stepDescription;
-	}
-
-	/**
-	 * Sets the step description.
-	 * 
-	 * @param stepDescription
-	 *            the stepDescription to set
-	 */
-	public void setStepDescription(String stepDescription) {
-		this.stepDescription = stepDescription;
+	public List<IExpectedResultAsserter> getExpectedResultAsserter() {
+		return expectedResultAsserter;
 	}
 
 	/**
@@ -175,36 +172,6 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	}
 
 	/**
-	 * Sets the my web element.
-	 * 
-	 * @param myWebElement
-	 *            the myWebElement to set
-	 */
-	public final void setMyWebElement(final MyWebElement myWebElement) {
-		this.elementStepFlag = true;
-		this.myWebElement = myWebElement;
-	}
-
-	/**
-	 * Checks if is target step.
-	 * 
-	 * @return the targetStep
-	 */
-	public boolean isTargetStep() {
-		return targetStep;
-	}
-
-	/**
-	 * Sets the target step.
-	 * 
-	 * @param targetStep
-	 *            the targetStep to set
-	 */
-	public void setTargetStep(boolean targetStep) {
-		this.targetStep = targetStep;
-	}
-
-	/**
 	 * Gets the page object.
 	 * 
 	 * @return the pageObject
@@ -215,16 +182,42 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	}
 
 	/**
-	 * Sets the page object.
+	 * Gets the step description.
 	 * 
-	 * @param pageObject
-	 *            the pageObject to set
+	 * @return the stepDescription
 	 */
-	public void setPageObject(IPageObject pageObject) {
-		this.pageObject = pageObject;
+	@Nullable
+	public String getStepDescription() {
+		return stepDescription;
 	}
 
-	
+	/**
+	 * Gets the step name.
+	 * 
+	 * @return the stepName
+	 */
+	public String getStepName() {
+		return stepName;
+	}
+
+	/**
+	 * Gets the step result status.
+	 *
+	 * @return the stepResultStatus
+	 */
+	public StepResultStatus getStepResultStatus() {
+		return stepResultStatus;
+	}
+
+	/**
+	 * Checks if is element step flag.
+	 *
+	 * @return the elementStepFlag
+	 */
+	public boolean isElementStepFlag() {
+		return elementStepFlag;
+	}
+
 	/**
 	 * Checks if is forced page validation.
 	 *
@@ -235,14 +228,14 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	}
 
 	/**
-	 * Sets the forced page validation.
+	 * Checks if is optional step.
 	 *
-	 * @param forcedPageValidation the forcedPageValidation to set
+	 * @return the optionalStep
 	 */
-	public void setForcedPageValidation(boolean forcedPageValidation) {
-		this.forcedPageValidation = forcedPageValidation;
+	public boolean isOptionalStep() {
+		return optionalStep;
 	}
-	
+
 	/**
 	 * Checks if is page validation.
 	 *
@@ -254,27 +247,27 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	
 	}
 
+	
 	/**
-	 * @return the elementStepFlag
+	 * Checks if is target step.
+	 * 
+	 * @return the targetStep
 	 */
-	public boolean isElementStepFlag() {
-		return elementStepFlag;
+	public boolean isTargetStep() {
+		return targetStep;
 	}
 
 	/**
-	 * @return the iExpectedResultAsserter
+	 * Parses the data holder.
+	 *
+	 * @throws RuntimeDataException the runtime data exception
 	 */
-	public List<IExpectedResultAsserter> getExpectedResultAsserter() {
-		return expectedResultAsserter;
+	protected void parseDataHolder() throws RuntimeDataException {
+		for (int i=0; i<getDataHolders().size(); i++) {
+			getDataHolders().get(i).parseData();
+		}
 	}
-
-	/**
-	 * @param iExpectedResultAsserter the iExpectedResultAsserter to set
-	 */
-	public void setExpectedResultAsserter(List<IExpectedResultAsserter> iExpectedResultAsserter) {
-		this.expectedResultAsserter = iExpectedResultAsserter;
-	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -288,58 +281,134 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 		}
 		
 	}
-	
+
 	/**
-	 * Gets the application context.
+	 * Sets the data holders.
 	 *
-	 * @return the application context
-	 */
-	public ApplicationContext getApplicationContext() throws IllegalStateException{
-		
-		final ApplicationContext applicationContext2 = applicationContext;
-		if (null == applicationContext2) {
-			throw new IllegalStateException("applicationContext is not correctly initialized in test step");
-		} else {
-			return applicationContext2;
-		}
-	}
-	/**
-	 * @return the dataHolders
-	 */
-	public List<IDataParser> getDataHolders() {
-		return dataHolders;
-		
-	}
-	/**
 	 * @param dataHolders the dataHolders to set
 	 */
 	public void setDataHolders(List<IDataParser> dataHolders) {
 		this.dataHolders = dataHolders;
 	}
-	
+
 	/**
-	 * Parses the data holder.
+	 * Sets the expected result asserter.
 	 *
-	 * @throws RuntimeDataException the runtime data exception
+	 * @param iExpectedResultAsserter the iExpectedResultAsserter to set
 	 */
-	protected void parseDataHolder() throws RuntimeDataException {
-		for (int i=0; i<getDataHolders().size(); i++) {
-			getDataHolders().get(i).parseData();
-		}
+	public void setExpectedResultAsserter(List<IExpectedResultAsserter> iExpectedResultAsserter) {
+		this.expectedResultAsserter = iExpectedResultAsserter;
+	}
+
+	/**
+	 * Sets the forced page validation.
+	 *
+	 * @param forcedPageValidation the forcedPageValidation to set
+	 */
+	public void setForcedPageValidation(boolean forcedPageValidation) {
+		this.forcedPageValidation = forcedPageValidation;
+	}
+
+	/**
+	 * Sets the my web element.
+	 * 
+	 * @param myWebElement
+	 *            the myWebElement to set
+	 */
+	public final void setMyWebElement(final MyWebElement myWebElement) {
+		this.elementStepFlag = true;
+		this.myWebElement = myWebElement;
+	}
+	
+	/**
+	 * Sets the optional step.
+	 *
+	 * @param optionalStep the optionalStep to set
+	 */
+	public void setOptionalStep(boolean optionalStep) {
+		this.optionalStep = optionalStep;
+	}
+	/**
+	 * Sets the page object.
+	 * 
+	 * @param pageObject
+	 *            the pageObject to set
+	 */
+	public void setPageObject(IPageObject pageObject) {
+		this.pageObject = pageObject;
+	}
+	/**
+	 * Sets the step description.
+	 * 
+	 * @param stepDescription
+	 *            the stepDescription to set
+	 */
+	public void setStepDescription(String stepDescription) {
+		this.stepDescription = stepDescription;
+	}
+	
+	/**
+	 * Sets the step name.
+	 * 
+	 * @param stepName
+	 *            the stepName to set
+	 */
+	public void setStepName(final String stepName) {
+		this.stepName = stepName;
 	}
 	
 	
 	/**
-	 * @return the stepResultStatus
-	 */
-	public StepResultStatus getStepResultStatus() {
-		return stepResultStatus;
-	}
-	/**
+	 * Sets the step result status.
+	 *
 	 * @param stepResultStatus the stepResultStatus to set
 	 */
 	public void setStepResultStatus(StepResultStatus stepResultStatus) {
 		this.stepResultStatus = stepResultStatus;
+	}
+	/**
+	 * Sets the target step.
+	 * 
+	 * @param targetStep
+	 *            the targetStep to set
+	 */
+	public void setTargetStep(boolean targetStep) {
+		this.targetStep = targetStep;
+	}
+
+	/**
+	 * @return the currentIteration
+	 */
+	public int getCurrentIteration() {
+		return currentIteration;
+	}
+
+	/**
+	 * @param currentIteration the currentIteration to set
+	 */
+	public void setCurrentIteration(int currentIteration) {
+		this.currentIteration = currentIteration;
+	}
+
+	/**
+	 * @return the currentRepeatStepName
+	 */
+	public String getCurrentRepeatStepName() {
+		return currentRepeatStepName;
+	}
+
+	/**
+	 * @param currentRepeatStepName the currentRepeatStepName to set
+	 */
+	public void setCurrentRepeatStepName(String currentRepeatStepName) {
+		this.currentRepeatStepName = currentRepeatStepName;
+	}
+
+	/**
+	 * @param elementStepFlag the elementStepFlag to set
+	 */
+	public void setElementStepFlag(boolean elementStepFlag) {
+		this.elementStepFlag = elementStepFlag;
 	}
 
 

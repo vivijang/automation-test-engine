@@ -44,7 +44,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @author Peidong Hu
  *
  */
-public class RepeatStep extends AbstractTestStep implements ITestStep {
+public class RepeatStep extends BaseTestStep implements ITestStep {
 
 	/** The test case. */
 	final private TestCase testCase;
@@ -105,63 +105,6 @@ public class RepeatStep extends AbstractTestStep implements ITestStep {
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isPageValidation() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@Nullable
-	public IPageObject getPageObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@Nullable
-	public IMyWebDriver getMyWebDriver() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@Nullable
-	public MyWebElement getMyWebElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@Nullable
-	public List<IDataParser> getDataHolders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isElementStepFlag() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -290,29 +233,14 @@ public class RepeatStep extends AbstractTestStep implements ITestStep {
 		return stepIndexes;
 	}
 
-	// /**
-	// * @return the inputDataHolders
-	// */
-	// public List<IStepInputData> getInputDataHolders() {
-	// return inputDataHolders;
-	// }
-	//
-	//
-	//
-	// /**
-	// * @return the dataParsers
-	// */
-	// public List<IDataParser> getDataParsers() {
-	// return dataParsers;
-	// }
-	//
-	//
-	//
-	// /**
-	// * @return the expectedResultAsserters
-	// */
-	// public List<IExpectedResultAsserter> getExpectedResultAsserters() {
-	// return expectedResultAsserters;
-	// }
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Nullable
+	public IMyWebDriver getMyWebDriver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

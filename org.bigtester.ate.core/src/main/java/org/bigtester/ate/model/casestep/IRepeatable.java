@@ -27,5 +27,11 @@ package org.bigtester.ate.model.casestep;
  *
  */
 public interface IRepeatable {
+	
+	/**
+	 * Refresh step data.
+	 *
+	 * @return true, if successful
+	 */
 	boolean refreshStepData();
 }
