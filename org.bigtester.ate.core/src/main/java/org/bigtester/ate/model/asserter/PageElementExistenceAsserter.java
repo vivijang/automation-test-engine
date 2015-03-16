@@ -22,6 +22,7 @@ package org.bigtester.ate.model.asserter;
 
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
+import org.bigtester.ate.model.data.IStepERValue;
 import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.data.StepErElementExistenceValue;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
@@ -51,10 +52,10 @@ public class PageElementExistenceAsserter extends
 	 * @param pageObj
 	 */
 	public PageElementExistenceAsserter(final IPageObject pageObj,
-			StepErElementExistenceValue stepERValue) {
+			IStepERValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		this.stepERValue = stepERValue;
+		this.stepERValue = (StepErElementExistenceValue) stepERValue.getERValue();
 		setExecResult(this);
 	}
 

@@ -64,6 +64,7 @@ public class AteNamespaceHandler extends NamespaceHandlerSupport {
 		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_CASETYPESERVICE, new CaseTypeServiceBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_HOMESTEP, new HomeStepBeanDefinitionParser());
+		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_REPEATSTEP, new RepeatStepBeanDefinitionParser());
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_LASTSTEP, new LastStepBeanDefinitionParser());
 		
 		registerBeanDefinitionParser(XsdElementConstants.ELEMENT_BASEERVALUE, new BaseERValueBeanDefinitionParser());

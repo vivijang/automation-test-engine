@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2015, Montreal PROT, or individual contributors as
+ * Copyright 2014, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,50 +18,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.data.exception;
+
 
 // TODO: Auto-generated Javadoc
 /**
- * This class IRepeatable defines ....
+ * This class StepExecutionException defines ....
+ * 
  * @author Peidong Hu
- *
+ * 
  */
-public interface IRepeatable {
+public class RepeatTestDataException extends RuntimeDataException {
 	
 	/**
-	 * Refresh step data.
-	 *
-	 * @return true, if successful
+	 * 
 	 */
+	private static final long serialVersionUID = 8009838033578209075L;
+
+	/** The repeat step name. */
+	final private String repeatStepName;
 	
+	/** The iteration. */
+	final private int iteration;
 	/**
-	 * Refresh step data.
+	 * Instantiates a new step execution exception.
 	 *
-	 * @return true, if successful
+	 * @param message            the message
+	 * @param errorCode            the error code
 	 */
-	
+	public RepeatTestDataException(String message, String errorCode, String repeatStepName, int iteration) {
+		super(message, errorCode);
+		this.repeatStepName = repeatStepName;
+		this.iteration = iteration;
+		setMessage(getMessage() + ":repeatStepName:" + repeatStepName + ":iteration:" + iteration);
+		
+	}
 	/**
-	 * Refresh step data.
-	 *
-	 * @return true, if successful
+	 * @return the repeatStepName
 	 */
-	
+	public String getRepeatStepName() {
+		return repeatStepName;
+	}
 	/**
-	 * Refresh step data.
-	 *
-	 * @return true, if successful
+	 * @return the iteration
 	 */
-	
-	/**
-	 * Refresh step data.
-	 *
-	 * @return true, if successful
-	 */
-	
-	/**
-	 * Refresh step data.
-	 *
-	 * @return true, if successful
-	 */
-	boolean refreshStepData(String repeatStepName, int iteration);
+	public int getIteration() {
+		return iteration;
+	}
 }

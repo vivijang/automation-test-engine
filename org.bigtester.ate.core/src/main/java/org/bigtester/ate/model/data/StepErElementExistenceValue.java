@@ -23,9 +23,12 @@ package org.bigtester.ate.model.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
 import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
 import org.bigtester.ate.model.data.exception.TestDataException;
+import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.context.ApplicationListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +37,7 @@ import org.bigtester.ate.model.data.exception.TestDataException;
  * @author Peidong Hu
  *
  */
-public class StepErElementExistenceValue extends BaseERValue{
+public class StepErElementExistenceValue extends BaseERValue implements IStepERValue, ApplicationListener<RepeatDataRefreshEvent>{
 	
 	/**
 	 * @param stepERDao
@@ -86,6 +89,28 @@ public class StepErElementExistenceValue extends BaseERValue{
 	public void setDataValueID(String sERSetID) {
 		this.dataValueID = sERSetID;
 		
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
+		List<StepErElementExistence> valueTmp = this.value;//NOPMD;
+		if (arg0 == null ) return;
+		try {
+			this.value = getStepERDao().getErElementExistences(this.dataValueID, arg0.getRepeatStepName(), arg0.getIteration());
+		} catch (TestDataException e) {
+			//TODO onDataRefresh Exception, we use default data. Need to find a way to log something. throw e to trigger AOP log, doesn't work in the event.
+			this.value = valueTmp;
+		}
+		
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BaseERValue getERValue() {
+		return this;
 	}
 
 }

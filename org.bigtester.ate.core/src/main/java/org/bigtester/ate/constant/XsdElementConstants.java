@@ -207,6 +207,9 @@ public final class XsdElementConstants {
 	/** The Constant ELEMENT_HOMESTEP. */
 	public static final String ELEMENT_HOMESTEP = "homeStep";
 	
+	/** The Constant ELEMENT_REPEATSTEP. */
+	public static final String ELEMENT_REPEATSTEP = "repeatStep";
+	
 	/** The Constant ELEMENT_LASTSTEP. */
 	public static final String ELEMENT_LASTSTEP = "lastStep";
 	
@@ -266,6 +269,19 @@ public final class XsdElementConstants {
 	
 	/** The Constant ATTR_TESTSTEP_TARGETSTEP. */
 	public static final String ATTR_TESTSTEP_TARGETSTEP = "targetStep";
+	
+	/** The Constant ATTR_REPEATSTEP_STARTSTEPNAME. */
+	public static final String ATTR_REPEATSTEP_STARTSTEPNAME = "startStepName";
+	
+	/** The Constant ATTR_REPEATSTEP_ENDSTEPNAME. */
+	public static final String ATTR_REPEATSTEP_ENDSTEPNAME = "endStepName";
+	
+	/** The Constant ATTR_REPEATSTEP_CONTINUEONFAILURE. */
+	public static final String ATTR_REPEATSTEP_CONTINUEONFAILURE = "continueOnFailure";
+	
+	/** The Constant ATTR_REPEATSTEP_NUMBEROFITERATIONS. */
+	public static final String ATTR_REPEATSTEP_NUMBEROFITERATIONS = "numberOfIterations";
+	
 	
 	/** The Constant ATTR_TESTSTEP_OPTIONALSTEP. */
 	public static final String ATTR_TESTSTEP_OPTIONALSTEP = "optionalStep";

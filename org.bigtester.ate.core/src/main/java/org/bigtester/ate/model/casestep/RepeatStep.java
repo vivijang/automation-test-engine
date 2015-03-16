@@ -89,6 +89,11 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 		this.continueOnFailure = false;
 		this.numberOfIterations = 1;
 		this.testCase = testCase;
+		
+
+	}
+
+	private void createRepeatStepIndexes() {
 		int startIndex = 0;
 		int endIndex = testCase.getTestStepList().size();
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
@@ -102,9 +107,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 				stepIndexes.add(i);
 			}
 		}
-
 	}
-
 
 	/**
 	 * {@inheritDoc}
@@ -112,6 +115,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	@Override
 	public void doStep() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
+		createRepeatStepIndexes();
 		repeatSteps();
 
 	}
@@ -126,6 +130,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	private void repeatSteps() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
 		for (int iteration = 0; iteration < getNumberOfIterations(); iteration++) {
+			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, this.getCurrentRepeatStepName(), iteration));
 			for (int i = 0; i < getStepIndexes().size(); i++) {
 				ITestStep currentTestStepTmp = getTestCase().getTestStepList()
 						.get(getStepIndexes().get(i));

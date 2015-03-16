@@ -599,6 +599,25 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:complexType name="RepeatStepType">
+		<xsd:complexContent>
+			<xsd:extension base="BaseTestStepType">
+				<xsd:attribute name="startStepName" type="xsd:string"
+					use="required">
+				</xsd:attribute>
+				<xsd:attribute name="endStepName" type="xsd:string"
+					use="required">
+				</xsd:attribute>
+				<xsd:attribute name="continueOnFailure" type="xsd:boolean"
+					use="required">
+				</xsd:attribute>
+				<xsd:attribute name="numberOfIterations" type="xsd:int"
+					use="required">
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 
 	<xsd:complexType name="LastStepType">
 		<xsd:complexContent>
@@ -640,6 +659,7 @@
 						maxOccurs="unbounded" />
 					<xsd:element ref="homeStep" minOccurs="1" maxOccurs="unbounded" />
 					<xsd:element ref="elementStep" minOccurs="0" maxOccurs="unbounded" />
+					<xsd:element ref="repeatStep" minOccurs="0" maxOccurs="unbounded" />
 					<xsd:element ref="lastStep" minOccurs="1" maxOccurs="unbounded" />
 				</xsd:choice>
 				
@@ -685,6 +705,7 @@
 	<xsd:element name="elementActionDef" type="ElementActionDefType">
 	</xsd:element>
 	<xsd:element name="elementStep" type="ElementStepType" />
+	<xsd:element name="repeatStep" type="RepeatStepType" />
 	<xsd:element name="baseElementAction" type="BaseElementActionType" />
 
 	<xsd:element name="baseERValue" type="BaseERValueType" />

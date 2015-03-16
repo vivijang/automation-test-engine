@@ -90,6 +90,10 @@ public class TestCaseBeanDefinitionParser extends AbstractBeanDefinitionParser {
 				ElementStepBeanDefinitionParser elementStep = new ElementStepBeanDefinitionParser();
 				children.add(elementStep.parse(element, parserContext));
 			} else if (element.getTagName() == "ate:"
+					+ XsdElementConstants.ELEMENT_REPEATSTEP) {
+				RepeatStepBeanDefinitionParser repeatStep = new RepeatStepBeanDefinitionParser();
+				children.add(repeatStep.parse(element, parserContext));
+			} else if (element.getTagName() == "ate:"
 					+ XsdElementConstants.ELEMENT_LASTSTEP) {
 				LastStepBeanDefinitionParser lastStep = new LastStepBeanDefinitionParser();
 				children.add(lastStep.parse(element, parserContext));
