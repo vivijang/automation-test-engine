@@ -43,6 +43,10 @@
 			stepDescription="first repeat step" targetStep="true" startStepName="openPublicHomePage"
 			endStepName="openPublicHomePage" continueOnFailure="false"
 			numberOfIterations="1" />
+		<ate:repeatStep id="repeatHomeStep2" stepName="repeatHomeStep2"
+			stepDescription="first repeat step" targetStep="true" startStepName="openPublicHomePage"
+			endStepName="repeatHomeStep" continueOnFailure="false"
+			numberOfIterations="1" />
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false"
 			pageObject="myLastPage" />

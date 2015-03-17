@@ -10,6 +10,8 @@
 
 <STEPERELEMENTEXISTENCE FirstTimeExecution= "No"   ELEMENTFINDBY="ID"	ELEMENTFINDBYVALUE="map_canvas"	ASSERTPRIORITY="HIGH" PAGENAME="homepage"	STEPERSETID="publicHomePageVID"	TESTDATACONTEXT_IDCOLUMN="5"	repeatStepName="repeatHomeStep" iteration="1"/>
 
+<STEPERELEMENTEXISTENCE FirstTimeExecution= "No"   ELEMENTFINDBY="ID"	ELEMENTFINDBYVALUE="map_canvas"	ASSERTPRIORITY="HIGH" PAGENAME="homepage"	STEPERSETID="publicHomePageVID"	TESTDATACONTEXT_IDCOLUMN="5"	repeatStepName="repeatHomeStep2" iteration="1"/>
+
 <StepErPageProperty FirstTimeExecution= "Yes"  ASSERTPROPERTY="Page_Title" ASSERTVALUE="DentistAround - A dentist right here, right now"	PAGENAME="homepage"	STEPERSETID="publicHomePageVID"	TESTDATACONTEXT_IDCOLUMN="8"	ASSERTPRIORITY="HIGH"/>
 
 <ElementInputData ID="1" dataName="UserName" dataValue="gocarpool@hotmail.com" testDataContext_idColumn="1" />
