@@ -42,7 +42,7 @@
 		<ate:repeatStep id="repeatHomeStep" stepName="repeatHomeStep"
 			stepDescription="first repeat step" targetStep="true" startStepName="openPublicHomePage"
 			endStepName="openPublicHomePage" continueOnFailure="false"
-			numberOfIterations="2" />
+			numberOfIterations="1" />
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false"
 			pageObject="myLastPage" />

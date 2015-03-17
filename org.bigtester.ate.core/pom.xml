@@ -549,6 +549,11 @@
   <artifactId>jcabi-aether</artifactId>
   <version>0.10.1</version>
 </dependency>
+<dependency>
+    <groupId>uk.com.robust-it</groupId>
+    <artifactId>cloning</artifactId>
+    <version>1.9.1</version>
+</dependency>
 	</dependencies>
 
 </project>

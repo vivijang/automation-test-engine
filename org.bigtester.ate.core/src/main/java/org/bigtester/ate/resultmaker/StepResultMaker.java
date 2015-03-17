@@ -21,18 +21,18 @@
 package org.bigtester.ate.resultmaker;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
-
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.model.casestep.BaseTestStep;
 import org.bigtester.ate.model.testresult.TestStepResult;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+
+import com.rits.cloning.Cloner;
 
 
 // TODO: Auto-generated Javadoc
@@ -60,7 +60,10 @@ public class StepResultMaker {
 	@SuppressWarnings("unchecked")
 	@After("@annotation(org.bigtester.ate.annotation.StepLoggable)")
 	public void log(final JoinPoint joinPoint_p) {
-		BaseTestStep bts = (BaseTestStep) joinPoint_p.getTarget();
+		
+		Cloner cloner=new Cloner();
+
+		BaseTestStep bts =cloner.deepClone((BaseTestStep) joinPoint_p.getTarget());
 		if  (bts == null) throw GlobalUtils.createInternalError("stepresultmaker log function.");
 		TestStepResult tsr = new TestStepResult(((BaseTestStep) joinPoint_p.getTarget()).getStepName(), bts);
 		

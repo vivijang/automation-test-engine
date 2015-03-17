@@ -25,15 +25,10 @@ import java.util.List;
 
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.StepResultStatus;
-import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
-import org.bigtester.ate.model.data.IDataParser;
-import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
-import org.bigtester.ate.model.page.page.IPageObject;
-import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.utils.ThinkTime;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -94,8 +89,8 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	}
 
 	private void createRepeatStepIndexes() {
-		int startIndex = 0;
-		int endIndex = testCase.getTestStepList().size();
+		int startIndex = 0; //NOPMD
+		int endIndex = testCase.getTestStepList().size(); //NOPMD
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (testCase.getTestStepList().get(i).getStepName() == this.startStepName) {
 				startIndex = i;
@@ -129,8 +124,9 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	 */
 	private void repeatSteps() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
-		for (int iteration = 0; iteration < getNumberOfIterations(); iteration++) {
-			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, this.getCurrentRepeatStepName(), iteration));
+		for (int iteration = 1; iteration <= getNumberOfIterations(); iteration++) {
+			setCurrentIteration(iteration);
+			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, this.getStepName(), iteration));
 			for (int i = 0; i < getStepIndexes().size(); i++) {
 				ITestStep currentTestStepTmp = getTestCase().getTestStepList()
 						.get(getStepIndexes().get(i));

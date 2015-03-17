@@ -25,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ReportMessage;
+import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
 import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.page.page.IPageObject;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,6 +33,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,7 +43,7 @@ import org.springframework.context.ApplicationContextAware;
  *
  */
 public abstract class AbstractExpectedResultAsserter implements
-		ApplicationContextAware { // NOPMD
+		ApplicationContextAware,  ApplicationListener<RepeatDataRefreshEvent>{ // NOPMD
 	/** The result page. */
 	@Nullable
 	private IPageObject resultPage;
@@ -64,7 +66,9 @@ public abstract class AbstractExpectedResultAsserter implements
 	/** The Flag fail case. */
 	private boolean flagFailCase;
 
-	/** The exec result. */
+	/** The exec result. 
+	 * NOTE: desperated
+	 * */
 	@Nullable
 	protected IStepExecutionResult execResult;
 
@@ -87,6 +91,22 @@ public abstract class AbstractExpectedResultAsserter implements
 	/** The assert report msg. */
 	protected transient String assertReportMSG = "";
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
+		if (null == arg0) return;
+		getComparedItemResults().clear();
+		
+		
+		getFailedItemResults().clear();
+		
+		setFlagFailCase(false);
+
+		assertReportMSG = "";
+	}
+	
 	/**
 	 * @return the assertReportMSG
 	 */
