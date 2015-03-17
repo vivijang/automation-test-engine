@@ -36,6 +36,8 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class AbstractTestStep defines ....
@@ -52,6 +54,7 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	
 	/** The application context. */
 	@Nullable
+	@XStreamOmitField
 	private ApplicationContext applicationContext;
 
 	/** The data holders. */

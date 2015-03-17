@@ -35,6 +35,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class AbstractExpectedResultAsserter defines ....
@@ -46,6 +48,7 @@ public abstract class AbstractExpectedResultAsserter implements
 		ApplicationContextAware,  ApplicationListener<RepeatDataRefreshEvent>{ // NOPMD
 	/** The result page. */
 	@Nullable
+	
 	private IPageObject resultPage;
 	
 	/**
@@ -74,6 +77,7 @@ public abstract class AbstractExpectedResultAsserter implements
 
 	/** The application context. */
 	@Nullable
+	@XStreamOmitField
 	private ApplicationContext applicationContext;
 
 	/** The Constant EXIST. */

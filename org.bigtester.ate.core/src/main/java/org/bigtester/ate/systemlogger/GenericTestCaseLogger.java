@@ -39,6 +39,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class GenericTestCaseLogger will handle errors happened inside of a
@@ -52,6 +54,7 @@ public class GenericTestCaseLogger implements ApplicationContextAware {
 
 	/** The app context. */
 	@Nullable
+	@XStreamOmitField
 	private transient ApplicationContext appContext;
 
 	/**

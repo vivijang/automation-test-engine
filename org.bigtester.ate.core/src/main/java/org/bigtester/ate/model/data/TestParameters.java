@@ -25,6 +25,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationContext;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestParameters defines ....
@@ -45,10 +47,12 @@ public class TestParameters
     
     /** The global app ctx. */
     @Nullable
+    @XStreamOmitField
     private ApplicationContext globalAppCtx;
     
     /** The parent app ctx. */
     @Nullable
+    @XStreamOmitField
     private ApplicationContext parentAppCtx;
     
     /** The parent test case data holders. */

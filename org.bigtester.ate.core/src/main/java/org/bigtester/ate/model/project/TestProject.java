@@ -38,6 +38,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import com.github.javaparser.ParseException;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,6 +54,7 @@ public class TestProject {
 
 	/** The app ctx. */
 	@Nullable
+	@XStreamOmitField
 	private ApplicationContext appCtx;
 
 	/** The global init xmlfiles. */

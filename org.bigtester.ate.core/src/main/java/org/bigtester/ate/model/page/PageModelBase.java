@@ -22,6 +22,8 @@ package org.bigtester.ate.model.page;
 
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,6 +34,7 @@ import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 public class PageModelBase {//NOPMD
 	
 	/** The i my wd. */
+	@XStreamOmitField
 	protected IMyWebDriver myWd;
 
 	/**

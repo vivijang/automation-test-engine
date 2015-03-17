@@ -31,6 +31,7 @@ import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.utils.ThinkTime;
 import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.context.ApplicationListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,7 +40,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @author Peidong Hu
  *
  */
-public class RepeatStep extends BaseTestStep implements ITestStep {
+public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationListener<RepeatDataRefreshEvent> {
 
 	/** The test case. */
 	final private TestCase testCase;
@@ -243,5 +244,14 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	public IMyWebDriver getMyWebDriver() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
+		if (null==arg0 || arg0.getRepeatStepName() == this.getStepName()) return;
+		stepIndexes.clear();
 	}
 }

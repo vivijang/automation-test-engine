@@ -58,6 +58,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;//NOPMD, can't be deleted since this file will be used as a template to create runners
 import org.testng.internal.Utils;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class CaseRunner runs a single test case
@@ -69,6 +71,7 @@ public class CaseRunner implements IRunTestCase {
 
 	/** The context. */
 	@Nullable
+	@XStreamOmitField
 	private ApplicationContext context;
 
 	/** The main driver. */
