@@ -54,7 +54,7 @@ public class RepeatStepExecutionLogger {
 		repeatStepTrees.put(repeatStepName, repeatStepTree);
 	}
 
-	private @Nullable RepeatStepExecutionLoggerNode searchStep(
+	private @Nullable RepeatStepExecutionLoggerNode searchStepNode(
 			RepeatStepExecutionLoggerNode rootNode, String stepName) {
 
 		RepeatStepExecutionLoggerNode theNode = null;
@@ -69,22 +69,45 @@ public class RepeatStepExecutionLogger {
 		return theNode;
 	}
 
-	public void addChildRepeatStepName(String repeatStepName) {
-		DefaultTreeModel childRootedStepTree = repeatStepTrees.get(repeatStepName);
+	public void addChildRepeatStepName(String childStepName,
+			String parentStepName) {
+		DefaultTreeModel childRootedStepTree = repeatStepTrees
+				.get(childStepName);
 		if (null == childRootedStepTree) {
-		for (Map.Entry<String, DefaultTreeModel> entry : repeatStepTrees.entrySet()) {
-		    String rootStepName = entry.getKey();
-		    RepeatStepExecutionLoggerNode stepTreeRoot = (RepeatStepExecutionLoggerNode) entry.getValue().getRoot();
-		    if (rootStepName != null && stepTreeRoot != null) {
-		    	RepeatStepExecutionLoggerNode childNode = searchStep(stepTreeRoot, rootStepName);
-		    	if (null != childNode) break;
-		    }
-		}
+			// for (Map.Entry<String, DefaultTreeModel> entry : repeatStepTrees
+			// .entrySet()) {
+			// String rootStepName = entry.getKey();
+			// RepeatStepExecutionLoggerNode stepTreeRoot =
+			// (RepeatStepExecutionLoggerNode) entry
+			// .getValue().getRoot();
+			// if (rootStepName != null && stepTreeRoot != null) {
+			// RepeatStepExecutionLoggerNode childNode = searchStepNode(
+			// stepTreeRoot, rootStepName);
+			// if (null != childNode)
+			// break;
+			// }
+			// }
 		} else {
-			
+			DefaultTreeModel parentStepTree = repeatStepTrees
+					.get(parentStepName);
+			RepeatStepExecutionLoggerNode newRootNode;
+			if (null == parentStepTree) {
+				newRootNode = new RepeatStepExecutionLoggerNode(
+						parentStepName);
+			} else {
+				newRootNode = (RepeatStepExecutionLoggerNode) parentStepTree
+						.getRoot();
+			}
+			newRootNode.add((RepeatStepExecutionLoggerNode) childRootedStepTree
+					.getRoot());
+			repeatStepTrees.put(parentStepName, new DefaultTreeModel(
+					newRootNode));
+			repeatStepTrees.remove(childStepName);
+
 		}
-		DefaultTreeModel parentStepNode = repeatStepTrees.get(repeatStepName);
-		RepeatStepExecutionLoggerNode rootNode = new RepeatStepExecutionLoggerNode(repeatStepName);
-		
+		DefaultTreeModel parentStepNode = repeatStepTrees.get(childStepName);
+		RepeatStepExecutionLoggerNode rootNode = new RepeatStepExecutionLoggerNode(
+				childStepName);
+
 	}
 }
