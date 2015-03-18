@@ -20,34 +20,71 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.tree.DefaultTreeModel;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 // TODO: Auto-generated Javadoc
 /**
  * This class RepeatStepExecutionLogger defines ....
+ * 
  * @author Peidong Hu
  *
  */
 public class RepeatStepExecutionLogger {
-	final private Map<String, DefaultTreeModel> RepeatStepTrees = new ConcurrentHashMap<String, DefaultTreeModel>();
+	final private Map<String, DefaultTreeModel> repeatStepTrees = new ConcurrentHashMap<String, DefaultTreeModel>();
 
 	/**
 	 * @return the repeatStepTrees
 	 */
 	public Map<String, DefaultTreeModel> getRepeatStepTrees() {
-		return RepeatStepTrees;
+		return repeatStepTrees;
 	}
 
-	
-	public void addExternalRepeatStepName(String externalRepeatStepName, String internalRepeatStepName) {
-		
+	public void addRepeatStepName(String repeatStepName) {
+		if (repeatStepTrees.containsKey(repeatStepName))
+			return;
+		RepeatStepExecutionLoggerNode rootNode = new RepeatStepExecutionLoggerNode(
+				repeatStepName);
+		DefaultTreeModel repeatStepTree = new DefaultTreeModel(rootNode);
+		repeatStepTrees.put(repeatStepName, repeatStepTree);
 	}
-	
-	public void addRootRepeatStepName(String repeatStepName) {
+
+	private @Nullable RepeatStepExecutionLoggerNode searchStep(
+			RepeatStepExecutionLoggerNode rootNode, String stepName) {
+
+		RepeatStepExecutionLoggerNode theNode = null;
+		for (Enumeration enumer = rootNode.depthFirstEnumeration(); enumer
+				.hasMoreElements() && theNode == null;) {
+			RepeatStepExecutionLoggerNode node = (RepeatStepExecutionLoggerNode) enumer
+					.nextElement();
+			if (((String) node.getUserObject()).equals(stepName)) {
+				theNode = node;
+			}
+		}
+		return theNode;
+	}
+
+	public void addChildRepeatStepName(String repeatStepName) {
+		DefaultTreeModel childRootedStepTree = repeatStepTrees.get(repeatStepName);
+		if (null == childRootedStepTree) {
+		for (Map.Entry<String, DefaultTreeModel> entry : repeatStepTrees.entrySet()) {
+		    String rootStepName = entry.getKey();
+		    RepeatStepExecutionLoggerNode stepTreeRoot = (RepeatStepExecutionLoggerNode) entry.getValue().getRoot();
+		    if (rootStepName != null && stepTreeRoot != null) {
+		    	RepeatStepExecutionLoggerNode childNode = searchStep(stepTreeRoot, rootStepName);
+		    	if (null != childNode) break;
+		    }
+		}
+		} else {
+			
+		}
+		DefaultTreeModel parentStepNode = repeatStepTrees.get(repeatStepName);
 		RepeatStepExecutionLoggerNode rootNode = new RepeatStepExecutionLoggerNode(repeatStepName);
-		DefaultTreeModel
+		
 	}
 }
