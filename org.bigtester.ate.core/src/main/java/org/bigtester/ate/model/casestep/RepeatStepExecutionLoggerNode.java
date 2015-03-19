@@ -36,8 +36,13 @@ public class RepeatStepExecutionLoggerNode extends DefaultMutableTreeNode {
 	 */
 	private static final long serialVersionUID = -7048151244571042316L;
 
-	public RepeatStepExecutionLoggerNode(String RepeatStepName) {
-		super(RepeatStepName);
+	/**
+	 * Instantiates a new repeat step execution logger node.
+	 *
+	 * @param repeatStepName the repeat step name
+	 */
+	public RepeatStepExecutionLoggerNode(String repeatStepName) {
+		super(repeatStepName);
 	}
 
 }

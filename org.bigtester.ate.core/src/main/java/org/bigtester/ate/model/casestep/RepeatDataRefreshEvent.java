@@ -25,7 +25,6 @@ import java.util.Arrays;
 import javax.swing.tree.TreeNode;
 
 import org.bigtester.ate.GlobalUtils;
-import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationEvent;
 
 // TODO: Auto-generated Javadoc
@@ -69,6 +68,16 @@ public class RepeatDataRefreshEvent extends ApplicationEvent {
 		else
 			this.repeatStepInvokePathNodes = temp;
 		this.iteration = iteration;
+	}
+
+	/**
+	 * @param repeatStep
+	 * @param i
+	 */
+	public RepeatDataRefreshEvent(Object source) {
+		super(source);
+		this.iteration = 0;
+		this.repeatStepInvokePathNodes = new TreeNode[0];
 	}
 
 	/**

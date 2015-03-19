@@ -81,7 +81,7 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 	 */
 	public List<StepErElementExistence> getErElementExistences(String sERSetID,
 			String repeatStepName, int iteration) throws TestDataException {
-		String sql = "select p from StepErElementExistence p where FirstTimeExecution= 'No' and p.stepERSetID = :stepERSetID and p.repeatStepName=:repeatStepName and p.iteration=:iteration";
+		String sql = "select p from StepErElementExistence p where repeatStepExternalLoopPath is null and FirstTimeExecution= 'No' and p.stepERSetID = :stepERSetID and p.repeatStepName=:repeatStepName and p.iteration=:iteration";
 		TypedQuery<StepErElementExistence> query = getDbEM().createQuery(sql,
 				StepErElementExistence.class);
 		query.setParameter("stepERSetID", sERSetID);
@@ -97,6 +97,37 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 		}
 	}
 
+	/**
+	 * Gets the er element existences.
+	 *
+	 * @param sERSetID the s er set id
+	 * @return the er element existences
+	 * @throws TestDataException the test data exception
+	 */
+	public List<StepErElementExistence> getErElementExistences(String sERSetID) throws TestDataException {
+		String sql = "select p from StepErElementExistence p where FirstTimeExecution= 'Yes' and p.stepERSetID = :stepERSetID ";
+		TypedQuery<StepErElementExistence> query = getDbEM().createQuery(sql,
+				StepErElementExistence.class);
+		query.setParameter("stepERSetID", sERSetID);
+		List<StepErElementExistence> sERs = (List<StepErElementExistence>) query
+				.getResultList();
+		if (sERs.isEmpty()) {
+			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+					ExceptionErrorCode.TESTDATA_NOTFOUND);
+		} else {
+			return sERs;
+		}
+	}
+	/**
+	 * Gets the er element existences.
+	 *
+	 * @param sERSetID the s er set id
+	 * @param repeatStepName the repeat step name
+	 * @param repeatStepExternalLoopPath the repeat step external loop path
+	 * @param iteration the iteration
+	 * @return the er element existences
+	 * @throws TestDataException the test data exception
+	 */
 	public List<StepErElementExistence> getErElementExistences(String sERSetID,
 			String repeatStepName, String repeatStepExternalLoopPath, int iteration)
 			throws TestDataException {
@@ -124,30 +155,30 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 
 	}
 
-	/**
-	 * Gets the er element existences.
-	 *
-	 * @param sERSetID
-	 *            the s er set id
-	 * @return the er element existences
-	 * @throws TestDataException
-	 *             the test data exception
-	 */
-	public List<StepErElementExistence> getErElementExistences(String sERSetID)
-			throws TestDataException {
-
-		List<StepErElementExistence> sERs = (List<StepErElementExistence>) getDbEM()
-				.createQuery(
-						"select p from StepErElementExistence p where p.stepERSetID = :stepERSetID",
-						StepErElementExistence.class)
-				.setParameter("stepERSetID", sERSetID).getResultList();
-		if (sERs.isEmpty()) {
-			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
-		} else {
-			return sERs;
-		}
-	}
+//	/**
+//	 * Gets the er element existences.
+//	 *
+//	 * @param sERSetID
+//	 *            the s er set id
+//	 * @return the er element existences
+//	 * @throws TestDataException
+//	 *             the test data exception
+//	 */
+//	public List<StepErElementExistence> getErElementExistences(String sERSetID)
+//			throws TestDataException {
+//
+//		List<StepErElementExistence> sERs = (List<StepErElementExistence>) getDbEM()
+//				.createQuery(
+//						"select p from StepErElementExistence p where p.stepERSetID = :stepERSetID",
+//						StepErElementExistence.class)
+//				.setParameter("stepERSetID", sERSetID).getResultList();
+//		if (sERs.isEmpty()) {
+//			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+//					ExceptionErrorCode.TESTDATA_NOTFOUND);
+//		} else {
+//			return sERs;
+//		}
+//	}
 
 	/**
 	 * Gets the step expected results list.

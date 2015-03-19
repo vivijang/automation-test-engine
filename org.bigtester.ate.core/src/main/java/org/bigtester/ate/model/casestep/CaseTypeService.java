@@ -245,5 +245,14 @@ public class CaseTypeService extends TestCase implements ITestStep { // NOPMD
 	public StepResultStatus getStepResultStatus() {
 		return stepResultStatus;
 	}
+	
+	/**
+	 * Sets the step description, 
+	 *
+	 * @param desc the new step description
+	 */
+	public void setStepDescription(String desc) {
+		//TODO future to add step desc for special step type
+	}
 
 }

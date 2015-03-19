@@ -100,6 +100,13 @@ public interface ITestStep {
 	String getStepDescription();
 	
 	/**
+	 * Gets the step description.
+	 * 
+	 * @return the stepDescription
+	 */
+	void setStepDescription(String stepDescription);
+	
+	/**
 	 * Gets the expected result asserter.
 	 *
 	 * @return the expected result asserter

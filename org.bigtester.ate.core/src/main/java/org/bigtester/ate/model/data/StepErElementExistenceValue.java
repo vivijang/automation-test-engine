@@ -32,79 +32,106 @@ import org.springframework.context.ApplicationListener;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class PropertyDataValue defines ....
- * this class is desperate
+ * This class PropertyDataValue defines .... this class is desperate
+ * 
  * @author Peidong Hu
  *
  */
-public class StepErElementExistenceValue extends BaseERValue implements IStepERValue, ApplicationListener<RepeatDataRefreshEvent>{
-	
+public class StepErElementExistenceValue extends BaseERValue implements
+		IStepERValue, ApplicationListener<RepeatDataRefreshEvent> {
+
 	/**
 	 * @param stepERDao
-	 * @throws TestDataException 
+	 * @throws TestDataException
 	 */
-	public StepErElementExistenceValue(StepExpectedResultDaoImpl stepERDao, String erSetId) throws TestDataException {
+	public StepErElementExistenceValue(StepExpectedResultDaoImpl stepERDao,
+			String erSetId) throws TestDataException {
 		super(stepERDao);
 		this.dataValueID = erSetId;
 		this.value = getStepERDao().getErElementExistences(erSetId);
 	}
+
 	/**
 	 * Gets the value.
 	 *
 	 * @return the value
 	 */
-	
-	private List<StepErElementExistence> value = new ArrayList<StepErElementExistence>(); //NOPMD
-	
-	
+
+	private List<StepErElementExistence> value = new ArrayList<StepErElementExistence>(); // NOPMD
+
 	/**
 	 * Gets the data value id.
 	 *
 	 * @return the data value id
 	 */
-	
-	private String dataValueID; //NOPMD
+
+	private String dataValueID; // NOPMD
+
 	/**
 	 * @return the value
 	 */
 	public List<StepErElementExistence> getValue() {
 		return value;
 	}
+
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
 	public void setValue(List<StepErElementExistence> value) {
 		this.value = value;
 	}
+
 	/**
 	 * @return the dataValueID
 	 */
 	public String getDataValueID() {
 		return dataValueID;
 	}
+
 	/**
-	 * @param dataValueID the dataValueID to set
-	 * @throws TestDataException 
+	 * @param dataValueID
+	 *            the dataValueID to set
+	 * @throws TestDataException
 	 */
 	public void setDataValueID(String sERSetID) {
 		this.dataValueID = sERSetID;
-		
+
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
-		List<StepErElementExistence> valueTmp = this.value;//NOPMD;
-		if (arg0 == null ) return;
-		try {
-			this.value = getStepERDao().getErElementExistences(this.dataValueID, arg0.getRepeatStepName(),arg0.getRepeatStepExternalLoopPath(), arg0.getIteration());
-		} catch (TestDataException e) {
-			//TODO onDataRefresh Exception, we use default data. Need to find a way to log something. throw e to trigger AOP log, doesn't work in the event.
-			this.value = valueTmp;
+		List<StepErElementExistence> valueTmp = this.value;// NOPMD;
+		if (arg0 == null)
+			return;
+		if (arg0.getIteration() == 0) {
+			try {
+				this.value = getStepERDao().getErElementExistences(
+						this.dataValueID);
+			} catch (TestDataException e) {
+				// TODO Auto-generated catch block
+				this.value = valueTmp;
+			}
+
+		} else {
+			try {
+				this.value = getStepERDao().getErElementExistences(
+						this.dataValueID, arg0.getRepeatStepName(),
+						arg0.getRepeatStepExternalLoopPath(),
+						arg0.getIteration());
+			} catch (TestDataException e) {
+				// TODO onDataRefresh Exception, we use default data. Need to
+				// find a way to log something. throw e to trigger AOP log,
+				// doesn't work in the event.
+				this.value = valueTmp;
+			}
 		}
-		
+
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */

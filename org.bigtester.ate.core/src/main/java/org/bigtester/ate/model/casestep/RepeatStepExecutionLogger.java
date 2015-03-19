@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,7 +51,12 @@ public class RepeatStepExecutionLogger {
 	private @Nullable RepeatStepExecutionLoggerNode currentRepeatStepNode;
 	
 
-	public TreeNode[] getCurrentRepeatStepPath() {
+	/**
+	 * Gets the current repeat step path.
+	 *
+	 * @return the current repeat step path
+	 */
+	public TreeNode[] getCurrentRepeatStepPathNodes() {
 		
 			final RepeatStepExecutionLoggerNode currentRepeatStepNode2 = currentRepeatStepNode;
 			if (null == currentRepeatStepNode2) {
@@ -67,6 +71,25 @@ public class RepeatStepExecutionLogger {
 				}
 					
 			}
+	}
+	
+	/**
+	 * Gets the current repeat step full path string.
+	 *
+	 * @return the current repeat step full path string
+	 */
+	public String getCurrentRepeatStepFullPathString() {
+		TreeNode[] tNodes = getCurrentRepeatStepPathNodes();
+		StringBuilder builder = new StringBuilder("");
+		for (int index=0; index<=tNodes.length - 1; index++) {
+			RepeatStepExecutionLoggerNode tempNode = (RepeatStepExecutionLoggerNode) tNodes[index];
+			builder.append(  (String) tempNode.getUserObject());
+			if (index < tNodes.length - 1)
+				builder.append("->");
+		}
+		String retVal = builder.toString();
+		if (null == retVal) throw GlobalUtils.createInternalError("get repeat step loop path.");
+		return retVal;
 	}
 	
 	/**
@@ -94,21 +117,21 @@ public class RepeatStepExecutionLogger {
 		}
 		currentRepeatStepNode = newNode;
 	}
-
-	private @Nullable RepeatStepExecutionLoggerNode searchStepNode(
-			RepeatStepExecutionLoggerNode rootNode, String stepName) {
-
-		RepeatStepExecutionLoggerNode theNode = null;
-		for (Enumeration enumer = rootNode.depthFirstEnumeration(); enumer
-				.hasMoreElements() && theNode == null;) {
-			RepeatStepExecutionLoggerNode node = (RepeatStepExecutionLoggerNode) enumer
-					.nextElement();
-			if (((String) node.getUserObject()).equals(stepName)) {
-				theNode = node;
-			}
-		}
-		return theNode;
-	}
+//
+//	private @Nullable RepeatStepExecutionLoggerNode searchStepNode(
+//			RepeatStepExecutionLoggerNode rootNode, String stepName) {
+//
+//		RepeatStepExecutionLoggerNode theNode = null;
+//		for (Enumeration enumer = rootNode.depthFirstEnumeration(); enumer
+//				.hasMoreElements() && theNode == null;) {
+//			RepeatStepExecutionLoggerNode node = (RepeatStepExecutionLoggerNode) enumer
+//					.nextElement();
+//			if (((String) node.getUserObject()).equals(stepName)) {
+//				theNode = node;
+//			}
+//		}
+//		return theNode;
+//	}
 //
 //	public void addChildRepeatStepName(String childStepName,
 //			String parentStepName) {
