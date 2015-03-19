@@ -33,6 +33,10 @@ public final class GlobalConstants {
 	
 	/** The Constant BEAN_ID_GLOBAL_DBINITIALIZER. */
 	public static final String BEAN_ID_GLOBAL_DBINITIALIZER = "dbInitializer";
+	
+	/** The Constant BEAN_ID_REPEATSTEPEXECUTIONLOGGER. */
+	public static final String BEAN_ID_REPEATSTEPEXECUTIONLOGGER = "repeatStepExecutionLogger";
+	
 		
 	private GlobalConstants () {
 		throw new AssertionError();

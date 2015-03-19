@@ -21,6 +21,7 @@
 package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
+import org.bigtester.ate.constant.GlobalConstants;
 import org.bigtester.ate.constant.XsdElementConstants;
 import org.bigtester.ate.model.casestep.BaseTestStep;
 import org.eclipse.jdt.annotation.Nullable;
@@ -102,7 +103,9 @@ public class BaseTestStepBeanDefinitionParser extends
 				.getAttribute(XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION);
 		bDef.getPropertyValues().addPropertyValue(
 				XsdElementConstants.ATTR_TESTSTEP_STEPDESCRIPTION, stepDesc);
-
+		
+		bDef.getPropertyValues().addPropertyValue("repeatStepLogger",
+				new RuntimeBeanReference(GlobalConstants.BEAN_ID_REPEATSTEPEXECUTIONLOGGER));
 		
 //        String text = element.getAttribute("text");
 //        bd.getPropertyValues().addPropertyValue("text", text);

@@ -58,6 +58,12 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 
 	/** The step i ds. */
 	final private List<Integer> stepIndexes = new ArrayList<Integer>();
+	
+	/** The external repeat node of this step. */
+	private transient @Nullable RepeatStepExecutionLoggerNode externalRepeatNodeOfThisStep;
+	
+	/** The current repeat node of this step. */
+	private transient @Nullable RepeatStepExecutionLoggerNode currentRepeatNodeOfThisStep;
 
 	// /** The input data holders. */
 	// final private List<IStepInputData> inputDataHolders;
@@ -126,6 +132,17 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 	private void repeatSteps() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
 		for (int iteration = 1; iteration <= getNumberOfIterations(); iteration++) {
+			if (1 == iteration) {//NOPMD
+				
+				if (null != getRepeatStepLogger().getRepeatStepExternalNode()) {
+					externalRepeatNodeOfThisStep = getRepeatStepLogger().getRepeatStepExternalNode();
+				}
+				getRepeatStepLogger().addRepeatStepName(getStepName());
+					
+				if (null != getRepeatStepLogger().getCurrentRepeatStepNode()) {
+					currentRepeatNodeOfThisStep = getRepeatStepLogger().getCurrentRepeatStepNode();
+				}
+			}
 			setCurrentIteration(iteration);
 			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, this.getStepName(), iteration));
 			for (int i = 0; i < getStepIndexes().size(); i++) {
@@ -140,7 +157,15 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 				}
 
 				try {
+					if (currentTestStepTmp instanceof RepeatStep) {
+						getRepeatStepLogger().setRepeatStepExternalNode(getRepeatStepLogger().getCurrentRepeatStepNode());
+					}
 					getTestCase().getCurrentTestStep().doStep();// NOPMD
+					if (currentTestStepTmp instanceof RepeatStep) {
+						getRepeatStepLogger().setRepeatStepExternalNode(externalRepeatNodeOfThisStep);
+						getRepeatStepLogger().setCurrentRepeatStepNode(currentRepeatNodeOfThisStep);
+					}
+					
 					getTestCase().getCurrentTestStep().setStepResultStatus(
 							StepResultStatus.PASS);
 				} catch (StepExecutionException2 stepE) {

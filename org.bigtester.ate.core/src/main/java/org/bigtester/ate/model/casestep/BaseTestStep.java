@@ -24,6 +24,7 @@ package org.bigtester.ate.model.casestep;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.asserter.IExpectedResultAsserter;
 import org.bigtester.ate.model.data.IDataParser;
@@ -56,6 +57,10 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	@Nullable
 	@XStreamOmitField
 	private ApplicationContext applicationContext;
+	
+	/** The step logger. */
+	@Nullable
+	private RepeatStepExecutionLogger repeatStepLogger; 
 
 	/** The data holders. */
 	private List<IDataParser> dataHolders = new ArrayList<IDataParser>();
@@ -412,6 +417,25 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 */
 	public void setElementStepFlag(boolean elementStepFlag) {
 		this.elementStepFlag = elementStepFlag;
+	}
+
+	/**
+	 * @return the stepLogger
+	 */
+	public RepeatStepExecutionLogger getRepeatStepLogger() {
+		final RepeatStepExecutionLogger repeatStepLogger2 = repeatStepLogger;
+		if (repeatStepLogger2 == null) {
+			throw GlobalUtils.createNotInitializedException("repeatStepLogger");
+		} else {
+			return repeatStepLogger2;
+		}
+	}
+
+	/**
+	 * @param repeatStepLogger the repeatStepLogger to set
+	 */
+	public void setRepeatStepLogger(RepeatStepExecutionLogger repeatStepLogger) {
+		this.repeatStepLogger = repeatStepLogger;
 	}
 
 
