@@ -20,11 +20,18 @@
  *******************************************************************************/
 package org.bigtester.ate.model.casestep;
 
+import java.util.Arrays;
+
+import javax.swing.tree.TreeNode;
+
+import org.bigtester.ate.GlobalUtils;
+import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationEvent;
 
 // TODO: Auto-generated Javadoc
 /**
  * This class RepeatDataRefreshEvent defines ....
+ * 
  * @author Peidong Hu
  *
  */
@@ -35,26 +42,67 @@ public class RepeatDataRefreshEvent extends ApplicationEvent {
 	 */
 	private static final long serialVersionUID = -6313585724147559106L;
 
-	/** The repeat step name. */
-	final private String repeatStepName;
-	
 	/** The iteration. */
 	final private int iteration;
-	
+
+	/** The repeat step path nodes. */
+	final private TreeNode[] repeatStepInvokePathNodes;
+
 	/**
+	 * Instantiates a new repeat data refresh event.
+	 *
 	 * @param source
+	 *            the source
+	 * @param repeatStepInvokePathNodes
+	 *            the repeat step invoke path nodes
+	 * @param iteration
+	 *            the iteration
 	 */
-	public RepeatDataRefreshEvent(Object source, String repeatStepName, int iteration) {
+	public RepeatDataRefreshEvent(Object source,
+			TreeNode[] repeatStepInvokePathNodes, int iteration) {
 		super(source);
-		this.repeatStepName = repeatStepName;
+		TreeNode[] temp = Arrays.copyOf(repeatStepInvokePathNodes,
+				repeatStepInvokePathNodes.length);
+		if (null == temp)
+			throw GlobalUtils
+					.createInternalError("error in copying array, repeatStepInvokePathNodes");
+		else
+			this.repeatStepInvokePathNodes = temp;
 		this.iteration = iteration;
 	}
 
 	/**
-	 * @return the repeatStepName
+	 * Gets the repeat step name.
+	 *
+	 * @return the repeat step name
 	 */
 	public String getRepeatStepName() {
-		return repeatStepName;
+		RepeatStepExecutionLoggerNode retVal = (RepeatStepExecutionLoggerNode) repeatStepInvokePathNodes[repeatStepInvokePathNodes.length - 1];
+		String retV = (String) retVal.getUserObject();
+		if (null == retV)
+			throw GlobalUtils
+					.createInternalError("repeat step name conversion error");
+		else
+			return retV;
+	}
+	
+	/**
+	 * Gets the repeat step loop path.
+	 *
+	 * @return the repeat step loop path
+	 */
+	
+	public String getRepeatStepExternalLoopPath() {
+		StringBuilder builder = new StringBuilder("");
+		for (int index=0; index<=repeatStepInvokePathNodes.length - 2; index++) {
+			RepeatStepExecutionLoggerNode tempNode = (RepeatStepExecutionLoggerNode) repeatStepInvokePathNodes[index];
+			builder.append(  (String) tempNode.getUserObject());
+			if (index < repeatStepInvokePathNodes.length - 2)
+				builder.append("->");
+		}
+		String retVal = builder.toString();
+		if (null == retVal) throw GlobalUtils.createInternalError("get repeat step loop path.");
+		return retVal;
 	}
 
 	/**
@@ -62,6 +110,19 @@ public class RepeatDataRefreshEvent extends ApplicationEvent {
 	 */
 	public int getIteration() {
 		return iteration;
+	}
+
+	/**
+	 * @return the repeatStepInvokePathNodes
+	 */
+	public TreeNode[] getRepeatStepInvokePathNodes() {
+		TreeNode[] temp = Arrays.copyOf(repeatStepInvokePathNodes,
+				repeatStepInvokePathNodes.length);
+		if (null == temp)
+			throw GlobalUtils
+					.createInternalError("error in copying array, repeatStepInvokePathNodes");
+		else
+			return temp;
 	}
 
 }

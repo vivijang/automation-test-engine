@@ -53,10 +53,20 @@ public class RepeatStepExecutionLogger {
 	
 
 	public TreeNode[] getCurrentRepeatStepPath() {
-		if (null == currentRepeatStepNode) throw GlobalUtils.createNotInitializedException("currentRepeatStepNode");
-		else if (null == currentRepeatStepNode.getPath()) {
-			
-		}
+		
+			final RepeatStepExecutionLoggerNode currentRepeatStepNode2 = currentRepeatStepNode;
+			if (null == currentRepeatStepNode2) {
+				throw GlobalUtils.createNotInitializedException("currentRepeatStepNode");
+				
+			} else {
+				TreeNode[] retVal = currentRepeatStepNode2.getPath();
+				if (null == retVal) {
+					throw GlobalUtils.createNotInitializedException("currentRepeatStepNode tree");
+				} else {
+					return retVal;
+				}
+					
+			}
 	}
 	
 	/**

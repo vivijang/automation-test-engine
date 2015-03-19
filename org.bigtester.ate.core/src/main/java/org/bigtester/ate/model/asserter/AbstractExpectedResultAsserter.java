@@ -93,7 +93,7 @@ public abstract class AbstractExpectedResultAsserter implements
 	public final static String NOTEXIST = "NotExist";
 
 	/** The assert report msg. */
-	protected transient String assertReportMSG = "";
+	protected String assertReportMSG = "";
 
 	/**
 	 * {@inheritDoc}
@@ -245,5 +245,12 @@ public abstract class AbstractExpectedResultAsserter implements
 				+ ReportMessage.MSG_SEPERATOR
 				+ icr.getComparedResult();
 		assertReportMSG += "</br>";
+	}
+
+	/**
+	 * @param assertReportMSG the assertReportMSG to set
+	 */
+	public void setAssertReportMSG(String assertReportMSG) {
+		this.assertReportMSG = assertReportMSG;
 	}
 }

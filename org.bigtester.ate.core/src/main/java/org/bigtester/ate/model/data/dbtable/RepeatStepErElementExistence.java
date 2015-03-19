@@ -48,6 +48,11 @@ public class RepeatStepErElementExistence extends StepErElementExistence {
 	@Nullable
 	private String repeatStepName;
 
+	/** The repeat step loop path. */
+	@Column
+	@Nullable
+	private String repeatStepExternalLoopPath;
+	
 	/**
 	 * @return the iterationIndex
 	 */
@@ -80,6 +85,25 @@ public class RepeatStepErElementExistence extends StepErElementExistence {
 	 */
 	public void setRepeatStepName(String repeatStepName) {
 		this.repeatStepName = repeatStepName;
+	}
+
+	/**
+	 * @return the repeatStepExternalLoopPath
+	 */
+	public String getRepeatStepExternalLoopPath() {
+		final String repeatStepExternalLoopPath2 = repeatStepExternalLoopPath;
+		if (repeatStepExternalLoopPath2 == null) {
+			throw GlobalUtils.createNotInitializedException("repeatStepExternalLoopPath");
+		} else {
+			return repeatStepExternalLoopPath2;
+		}
+	}
+
+	/**
+	 * @param repeatStepExternalLoopPath the repeatStepExternalLoopPath to set
+	 */
+	public void setRepeatStepExternalLoopPath(String repeatStepExternalLoopPath) {
+		this.repeatStepExternalLoopPath = repeatStepExternalLoopPath;
 	}
 
 }

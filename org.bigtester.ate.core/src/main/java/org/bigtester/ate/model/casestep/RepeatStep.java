@@ -40,7 +40,7 @@ import org.springframework.context.ApplicationListener;
  * @author Peidong Hu
  *
  */
-public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationListener<RepeatDataRefreshEvent> {
+public class RepeatStep extends BaseTestStep implements ITestStep {
 
 	/** The test case. */
 	final private TestCase testCase;
@@ -132,7 +132,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 	private void repeatSteps() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
 		for (int iteration = 1; iteration <= getNumberOfIterations(); iteration++) {
-			if (1 == iteration) {//NOPMD
+			if (1 == iteration) {// NOPMD
 				
 				if (null != getRepeatStepLogger().getRepeatStepExternalNode()) {
 					externalRepeatNodeOfThisStep = getRepeatStepLogger().getRepeatStepExternalNode();
@@ -144,7 +144,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 				}
 			}
 			setCurrentIteration(iteration);
-			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, this.getStepName(), iteration));
+			getApplicationContext().publishEvent(new RepeatDataRefreshEvent(this, getRepeatStepLogger().getCurrentRepeatStepPath(), iteration));
 			for (int i = 0; i < getStepIndexes().size(); i++) {
 				ITestStep currentTestStepTmp = getTestCase().getTestStepList()
 						.get(getStepIndexes().get(i));
@@ -271,12 +271,5 @@ public class RepeatStep extends BaseTestStep implements ITestStep, ApplicationLi
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
-		if (null==arg0 || arg0.getRepeatStepName() == this.getStepName()) return;
-		stepIndexes.clear();
-	}
+	
 }

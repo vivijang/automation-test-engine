@@ -98,7 +98,7 @@ public class StepErElementExistenceValue extends BaseERValue implements IStepERV
 		List<StepErElementExistence> valueTmp = this.value;//NOPMD;
 		if (arg0 == null ) return;
 		try {
-			this.value = getStepERDao().getErElementExistences(this.dataValueID, arg0.getRepeatStepName(), arg0.getIteration());
+			this.value = getStepERDao().getErElementExistences(this.dataValueID, arg0.getRepeatStepName(),arg0.getRepeatStepExternalLoopPath(), arg0.getIteration());
 		} catch (TestDataException e) {
 			//TODO onDataRefresh Exception, we use default data. Need to find a way to log something. throw e to trigger AOP log, doesn't work in the event.
 			this.value = valueTmp;
