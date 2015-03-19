@@ -19,25 +19,25 @@
 	<ate:regularPage id="publicLoginPage"   dataFile="dentistSmokeTest/pageObjects/publicLoginPage.data.xml"/>
 
 	<ate:pagePropertyCorrectnessAsserter
-		id="publicLoginPagePropertyAsserter" resultPage="publicLoginPage" stepERValue="publicLoginPageValidationValue"/>
+		id="publicLoginPagePropertyAsserter" resultPage="publicLoginPage" stepERValue="publicLoginPageVID"/>
 
 	<ate:pageElementExistenceAsserter
-		id="publicLoginPageElementExistenceAsserter" resultPage="publicLoginPage" stepERValue="publicLoginPageValidationValue" />
+		id="publicLoginPageElementExistenceAsserter" resultPage="publicLoginPage" stepERValue="publicLoginPageVID" />
 		
 	<ate:pageElementExistenceAsserter
-		id="publicRegisterSuccessAsserter" resultPage="publicLoginPage" stepERValue="publicRegisterSuccessERValue" />
+		id="publicRegisterSuccessAsserter" resultPage="publicLoginPage" stepERValue="publicRegisterSuccessVID" />
 		
-<ate:stepExpectedResultValue id="publicRegisterSuccessERValue"
-		dataValueID="publicRegisterSuccessVID"   />
+<!-- <ate:stepExpectedResultValue id="publicRegisterSuccessERValue" -->
+<!-- 		dataValueID="publicRegisterSuccessVID"   /> -->
 		
-	<ate:stepExpectedResultValue id="publicLoginPageValidationValue"
-		dataValueID="publicLoginPageVID"   />
+<!-- 	<ate:stepExpectedResultValue id="publicLoginPageValidationValue" -->
+<!-- 		dataValueID="publicLoginPageVID"   /> -->
 
 	<ate:pageElementExistenceAsserter
-		id="publicLoginWrongPasswdElementExistenceAsserter" resultPage="publicLoginPage" stepERValue="publicLoginWrongPasswdValidationValue" />
+		id="publicLoginWrongPasswdElementExistenceAsserter" resultPage="publicLoginPage" stepERValue="publicLoginWrongPasswdVID" />
 
-	<ate:stepExpectedResultValue id="publicLoginWrongPasswdValidationValue"
-		dataValueID="publicLoginWrongPasswdVID"   />
+<!-- 	<ate:stepExpectedResultValue id="publicLoginWrongPasswdValidationValue" -->
+<!-- 		dataValueID="publicLoginWrongPasswdVID"   /> -->
 
 
 	<!-- myWebElement definition -->

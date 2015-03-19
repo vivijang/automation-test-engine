@@ -34,13 +34,13 @@
 
 	<ate:pagePropertyCorrectnessAsserter
 		id="publicPracticeProfilePropertyAsserter" resultPage="publicPracticeProfileClinicC"
-		stepERValue="publicPracticeProfileClinicCValidationValue" />
+		stepERValue="publicPracticeProfileClinicCVID" />
 
 	<ate:pageElementExistenceAsserter
 		id="publicPracticeProfileClinicCElementExistenceAsserter" resultPage="publicPracticeProfileClinicC"
-		stepERValue="publicPracticeProfileClinicCValidationValue" />
+		stepERValue="publicPracticeProfileClinicCVID" />
 
-	<ate:stepExpectedResultValue
-		id="publicPracticeProfileClinicCValidationValue" dataValueID="publicPracticeProfileClinicCVID" />
+<!-- 	<ate:stepExpectedResultValue -->
+<!-- 		id="publicPracticeProfileClinicCValidationValue" dataValueID="publicPracticeProfileClinicCVID" /> -->
 
 </beans>

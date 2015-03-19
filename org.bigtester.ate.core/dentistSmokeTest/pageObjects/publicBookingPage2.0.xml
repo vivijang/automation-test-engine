@@ -77,7 +77,7 @@
 	<ate:pageElementExistenceAsserter
 		id="publicBookingConfirmElementExistenceAsserter" resultPage="publicSmsAuthentication"
 		stepERValue="publicBookingConfirm" />
-		<ate:stepExpectedResultValue id="publicBookingConfirm"
-		dataValueID="publicBookingConfirm" />
+<!-- 		<ate:stepExpectedResultValue id="publicBookingConfirm" -->
+<!-- 		dataValueID="publicBookingConfirm" /> -->
 	
 </beans>

@@ -19,8 +19,8 @@
 	<ate:regularPage id="adminLoginDashBoard" 
 		dataFile="dentistSmokeTest/backend_pages/adminLoginDashBoard.data.xml"/>
 		
-	<ate:pageElementExistenceAsserter id="adminLoginDashBoardElementExistenceAsserter" resultPage="adminLoginDashBoard" stepERValue="adminLoginDashBoardValidationValue" />
-	<ate:stepExpectedResultValue id="adminLoginDashBoardValidationValue" dataValueID="adminDashboardVID"   />
+	<ate:pageElementExistenceAsserter id="adminLoginDashBoardElementExistenceAsserter" resultPage="adminLoginDashBoard" stepERValue="adminDashboardVID" />
+<!-- 	<ate:stepExpectedResultValue id="adminLoginDashBoardValidationValue" dataValueID="adminDashboardVID"   /> -->
 	
 <!-- move cursor to profile link operations -->
 	<ate:elementActionDef id="moveCursorToProfile" elementFind="profileLink" elementAction="moveToProfileLink"/>

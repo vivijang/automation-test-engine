@@ -132,10 +132,10 @@
 	<ate:clickAction id="signUpButtonClickEA" />
 
 <ate:pageElementExistenceAsserter
-		id="adminRegisterSuccessAsserter" resultPage="adminHomePage" stepERValue="adminRegisterSuccessERValue" />
+		id="adminRegisterSuccessAsserter" resultPage="adminHomePage" stepERValue="adminRegisterSuccessVID" />
 		
-<ate:stepExpectedResultValue id="adminRegisterSuccessERValue"
-		dataValueID="adminRegisterSuccessVID"   />
+<!-- <ate:stepExpectedResultValue id="adminRegisterSuccessERValue" -->
+<!-- 		dataValueID="adminRegisterSuccessVID"   /> -->
 
 
 </beans>

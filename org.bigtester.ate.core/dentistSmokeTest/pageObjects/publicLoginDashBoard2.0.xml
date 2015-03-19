@@ -20,11 +20,11 @@
 		dataFile="dentistSmokeTest/pageObjects/publicLoginDashBoard.data.xml"/>
 		
 	<ate:pagePropertyCorrectnessAsserter
-		id="publicLoginDashBoardPropertyAsserter" resultPage="publicLoginDashBoard" stepERValue="publicLoginDashBoardValidationValue"/>
+		id="publicLoginDashBoardPropertyAsserter" resultPage="publicLoginDashBoard" stepERValue="loginDashboardVID"/>
 
-	<ate:pageElementExistenceAsserter id="publicLoginDashBoardElementExistenceAsserter" resultPage="publicLoginDashBoard" stepERValue="publicLoginDashBoardValidationValue" />
+	<ate:pageElementExistenceAsserter id="publicLoginDashBoardElementExistenceAsserter" resultPage="publicLoginDashBoard" stepERValue="loginDashboardVID" />
 
-	<ate:stepExpectedResultValue id="publicLoginDashBoardValidationValue" dataValueID="loginDashboardVID"   />
+<!-- 	<ate:stepExpectedResultValue id="publicLoginDashBoardValidationValue" dataValueID="loginDashboardVID"   /> -->
 <!-- appontment operations -->
 	<ate:elementActionDef id="clickAppointmentTab" elementFind="appointmentTabEF" elementAction="appointmentClickEA"/>
 	<ate:elementFindByXpath id="appointmentTabEF" findByValue="//a[@href='#tab_1']" />
