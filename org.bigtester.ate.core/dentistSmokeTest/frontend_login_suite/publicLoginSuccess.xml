@@ -56,7 +56,7 @@
 			targetStep="true" elementActionDef="clickLoginButtonWE" pageObject="publicLoginDashBoard">
 			<property name="expectedResultAsserter">
 				<list>
-					<ref bean="publicLoginDashBoardPropertyAsserter" />
+<!-- 					<ref bean="publicLoginDashBoardPropertyAsserter" /> -->
 					<ref bean="publicLoginDashBoardElementExistenceAsserter" />
 				</list>
 			</property>

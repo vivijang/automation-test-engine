@@ -2,7 +2,7 @@
 <dataset>
 
 	<!-- public login english page -->
-	<STEPEXPECTEDRESULT ELEMENTFINDBY="XPATH"
+<STEPERELEMENTEXISTENCE FirstTimeExecution= "Yes"   ELEMENTFINDBY="XPATH"
 		ELEMENTFINDBYVALUE="//i[@class='fa fa-thumbs-up']" ASSERTPRIORITY="HIGH"
 		PAGENAME="personalInformationPage" STEPERSETID="savePersonalInfoElementExistenceAsserterVID"
 		TESTDATACONTEXT_IDCOLUMN="5" />
