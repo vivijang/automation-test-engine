@@ -18,16 +18,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.data;
+package org.bigtester.ate.model.data; //NOPMD
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.bigtester.ate.GlobalUtils;
 import org.dbunit.DatabaseUnitException;
@@ -41,10 +51,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-
-
-
-
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -62,7 +72,7 @@ public class TestDatabaseInitializer {
 
 	/** The datasets. */
 	@Nullable
-	transient private IDataSet[] datasets;
+	transient private IDataSet[] datasets;// NOPMD
 
 	/** The single init xml file. */
 	@Nullable
@@ -75,10 +85,11 @@ public class TestDatabaseInitializer {
 	 */
 	public List<InputStream> getInitXmlFiles() {
 		final List<InputStream> initXmlFiles2 = initXmlFiles;
-		if (null == initXmlFiles2 ) {
-			throw new IllegalStateException("initxml files are not correctly populated.");
+		if (null == initXmlFiles2) {
+			throw new IllegalStateException(
+					"initxml files are not correctly populated.");
 		} else {
-			return  initXmlFiles2;
+			return initXmlFiles2;
 		}
 	}
 
@@ -146,25 +157,92 @@ public class TestDatabaseInitializer {
 	 */
 	public void initialize(ApplicationContext context)
 			throws DatabaseUnitException, SQLException, MalformedURLException {
-		DataSource datas = GlobalUtils.findDataSourceBean(context);
-		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); // Create
-																					// DBUnit
-																					// Database
-																					// connection
-		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-		builder.setColumnSensing(true);
-
 		if (!getInitXmlFiles().isEmpty()) {
-			datasets = new IDataSet[getInitXmlFiles().size()];
-			for (int i = 0; i < getInitXmlFiles().size(); i++) {
-				datasets[i] = builder.build(getInitXmlFiles().get(i));
-			}
-			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
-					datasets)); // Import your data
-		}
-		// TODO handle the empty data file case.
-		con.close();
+			DataSource datas = GlobalUtils.findDataSourceBean(context);
+			IDatabaseConnection con = new DatabaseConnection(
+					datas.getConnection()); // Create
+											// DBUnit
+											// Database
+											// connection
+			FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+			builder.setColumnSensing(true);
 
+			DatabaseOperation.CLEAN_INSERT.execute(con,
+					builder.build(combineInitXmlFiles())); // Import your data
+
+			//
+			//
+			// if (!getInitXmlFiles().isEmpty()) {
+			// datasets = new IDataSet[getInitXmlFiles().size()];
+			// for (int i = 0; i < getInitXmlFiles().size(); i++) {
+			// datasets[i] = builder.build(getInitXmlFiles().get(i));
+			// }
+			// DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
+			// datasets)); // Import your data
+			// }
+			// TODO handle the empty data file case.
+			con.close();
+		}
+
+	}
+
+	/**
+	 * Combine init xml files.
+	 *
+	 * @return the input stream
+	 */
+	private InputStream combineInitXmlFiles() {
+		if (getInitXmlFiles().isEmpty()) {
+			throw GlobalUtils
+					.createNotInitializedException("xml data files are not populated");
+		} else {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			dbf.setValidating(false);
+			DocumentBuilder dbuilder;
+			try {
+				dbuilder = dbf.newDocumentBuilder();
+
+				Document retDoc = dbuilder.newDocument();
+				Document doc0;
+
+				doc0 = dbuilder.parse(getInitXmlFiles().get(0));
+
+				Node firstDataset = retDoc.importNode(doc0.getFirstChild(),
+						true);
+				retDoc.appendChild(firstDataset);
+				for (int i = 1; i < getInitXmlFiles().size(); i++) {
+					Document doc2 = dbuilder.parse(getInitXmlFiles().get(i));
+					Node root = doc2.getFirstChild();
+					NodeList list = root.getChildNodes();
+					for (int index = 0; index < list.getLength(); index++) {
+						Node copiedNode = retDoc.importNode(list.item(index),
+								true);
+						retDoc.getDocumentElement().appendChild(copiedNode);
+					}
+				}
+
+				DOMSource source = new DOMSource(retDoc);
+				StringWriter xmlAsWriter = new StringWriter();
+
+				StreamResult result = new StreamResult(xmlAsWriter);
+
+				TransformerFactory.newInstance().newTransformer()
+						.transform(source, result);
+
+				// write changes
+				return new ByteArrayInputStream(xmlAsWriter.toString()
+						.getBytes("UTF-8"));
+
+			} catch (SAXException | IOException | ParserConfigurationException e) {
+				throw GlobalUtils.createNotInitializedException(
+						"xml data files are not correctly populated", e);
+			} catch (TransformerException
+					| TransformerFactoryConfigurationError transE) {
+				throw GlobalUtils.createInternalError("xml transformer error!",
+						transE);
+			}
+
+		}
 	}
 
 	/**
@@ -181,24 +259,28 @@ public class TestDatabaseInitializer {
 	 */
 	public void initialize(BeanFactory beanFac) throws DatabaseUnitException,
 			SQLException, MalformedURLException {
-		DataSource datas = GlobalUtils.findDataSourceBean(beanFac);
-		IDatabaseConnection con = new DatabaseConnection(datas.getConnection()); // Create
-																					// DBUnit
-																					// Database
-																					// connection
-		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-		builder.setColumnSensing(true);
-
 		if (!getInitXmlFiles().isEmpty()) {
-			datasets = new IDataSet[getInitXmlFiles().size()];
-			for (int i = 0; i < getInitXmlFiles().size(); i++) {
-				datasets[i] = builder.build(getInitXmlFiles().get(i));
-			}
-			DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
-					datasets)); // Import your data
+			DataSource datas = GlobalUtils.findDataSourceBean(beanFac);
+			IDatabaseConnection con = new DatabaseConnection(
+					datas.getConnection()); // Create
+											// DBUnit
+											// Database
+											// connection
+			FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+			builder.setColumnSensing(true);
+
+			DatabaseOperation.CLEAN_INSERT.execute(con,
+					builder.build(combineInitXmlFiles())); // Import your data
+			// datasets = new IDataSet[getInitXmlFiles().size()];
+			// for (int i = 0; i < getInitXmlFiles().size(); i++) {
+			// datasets[i] = builder.build(getInitXmlFiles().get(i));
+			// }
+			// DatabaseOperation.CLEAN_INSERT.execute(con, new CompositeDataSet(
+			// datasets, false)); // Import your data
+
+			// TODO handle the empty data file case.
+			con.close();
 		}
-		// TODO handle the empty data file case.
-		con.close();
 
 	}
 
