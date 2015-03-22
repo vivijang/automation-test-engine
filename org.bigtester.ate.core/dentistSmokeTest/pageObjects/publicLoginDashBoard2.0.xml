@@ -19,8 +19,8 @@
 	<ate:regularPage id="publicLoginDashBoard" 
 		dataFile="dentistSmokeTest/pageObjects/publicLoginDashBoard.data.xml"/>
 		
-<!-- 	<ate:pagePropertyCorrectnessAsserter -->
-<!-- 		id="publicLoginDashBoardPropertyAsserter" resultPage="publicLoginDashBoard" stepERValue="loginDashboardVID"/> -->
+	<ate:pagePropertyCorrectnessAsserter
+		id="publicLoginDashBoardPropertyAsserter" resultPage="publicLoginDashBoard" stepERValue="loginDashboardVID"/>
 
 	<ate:pageElementExistenceAsserter id="publicLoginDashBoardElementExistenceAsserter" resultPage="publicLoginDashBoard" stepERValue="loginDashboardVID" />
 

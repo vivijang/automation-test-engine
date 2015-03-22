@@ -9,10 +9,10 @@
 <STEPERELEMENTEXISTENCE FirstTimeExecution= "Yes"   ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(., 'Wrong password')]"	ASSERTPRIORITY="HIGH" PAGENAME="publicloginpage"	STEPERSETID="publicLoginWrongPasswdVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
 <STEPERELEMENTEXISTENCE FirstTimeExecution= "Yes"   ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//span[contains(., 'your account is created!')]"	ASSERTPRIORITY="HIGH" PAGENAME="publicloginpage"	STEPERSETID="publicRegisterSuccessVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
 
- <STEPERELEMENTEXISTENCE FirstTimeExecution= "No" repeatStepExternalLoopPath="repeatHomeStep2" repeatStepName="repeatHomeStep" iteration="1"   ELEMENTFINDBY="ID"	ELEMENTFINDBYVALUE="forget-password" ASSERTPRIORITY="HIGH"	PAGENAME="publicloginpage"	STEPERSETID="publicLoginPageVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
+<!--  <STEPERELEMENTEXISTENCE FirstTimeExecution= "No" repeatStepExternalLoopPath="repeatHomeStep2" repeatStepName="repeatHomeStep" iteration="1"   ELEMENTFINDBY="ID"	ELEMENTFINDBYVALUE="forget-password" ASSERTPRIORITY="HIGH"	PAGENAME="publicloginpage"	STEPERSETID="publicLoginPageVID"	TESTDATACONTEXT_IDCOLUMN="5"	/> -->
 
 
-<StepErPageProperty FirstTimeExecution= "Yes"  ASSERTPROPERTY="Page_Title" ASSERTVALUE="DentistAround - A dentist right here, right now"	PAGENAME="homepage"	STEPERSETID="publicLoginPageVID"	TESTDATACONTEXT_IDCOLUMN="8"	ASSERTPRIORITY="HIGH"/>
+<StepErPageProperty FirstTimeExecution= "Yes"  ASSERTPROPERTY="Page_Title" ASSERTVALUE="DentistAround.com"	PAGENAME="loginPage"	STEPERSETID="publicLoginPageVID"	TESTDATACONTEXT_IDCOLUMN="8"	ASSERTPRIORITY="HIGH"/>
 
 
 </dataset>
