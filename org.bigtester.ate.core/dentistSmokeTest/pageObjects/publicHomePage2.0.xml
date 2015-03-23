@@ -65,7 +65,7 @@
 	<ate:sendKeysAction id="Location_Input_EA"
 		dataValue="location_value" />
 
-	<ate:stepInputDataValue id="location_value"
+	<ate:fileDataHolder id="location_value"
 		dataValueID="5" />
 
 	<!-- <ate:runTimeDataHolder id="bookingSmsCode" dataHolderType="ManualAssigned" -->

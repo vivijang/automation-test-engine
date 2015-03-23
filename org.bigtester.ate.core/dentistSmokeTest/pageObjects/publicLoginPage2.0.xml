@@ -46,8 +46,7 @@
 	<ate:elementFindById id="loginUserNameEF"
 		findByValue="email_login" />
 	<ate:sendKeysAction id="loginUserNameEA" dataValue="userNameValue"  />
-	<ate:stepInputDataValue id="userNameValue" dataValueID="1"
-		  />
+	<ate:fileDataHolder id="userNameValue" dataValueID="1"/>
 
 
 	<!-- myWebElement definition -->
@@ -56,15 +55,14 @@
 	<ate:elementFindByXpath id="loginPasswordEF"
 		findByValue="//input[@type='password']" />
 	<ate:sendKeysAction id="loginPasswordEA" dataValue="passwordValue"  />
-	<ate:stepInputDataValue id="passwordValue" dataValueID="3"
-		  />
+	<ate:fileDataHolder id="passwordValue" dataValueID="3"/>
 
 	<!-- myWebElement definition -->
 	<ate:elementActionDef id="loginWrongPasswordWE"   elementFind="loginPasswordEF" elementAction="loginWrongPasswordEA"/>
 	
 	<ate:sendKeysAction id="loginWrongPasswordEA"
 		dataValue="wrongPasswordValue"  />
-	<ate:stepInputDataValue id="wrongPasswordValue"
+	<ate:fileDataHolder id="wrongPasswordValue"
 		dataValueID="4"   />
 
 	<!-- step publicLogin_clickLoginbutton myWebElement definition -->

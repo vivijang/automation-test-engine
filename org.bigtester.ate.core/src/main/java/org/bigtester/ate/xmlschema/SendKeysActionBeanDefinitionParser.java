@@ -23,15 +23,15 @@ package org.bigtester.ate.xmlschema;
 
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.XsdElementConstants;
-import org.bigtester.ate.model.data.StepErElementExistenceValue;
+//import org.bigtester.ate.model.data.StepInputDataValue;
 import org.bigtester.ate.model.page.elementaction.SendKeysAction;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
+//import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.ChildBeanDefinition;
+//import org.springframework.beans.factory.support.ChildBeanDefinition;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
@@ -67,16 +67,14 @@ public class SendKeysActionBeanDefinitionParser extends
 				String data = element
 						.getAttribute(XsdElementConstants.ATTR_SENDKEYSACTION_DATAVALUE);
 				if (StringUtils.hasText(data)) {
-					ConstructorArgumentValues erValueDefConstrs = new ConstructorArgumentValues();
-					erValueDefConstrs.addGenericArgumentValue(data);
-					BeanDefinition erValueDef = new ChildBeanDefinition(
-							XsdElementConstants.ELEMENT_ID_BASEINPUTDATAVALUE,
-							StepErElementExistenceValue.class, erValueDefConstrs, null);
-
-					parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id") + "_ASSERTER_STEPERVALUE_ID", erValueDef);
-
-					
-					
+//					ConstructorArgumentValues inputDataValueConstrs = new ConstructorArgumentValues();
+//					inputDataValueConstrs.addGenericArgumentValue(data);
+//					BeanDefinition inputDataValueDef = new ChildBeanDefinition(
+//							XsdElementConstants.ELEMENT_ID_BASEINPUTDATAVALUE,
+//							StepInputDataValue.class, inputDataValueConstrs, null);
+//
+//					parserContext.getRegistry().registerBeanDefinition(element.getAttribute("id") + "_ELEMENTINPUTDATA_ID", inputDataValueDef);
+//					
 					bDef.getConstructorArgumentValues().addGenericArgumentValue( new RuntimeBeanReference(data));
 				}
 

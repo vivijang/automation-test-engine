@@ -42,7 +42,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class ElementInputData defines ....
+ * This class ElementInputData defines table structure for the input data storing in the data.xml file
  * 
  * @author Peidong Hu
  *
@@ -55,7 +55,7 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * {@inheritDoc}
  */
-// @Data
+
 @SuppressWarnings(value = { "PMD" })
 public class ElementInputData extends BaseDBTable{
 
@@ -64,12 +64,12 @@ public class ElementInputData extends BaseDBTable{
 	@Nullable
 	private String stepEIDsetID;
 
-	@Column(length = 50, nullable = false, unique = false)
+	@Column(length = 50, unique = false)
 	@Nullable
 	private String dataName;
 	/** The key in data. */
 
-	@Column(length = 50, nullable = false, unique = true)
+	@Column(length = 50, unique = true)
 	@Nullable
 	private String dataValue;
 
@@ -135,59 +135,59 @@ public class ElementInputData extends BaseDBTable{
 		this.testDataContext = testDataContext;
 	}
 
-	/**
-	 * @return the sunnyParentData
-	 */
-	public ElementInputData getSunnyParentData() {
-		final ElementInputData retVal = sunnyParentData;
-		if (null == retVal) {
-			throw new IllegalStateException("sunny parent data collumn is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
-	}
-
-	/**
-	 * @param sunnyParentData the sunnyParentData to set
-	 */
-	public void setSunnyParentData(ElementInputData sunnyParentData) {
-		this.sunnyParentData = sunnyParentData;
-	}
-
-	/**
-	 * @return the subordinates
-	 */
-	public Set<ElementInputData> getSubordinates() {
-		final Set<ElementInputData> retVal = subordinates;
-		if (null == retVal) {
-			throw new IllegalStateException("subordinates collumn is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
-	}
-
-	/**
-	 * @param subordinates the subordinates to set
-	 */
-	public void setSubordinates(Set<ElementInputData> subordinates) {
-		this.subordinates = subordinates;
-	}
+//	/**
+//	 * @return the sunnyParentData
+//	 */
+//	public ElementInputData getSunnyParentData() {
+//		final ElementInputData retVal = sunnyParentData;
+//		if (null == retVal) {
+//			throw new IllegalStateException("sunny parent data collumn is not correctly populated");
+//			
+//		} else {
+//			return retVal;
+//		}
+//	}
+//
+//	/**
+//	 * @param sunnyParentData the sunnyParentData to set
+//	 */
+//	public void setSunnyParentData(ElementInputData sunnyParentData) {
+//		this.sunnyParentData = sunnyParentData;
+//	}
+//
+//	/**
+//	 * @return the subordinates
+//	 */
+//	public Set<ElementInputData> getSubordinates() {
+//		final Set<ElementInputData> retVal = subordinates;
+//		if (null == retVal) {
+//			throw new IllegalStateException("subordinates collumn is not correctly populated");
+//			
+//		} else {
+//			return retVal;
+//		}
+//	}
+//
+//	/**
+//	 * @param subordinates the subordinates to set
+//	 */
+//	public void setSubordinates(Set<ElementInputData> subordinates) {
+//		this.subordinates = subordinates;
+//	}
 
 	@ManyToOne
 	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
 	@Nullable
 	private TestDataContext testDataContext; // NOPMD
-
-	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "sunnyParentData_id", referencedColumnName = "id")
-	@Nullable
-	private ElementInputData sunnyParentData;
-
-	@OneToMany(mappedBy = "sunnyParentData")
-	@Nullable
-	private Set<ElementInputData> subordinates = new HashSet<ElementInputData>();
+//
+//	@ManyToOne(cascade = { CascadeType.ALL })
+//	@JoinColumn(name = "sunnyParentData_id", referencedColumnName = "stepEIDsetID")
+//	@Nullable
+//	private ElementInputData sunnyParentData;
+//
+//	@OneToMany(mappedBy = "sunnyParentData")
+//	@Nullable
+//	private Set<ElementInputData> subordinates = new HashSet<ElementInputData>();
 
 	/**
 	 * Instantiates a new element input data.

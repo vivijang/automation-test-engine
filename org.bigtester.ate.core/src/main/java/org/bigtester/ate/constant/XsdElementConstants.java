@@ -108,7 +108,7 @@ public final class XsdElementConstants {
 	public static final String ELEMENT_BASEELEMENTACTION = "baseElementAction";
 	
 	/** The Constant ELEMENT_STEPDATAVALUE. */
-	public static final String ELEMENT_STEPINPUTDATAVALUE = "stepInputDataValue";
+	public static final String ELEMENT_STEPINPUTDATAVALUE = "fileDataHolder";
 	
 	/** The Constant ATTR_STEPDATAVALUE_DATAVALUEID. */
 	public static final String ATTR_STEPDATAVALUE_DATAVALUEID = "dataValueID";

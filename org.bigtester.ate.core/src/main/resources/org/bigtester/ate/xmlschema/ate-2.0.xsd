@@ -713,7 +713,7 @@
 	<xsd:element name="pagePropertyCorrectnessAsserter" type="PagePropertyCorrectnessAsserterType" />
 	<xsd:element name="pageElementExistenceAsserter" type="PageElementExistenceAsserterType" />
 	<xsd:element name="stepExpectedResultValue" type="StepExpectedResultValueType" />
-	<xsd:element name="stepInputDataValue" type="StepInputDataValueType" />
+	<xsd:element name="fileDataHolder" type="StepInputDataValueType" />
 	<xsd:element name="stepInputDataValueParent" type="InputDataValueParentType" />
 
 	<xsd:element name="testCase" type="TestCaseType" />
