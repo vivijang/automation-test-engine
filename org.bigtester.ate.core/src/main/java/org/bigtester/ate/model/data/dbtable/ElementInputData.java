@@ -20,10 +20,6 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.dbtable;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -31,9 +27,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 import org.bigtester.ate.GlobalUtils;
@@ -57,7 +51,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 
 @SuppressWarnings(value = { "PMD" })
-public class ElementInputData extends BaseDBTable{
+public class ElementInputData extends BaseTestDataTable{
 
 	/** The id. */
 	@Column
@@ -69,7 +63,7 @@ public class ElementInputData extends BaseDBTable{
 	private String dataName;
 	/** The key in data. */
 
-	@Column(length = 50, unique = true)
+	@Column(length = 50, unique = false)
 	@Nullable
 	private String dataValue;
 
@@ -114,26 +108,26 @@ public class ElementInputData extends BaseDBTable{
 	public void setDataValue(String dataValue) {
 		this.dataValue = dataValue;
 	}
-
-	/**
-	 * @return the testDataContext
-	 */
-	public TestDataContext getTestDataContext() {
-		final TestDataContext retVal = testDataContext;
-		if (null == retVal) {
-			throw new IllegalStateException("test data context collumn is not correctly populated");
-			
-		} else {
-			return retVal;
-		}
-	}
-
-	/**
-	 * @param testDataContext the testDataContext to set
-	 */
-	public void setTestDataContext(TestDataContext testDataContext) {
-		this.testDataContext = testDataContext;
-	}
+//
+//	/**
+//	 * @return the testDataContext
+//	 */
+//	public TestDataContext getTestDataContext() {
+//		final TestDataContext retVal = testDataContext;
+//		if (null == retVal) {
+//			throw new IllegalStateException("test data context collumn is not correctly populated");
+//			
+//		} else {
+//			return retVal;
+//		}
+//	}
+//
+//	/**
+//	 * @param testDataContext the testDataContext to set
+//	 */
+//	public void setTestDataContext(TestDataContext testDataContext) {
+//		this.testDataContext = testDataContext;
+//	}
 
 //	/**
 //	 * @return the sunnyParentData
@@ -175,10 +169,10 @@ public class ElementInputData extends BaseDBTable{
 //		this.subordinates = subordinates;
 //	}
 
-	@ManyToOne
-	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
-	@Nullable
-	private TestDataContext testDataContext; // NOPMD
+//	@ManyToOne
+//	@JoinColumn(name = "testDataContext_idColumn", referencedColumnName = "idColumn")
+//	@Nullable
+//	private TestDataContext testDataContext; // NOPMD
 //
 //	@ManyToOne(cascade = { CascadeType.ALL })
 //	@JoinColumn(name = "sunnyParentData_id", referencedColumnName = "stepEIDsetID")

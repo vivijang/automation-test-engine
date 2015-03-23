@@ -352,7 +352,7 @@
 			<xsd:extension base="beans:identifiedType">
 				<xsd:group ref="beans:beanElements" />
 				<xsd:attributeGroup ref="beans:beanAttributes" />
-				<xsd:attribute name="dataValueID" type="xsd:long" />
+				<xsd:attribute name="dataValueID" type="xsd:string" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

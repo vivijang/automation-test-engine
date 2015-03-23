@@ -56,12 +56,12 @@ public class StepInputDataValueBeanDefinitionParser extends
         BeanDefinitionHolder holder = parserContext.getDelegate().parseBeanDefinitionElement(element);
         BeanDefinition bDef = holder.getBeanDefinition();
         bDef.setBeanClassName(StepInputDataValue.class.getName());
-        String elementDataDao = element
-				.getAttribute(XsdElementConstants.ATTR_BASEINPUTDATAVALUE_ELEMENTDATADAO);
-		if (StringUtils.hasText(elementDataDao)) {
-			bDef.getConstructorArgumentValues().addGenericArgumentValue(
-					new RuntimeBeanReference(elementDataDao));
-		}
+//        String elementDataDao = element
+//				.getAttribute(XsdElementConstants.ATTR_BASEINPUTDATAVALUE_ELEMENTDATADAO);
+//		if (StringUtils.hasText(elementDataDao)) {
+//			bDef.getConstructorArgumentValues().addGenericArgumentValue(
+//					new RuntimeBeanReference(elementDataDao));
+//		}
         String dataValueId = element.getAttribute(XsdElementConstants.ATTR_STEPDATAVALUE_DATAVALUEID);
         bDef.getConstructorArgumentValues().addGenericArgumentValue(dataValueId);
         
