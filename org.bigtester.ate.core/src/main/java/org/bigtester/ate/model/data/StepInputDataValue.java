@@ -40,7 +40,7 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 	 * @throws TestDataException 
 	 */
 	public StepInputDataValue(ElementInputDataDaoImpl elementDataDao,
-			Long dataValueID) throws TestDataException {
+			String dataValueID) throws TestDataException {
 		super("");
 		this.elementDataDao = elementDataDao;
 		this.dataValueID = dataValueID;
@@ -53,23 +53,9 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 	 * @return the data value id
 	 */
 
-	private Long dataValueID; // NOPMD
+	private String dataValueID; // NOPMD
 
-	/**
-	 * @return the dataValueID
-	 */
-	public Long getDataValueID() {
-		return dataValueID;
-	}
-
-	/**
-	 * @param dataValueID
-	 *            the dataValueID to set
-	 * @throws TestDataException
-	 */
-	public void setDataValueID(Long dataValueID) {
-		this.dataValueID = dataValueID;
-	}
+	
 	/**
 	 * Gets the element data dao.
 	 *
@@ -93,7 +79,21 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 	 * @param dataValueID the data value id
 	 * @throws TestDataException the test data exception
 	 */
-	public void initDataValue(Long dataValueID) throws TestDataException {
+	public void initDataValue(String dataValueID) throws TestDataException {
 		setStrDataValue(getElementDataDao().getValue(dataValueID));
+	}
+
+	/**
+	 * @return the dataValueID
+	 */
+	public String getDataValueID() {
+		return dataValueID;
+	}
+
+	/**
+	 * @param dataValueID the dataValueID to set
+	 */
+	public void setDataValueID(String dataValueID) {
+		this.dataValueID = dataValueID;
 	}
 }

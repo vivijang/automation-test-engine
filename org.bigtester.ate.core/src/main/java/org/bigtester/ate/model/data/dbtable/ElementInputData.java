@@ -20,21 +20,23 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data.dbtable;
 
-import static javax.persistence.GenerationType.AUTO;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.bigtester.ate.GlobalUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
 
@@ -47,19 +49,20 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 @Entity
 @Table
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="FirstTimeExecution",discriminatorType=DiscriminatorType.STRING)  
+@DiscriminatorValue(value="Yes")  
 /**
  * {@inheritDoc}
  */
 // @Data
 @SuppressWarnings(value = { "PMD" })
-public class ElementInputData {
+public class ElementInputData extends BaseDBTable{
 
 	/** The id. */
-	@Id
-	@GeneratedValue(strategy = AUTO)
 	@Column
 	@Nullable
-	private Long id;
+	private String stepEIDsetID;
 
 	@Column(length = 50, nullable = false, unique = false)
 	@Nullable
@@ -70,24 +73,7 @@ public class ElementInputData {
 	@Nullable
 	private String dataValue;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		final Long id2 = id;
-		if (null == id2 ) {
-			throw new IllegalStateException("id collumn is not correctly populated");
-		} else {
-			return id2;
-		}
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	/**
 	 * @return the dataName
@@ -222,5 +208,25 @@ public class ElementInputData {
 	public ElementInputData() {
 		this.dataName = "";
 		this.dataValue = "";
+	}
+
+	/**
+	 * @return the stepEIDsetID
+	 */
+	public String getStepEIDsetID() {
+		final String stepEIDsetID2 = stepEIDsetID;
+		if (null == stepEIDsetID2 ) {
+			throw GlobalUtils.createNotInitializedException("stepEIDsetID");
+			
+		} else {
+			return stepEIDsetID2;
+		}
+	}
+
+	/**
+	 * @param stepEIDsetID the stepEIDsetID to set
+	 */
+	public void setStepEIDsetID(String stepEIDsetID) {
+		this.stepEIDsetID = stepEIDsetID;
 	}
 }

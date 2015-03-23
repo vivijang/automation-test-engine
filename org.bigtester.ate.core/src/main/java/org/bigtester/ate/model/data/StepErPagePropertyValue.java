@@ -27,7 +27,7 @@ import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
 import org.bigtester.ate.model.data.exception.TestDataException;
 
-// TODO: Auto-generated Javadoc
+// TODO: add repeatstep support, 1) datarefreshevent 2)change the data.xml file
 /**
  * This class PropertyDataValue defines ....
  * this class is desperate

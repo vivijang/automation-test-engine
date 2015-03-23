@@ -47,14 +47,10 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 	 *            the eid
 	 * @return the long
 	 */
-	public Long save(@Nullable ElementInputData eid) {
-		long retVal;
-		if (null == eid)
-			retVal = 0;
-		else {
-			getDbEM().persist(eid);
-			retVal = eid.getId();
-		}
+	public String save(ElementInputData eid) {
+		String retVal;
+		getDbEM().persist(eid);
+		retVal = eid.getStepEIDsetID();
 		return retVal;
 	}
 
@@ -75,7 +71,7 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 	 *            the input data id
 	 * @return the value
 	 */
-	public String getValue(Long inputDataID) throws TestDataException {
+	public String getValue(String inputDataID) throws TestDataException {
 
 		ElementInputData eid = getDbEM().find(ElementInputData.class,
 				inputDataID);
