@@ -25,6 +25,7 @@ import java.util.List;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
+
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +40,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ElementInputDataDaoImpl extends BaseDaoImpl {
 
-	
 	/**
 	 * Save.
 	 *
@@ -73,13 +73,22 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 	 */
 	public String getValue(String inputDataID) throws TestDataException {
 
-		ElementInputData eid = getDbEM().find(ElementInputData.class,
-				inputDataID);
-		if (eid == null) {
+		List<ElementInputData> sERs = (List<ElementInputData>) getDbEM()
+				.createQuery(
+						"select p from ElementInputData p where FirstTimeExecution= 'Yes' and p.stepEIDsetID = :stepEIDsetID",
+						ElementInputData.class)
+				.setParameter("stepEIDsetID", inputDataID)// NOPMD
+				.getResultList();
+		if (sERs.isEmpty()) {
 			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
 					ExceptionErrorCode.TESTDATA_NOTFOUND);
+		} else if (sERs.size() > 1) { //NOPMD
+			throw new TestDataException(
+					ExceptionMessage.MSG_TESTDATA_DUPLICATED,
+					ExceptionErrorCode.TESTDATA_NOTFOUND);
 		} else {
-			return eid.getDataValue();
+			return sERs.get(0).getDataValue();
 		}
+
 	}
 }

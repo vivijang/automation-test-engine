@@ -38,6 +38,9 @@ public final class ExceptionMessage {
 	public static final String MSG_TESTDATA_NOTFOUND = "Test Data in DB not Found.";
 	
 	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
+	public static final String MSG_TESTDATA_DUPLICATED = "Multiple Test Data in DB Found, which one should we use for this step?";
+	
+	/** The Constant MSG_WEBELEMENT_NOTFOUND. */
 	public static final String MSG_RUNTIMEDATA_NOTFOUND = "Runtime Data not Found.";
 	
 	/** The Constant MSG_NONCORRECT_PAGEPROPERTY. */
