@@ -20,9 +20,13 @@
  *******************************************************************************/
 package org.bigtester.ate.model.data;
 
+
+import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
 import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 
 import org.bigtester.ate.model.data.exception.TestDataException;
+import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.context.ApplicationListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,7 +35,7 @@ import org.bigtester.ate.model.data.exception.TestDataException;
  * @author Peidong Hu
  *
  */
-public class StepInputDataValue extends BaseInputDataValue implements IStepInputData{
+public class StepInputDataValue extends BaseInputDataValue implements IStepInputData, ApplicationListener<RepeatDataRefreshEvent>{
 
 	/** The element data dao. */
 	private ElementInputDataDaoImpl elementDataDao;//NOPMD
@@ -95,5 +99,36 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 	 */
 	public void setDataValueID(String dataValueID) {
 		this.dataValueID = dataValueID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
+		
+		String valueTmp = this.getStrDataValue();// NOPMD;
+		if (arg0 == null)
+			return;
+		if (arg0.getIteration() == 0) {
+			try {
+				this.setStrDataValue(getElementDataDao().getValue(dataValueID));
+			} catch (TestDataException e) {
+				// TODO Auto-generated catch block
+				this.setStrDataValue(valueTmp);
+			}
+
+		} else {
+			try {
+				this.setStrDataValue(getElementDataDao().getValue(dataValueID, arg0.getRepeatStepName(),
+						arg0.getRepeatStepExternalLoopPath(),
+						arg0.getIteration()));
+			} catch (TestDataException e) {
+				// TODO onDataRefresh Exception, we use default data. Need to
+				// find a way to log something. throw e to trigger AOP log,
+				// doesn't work in the event.
+				this.setStrDataValue(valueTmp);
+			}
+		}
 	}
 }
