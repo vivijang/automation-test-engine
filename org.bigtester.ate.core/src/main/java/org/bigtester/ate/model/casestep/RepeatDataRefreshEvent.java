@@ -98,7 +98,7 @@ public class RepeatDataRefreshEvent extends ApplicationEvent {
 	/**
 	 * Gets the repeat step loop path.
 	 *
-	 * @return the repeat step loop path
+	 * @return the repeat step loop path, if repeat step loop path is null, return "" empty string.
 	 */
 	
 	public String getRepeatStepExternalLoopPath() {
