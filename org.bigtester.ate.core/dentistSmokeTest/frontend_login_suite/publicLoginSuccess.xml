@@ -43,7 +43,7 @@
 			stepDescription="Click login link to log in" stepName="clickLoginLink"
 			targetStep="true" elementActionDef="publicAccountLinkWE" pageObject="publicLoginPage">
 		</ate:elementStep>
-		<ate:elementStep id="publicLogin_typeUsername"
+		<ate:elementStep id="typeUsername"
 			stepDescription="type in public user name" stepName="typeUsername"
 			targetStep="true" elementActionDef="loginUserNameWE" pageObject="publicLoginPage">
 		</ate:elementStep>
@@ -61,10 +61,13 @@
 				</list>
 			</property>
 		</ate:elementStep>
-		<ate:elementStep id="publicLogin_clickLogoutLink"
+		<ate:elementStep id="logoutPatient"
 			stepDescription="logout patient" stepName="logoutPatient"
 			targetStep="false" elementActionDef="logoutPatientWE">
 		</ate:elementStep>
+		<ate:repeatStep id="repeatLoginStep" startStepName="typeUsername" numberOfIterations="1" endStepName="logoutPatient" stepName="repeatLoginStep" continueOnFailure="true" targetStep="true"></ate:repeatStep>
+		<ate:repeatStep id="repeatLoginStep2" startStepName="repeatLoginStep" numberOfIterations="1" endStepName="repeatLoginStep" stepName="repeatLoginStep2" continueOnFailure="true" targetStep="true"></ate:repeatStep>
+		
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">
 		</ate:lastStep>
