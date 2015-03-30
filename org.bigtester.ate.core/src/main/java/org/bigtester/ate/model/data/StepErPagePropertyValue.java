@@ -34,7 +34,7 @@ import org.bigtester.ate.model.data.exception.TestDataException;
  * @author Peidong Hu
  *
  */
-public class StepErPagePropertyValue extends BaseERValue{
+public class StepErPagePropertyValue extends BaseERValue implements IStepERValue{
 	
 	/**
 	 * @param stepERDao
@@ -86,6 +86,13 @@ public class StepErPagePropertyValue extends BaseERValue{
 	public void setDataValueID(String sERSetID) {
 		this.dataValueID = sERSetID;
 		
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BaseERValue getERValue() {
+		return this;
 	}
 
 }

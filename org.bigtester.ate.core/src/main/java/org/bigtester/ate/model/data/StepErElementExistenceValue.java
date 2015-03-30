@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
+import org.bigtester.ate.model.casestep.RepeatStep;
 import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
 import org.bigtester.ate.model.data.exception.RepeatTestDataException;
@@ -105,9 +106,12 @@ public class StepErElementExistenceValue extends BaseERValue implements
 	 */
 	@Override
 	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
-		List<StepErElementExistence> valueTmp = this.value;// NOPMD;
+		
 		if (arg0 == null)
-			return;
+			return;//NOPMD
+		if (!((RepeatStep) arg0.getSource()).getRefreshERValues().contains(this)) return;
+		
+		List<StepErElementExistence> valueTmp = this.value;// NOPMD;
 		if (arg0.getIteration() == 0) {
 			try {
 				this.value = getStepERDao().getErElementExistences(

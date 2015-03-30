@@ -57,7 +57,7 @@ public class RepeatDataRefreshEvent extends ApplicationEvent {
 	 * @param iteration
 	 *            the iteration
 	 */
-	public RepeatDataRefreshEvent(Object source,
+	public RepeatDataRefreshEvent(RepeatStep source,
 			TreeNode[] repeatStepInvokePathNodes, int iteration) {
 		super(source);
 		TreeNode[] temp = Arrays.copyOf(repeatStepInvokePathNodes,

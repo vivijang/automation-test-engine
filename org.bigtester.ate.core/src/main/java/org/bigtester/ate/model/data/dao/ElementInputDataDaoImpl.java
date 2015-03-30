@@ -123,7 +123,7 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 		} else if (retVal.size() > 1) { // NOPMD
 			throw new RepeatTestDataException(
 					ExceptionMessage.MSG_TESTDATA_DUPLICATED,
-					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND, repeatStepName, repeatStepExternalLoopPath, iteration);
+					ExceptionErrorCode.REPEATTESTDATA_DUPLICATED, repeatStepName, repeatStepExternalLoopPath, iteration);
 		} else {
 			return retVal.get(0).getDataValue();
 		}
@@ -154,7 +154,7 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 		} else if (retVal.size() > 1) { // NOPMD
 			throw new RepeatTestDataException(
 					ExceptionMessage.MSG_TESTDATA_DUPLICATED,
-					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND,  repeatStepName, "", iteration);
+					ExceptionErrorCode.REPEATTESTDATA_DUPLICATED,  repeatStepName, "", iteration);
 		} else {
 			return retVal.get(0).getDataValue();
 		}

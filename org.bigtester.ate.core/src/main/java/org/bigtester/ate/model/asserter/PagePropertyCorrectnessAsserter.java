@@ -24,6 +24,7 @@ import org.bigtester.ate.constant.AssertType;
 import org.bigtester.ate.constant.EnumAssertPriority;
 import org.bigtester.ate.constant.EnumAssertResult;
 import org.bigtester.ate.constant.PagePropertyType;
+import org.bigtester.ate.model.data.IStepERValue;
 import org.bigtester.ate.model.data.ItemCompareResult;
 import org.bigtester.ate.model.data.StepErPagePropertyValue;
 import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
@@ -47,10 +48,10 @@ public class PagePropertyCorrectnessAsserter extends
 	/**
 	 * @param pageObj
 	 */
-	public PagePropertyCorrectnessAsserter(final IPageObject pageObj, StepErPagePropertyValue stepERValue) {
+	public PagePropertyCorrectnessAsserter(final IPageObject pageObj, IStepERValue stepERValue) {
 		super();
 		setResultPage(pageObj);
-		this.stepERValue = stepERValue;
+		this.stepERValue = (StepErPagePropertyValue) stepERValue.getERValue();
 		setExecResult(this);
 	}
 

@@ -22,6 +22,7 @@ package org.bigtester.ate.model.data;
 
 
 import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
+import org.bigtester.ate.model.casestep.RepeatStep;
 import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
 import org.bigtester.ate.model.data.exception.RepeatTestDataException;
 import org.bigtester.ate.model.data.exception.TestDataException;
@@ -107,9 +108,12 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 	@Override
 	public void onApplicationEvent(@Nullable RepeatDataRefreshEvent arg0) {
 		
-		String valueTmp = this.getStrDataValue();// NOPMD;
+	
 		if (arg0 == null)
-			return;
+			return;//NOPMD
+		if (!((RepeatStep) arg0.getSource()).getRefreshDataValues().contains(this)) return;
+		
+		String valueTmp = this.getStrDataValue();
 		if (arg0.getIteration() == 0) {
 			try {
 				this.setStrDataValue(getElementDataDao().getValue(dataValueID));

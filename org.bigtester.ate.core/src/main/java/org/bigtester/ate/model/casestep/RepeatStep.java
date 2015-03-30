@@ -26,10 +26,16 @@ import java.util.List;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.StepResultStatus;
+import org.bigtester.ate.model.data.BaseERValue;
+import org.bigtester.ate.model.data.IStepERValue;
+import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
 import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
+import org.bigtester.ate.model.page.elementaction.IElementAction;
+import org.bigtester.ate.model.page.elementaction.ITestObjectAction;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
+import org.bigtester.ate.model.page.page.MyWebElement;
 import org.bigtester.ate.model.utils.ThinkTime;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.aop.support.AopUtils;
@@ -59,7 +65,13 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 
 	/** The step i ds. */
 	final private List<Integer> stepIndexes = new ArrayList<Integer>();
+	
+	/** The refresh data values. */
+	final private List<IStepInputData> refreshDataValues = new ArrayList<IStepInputData>();
 
+	/** The refresh er values. */
+	final private List<IStepERValue> refreshERValues = new ArrayList<IStepERValue>();
+	
 	/** The external repeat node of this step. */
 	private transient @Nullable RepeatStepExecutionLoggerNode externalRepeatNodeOfThisStep;
 
@@ -95,10 +107,12 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 
 	}
 
-	private void createRepeatStepIndexes() {
+	private void buildRepeatStepContext() {
 		int startIndex = -1; // NOPMD
 		int endIndex = -1; // NOPMD
 		stepIndexes.clear();
+		refreshERValues.clear();
+		refreshDataValues.clear();
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (testCase.getTestStepList().get(i).getStepName()
 					.equals(this.startStepName)) {
@@ -113,6 +127,17 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (i >= startIndex && i <= endIndex) {
 				stepIndexes.add(i);
+				ITestStep thisStep = testCase.getTestStepList().get(i);
+				for (int asserterIndex = 0; asserterIndex < thisStep.getExpectedResultAsserter().size(); asserterIndex++) {
+					refreshERValues.add(thisStep.getExpectedResultAsserter().get(asserterIndex).getStepERValue());
+				}
+				MyWebElement webE = thisStep.getMyWebElement();
+				if (null != webE && webE.getTestObjectAction() instanceof IElementAction) {
+					ITestObjectAction iTOA = webE.getTestObjectAction();
+					if (null != iTOA)
+					refreshDataValues.add(((IElementAction) iTOA).getDataValue());
+				}
+			
 			}
 		}
 	}
@@ -137,7 +162,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	 */
 	private void repeatSteps() throws StepExecutionException2,
 			PageValidationException2, RuntimeDataException {
-		createRepeatStepIndexes();
+		buildRepeatStepContext();
 		for (int iteration = 1; iteration <= getNumberOfIterations(); iteration++) {
 			if (1 == iteration) {// NOPMD
 
@@ -324,6 +349,20 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	public IMyWebDriver getMyWebDriver() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * @return the refreshDataValues
+	 */
+	public List<IStepInputData> getRefreshDataValues() {
+		return refreshDataValues;
+	}
+
+	/**
+	 * @return the refreshERValues
+	 */
+	public List<IStepERValue> getRefreshERValues() {
+		return refreshERValues;
 	}
 
 }

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * ATE, Automation Test Engine
  *
- * Copyright 2014, Montreal PROT, or individual contributors as
+ * Copyright 2015, Montreal PROT, or individual contributors as
  * indicated by the @author tags or express copyright attribution
  * statements applied by the authors.  All third-party contributions are
  * distributed under license by Montreal PROT.
@@ -18,50 +18,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.asserter;
+package org.bigtester.ate.model.project;
 
+import org.eclipse.jdt.annotation.Nullable;
+import org.testng.ITestResult;
+import org.testng.TestListenerAdapter;
 
-import org.bigtester.ate.model.data.IStepERValue;
-import org.bigtester.ate.model.page.page.IPageObject;
 
 // TODO: Auto-generated Javadoc
 /**
- * This class IExpectedResultAsserter defines ....
+ * This class TestCaseResultModifier defines ....
  * @author Peidong Hu
  *
  */
-public interface IExpectedResultAsserter {
-	
-	/**
-	 * Assert e r.
-	 */
-	void assertER();
-	
-	/**
-	 * Gets the result page.
-	 *
-	 * @return the result page
-	 */
-	IPageObject getResultPage();
-	
-	/**
-	 * Gets the step er value.
-	 *
-	 * @return the step er value
-	 */
-	IStepERValue getStepERValue();
-	
-	/**
-	 * Gets the exec result.
-	 *
-	 * @return the exec result
-	 */
-	IStepExecutionResult getExecResult();
-	
-	/**
-	 * Gets the assert report msg.
-	 *
-	 * @return the assert report msg
-	 */
-	String getAssertReportMSG();
+public class TestCaseResultModifier extends TestListenerAdapter {
+	@Override
+	public void onTestFailure(@Nullable ITestResult result) {
+//		if (result.getTestContext().)
+//		Throwable()result.getThrowable();
+//		result.setStatus(arg0);
+//	    Reporter.setCurrentTestResult(result); 
+//	    Reporter.log("<br> <img src=.\\screenshots\\Untitled.png /> <br>");
+//	    Reporter.setCurrentTestResult(null); 
+	}
 }

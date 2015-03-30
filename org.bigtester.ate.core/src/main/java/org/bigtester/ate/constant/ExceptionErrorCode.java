@@ -48,6 +48,9 @@ public final class ExceptionErrorCode {
 	/** The Constant Repeat TESTDATA_NOTFOUND. */
 	public static final String REPEATTESTDATA_NOTFOUND = "0006";
 	
+	/** The Constant REPEATTESTDATA_DUPLICATED. */
+	public static final String REPEATTESTDATA_DUPLICATED = "0007";
+	
 	/**
 	 * Instantiates a new exception error code.
 	 */
