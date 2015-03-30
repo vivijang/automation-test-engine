@@ -45,6 +45,8 @@ public final class ExceptionErrorCode {
 	/** The Constant RUNTIMEDATA_NOTFOUND. */
 	public static final String RUNTIMEDATA_NOTFOUND = "0005";
 	
+	/** The Constant Repeat TESTDATA_NOTFOUND. */
+	public static final String REPEATTESTDATA_NOTFOUND = "0006";
 	
 	/**
 	 * Instantiates a new exception error code.

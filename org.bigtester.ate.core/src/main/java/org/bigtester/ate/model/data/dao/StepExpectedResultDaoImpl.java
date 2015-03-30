@@ -29,6 +29,7 @@ import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
 import org.bigtester.ate.model.data.dbtable.StepErPageProperty;
 import org.bigtester.ate.model.data.dbtable.StepExpectedResult;
+import org.bigtester.ate.model.data.exception.RepeatTestDataException;
 import org.bigtester.ate.model.data.exception.TestDataException;
 
 // TODO: Auto-generated Javadoc
@@ -80,7 +81,7 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 	 *             the test data exception
 	 */
 	public List<StepErElementExistence> getErElementExistences(String sERSetID,
-			String repeatStepName, int iteration) throws TestDataException {
+			String repeatStepName, int iteration) throws RepeatTestDataException {
 		String sql = "select p from StepErElementExistence p where repeatStepExternalLoopPath is null and FirstTimeExecution= 'No' and p.stepERSetID = :stepERSetID and p.repeatStepName=:repeatStepName and p.iteration=:iteration";
 		TypedQuery<StepErElementExistence> query = getDbEM().createQuery(sql,
 				StepErElementExistence.class);
@@ -90,8 +91,8 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 		List<StepErElementExistence> sERs = (List<StepErElementExistence>) query
 				.getResultList();
 		if (sERs.isEmpty()) {
-			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
+			throw new RepeatTestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+					ExceptionErrorCode.TESTDATA_NOTFOUND, repeatStepName, "", iteration);
 		} else {
 			return sERs;
 		}
@@ -130,7 +131,7 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 	 */
 	public List<StepErElementExistence> getErElementExistences(String sERSetID,
 			String repeatStepName, String repeatStepExternalLoopPath, int iteration)
-			throws TestDataException {
+			throws RepeatTestDataException {
 		List<StepErElementExistence> retVal;
 		if ("".equals(repeatStepExternalLoopPath))
 			retVal = getErElementExistences(sERSetID, repeatStepName, iteration);
@@ -145,9 +146,9 @@ public class StepExpectedResultDaoImpl extends BaseDaoImpl {
 			retVal = (List<StepErElementExistence>) query
 					.getResultList();
 			if (retVal.isEmpty()) {
-				throw new TestDataException(
+				throw new RepeatTestDataException(
 						ExceptionMessage.MSG_TESTDATA_NOTFOUND,
-						ExceptionErrorCode.TESTDATA_NOTFOUND);
+						ExceptionErrorCode.TESTDATA_NOTFOUND, repeatStepName, repeatStepExternalLoopPath, iteration );
 			}
 		}
 

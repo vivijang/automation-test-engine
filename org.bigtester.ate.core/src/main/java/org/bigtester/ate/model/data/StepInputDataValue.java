@@ -23,7 +23,7 @@ package org.bigtester.ate.model.data;
 
 import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
 import org.bigtester.ate.model.data.dao.ElementInputDataDaoImpl;
-
+import org.bigtester.ate.model.data.exception.RepeatTestDataException;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationListener;
@@ -116,14 +116,14 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 			} catch (TestDataException e) {
 				// TODO Auto-generated catch block
 				this.setStrDataValue(valueTmp);
-			}
+			} 
 
 		} else {
 			try {
 				this.setStrDataValue(getElementDataDao().getValue(dataValueID, arg0.getRepeatStepName(),
 						arg0.getRepeatStepExternalLoopPath(),
 						arg0.getIteration()));
-			} catch (TestDataException e) {
+			} catch (RepeatTestDataException e) {
 				// TODO onDataRefresh Exception, we use default data. Need to
 				// find a way to log something. throw e to trigger AOP log,
 				// doesn't work in the event.

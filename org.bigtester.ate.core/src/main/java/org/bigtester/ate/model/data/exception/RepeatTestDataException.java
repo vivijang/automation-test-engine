@@ -38,6 +38,9 @@ public class RepeatTestDataException extends RuntimeDataException {
 	/** The repeat step name. */
 	final private String repeatStepName;
 	
+	/** The external repeat loop path. */
+	final private String externalRepeatLoopPath;
+	
 	/** The iteration. */
 	final private int iteration;
 	/**
@@ -46,11 +49,12 @@ public class RepeatTestDataException extends RuntimeDataException {
 	 * @param message            the message
 	 * @param errorCode            the error code
 	 */
-	public RepeatTestDataException(String message, String errorCode, String repeatStepName, int iteration) {
+	public RepeatTestDataException(String message, String errorCode, String repeatStepName, String externalRepeatLoopPath, int iteration) {
 		super(message, errorCode);
 		this.repeatStepName = repeatStepName;
 		this.iteration = iteration;
-		setMessage(getMessage() + ":repeatStepName:" + repeatStepName + ":iteration:" + iteration);
+		this.externalRepeatLoopPath = externalRepeatLoopPath;
+		setMessage(getMessage() + ":repeatStepName:" + repeatStepName + ":externalRepeatLoopPath"+externalRepeatLoopPath+":iteration:" + iteration);
 		
 	}
 	/**
@@ -64,5 +68,11 @@ public class RepeatTestDataException extends RuntimeDataException {
 	 */
 	public int getIteration() {
 		return iteration;
+	}
+	/**
+	 * @return the externalRepeatLoopPath
+	 */
+	public String getExternalRepeatLoopPath() {
+		return externalRepeatLoopPath;
 	}
 }

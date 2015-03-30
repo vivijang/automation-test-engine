@@ -24,7 +24,7 @@
 
 
 <ElementInputData FirstTimeExecution= "No" stepEIDsetID="1" dataName="UserName" dataValue="gocarpool@hotmail.com" testDataContext_idColumn="1" repeatStepName="repeatLoginStep" iteration="1"/>
-<ElementInputData FirstTimeExecution= "No" stepEIDsetID="3" dataName="Password" dataValue="test3" testDataContext_idColumn="1" repeatStepName="repeatLoginStep" iteration="1"/>
+<ElementInputData FirstTimeExecution= "No" stepEIDsetID="3" dataName="Password" dataValue="test1" testDataContext_idColumn="1" repeatStepName="repeatLoginStep" iteration="1"/>
 
 <ElementInputData FirstTimeExecution= "No" stepEIDsetID="1" dataName="UserName" dataValue="gocarpool@hotmail.com" testDataContext_idColumn="1" repeatStepName="repeatLoginStep" repeatStepExternalLoopPath="repeatLoginStep2" iteration="1"/>
 <ElementInputData FirstTimeExecution= "No" stepEIDsetID="3" dataName="Password" dataValue="test1" testDataContext_idColumn="1" repeatStepName="repeatLoginStep" repeatStepExternalLoopPath="repeatLoginStep2" iteration="1"/>

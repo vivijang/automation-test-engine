@@ -26,6 +26,7 @@ import java.util.List;
 import org.bigtester.ate.model.casestep.RepeatDataRefreshEvent;
 import org.bigtester.ate.model.data.dao.StepExpectedResultDaoImpl;
 import org.bigtester.ate.model.data.dbtable.StepErElementExistence;
+import org.bigtester.ate.model.data.exception.RepeatTestDataException;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.context.ApplicationListener;
@@ -122,7 +123,7 @@ public class StepErElementExistenceValue extends BaseERValue implements
 						this.dataValueID, arg0.getRepeatStepName(),
 						arg0.getRepeatStepExternalLoopPath(),
 						arg0.getIteration());
-			} catch (TestDataException e) {
+			} catch (RepeatTestDataException e) {
 				// TODO onDataRefresh Exception, we use default data. Need to
 				// find a way to log something. throw e to trigger AOP log,
 				// doesn't work in the event.

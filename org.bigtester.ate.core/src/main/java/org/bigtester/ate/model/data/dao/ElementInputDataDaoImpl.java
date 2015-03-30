@@ -27,6 +27,7 @@ import javax.persistence.TypedQuery;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.ExceptionMessage;
 import org.bigtester.ate.model.data.dbtable.ElementInputData;
+import org.bigtester.ate.model.data.exception.RepeatTestDataException;
 import org.bigtester.ate.model.data.exception.TestDataException;
 import org.eclipse.jdt.annotation.Nullable;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,7 +103,7 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 	 */
 	public String getValue(String inputDataID, String repeatStepName,
 			String repeatStepExternalLoopPath, int iteration)
-			throws TestDataException {
+			throws RepeatTestDataException {
 		
 		if ("".equals(repeatStepExternalLoopPath))
 			return getValue(inputDataID, repeatStepName, iteration);//NOPMD
@@ -117,12 +118,12 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 		query.setParameter("iteration", iteration);
 		retVal = (List<ElementInputData>) query.getResultList();
 		if (retVal.isEmpty()) {
-			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
+			throw new RepeatTestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND, repeatStepName, repeatStepExternalLoopPath, iteration);
 		} else if (retVal.size() > 1) { // NOPMD
-			throw new TestDataException(
+			throw new RepeatTestDataException(
 					ExceptionMessage.MSG_TESTDATA_DUPLICATED,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
+					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND, repeatStepName, repeatStepExternalLoopPath, iteration);
 		} else {
 			return retVal.get(0).getDataValue();
 		}
@@ -138,9 +139,9 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 	 */
 	public String getValue(String inputDataID, String repeatStepName,
 			int iteration)
-			throws TestDataException {
+			throws RepeatTestDataException {
 		List<ElementInputData> retVal;
-		String sql = "select p from ElementInputData p where FirstTimeExecution= 'No' and p.stepEIDsetID = :stepEIDsetID and p.repeatStepName=:repeatStepName and p.iteration=:iteration";
+		String sql = "select p from ElementInputData p where repeatStepExternalLoopPath is null and FirstTimeExecution= 'No' and p.stepEIDsetID = :stepEIDsetID and p.repeatStepName=:repeatStepName and p.iteration=:iteration";
 		TypedQuery<ElementInputData> query = getDbEM().createQuery(sql,
 				ElementInputData.class);
 		query.setParameter("stepEIDsetID", inputDataID);
@@ -148,12 +149,12 @@ public class ElementInputDataDaoImpl extends BaseDaoImpl {
 		query.setParameter("iteration", iteration);
 		retVal = (List<ElementInputData>) query.getResultList();
 		if (retVal.isEmpty()) {
-			throw new TestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
+			throw new RepeatTestDataException(ExceptionMessage.MSG_TESTDATA_NOTFOUND,
+					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND, repeatStepName, "", iteration);
 		} else if (retVal.size() > 1) { // NOPMD
-			throw new TestDataException(
+			throw new RepeatTestDataException(
 					ExceptionMessage.MSG_TESTDATA_DUPLICATED,
-					ExceptionErrorCode.TESTDATA_NOTFOUND);
+					ExceptionErrorCode.REPEATTESTDATA_NOTFOUND,  repeatStepName, "", iteration);
 		} else {
 			return retVal.get(0).getDataValue();
 		}
