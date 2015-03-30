@@ -26,6 +26,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.aop.framework.Advised;
 import org.bigtester.ate.model.casestep.TestCase;
 import org.bigtester.ate.model.data.AbstractRunTimeDataHolder;
 import org.bigtester.ate.model.data.TestDatabaseInitializer;
@@ -35,6 +36,7 @@ import org.bigtester.ate.model.page.page.Lastpage;
 import org.bigtester.ate.model.page.page.RegularPage;
 import org.bigtester.ate.model.project.TestProject;
 import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -48,6 +50,32 @@ import org.springframework.core.io.Resource;
  *
  */
 public final class GlobalUtils {
+
+	/**
+	 * Gets the target object.
+	 *
+	 * @param <T>
+	 *            the generic type
+	 * @param proxy
+	 *            the proxy
+	 * @return the target object
+	 * @throws Exception 
+	 */
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T getTargetObject(@Nullable Object proxy) { //NOPMD
+		if (proxy == null ) throw GlobalUtils.createNotInitializedException("proxy");
+		while (AopUtils.isJdkDynamicProxy(proxy)) {
+			try {
+				return (T) getTargetObject(((Advised) proxy).getTargetSource()//NOPMD
+						.getTarget());
+			} catch (Exception e) {//NOPMD
+				throw GlobalUtils.createInternalError("proxied object error", e);
+			}
+		}
+		return (T) proxy; // expected to be cglib proxy then, which is simply a
+							// specialized class
+	}
 
 	/**
 	 * Find test case bean.
@@ -68,24 +96,25 @@ public final class GlobalUtils {
 			TestCase retVal = testcases.values().iterator().next();
 			if (null == retVal) {
 				throw new NoSuchBeanDefinitionException(TestCase.class);
-			}
-			else {
+			} else {
 				return retVal;
 			}
 		}
 	}
-	
+
 	/**
 	 * Find run time data holder beans.
 	 *
-	 * @param appCtx the app ctx
+	 * @param appCtx
+	 *            the app ctx
 	 * @return the map
-	 * @throws NoSuchBeanDefinitionException the no such bean definition exception
+	 * @throws NoSuchBeanDefinitionException
+	 *             the no such bean definition exception
 	 */
-	public static @Nullable Map<String, AbstractRunTimeDataHolder> findRunTimeDataHolderBeans(ApplicationContext appCtx)
-			throws NoSuchBeanDefinitionException {
+	public static @Nullable Map<String, AbstractRunTimeDataHolder> findRunTimeDataHolderBeans(
+			ApplicationContext appCtx) throws NoSuchBeanDefinitionException {
 		return appCtx.getBeansOfType(AbstractRunTimeDataHolder.class);
-		
+
 	}
 
 	/**
@@ -101,11 +130,13 @@ public final class GlobalUtils {
 				.getBeansOfType(TestDatabaseInitializer.class);
 
 		if (dbInit.isEmpty()) {
-			throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
+			throw new NoSuchBeanDefinitionException(
+					TestDatabaseInitializer.class);
 		} else {
 			TestDatabaseInitializer retVal = dbInit.values().iterator().next();
 			if (null == retVal) {
-				throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
+				throw new NoSuchBeanDefinitionException(
+						TestDatabaseInitializer.class);
 			} else {
 				return retVal;
 			}
@@ -119,12 +150,14 @@ public final class GlobalUtils {
 	 *            the bean factory
 	 * @return the test database initializer
 	 */
-	public static TestDatabaseInitializer findDBInitializer(BeanFactory beanFac) throws NoSuchBeanDefinitionException {
+	public static TestDatabaseInitializer findDBInitializer(BeanFactory beanFac)
+			throws NoSuchBeanDefinitionException {
 
 		TestDatabaseInitializer dbInit = beanFac
 				.getBean(TestDatabaseInitializer.class);
 		if (null == dbInit) {
-			throw new NoSuchBeanDefinitionException(TestDatabaseInitializer.class);
+			throw new NoSuchBeanDefinitionException(
+					TestDatabaseInitializer.class);
 		} else {
 			return dbInit;
 		}
@@ -182,7 +215,7 @@ public final class GlobalUtils {
 		if (testProjects.isEmpty()) {
 			throw new NoSuchBeanDefinitionException(TestProject.class);
 		} else {
-			TestProject testProject = testProjects.values().iterator().next();  
+			TestProject testProject = testProjects.values().iterator().next();
 			if (null == testProject) {
 				throw new NoSuchBeanDefinitionException(TestProject.class);
 			} else {
@@ -218,7 +251,7 @@ public final class GlobalUtils {
 		}
 
 	}
-	
+
 	/**
 	 * Find data source bean.
 	 *
@@ -246,7 +279,6 @@ public final class GlobalUtils {
 
 	}
 
-	
 	/**
 	 * Find data source bean.
 	 *
@@ -258,7 +290,7 @@ public final class GlobalUtils {
 	 */
 	public static DataSource findDataSourceBean(BeanFactory beanFac) {
 		DataSource dataSrc = beanFac.getBean(DataSource.class);
-		
+
 		if (null == dataSrc) {
 			throw new NoSuchBeanDefinitionException(DataSource.class);
 		} else {
@@ -270,45 +302,54 @@ public final class GlobalUtils {
 	/**
 	 * Throw not initialized exception.
 	 *
-	 * @param variableName the variable name
+	 * @param variableName
+	 *            the variable name
 	 */
-	public static IllegalStateException createNotInitializedException(String variableName) {
-		return new IllegalStateException(variableName + " not correctly populated.");
+	public static IllegalStateException createNotInitializedException(
+			String variableName) {
+		return new IllegalStateException(variableName
+				+ " not correctly populated.");
 	}
-	
+
 	/**
 	 * Throw not initialized exception.
 	 *
-	 * @param variableName the variable name
+	 * @param variableName
+	 *            the variable name
 	 */
-	public static IllegalStateException createNotInitializedException(String variableName,  Throwable cause) {
-		return new IllegalStateException(variableName + " not correctly populated.", cause);
+	public static IllegalStateException createNotInitializedException(
+			String variableName, Throwable cause) {
+		return new IllegalStateException(variableName
+				+ " not correctly populated.", cause);
 	}
-	
+
 	/**
 	 * Creates the internal error.
 	 *
-	 * @param errorPlace the error place
+	 * @param errorPlace
+	 *            the error place
 	 * @return the illegal state exception
 	 */
 	public static IllegalStateException createInternalError(String errorPlace) {
 		return new IllegalStateException("internal error at: " + errorPlace);
 	}
-	
+
 	/**
 	 * Creates the internal error.
 	 *
-	 * @param errorPlace the error place
+	 * @param errorPlace
+	 *            the error place
 	 * @return the illegal state exception
 	 */
-	public static IllegalStateException createInternalError(String errorPlace,   Throwable cause) {
-		return new IllegalStateException("internal error at: " + errorPlace, cause);
+	public static IllegalStateException createInternalError(String errorPlace,
+			Throwable cause) {
+		return new IllegalStateException("internal error at: " + errorPlace,
+				cause);
 	}
-	
-	
-	
-	//TODO use generic Type <T> to reduce the number of duplicated findNNNBean functions.
-	
+
+	// TODO use generic Type <T> to reduce the number of duplicated findNNNBean
+	// functions.
+
 	private GlobalUtils() {
 	}
 

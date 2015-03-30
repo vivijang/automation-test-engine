@@ -129,13 +129,14 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 				stepIndexes.add(i);
 				ITestStep thisStep = testCase.getTestStepList().get(i);
 				for (int asserterIndex = 0; asserterIndex < thisStep.getExpectedResultAsserter().size(); asserterIndex++) {
-					refreshERValues.add(thisStep.getExpectedResultAsserter().get(asserterIndex).getStepERValue());
+					refreshERValues.add((IStepERValue)GlobalUtils.getTargetObject(thisStep.getExpectedResultAsserter().get(asserterIndex).getStepERValue()));
 				}
 				MyWebElement webE = thisStep.getMyWebElement();
 				if (null != webE && webE.getTestObjectAction() instanceof IElementAction) {
 					ITestObjectAction iTOA = webE.getTestObjectAction();
-					if (null != iTOA)
-					refreshDataValues.add(((IElementAction) iTOA).getDataValue());
+					if (null != iTOA && ((IElementAction) iTOA).getDataValue() != null) {
+						refreshDataValues.add((IStepInputData) GlobalUtils.getTargetObject(((IElementAction) iTOA).getDataValue()));
+					}
 				}
 			
 			}
@@ -199,11 +200,6 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 						getRepeatStepLogger().setRepeatStepExternalNode(
 								getRepeatStepLogger()
 										.getCurrentRepeatStepNode());
-						// Advised advisedStep = (Advised)currentTestStepTmp;
-						// RepeatStep proxyTargetedStep = (RepeatStep)
-						// advisedStep.getTargetSource().getTarget();
-						// List<Integer> tmpIndexes = new
-						// ArrayList(proxyTargetedStep.getStepIndexes());
 					} else {
 						currentTestStepTmp
 								.setStepDescription(currentTestStepTmp
