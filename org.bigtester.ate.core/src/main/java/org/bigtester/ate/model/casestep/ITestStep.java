@@ -49,12 +49,24 @@ public interface ITestStep {
 	boolean isTargetStep();
 	
 	/**
+	 * Gets the optional step util inclusive.
+	 *
+	 * @return the optional step util inclusive
+	 */
+	String getOptionalStepUtilInclusive();
+	/**
 	 * Checks if is optional step.
 	 *
 	 * @return true, if is optional step
 	 */
 	boolean isOptionalStep();
 	
+	/**
+	 * Sets the optional step.
+	 *
+	 * @param optionalStep the new optional step
+	 */
+	void setOptionalStep(boolean optionalStep);
 	/**
 	 * Checks if is page validation.
 	 *

@@ -82,6 +82,9 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	/** The optional step. default is false*/
 	private boolean optionalStep;
 	
+	/** The optional step inclusive. */
+	private String optionalStepUtilInclusive="";
+	
 	/** The page object. */
 	@Nullable
 	private IPageObject pageObject;
@@ -436,6 +439,21 @@ public class BaseTestStep implements ApplicationContextAware {//NOPMD
 	 */
 	public void setRepeatStepLogger(RepeatStepExecutionLogger repeatStepLogger) {
 		this.repeatStepLogger = repeatStepLogger;
+	}
+
+	
+	/**
+	 * @param optionalStepUtilInclusive the optionalStepInclusive to set
+	 */
+	public void setOptionalStepUtilInclusive(String optionalStepUtilInclusive) {
+		this.optionalStepUtilInclusive = optionalStepUtilInclusive;
+	}
+
+	/**
+	 * @return the optionalStepUtilInclusive
+	 */
+	public String getOptionalStepUtilInclusive() {
+		return optionalStepUtilInclusive;
 	}
 
 

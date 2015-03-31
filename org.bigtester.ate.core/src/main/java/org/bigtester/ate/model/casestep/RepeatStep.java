@@ -66,13 +66,13 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 
 	/** The step i ds. */
 	final private List<Integer> stepIndexes = new ArrayList<Integer>();
-	
+
 	/** The refresh data values. */
 	final private List<IStepInputData> refreshDataValues = new ArrayList<IStepInputData>();
 
 	/** The refresh er values. */
 	final private List<IStepERValue> refreshERValues = new ArrayList<IStepERValue>();
-	
+
 	/** The external repeat node of this step. */
 	private transient @Nullable RepeatStepExecutionLoggerNode externalRepeatNodeOfThisStep;
 
@@ -113,35 +113,45 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 		stepIndexes.clear();
 		refreshERValues.clear();
 		refreshDataValues.clear();
-		int startIndex = -1; //NOPMD
-		int endIndex = -1; //NOPMD
-		
+		int startIndex = -1; // NOPMD
+		int endIndex = -1; // NOPMD
+
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (testCase.getTestStepList().get(i).getStepName()
 					.equals(this.startStepName)) {
-				startIndex = i;//NOPMD
+				startIndex = i;// NOPMD
 			}
 			if (testCase.getTestStepList().get(i).getStepName()
 					.equals(this.endStepName)) {
-				endIndex = i;//NOPMD
+				endIndex = i;// NOPMD
 			}
 		}
-		if (startIndex == -1 || endIndex == -1) throw GlobalUtils.createNotInitializedException("startStepName or endStepName");
+		if (startIndex == -1 || endIndex == -1)
+			throw GlobalUtils
+					.createNotInitializedException("startStepName or endStepName");
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (i >= startIndex && i <= endIndex) {
 				stepIndexes.add(i);
 				ITestStep thisStep = testCase.getTestStepList().get(i);
-				for (int asserterIndex = 0; asserterIndex < thisStep.getExpectedResultAsserter().size(); asserterIndex++) {
-					refreshERValues.add((IStepERValue)GlobalUtils.getTargetObject(thisStep.getExpectedResultAsserter().get(asserterIndex).getStepERValue()));
+				for (int asserterIndex = 0; asserterIndex < thisStep
+						.getExpectedResultAsserter().size(); asserterIndex++) {
+					refreshERValues.add((IStepERValue) GlobalUtils
+							.getTargetObject(thisStep
+									.getExpectedResultAsserter()
+									.get(asserterIndex).getStepERValue()));
 				}
 				MyWebElement webE = thisStep.getMyWebElement();
-				if (null != webE && webE.getTestObjectAction() instanceof IElementAction) {
+				if (null != webE
+						&& webE.getTestObjectAction() instanceof IElementAction) {
 					ITestObjectAction iTOA = webE.getTestObjectAction();
-					if (null != iTOA && ((IElementAction) iTOA).getDataValue() != null) {
-						refreshDataValues.add((IStepInputData) GlobalUtils.getTargetObject(((IElementAction) iTOA).getDataValue()));
+					if (null != iTOA
+							&& ((IElementAction) iTOA).getDataValue() != null) {
+						refreshDataValues.add((IStepInputData) GlobalUtils
+								.getTargetObject(((IElementAction) iTOA)
+										.getDataValue()));
 					}
 				}
-			
+
 			}
 		}
 	}
@@ -196,53 +206,66 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 					getTestCase().setCurrentTestStep(currentTestStepTmp);
 				}
 
-				
 				if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
 					getRepeatStepLogger().setRepeatStepExternalNode(
-							getRepeatStepLogger()
-									.getCurrentRepeatStepNode());
-					((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setAsserterValuesRemainSame(this.isAsserterValuesRemainSame());
-					((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setContinueOnFailure(this.continueOnFailure);
+							getRepeatStepLogger().getCurrentRepeatStepNode());
+					((RepeatStep) GlobalUtils.getTargetObject(getTestCase()
+							.getCurrentTestStep()))
+							.setAsserterValuesRemainSame(this
+									.isAsserterValuesRemainSame());
+					((RepeatStep) GlobalUtils.getTargetObject(getTestCase()
+							.getCurrentTestStep()))
+							.setContinueOnFailure(this.continueOnFailure);
 				} else {
-					currentTestStepTmp
-							.setStepDescription(currentTestStepTmp
-									.getStepDescription()
-									+ " | "
-									+ getRepeatStepLogger()
-											.getCurrentRepeatStepFullPathString());
+					currentTestStepTmp.setStepDescription(currentTestStepTmp
+							.getStepDescription()
+							+ " | "
+							+ getRepeatStepLogger()
+									.getCurrentRepeatStepFullPathString());
 				}
-				String tmpStepDesc = currentTestStepTmp.getStepDescription();//NOPMD
+				String tmpStepDesc = currentTestStepTmp.getStepDescription();// NOPMD
 				try {
 					getTestCase().getCurrentTestStep().doStep();// NOPMD
+					getTestCase().getCurrentTestStep().setStepResultStatus(
+							StepResultStatus.PASS);
+
 				} catch (StepExecutionException2 stepE) {
-					if (stepE.getErrorCode() == ExceptionErrorCode.WEBELEMENT_NOTFOUND
-							&& getTestCase().getCurrentTestStep()
-									.isOptionalStep()) {
+					if (getTestCase().getCurrentTestStep().isOptionalStep()) {
 						getTestCase().getCurrentTestStep().setStepResultStatus(
 								StepResultStatus.SKIP);
 					} else {
 						throw stepE;
 					}
-				} catch (PageValidationException2 pve) {//NOPMD
-					//TODO add code to handle the page validation error according to parameter of continueOnFailure
-					if (!this.continueOnFailure)
-						throw pve;
-				}catch (Exception e) { // NOPMD
-					throw GlobalUtils.createInternalError("Error not handled", e); // NOPMD
+				} catch (PageValidationException2 pve) {// NOPMD
+					// TODO add code to handle the page validation error
+					// according to parameter of continueOnFailure
+					if (getTestCase().getCurrentTestStep().isOptionalStep()) {
+						getTestCase().getCurrentTestStep().setStepResultStatus(
+								StepResultStatus.SKIP);
+					} else {
+						if (!this.continueOnFailure)
+							throw pve;
+					}
+				} catch (Exception e) { // NOPMD
+					if (getTestCase().getCurrentTestStep().isOptionalStep()) {
+						getTestCase().getCurrentTestStep().setStepResultStatus(
+								StepResultStatus.SKIP);
+					} else {
+						throw GlobalUtils.createInternalError(
+								"Error not handled", e); // NOPMD
+					}
 				}
-				
+
 				if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
 					getRepeatStepLogger().setRepeatStepExternalNode(
 							externalRepeatNodeOfThisStep);
 					getRepeatStepLogger().setCurrentRepeatStepNode(
 							currentRepeatNodeOfThisStep);
-					getApplicationContext()
-							.publishEvent(
-									new RepeatDataRefreshEvent(
-											this,
-											getRepeatStepLogger()
-													.getCurrentRepeatStepPathNodes(),
-											iteration));
+					getApplicationContext().publishEvent(
+							new RepeatDataRefreshEvent(this,
+									getRepeatStepLogger()
+											.getCurrentRepeatStepPathNodes(),
+									iteration));
 
 				}
 				if (null == tmpStepDesc)
@@ -250,8 +273,6 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 				else
 					currentTestStepTmp.setStepDescription(tmpStepDesc);
 
-				getTestCase().getCurrentTestStep().setStepResultStatus(
-						StepResultStatus.PASS);
 				if (getTestCase().getStepThinkTime() > 0) {
 					ThinkTime thinkTimer = new ThinkTime(getTestCase()
 							.getStepThinkTime());
@@ -374,7 +395,8 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	}
 
 	/**
-	 * @param asserterValueRemainSame the asserterValueRemainSame to set
+	 * @param asserterValueRemainSame
+	 *            the asserterValueRemainSame to set
 	 */
 	public void setAsserterValuesRemainSame(boolean asserterValueRemainSame) {
 		this.asserterValuesRemainSame = asserterValueRemainSame;

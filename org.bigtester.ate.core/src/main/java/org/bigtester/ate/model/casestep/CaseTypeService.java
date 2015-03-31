@@ -255,4 +255,22 @@ public class CaseTypeService extends TestCase implements ITestStep { // NOPMD
 		//TODO future to add step desc for special step type
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getOptionalStepUtilInclusive() {
+		// TODO add optionalStepUtil parameter for caseTypeService
+		return "";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setOptionalStep(boolean optionalStep) {
+		// TODO add optionalStepUtil parameter for caseTypeService
+		
+	}
+
 }

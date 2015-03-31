@@ -22,6 +22,7 @@ package org.bigtester.ate.model.casestep;
 
 import java.util.List;
 
+import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.StepResultStatus;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
@@ -29,7 +30,9 @@ import org.bigtester.ate.model.page.atewebdriver.IMyWebDriver;
 import org.bigtester.ate.model.page.exception.PageValidationException2;
 import org.bigtester.ate.model.page.exception.StepExecutionException2;
 import org.bigtester.ate.model.utils.ThinkTime;
+import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+import org.springframework.aop.support.AopUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -87,11 +90,12 @@ public class TestCase {
 	 */
 	protected void cleanUpAsserters() {
 		for (int i = 0; i < getTestStepList().size(); i++) {
-			if (!getTestStepList().get(i)
-					.getExpectedResultAsserter().isEmpty()) {
-				 getTestStepList().get(i)
-						.getExpectedResultAsserter().removeAll(
-								 getTestStepList().get(i)
+			if (!getTestStepList().get(i).getExpectedResultAsserter().isEmpty()) {
+				getTestStepList()
+						.get(i)
+						.getExpectedResultAsserter()
+						.removeAll(
+								getTestStepList().get(i)
 										.getExpectedResultAsserter());
 			}
 		}
@@ -123,6 +127,36 @@ public class TestCase {
 	}
 
 	/**
+	 * Optional step population.
+	 */
+	private void optionalStepPopulation(@Nullable ITestStep currentStep) {
+		if (null == currentStep)
+			throw GlobalUtils.createNotInitializedException("currentStep");
+		if (!StringUtils.isEmpty(currentStep.getOptionalStepUtilInclusive())) {
+			currentStep.setOptionalStep(true);
+			int startIndex = -1;
+			int endIndex = -1;
+			for (int index = 0; index < getTestStepList().size(); index++) {
+				if (getTestStepList().get(index).getStepName() == currentStep
+						.getStepName()) {
+					startIndex = index;
+				}
+				if (getTestStepList().get(index).getStepName() == currentStep
+						.getOptionalStepUtilInclusive()) {
+					endIndex = index;
+					break;
+				}
+			}
+			if (startIndex == -1 || endIndex == -1 || endIndex < startIndex)
+				throw GlobalUtils
+						.createInternalError("Optional Step util inclusive");
+			for (int index2 = startIndex; index2 <= endIndex; index2++) {
+				getTestStepList().get(index2).setOptionalStep(true);
+			}
+		}
+	}
+
+	/**
 	 * run steps.
 	 * 
 	 * @throws RuntimeDataException
@@ -136,6 +170,7 @@ public class TestCase {
 		for (int i = 0; i < getTestStepList().size(); i++) {
 
 			ITestStep currentTestStepTmp = getTestStepList().get(i);
+			optionalStepPopulation(currentTestStepTmp);
 			if (null == currentTestStepTmp) {
 				throw new IllegalStateException(
 						"Test Step List was not successfully initialized by ApplicationContext at list index"
@@ -144,17 +179,33 @@ public class TestCase {
 				setCurrentTestStep(currentTestStepTmp);
 			}
 
-			//setCurrentWebDriver(getCurrentTestStep().getMyWebDriver());
+			// setCurrentWebDriver(getCurrentTestStep().getMyWebDriver());
 			try {
 				getCurrentTestStep().doStep();// NOPMD
 				getCurrentTestStep().setStepResultStatus(StepResultStatus.PASS);
-			} catch (StepExecutionException2 stepE) {
-				if (stepE.getErrorCode() == ExceptionErrorCode.WEBELEMENT_NOTFOUND && getCurrentTestStep().isOptionalStep()) {
-					getCurrentTestStep().setStepResultStatus(StepResultStatus.SKIP);
+			} catch (Exception e) { //NOPMD
+				if (getCurrentTestStep().isOptionalStep()) {
+					getCurrentTestStep().setStepResultStatus(
+							StepResultStatus.SKIP);
 				} else {
-					throw stepE;
+					throw GlobalUtils.createInternalError("Error not handled", e);
 				}
 			}
+			// } catch (StepExecutionException2 stepE) {
+			//
+			// if (stepE.getErrorCode() ==
+			// ExceptionErrorCode.WEBELEMENT_NOTFOUND
+			// && getCurrentTestStep().isOptionalStep()) {
+			// getCurrentTestStep().setStepResultStatus(
+			// StepResultStatus.SKIP);
+			// } else if (AopUtils.getTargetClass(getCurrentTestStep()) ==
+			// RepeatStep.class && getCurrentTestStep().isOptionalStep()) {
+			// getCurrentTestStep().setStepResultStatus(
+			// StepResultStatus.SKIP);
+			// } else {
+			// throw stepE;
+			// }
+			// }
 			if (stepThinkTime > 0) {
 				ThinkTime thinkTimer = new ThinkTime(stepThinkTime);
 				thinkTimer.setTimer();
