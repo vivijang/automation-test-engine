@@ -128,7 +128,7 @@ public class StepInputDataValue extends BaseInputDataValue implements IStepInput
 						arg0.getRepeatStepExternalLoopPath(),
 						arg0.getIteration()));
 			} catch (RepeatTestDataException e) {
-				// TODO onDataRefresh Exception, we use default data. Need to
+				// TODO onDataRefresh Exception, we use last execution data. Need to
 				// find a way to log something. throw e to trigger AOP log,
 				// doesn't work in the event.
 				this.setStrDataValue(valueTmp);

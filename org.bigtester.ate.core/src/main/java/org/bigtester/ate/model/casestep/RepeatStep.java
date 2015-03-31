@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package org.bigtester.ate.model.casestep;
+package org.bigtester.ate.model.casestep;//NOPMD
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,6 @@ import java.util.List;
 import org.bigtester.ate.GlobalUtils;
 import org.bigtester.ate.constant.ExceptionErrorCode;
 import org.bigtester.ate.constant.StepResultStatus;
-import org.bigtester.ate.model.data.BaseERValue;
 import org.bigtester.ate.model.data.IStepERValue;
 import org.bigtester.ate.model.data.IStepInputData;
 import org.bigtester.ate.model.data.exception.RuntimeDataException;
@@ -60,6 +59,8 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	/** The continue on failure. */
 	private boolean continueOnFailure;
 
+	/** The asserter value remain same. */
+	private boolean asserterValuesRemainSame;
 	/** The repeat times. */
 	private int numberOfIterations;
 
@@ -104,23 +105,25 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 		this.continueOnFailure = false;
 		this.numberOfIterations = 1;
 		this.testCase = testCase;
+		this.asserterValuesRemainSame = true;
 
 	}
 
 	private void buildRepeatStepContext() {
-		int startIndex = -1; // NOPMD
-		int endIndex = -1; // NOPMD
 		stepIndexes.clear();
 		refreshERValues.clear();
 		refreshDataValues.clear();
+		int startIndex = -1; //NOPMD
+		int endIndex = -1; //NOPMD
+		
 		for (int i = 0; i < testCase.getTestStepList().size(); i++) {
 			if (testCase.getTestStepList().get(i).getStepName()
 					.equals(this.startStepName)) {
-				startIndex = i;
+				startIndex = i;//NOPMD
 			}
 			if (testCase.getTestStepList().get(i).getStepName()
 					.equals(this.endStepName)) {
-				endIndex = i;
+				endIndex = i;//NOPMD
 			}
 		}
 		if (startIndex == -1 || endIndex == -1) throw GlobalUtils.createNotInitializedException("startStepName or endStepName");
@@ -200,6 +203,7 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 						getRepeatStepLogger().setRepeatStepExternalNode(
 								getRepeatStepLogger()
 										.getCurrentRepeatStepNode());
+						((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setAsserterValuesRemainSame(this.isAsserterValuesRemainSame());
 					} else {
 						currentTestStepTmp
 								.setStepDescription(currentTestStepTmp
@@ -359,6 +363,20 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 	 */
 	public List<IStepERValue> getRefreshERValues() {
 		return refreshERValues;
+	}
+
+	/**
+	 * @return the asserterValueRemainSame
+	 */
+	public boolean isAsserterValuesRemainSame() {
+		return asserterValuesRemainSame;
+	}
+
+	/**
+	 * @param asserterValueRemainSame the asserterValueRemainSame to set
+	 */
+	public void setAsserterValuesRemainSame(boolean asserterValueRemainSame) {
+		this.asserterValuesRemainSame = asserterValueRemainSame;
 	}
 
 }

@@ -112,12 +112,11 @@ public class StepErElementExistenceValue extends BaseERValue implements
 		if (!((RepeatStep) arg0.getSource()).getRefreshERValues().contains(this)) return;
 		
 		List<StepErElementExistence> valueTmp = this.value;// NOPMD;
-		if (arg0.getIteration() == 0) {
+		if (arg0.getIteration() == 0 || ((RepeatStep) arg0.getSource()).isAsserterValuesRemainSame()) {
 			try {
 				this.value = getStepERDao().getErElementExistences(
 						this.dataValueID);
 			} catch (TestDataException e) {
-				// TODO Auto-generated catch block
 				this.value = valueTmp;
 			}
 
@@ -128,10 +127,11 @@ public class StepErElementExistenceValue extends BaseERValue implements
 						arg0.getRepeatStepExternalLoopPath(),
 						arg0.getIteration());
 			} catch (RepeatTestDataException e) {
-				// TODO onDataRefresh Exception, we use default data. Need to
+				// TODO onDataRefresh Exception, we use last execution data. Need to
 				// find a way to log something. throw e to trigger AOP log,
 				// doesn't work in the event.
 				this.value = valueTmp;
+				
 			}
 		}
 

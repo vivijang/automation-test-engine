@@ -32,13 +32,15 @@ import org.testng.TestListenerAdapter;
  *
  */
 public class TestCaseResultModifier extends TestListenerAdapter {
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onTestFailure(@Nullable ITestResult result) {
-//		if (result.getTestContext().)
-//		Throwable()result.getThrowable();
-//		result.setStatus(arg0);
+//		if (null != result && result.getThrowable() instanceof RepeatTestDataException) {
+//			result.setStatus(ITestResult.SUCCESS_PERCENTAGE_FAILURE);
+//		}
 //	    Reporter.setCurrentTestResult(result); 
-//	    Reporter.log("<br> <img src=.\\screenshots\\Untitled.png /> <br>");
-//	    Reporter.setCurrentTestResult(null); 
 	}
 }

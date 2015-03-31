@@ -116,8 +116,10 @@ public class TestProject {
 			IOException {
 
 		final TestProjectListener tla = new TestProjectListener(this);
+		final TestCaseResultModifier repeatStepResultModifier = new TestCaseResultModifier();
 		final TestNG testng = new TestNG();
 		testng.addListener(tla);
+		testng.addListener(repeatStepResultModifier);
 
 		ATEXMLReporter rng = new ATEXMLReporter();
 		rng.setStackTraceOutputMethod(XMLReporterConfig.STACKTRACE_NONE);

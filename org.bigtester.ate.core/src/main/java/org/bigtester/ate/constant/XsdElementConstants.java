@@ -282,6 +282,9 @@ public final class XsdElementConstants {
 	/** The Constant ATTR_REPEATSTEP_NUMBEROFITERATIONS. */
 	public static final String ATTR_REPEATSTEP_NUMBEROFITERATIONS = "numberOfIterations";
 	
+	/** The Constant ATTR_REPEATSTEP_ASSERTERVALUESREMAINSAME. */
+	public static final String ATTR_REPEATSTEP_ASSERTERVALUESREMAINSAME = "asserterValuesRemainSame";//NOPMD
+	
 	
 	/** The Constant ATTR_TESTSTEP_OPTIONALSTEP. */
 	public static final String ATTR_TESTSTEP_OPTIONALSTEP = "optionalStep";

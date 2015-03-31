@@ -615,6 +615,9 @@
 				<xsd:attribute name="numberOfIterations" type="xsd:int"
 					use="required">
 				</xsd:attribute>
+				<xsd:attribute name="asserterValuesRemainSame" type="xsd:boolean"
+					default="true">
+				</xsd:attribute>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>

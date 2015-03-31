@@ -83,6 +83,13 @@ public class RepeatStepBeanDefinitionParser extends
 		bDef.getPropertyValues().addPropertyValue(
 				XsdElementConstants.ATTR_REPEATSTEP_NUMBEROFITERATIONS, iter);
 
+		boolean asserterSame = Boolean
+				.parseBoolean(element
+						.getAttribute(XsdElementConstants.ATTR_REPEATSTEP_ASSERTERVALUESREMAINSAME));
+		bDef.getPropertyValues().addPropertyValue(
+				XsdElementConstants.ATTR_REPEATSTEP_ASSERTERVALUESREMAINSAME,
+				asserterSame);
+		
 		parserContext.getRegistry().registerBeanDefinition(
 				element.getAttribute("id"), bDef);
 		return (AbstractBeanDefinition) bDef;
