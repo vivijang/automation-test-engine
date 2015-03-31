@@ -196,46 +196,24 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 					getTestCase().setCurrentTestStep(currentTestStepTmp);
 				}
 
+				
+				if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
+					getRepeatStepLogger().setRepeatStepExternalNode(
+							getRepeatStepLogger()
+									.getCurrentRepeatStepNode());
+					((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setAsserterValuesRemainSame(this.isAsserterValuesRemainSame());
+					((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setContinueOnFailure(this.continueOnFailure);
+				} else {
+					currentTestStepTmp
+							.setStepDescription(currentTestStepTmp
+									.getStepDescription()
+									+ " | "
+									+ getRepeatStepLogger()
+											.getCurrentRepeatStepFullPathString());
+				}
+				String tmpStepDesc = currentTestStepTmp.getStepDescription();//NOPMD
 				try {
-					String tmpStepDesc = currentTestStepTmp
-							.getStepDescription();
-					if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
-						getRepeatStepLogger().setRepeatStepExternalNode(
-								getRepeatStepLogger()
-										.getCurrentRepeatStepNode());
-						((RepeatStep)GlobalUtils.getTargetObject(getTestCase().getCurrentTestStep())).setAsserterValuesRemainSame(this.isAsserterValuesRemainSame());
-					} else {
-						currentTestStepTmp
-								.setStepDescription(currentTestStepTmp
-										.getStepDescription()
-										+ " | "
-										+ getRepeatStepLogger()
-												.getCurrentRepeatStepFullPathString());
-					}
-
 					getTestCase().getCurrentTestStep().doStep();// NOPMD
-
-					if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
-						getRepeatStepLogger().setRepeatStepExternalNode(
-								externalRepeatNodeOfThisStep);
-						getRepeatStepLogger().setCurrentRepeatStepNode(
-								currentRepeatNodeOfThisStep);
-						getApplicationContext()
-								.publishEvent(
-										new RepeatDataRefreshEvent(
-												this,
-												getRepeatStepLogger()
-														.getCurrentRepeatStepPathNodes(),
-												iteration));
-
-					}
-					if (null == tmpStepDesc)
-						tmpStepDesc = ""; // NOPMD
-					else
-						currentTestStepTmp.setStepDescription(tmpStepDesc);
-
-					getTestCase().getCurrentTestStep().setStepResultStatus(
-							StepResultStatus.PASS);
 				} catch (StepExecutionException2 stepE) {
 					if (stepE.getErrorCode() == ExceptionErrorCode.WEBELEMENT_NOTFOUND
 							&& getTestCase().getCurrentTestStep()
@@ -247,10 +225,33 @@ public class RepeatStep extends BaseTestStep implements ITestStep {
 					}
 				} catch (PageValidationException2 pve) {//NOPMD
 					//TODO add code to handle the page validation error according to parameter of continueOnFailure
-					throw pve;
+					if (!this.continueOnFailure)
+						throw pve;
 				}catch (Exception e) { // NOPMD
 					throw GlobalUtils.createInternalError("Error not handled", e); // NOPMD
 				}
+				
+				if (AopUtils.getTargetClass(currentTestStepTmp) == RepeatStep.class) {
+					getRepeatStepLogger().setRepeatStepExternalNode(
+							externalRepeatNodeOfThisStep);
+					getRepeatStepLogger().setCurrentRepeatStepNode(
+							currentRepeatNodeOfThisStep);
+					getApplicationContext()
+							.publishEvent(
+									new RepeatDataRefreshEvent(
+											this,
+											getRepeatStepLogger()
+													.getCurrentRepeatStepPathNodes(),
+											iteration));
+
+				}
+				if (null == tmpStepDesc)
+					tmpStepDesc = ""; // NOPMD
+				else
+					currentTestStepTmp.setStepDescription(tmpStepDesc);
+
+				getTestCase().getCurrentTestStep().setStepResultStatus(
+						StepResultStatus.PASS);
 				if (getTestCase().getStepThinkTime() > 0) {
 					ThinkTime thinkTimer = new ThinkTime(getTestCase()
 							.getStepThinkTime());

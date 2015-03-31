@@ -610,7 +610,7 @@
 					use="required">
 				</xsd:attribute>
 				<xsd:attribute name="continueOnFailure" type="xsd:boolean"
-					use="required">
+					default="false">
 				</xsd:attribute>
 				<xsd:attribute name="numberOfIterations" type="xsd:int"
 					use="required">

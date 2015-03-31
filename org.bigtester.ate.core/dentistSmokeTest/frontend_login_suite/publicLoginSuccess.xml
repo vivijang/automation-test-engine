@@ -65,8 +65,8 @@
 			stepDescription="logout patient" stepName="logoutPatient"
 			targetStep="false" elementActionDef="logoutPatientWE">
 		</ate:elementStep>
-		<ate:repeatStep id="repeatLoginStep" startStepName="typeUsername" numberOfIterations="1" endStepName="logoutPatient" stepName="repeatLoginStep" continueOnFailure="true" targetStep="true" ></ate:repeatStep>
-		<ate:repeatStep id="repeatLoginStep2" startStepName="repeatLoginStep" numberOfIterations="1" endStepName="repeatLoginStep" stepName="repeatLoginStep2" continueOnFailure="true" targetStep="true" asserterValuesRemainSame="false"></ate:repeatStep>
+		<ate:repeatStep id="repeatLoginStep" startStepName="typeUsername" numberOfIterations="1" endStepName="logoutPatient" stepName="repeatLoginStep" continueOnFailure="false" targetStep="true" asserterValuesRemainSame="true"></ate:repeatStep>
+		<ate:repeatStep id="repeatLoginStep2" startStepName="repeatLoginStep" numberOfIterations="1" endStepName="repeatLoginStep" stepName="repeatLoginStep2" continueOnFailure="false" targetStep="true" asserterValuesRemainSame="true"></ate:repeatStep>
 		
 		<ate:lastStep id="mylaststep" stepName="mylaststep"
 			stepDescription="last step close browser" targetStep="false" pageObject="myLastPage">

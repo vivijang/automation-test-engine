@@ -7,7 +7,9 @@
 <STEPERELEMENTEXISTENCE FirstTimeExecution= "Yes"   ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//a[@href='/logoutPatient']"	ASSERTPRIORITY="HIGH" PAGENAME="logindashboard"	STEPERSETID="loginDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
 <STEPERELEMENTEXISTENCE FirstTimeExecution= "Yes"    ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//a[@href='#tab_1']"	ASSERTPRIORITY="HIGH" PAGENAME="logindashboard"	STEPERSETID="loginDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
 
-<!-- <STEPERELEMENTEXISTENCE FirstTimeExecution= "No" repeatStepExternalLoopPath="repeatHomeStep2" repeatStepName="repeatHomeStep" iteration="1"    ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//a[@href='#tab_3']" ASSERTPRIORITY="HIGH"	PAGENAME="logindashboard"	STEPERSETID="loginDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/> -->
+<STEPERELEMENTEXISTENCE FirstTimeExecution= "No" repeatStepName="repeatLoginStep" repeatStepExternalLoopPath="repeatLoginStep2" iteration="1"    ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//a[@href='#tab_32']" ASSERTPRIORITY="HIGH"	PAGENAME="logindashboard"	STEPERSETID="loginDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
+
+<STEPERELEMENTEXISTENCE FirstTimeExecution= "No" repeatStepName="repeatLoginStep" iteration="1"    ELEMENTFINDBY="XPATH"	ELEMENTFINDBYVALUE="//a[@href='#tab_31']" ASSERTPRIORITY="HIGH"	PAGENAME="logindashboard"	STEPERSETID="loginDashboardVID"	TESTDATACONTEXT_IDCOLUMN="5"	/>
 
 
 </dataset>
